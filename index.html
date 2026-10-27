@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Репетитор англійської мови | Індивідуальні заняття</title>
+    <title>Maryna Likarchuk | Англійська мова для дорослих</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #FBF9F5; /* Warm Paper */
@@ -16,7 +16,7 @@
             --text-main: #2C3E50;
             --text-muted: #6C7A89;
             --border-color: #E2DBD0;
-            --radius: 12px;
+            --radius: 16px;
         }
 
         * {
@@ -30,26 +30,46 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
 
+        /* Cursor Glow Effect (Cursify / Magic UI inspired) */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(198, 125, 56, 0.08) 0%, rgba(27, 42, 74, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+            z-index: 9999;
+        }
+
+        /* Navigation Bar (Navbar Gallery style) */
         header {
-            background-color: var(--navy);
-            color: #FFFFFF;
-            padding: 1.5rem 2rem;
+            background-color: rgba(251, 249, 245, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 0 0 var(--radius) var(--radius);
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #FFFFFF;
+            color: var(--navy);
+            letter-spacing: -0.5px;
         }
 
         .logo span {
@@ -57,9 +77,9 @@
         }
 
         nav a {
-            color: #FFFFFF;
+            color: var(--text-main);
             text-decoration: none;
-            margin-left: 1.5rem;
+            margin-left: 2rem;
             font-size: 0.95rem;
             font-weight: 500;
             transition: color 0.2s;
@@ -69,123 +89,178 @@
             color: var(--ochre);
         }
 
+        .nav-btn {
+            background-color: var(--navy);
+            color: #FFFFFF !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            transition: background 0.2s, transform 0.2s !important;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--ochre);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section (Godly / Aceternity style) */
         .hero {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 5rem 2rem 4rem;
+            padding: 6rem 2rem 4rem;
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--ochre-light);
+            color: var(--ochre);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(198, 125, 56, 0.2);
         }
 
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--navy);
-            line-height: 1.2;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
+            letter-spacing: -1px;
         }
 
         .hero-content h1 span {
             color: var(--ochre);
+            position: relative;
         }
 
         .hero-content p {
             font-size: 1.15rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
         }
 
-        .btn {
-            display: inline-block;
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
             background-color: var(--ochre);
             color: #FFFFFF;
-            padding: 0.9rem 2rem;
+            padding: 0.95rem 2.2rem;
             border-radius: var(--radius);
             text-decoration: none;
             font-weight: 600;
-            box-shadow: 0 4px 14px rgba(198, 125, 56, 0.3);
-            transition: all 0.2s ease;
+            box-shadow: 0 8px 24px rgba(198, 125, 56, 0.3);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             background-color: #B06C2F;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(198, 125, 56, 0.4);
         }
 
-        .hero-badge-card {
+        /* Bento Grid Style (BentoGrids.com inspired) */
+        .hero-bento {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .bento-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(27, 42, 74, 0.05);
+            box-shadow: 0 10px 30px rgba(27, 42, 74, 0.03);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-badge-card h3 {
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ochre);
+        }
+
+        .bento-card h3 {
             color: var(--navy);
             font-size: 1.3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-family: 'Playfair Display', serif;
         }
 
-        .hero-badge-card ul {
-            list-style: none;
-        }
-
-        .hero-badge-card li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.5rem;
-            color: var(--text-main);
+        .bento-card p {
+            color: var(--text-muted);
             font-size: 0.95rem;
         }
 
-        .hero-badge-card li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--ochre);
-            font-weight: bold;
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
         }
 
-        .section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
         }
 
         .section-title {
-            text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             color: var(--navy);
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
         }
 
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Levels Bento Section */
         .levels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
         }
 
         .level-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             border-radius: var(--radius);
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
         }
 
         .level-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             border-color: var(--ochre);
+            box-shadow: 0 15px 35px rgba(27, 42, 74, 0.05);
+        }
+
+        .level-badge {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--ochre);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            display: block;
         }
 
         .level-card h3 {
             color: var(--navy);
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .level-card p {
@@ -193,40 +268,312 @@
             font-size: 0.95rem;
         }
 
+        /* Pricing Grid (SaaS card styling) */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            align-items: stretch;
         }
 
         .price-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem;
             border-radius: var(--radius);
-            text-align: center;
+            text-align: left;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
         }
 
         .price-card.featured {
             border-color: var(--ochre);
-            background: linear-gradient(to bottom, #FFFFFF, var(--ochre-light));
+            background: linear-gradient(145deg, #FFFFFF 0%, var(--ochre-light) 100%);
+            box-shadow: 0 20px 40px rgba(198, 125, 56, 0.12);
+        }
+
+        .price-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 2rem;
+            background-color: var(--ochre);
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .price-card h3 {
             color: var(--navy);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .price {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--navy);
             margin: 1.5rem 0;
             font-family: 'Playfair Display', serif;
         }
 
         .price span {
-            font-size: 1rem;
-            color: var(--text-
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .price-card li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+
+        .price-card li::before {
+            content: "✦";
+            color: var(--ochre);
+            margin-right: 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-card {
+            display: block;
+            text-align: center;
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 0.85rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .price-card.featured .btn-card {
+            background-color: var(--ochre);
+        }
+
+        .price-card.featured .btn-card:hover {
+            background-color: #B06C2F;
+        }
+
+        .btn-card:hover {
+            background-color: var(--ochre);
+        }
+
+        /* Contact Section (CTA Gallery style) */
+        .contact-wrapper {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            text-align: center;
+            padding: 6rem 2rem;
+            border-radius: calc(var(--radius) * 1.5);
+            margin: 2rem auto 5rem;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-wrapper h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-wrapper p {
+            color: #D1D8E0;
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-white {
+            display: inline-block;
+            background-color: #FFFFFF;
+            color: var(--navy);
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.25s ease;
+        }
+
+        .btn-white:hover {
+            background-color: var(--ochre-light);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 3rem;
+                gap: 3rem;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .levels-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Light Follow Cursor Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <header>
+        <div class="logo">Maryna <span>Likarchuk</span></div>
+        <nav>
+            <a href="#levels">Рівні</a>
+            <a href="#pricing">Вартість</a>
+            <a href="#contact" class="nav-btn">Записатися</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">✨ Індивідуальний підхід & ESL Дизайн</span>
+            <h1>Сучасна англійська <span>для дорослих</span></h1>
+            <p>Персоналізовані заняття (від Pre-A1 до B1+), фокус на живій комунікації, подоланні мовного бар'єра та ефективній підготовці до НМТ.</p>
+            <a href="#contact" class="btn-primary">Записатися на пробний урок</a>
+        </div>
+        <div class="hero-bento">
+            <div class="bento-card">
+                <h3>Ефективна методика</h3>
+                <p>Scaffold-структура побудови розмови для впевненого говоріння з перших занять.</p>
+            </div>
+            <div class="bento-card" style="border-color: var(--ochre); background: linear-gradient(to right, #FFFFFF, var(--ochre-light));">
+                <h3>Авторські матеріалы</h3>
+                <p>Інтерактивні цифрові гайди, сучасні платформи та матеріали без нудних правил.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="levels" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Формати та рівні навчання</h2>
+            <p class="section-subtitle">Програма адаптується під ваші індивідуальні цілі, темп та робочий графік.</p>
+        </div>
+        <div class="levels-grid">
+            <div class="level-card">
+                <span class="level-badge">True Beginners</span>
+                <h3>Pre-A1</h3>
+                <p>М'який та комфортний старт з нуля. Будуємо міцну лексичну та граматичну базу без зайвого стресу.</p>
+            </div>
+            <div class="level-card">
+                <h3>A2 – Elementary / Pre-Intermediate</h3>
+                <p>Розширюємо словниковий запас, вчимося вільно сприймати мову на слух та будувати розгорнуті висловлювання.</p>
+            </div>
+            <div class="level-card" style="border-color: var(--ochre);">
+                <span class="level-badge">Advanced Growth</span>
+                <h3>B1+ Intermediate</h3>
+                <p>Впевнене вільне спілкування, активація пасивного словника, робота зі складними темами та нюансами мови.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Вартість та абонементи</h2>
+            <p class="section-subtitle">Обирайте зручний формат занять для стабільного та системного прогресу.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div>
+                    <h3>Разовий урок</h3>
+                    <div class="price">350 UAH <span>/ 50 хв</span></div>
+                    <ul>
+                        <li>Індивідуальне заняття</li>
+                        <li>Інтерактивні платформи</li>
+                        <li>Гнучний графік планування</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn-card">Обрати урок</a>
+            </div>
+            <div class="price-card featured">
+                <div class="popular-badge">Найвигідніше</div>
+                <div>
+                    <h3>Абонемент 8 уроків</h3>
+                    <div class="price">2300 UAH <span>/ курс</span></div>
+                    <ul>
+                        <li>Оптимальна ціна за заняття</li>
+                        <li>Постійна підтримка між уроками</li>
+                        <li>Авторські цифрові матеріали у подарунок</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn-card">Обрати абонемент</a>
+            </div>
+            <div class="price-card">
+                <div>
+                    <h3>Пакет для постійних</h3>
+                    <div class="price">Індивідуально</div>
+                    <ul>
+                        <li>Спеціальні умови для довгострокових учнів</li>
+                        <li>Глибока підготовка до НМТ та цілей</li>
+                        <li>Пріоритет у бронюванні часу</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn-card">Обговорити</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-wrapper">
+        <h2>Почніть говорити англійською вже сьогодні</h2>
+        <p>Напишіть мені в Telegram, щоб узгодити зручний час пробного заняття та визначити ваш поточний рівень.</p>
+        <a href="https://t.me/your_telegram" target="_blank" class="btn-white">Написати в Telegram</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
+    </footer>
+
+    <!-- Interactive Mouse Follow Script -->
+    <script>
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>

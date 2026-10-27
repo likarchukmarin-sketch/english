@@ -14,7 +14,6 @@
             theme: {
                 extend: {
                     colors: {
-                        // Кастомні кольори для світлої теми (сріблясто-зелений стиль)
                         lightbg: '#F4F5F4',
                         lightcard: '#FFFFFF',
                         darktext: '#022C22',
@@ -41,17 +40,17 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            pointer-events: none; /* Щоб не блокувати кліки на сайті */
+            pointer-events: none;
         }
 
         /* Змінні для Spotlight світіння */
         :root {
-            --spotlight-fill: rgba(6, 78, 59, 0.06);   /* Світла тема: м'яке зелене світіння */
-            --spotlight-ring: rgba(6, 78, 59, 0.25);   /* Світла тема: рамка */
+            --spotlight-fill: rgba(6, 78, 59, 0.06);
+            --spotlight-ring: rgba(6, 78, 59, 0.25);
         }
         .dark {
-            --spotlight-fill: rgba(16, 185, 129, 0.15); /* Темна тема: яскраве смарагдове світіння */
-            --spotlight-ring: rgba(16, 185, 129, 0.5);  /* Темна тема: яскрава рамка */
+            --spotlight-fill: rgba(16, 185, 129, 0.15);
+            --spotlight-ring: rgba(16, 185, 129, 0.5);
         }
 
         /* Spotlight Ефект для плашок */
@@ -72,14 +71,13 @@
         .spotlight-ring {
             pointer-events: none;
             position: absolute;
-            inset: -1px; /* Виходить на 1px за межі, щоб намалювати бордер */
+            inset: -1px;
             padding: 1px;
             z-index: -10;
             border-radius: inherit;
             opacity: 0;
             transition: opacity 0.3s ease;
             background: radial-gradient(320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-ring), transparent 70%);
-            /* CSS Маска, щоб залишити лише 1px край (як у Radix UI) */
             mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             mask-composite: exclude;
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -119,7 +117,7 @@
         </div>
     </header>
 
-    <!-- Головний блок -->
+    <!-- Головний блок із Карткою Профілю -->
     <section class="relative min-h-screen flex items-center pt-20 px-6 max-w-6xl mx-auto z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full py-16">
             <div>
@@ -141,15 +139,42 @@
                     </a>
                 </div>
             </div>
+            
+            <!-- Оновлена Інтерактивна Картка Профілю -->
             <div class="flex justify-center">
-                <div class="spotlight-card w-full max-w-sm h-[420px] rounded-2xl border border-silverborder dark:border-emerald-700/40 bg-white/90 dark:bg-emerald-900/20 backdrop-blur-md shadow-xl flex items-center justify-center p-4 relative overflow-hidden group transition-colors">
+                <div class="spotlight-card w-full max-w-sm rounded-3xl border border-silverborder dark:border-emerald-700/40 bg-white/80 dark:bg-emerald-900/20 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-colors">
                     <span class="spotlight-fill"></span>
                     <span class="spotlight-ring"></span>
                     
-                    <!-- Ваше фото -->
-                    <div class="absolute inset-0 bg-cover bg-center opacity-90 transition group-hover:scale-105" style="background-image: url('your-photo.jpg');"></div>
-                    <div class="relative z-10 text-center text-emeraldtext dark:text-emerald-300 font-mono text-sm bg-lightbg/90 dark:bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-silverborder dark:border-emerald-500/30 transition-colors">
-                        [ Ваше реальне фото ]
+                    <!-- Аватар із пульсуючим індикатором -->
+                    <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50">
+                        <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
+                        <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full"></div>
+                        <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
+                    </div>
+
+                    <!-- Інформація -->
+                    <h3 class="text-2xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-1 transition-colors">Maryna Likarchuk</h3>
+                    <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-4 transition-colors">ESL Designer & English Tutor</p>
+                    <p class="text-sm text-darktext/80 dark:text-emerald-300/80 mb-8 leading-relaxed transition-colors">
+                        Розробляю авторські матеріали та навчальні воркбуки. Допомагаю заговорити англійською легко та впевнено.
+                    </p>
+
+                    <!-- Кнопки дій -->
+                    <div class="w-full flex flex-col gap-3">
+                        <button onclick="copyTelegram('@likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-lightbg dark:bg-emerald-950/60 border border-silverborder dark:border-emerald-700/50 hover:bg-silverborder/50 dark:hover:bg-emerald-800 text-emeraldtext dark:text-emerald-200 py-3 rounded-xl font-semibold transition text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                            </svg>
+                            <span id="copyText">Copy Telegram</span>
+                        </button>
+                        <a href="@likarchuk" target="_blank" class="flex items-center justify-center gap-2 w-full bg-emeraldtext hover:bg-darktext dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white py-3 rounded-xl font-semibold transition shadow-md text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/>
+                            </svg>
+                            <span>Message Me</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -163,28 +188,24 @@
             <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Програма повністю адаптується під ваші цілі та робочий графік.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Картка 1 -->
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
                 <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-200 mb-3 transition-colors">Дорослі учні (Pre-A1 — B1+)</h3>
                 <p class="text-darktext/80 dark:text-emerald-300/80 text-sm leading-relaxed transition-colors">Для кар'єри, подорожей та повсякденного спілкування без нудної зубрилки.</p>
             </div>
-            <!-- Картка 2 -->
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
                 <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-200 mb-3 transition-colors">Подолання мовного бар'єра</h3>
                 <p class="text-darktext/80 dark:text-emerald-300/80 text-sm leading-relaxed transition-colors">Якщо ви все розумієте, але говорити складно чи є страх помилок — опрацюємо на практиці.</p>
             </div>
-            <!-- Картка 3 -->
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
                 <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-200 mb-3 transition-colors">Учні з нуля (True Beginners)</h3>
                 <p class="text-darktext/80 dark:text-emerald-300/80 text-sm leading-relaxed transition-colors">М'який та комфортний старт з чистого аркуша для побудови міцної бази.</p>
             </div>
-            <!-- Картка 4 -->
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
@@ -317,9 +338,21 @@
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
-    <!-- Скрипти: WebGL фон та Spotlight -->
+    <!-- Скрипти -->
     <script>
-        // 1. Активація ефекту Spotlight для кожної картки
+        // Копіювання Telegram-юзернейму
+        function copyTelegram(username) {
+            navigator.clipboard.writeText('@' + username).then(() => {
+                const copyText = document.getElementById('copyText');
+                const originalText = copyText.innerText;
+                copyText.innerText = 'Copied!';
+                setTimeout(() => {
+                    copyText.innerText = originalText;
+                }, 2000);
+            });
+        }
+
+        // Активація ефекту Spotlight для кожної картки
         document.querySelectorAll('.spotlight-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -330,7 +363,7 @@
             });
         });
 
-        // 2. Логіка перемикання тем (використовуємо класи Tailwind `dark`)
+        // Перемикання тем
         let isDark = true;
         function toggleTheme() {
             isDark = !isDark;
@@ -346,7 +379,7 @@
             }
         }
 
-        // 3. WebGL-шейдер (малює фон на весь екран і для світлої, і для темної теми)
+        // WebGL-шейдер
         const canvas = document.getElementById('nebulaCanvas');
         const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
         
@@ -388,7 +421,6 @@
                     vec2 uv = gl_FragCoord.xy / uRes.y;
                     vec2 mouseUv = uMouse / uRes.y;
                     
-                    // Реакція туманності на курсор
                     float dist = length(uv - mouseUv);
                     float lamp = exp(-dist * 2.2) * 0.55;
 
@@ -397,33 +429,28 @@
                     
                     vec3 col;
                     if (uTheme == 1) {
-                        // ТЕМНА ТЕМА (Смарагдовий космос)
                         vec3 voidCol = vec3(0.007, 0.10, 0.06);
                         vec3 emeraldGlow = vec3(0.02, 0.38, 0.22);
                         vec3 highlight = vec3(0.08, 0.75, 0.45);
                         col = mix(voidCol, emeraldGlow, smoothstep(0.2, 0.6, n));
                         col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.7);
                     } else {
-                        // СВІТЛА ТЕМА (Сріблясто-молочний фон, без синього)
-                        vec3 lightBg = vec3(0.957, 0.961, 0.957);     // #F4F5F4 (молочний)
-                        vec3 silverGlow = vec3(0.898, 0.906, 0.902);  // сріблястий
-                        vec3 emeraldGlow = vec3(0.750, 0.850, 0.800); // дуже м'який зелений відтінок
+                        vec3 lightBg = vec3(0.957, 0.961, 0.957);
+                        vec3 silverGlow = vec3(0.898, 0.906, 0.902);
+                        vec3 emeraldGlow = vec3(0.750, 0.850, 0.800);
                         
                         col = mix(lightBg, silverGlow, smoothstep(0.1, 0.5, n));
                         col = mix(col, emeraldGlow, smoothstep(0.55, 0.85, n) * 0.5);
                     }
                     
-                    // Ефект Halftone точок на весь екран
                     vec2 grid = fract(gl_FragCoord.xy / 6.0) - 0.5;
                     float d_grid = length(grid);
                     float dotMask = smoothstep(0.35, 0.38, d_grid * (0.5 + n * 0.8));
 
                     if (uTheme == 1) {
-                        col *= mix(0.75, 1.0, dotMask); // Крапки трохи темніші у темній темі
+                        col *= mix(0.75, 1.0, dotMask);
                     } else {
-                        // У світлій темі крапки мають бути темно-зеленими
-                        vec3 dotColor = vec3(0.023, 0.305, 0.231); // #064E3B
-                        // Змішуємо фон із зеленими крапками (напівпрозорими)
+                        vec3 dotColor = vec3(0.023, 0.305, 0.231);
                         col = mix(mix(col, dotColor, 0.08), col, dotMask); 
                     }
 
@@ -452,7 +479,6 @@
             let targetMouseX = mouseX;
             let targetMouseY = mouseY;
 
-            // Відслідковування миші для WebGL
             window.addEventListener('mousemove', (e) => {
                 targetMouseX = e.clientX;
                 targetMouseY = window.innerHeight - e.clientY;
@@ -468,7 +494,6 @@
 
             let startTime = performance.now();
             function render() {
-                // Плавний рух камери/курсора
                 mouseX += (targetMouseX - mouseX) * 0.08;
                 mouseY += (targetMouseY - mouseY) * 0.08;
 

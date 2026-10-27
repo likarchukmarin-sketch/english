@@ -13,15 +13,10 @@
             theme: {
                 extend: {
                     colors: {
-                        emerald: {
-                            950: '#021a10',
-                            900: '#062c1c',
-                            800: '#0a3a24',
-                            600: '#059669',
-                            500: '#10b981',
-                            400: '#34d399',
-                            300: '#6ee7b7'
-                        }
+                        paper: '#FBF9F5',
+                        navy: '#1B2A4A',
+                        ochre: '#C67D38',
+                        'ochre-light': '#F4EADF',
                     }
                 }
             }
@@ -31,64 +26,72 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+        /* Плавний перехід при зміні тем */
+        body, header, section, div, h1, p, a, button {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
     </style>
 </head>
-<body class="bg-emerald-950 text-emerald-50 transition-colors duration-300">
+<body class="bg-emerald-950 text-emerald-50 selection:bg-emerald-500 selection:text-white">
 
     <!-- Навігація з перемикачем тем -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-emerald-950/80 backdrop-blur-md border-b border-emerald-800/50">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-emerald-950/80 dark:bg-emerald-950/80 bg-[rgba(251,249,245,0.9)] backdrop-blur-md border-b border-emerald-800/50 dark:border-emerald-800/50 border-[#E2DBD0]">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-['Playfair_Display'] text-xl font-bold tracking-tight text-emerald-300">
-                Maryna <span class="text-emerald-500">Likarchuk</span>
+            <div class="font-['Playfair_Display'] text-xl font-bold tracking-tight text-emerald-300 dark:text-emerald-300 text-[#1B2A4A]">
+                Maryna <span class="text-emerald-500 dark:text-emerald-500 text-[#C67D38]">Likarchuk</span>
             </div>
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#audience" class="hover:text-emerald-400 transition">Для кого</a>
-                <a href="#levels" class="hover:text-emerald-400 transition">Рівні</a>
-                <a href="#formats" class="hover:text-emerald-400 transition">Формати</a>
-                <a href="#experience" class="hover:text-emerald-400 transition">Про мене</a>
+                <a href="#audience" class="hover:text-emerald-400 dark:hover:text-emerald-400 hover:text-[#C67D38] transition">Для кого</a>
+                <a href="#levels" class="hover:text-emerald-400 dark:hover:text-emerald-400 hover:text-[#C67D38] transition">Рівні</a>
+                <a href="#formats" class="hover:text-emerald-400 dark:hover:text-emerald-400 hover:text-[#C67D38] transition">Формати</a>
+                <a href="#experience" class="hover:text-emerald-400 dark:hover:text-emerald-400 hover:text-[#C67D38] transition">Про мене</a>
             </nav>
             <div class="flex items-center space-x-4">
                 <!-- Кнопка перемикача тем -->
-                <button onclick="toggleTheme()" class="p-2 rounded-full bg-emerald-900/60 border border-emerald-700/50 hover:bg-emerald-800 transition text-emerald-300" title="Змінити тему">
-                    🌙/☀️
+                <button onclick="toggleTheme()" id="themeBtn" class="p-2.5 rounded-full bg-emerald-900/60 dark:bg-emerald-900/60 bg-[#F4EADF] border border-emerald-700/50 dark:border-emerald-700/50 border-[#E2DBD0] hover:scale-105 transition text-emerald-300 dark:text-emerald-300 text-[#1B2A4A] shadow-sm flex items-center justify-center w-10 h-10 text-lg" title="Змінити тему">
+                    ☀️
                 </button>
-                <a href="#contact" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/30">
+                <a href="#contact" class="bg-emerald-600 dark:bg-emerald-600 bg-[#C67D38] hover:bg-emerald-500 hover:bg-[#B06C2F] text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/30">
                     Зв'язатися
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Головний блок із фоном-небулою у смарагдових тонах -->
-    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#020d08]">
-        <!-- Космічний фон у смарагдовій гамі (Halftone Nebula апроксимація) -->
-        <div class="absolute inset-0 opacity-40 pointer-events-none" style="background: radial-gradient(circle at 70% 30%, #059669 0%, #062c1c 40%, #020d08 80%);"></div>
+    <!-- Головний блок із Canvas-фоном (Halftone Nebula ефект) -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#020d08] dark:bg-[#020d08] bg-[#FBF9F5]" id="heroSection">
+        <!-- Інтерактивний canvas-фон небули (працює у темній темі) -->
+        <canvas id="nebulaCanvas" class="absolute inset-0 block h-full w-full pointer-events-none transition-opacity duration-500"></canvas>
+        
+        <!-- Альтернативний м'який світлий фон для світлої теми -->
+        <div id="lightBgOverlay" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-500 bg-gradient-to-br from-[#FBF9F5] via-[#F4EADF]/40 to-[#E2DBD0]/20"></div>
 
         <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10 w-full">
             <div>
-                <span class="inline-block bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide">
+                <span class="inline-block bg-emerald-900/80 dark:bg-emerald-900/80 bg-[#F4EADF] text-emerald-300 dark:text-emerald-300 text-[#C67D38] border border-emerald-700/50 dark:border-emerald-700/50 border-[#C67D38]/30 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm">
                     ✨ Індивідуальні заняття з англійської
                 </span>
-                <h1 class="text-4xl sm:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-emerald-100">
-                    Сучасна англійська <span class="text-emerald-400">для дорослих</span>
+                <h1 class="text-4xl sm:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-emerald-100 dark:text-emerald-100 text-[#1B2A4A]">
+                    Сучасна англійська <span class="text-emerald-400 dark:text-emerald-400 text-[#C67D38]">для дорослих</span>
                 </h1>
-                <p class="text-emerald-300/80 text-lg mb-8 leading-relaxed">
+                <p class="text-emerald-300/80 dark:text-emerald-300/80 text-[#6C7A89] text-lg mb-8 leading-relaxed">
                     Допомагаю подолати мовний бар'єр, почуватися впевнено в роботі та житті, а також якісно готуватися до іспитів у комфортному темпі.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#contact" class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-xl shadow-emerald-900/50 transition transform hover:-translate-y-0.5">
+                    <a href="#contact" class="bg-emerald-600 dark:bg-emerald-600 bg-[#C67D38] hover:bg-emerald-500 hover:bg-[#B06C2F] text-white px-8 py-3.5 rounded-xl font-semibold shadow-xl shadow-emerald-900/50 transition transform hover:-translate-y-0.5">
                         Почати навчання
                     </a>
-                    <a href="#formats" class="bg-emerald-900/50 border border-emerald-700/60 hover:bg-emerald-800/50 text-emerald-200 px-6 py-3.5 rounded-xl font-semibold transition">
+                    <a href="#formats" class="bg-emerald-900/50 dark:bg-emerald-900/50 bg-white border border-emerald-700/60 dark:border-emerald-700/60 border-[#E2DBD0] hover:bg-emerald-800/50 text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] px-6 py-3.5 rounded-xl font-semibold transition shadow-sm">
                         Дивитись ціни
                     </a>
                 </div>
             </div>
             <div class="flex justify-center">
-                <div class="w-full max-w-sm h-[420px] rounded-2xl border border-emerald-700/40 bg-emerald-900/20 backdrop-blur-xl shadow-2xl flex items-center justify-center p-4">
-                    <!-- Заглушка для вашого фото або аватарки -->
-                    <div class="text-center text-emerald-400/60 font-mono text-sm">
-                        [ Ваше фото тут ]
+                <div class="w-full max-w-sm h-[420px] rounded-2xl border border-emerald-700/40 dark:border-emerald-700/40 border-[#E2DBD0] bg-emerald-900/20 dark:bg-emerald-900/20 bg-white backdrop-blur-xl shadow-2xl flex items-center justify-center p-4 relative overflow-hidden group">
+                    <!-- Заглушка для фото (сюди можна поставити вашо фото) -->
+                    <div class="absolute inset-0 bg-cover bg-center opacity-90 transition group-hover:scale-105" style="background-image: url('your-photo.jpg');"></div>
+                    <div class="relative z-10 text-center text-emerald-400/60 dark:text-emerald-400/60 text-[#6C7A89] font-mono text-sm bg-black/40 dark:bg-black/40 bg-white/80 px-4 py-2 rounded-lg backdrop-blur-sm">
+                        [ Ваше реальне фото ]
                     </div>
                 </div>
             </div>
@@ -98,107 +101,250 @@
     <!-- Для кого ці заняття -->
     <section id="audience" class="py-24 max-w-6xl mx-auto px-6">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Для кого ці заняття</h2>
-            <p class="text-emerald-300/70">Програма повністю адаптується під ваші цілі та робочий графік.</p>
+            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Для кого ці заняття</h2>
+            <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89]">Програма повністю адаптується під ваші цілі та робочий графік.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Дорослі учні (Pre-A1 — B1+)</h3>
-                <p class="text-emerald-300/70 text-sm leading-relaxed">Для кар'єри, подорожей та повсякденного спілкування без нудної зубрилки.</p>
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl backdrop-blur-sm shadow-sm">
+                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-3">Дорослі учні (Pre-A1 — B1+)</h3>
+                <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm leading-relaxed">Для кар'єри, подорожей та повсякденного спілкування без нудної зубрилки.</p>
             </div>
-            <div class="bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Подолання мовного бар'єра</h3>
-                <p class="text-emerald-300/70 text-sm leading-relaxed">Якщо ви все розумієте, але говорити складно чи є страх помилок — опрацюємо на практиці.</p>
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl backdrop-blur-sm shadow-sm">
+                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-3">Подолання мовного бар'єра</h3>
+                <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm leading-relaxed">Якщо ви все розумієте, але говорити складно чи є страх помилок — опрацюємо на практиці.</p>
             </div>
-            <div class="bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Учні з нуля (True Beginners)</h3>
-                <p class="text-emerald-300/70 text-sm leading-relaxed">М'який та комфортний старт з чистого аркуша для побудови міцної бази.</p>
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl backdrop-blur-sm shadow-sm">
+                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-3">Учні з нуля (True Beginners)</h3>
+                <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm leading-relaxed">М'який та комфортний старт з чистого аркуша для побудови міцної бази.</p>
             </div>
-            <div class="bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Підготовка до НМТ</h3>
-                <p class="text-emerald-300/70 text-sm leading-relaxed">Спеціалізовані матеріали, розбір усіх форматів завдань та впевнена підготовка.</p>
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl backdrop-blur-sm shadow-sm">
+                <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-3">Підготовка до НМТ</h3>
+                <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm leading-relaxed">Спеціалізовані матеріали, розбір усіх форматів завдань та впевнена підготовка.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Рівні -->
+    <section id="levels" class="py-24 bg-emerald-900/10 dark:bg-emerald-900/10 bg-[#F4EADF]/30 border-y border-emerald-800/40 dark:border-emerald-800/40 border-[#E2DBD0]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Рівні, з якими я працюю</h2>
+                <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89]">Обираємо комфортну точку старту для вашого прогресу.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl shadow-sm">
+                    <h4 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-3">Pre-A1 (True Beginners)</h4>
+                    <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm">М'який старт з нуля, побудова базової лексики та найнеобхідніших розмовних конструкцій.</p>
+                </div>
+                <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl shadow-sm">
+                    <h4 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-3">A2 (Elementary / Pre-Int)</h4>
+                    <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm">Розширення словникового запасу, впевнене сприйняття мови на слух та побудова речень.</p>
+                </div>
+                <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-500 dark:bg-emerald-500 bg-[#C67D38] text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase">Advanced</div>
+                    <h4 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-3">B1+ (Intermediate)</h4>
+                    <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm">Вільне спілкування, активація пасивного словника, робота зі складнішими темами.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Формати та вартість -->
-    <section id="formats" class="py-24 bg-emerald-900/10 border-y border-emerald-800/40">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Формати та вартість</h2>
-                <p class="text-emerald-300/70">Обирайте найзручніший варіант для стабільного прогресу.</p>
+    <section id="formats" class="py-24 max-w-6xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Формати та вартість</h2>
+            <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89]">Обирайте найзручніший варіант для стабільного прогресу.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl flex flex-col justify-between shadow-sm">
+                <div>
+                    <span class="text-xs font-bold text-emerald-400 dark:text-emerald-400 text-[#C67D38] uppercase tracking-wider mb-2 block">Гнучко</span>
+                    <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Разовий урок</h3>
+                    <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm mb-6">Індивідуальне заняття (50 хв) для точкового вирішення мовних завдань.</p>
+                </div>
+                <div>
+                    <div class="text-3xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-6">350 UAH <span class="text-sm font-sans text-emerald-400/60 dark:text-emerald-400/60 text-[#6C7A89]">/ 50 хв</span></div>
+                    <a href="#contact" class="block text-center bg-emerald-950 dark:bg-emerald-950 bg-[#1B2A4A] border border-emerald-700/50 dark:border-emerald-700/50 border-[#1B2A4A] hover:bg-emerald-800 hover:bg-[#2C3E50] text-emerald-200 dark:text-emerald-200 text-white py-3 rounded-xl font-semibold transition">Обрати урок</a>
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 block">Гнучко</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Разовий урок</h3>
-                        <p class="text-emerald-300/70 text-sm mb-6">Індивідуальне заняття (50 хв) для точкового вирішення мовних завдань.</p>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6">350 UAH <span class="text-sm font-sans text-emerald-400/60">/ 50 хв</span></div>
-                        <a href="#contact" class="block text-center bg-emerald-950 border border-emerald-700/50 hover:bg-emerald-800 text-emerald-200 py-3 rounded-xl font-semibold transition">Обрати урок</a>
-                    </div>
-                </div>
 
-                <div class="bg-gradient-to-b from-emerald-900/40 to-emerald-950 border-2 border-emerald-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl">
-                    <span class="absolute -top-3 right-6 bg-emerald-500 text-emerald-950 text-xs font-bold px-3 py-1 rounded-full uppercase">Популярно</span>
-                    <div>
-                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 block">Курс</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Абонемент 8 уроків</h3>
-                        <p class="text-emerald-300/70 text-sm mb-6">Найвигідніші умови для стабільного прогресу та систематичних занять.</p>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6">2300 UAH <span class="text-sm font-sans text-emerald-400/60">/ курс</span></div>
-                        <a href="#contact" class="block text-center bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-semibold transition shadow-md shadow-emerald-900/50">Обрати абонемент</a>
-                    </div>
+            <div class="bg-gradient-to-b from-emerald-900/40 to-emerald-950 dark:from-emerald-900/40 dark:to-emerald-950 bg-white border-2 border-emerald-500 dark:border-emerald-500 border-[#C67D38] p-8 rounded-2xl flex flex-col justify-between relative shadow-xl">
+                <span class="absolute -top-3 right-6 bg-emerald-500 dark:bg-emerald-500 bg-[#C67D38] text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">Популярно</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-400 dark:text-emerald-400 text-[#C67D38] uppercase tracking-wider mb-2 block">Курс</span>
+                    <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Абонемент 8 уроків</h3>
+                    <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm mb-6">Найвигідніші умови для стабільного прогресу та систематичних занять.</p>
                 </div>
+                <div>
+                    <div class="text-3xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-6">2300 UAH <span class="text-sm font-sans text-emerald-400/60 dark:text-emerald-400/60 text-[#6C7A89]">/ курс</span></div>
+                    <a href="#contact" class="block text-center bg-emerald-600 dark:bg-emerald-600 bg-[#C67D38] hover:bg-emerald-500 hover:bg-[#B06C2F] text-white py-3 rounded-xl font-semibold transition shadow-md">Обрати абонемент</a>
+                </div>
+            </div>
 
-                <div class="bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 block">Система</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Пакет для постійних</h3>
-                        <p class="text-emerald-300/70 text-sm mb-6">Спеціальні умови для довгострокових учнів та цілеспрямованої підготовки.</p>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6">Індивідуально</div>
-                        <a href="#contact" class="block text-center bg-emerald-950 border border-emerald-700/50 hover:bg-emerald-800 text-emerald-200 py-3 rounded-xl font-semibold transition">Обговорити</a>
-                    </div>
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-8 rounded-2xl flex flex-col justify-between shadow-sm">
+                <div>
+                    <span class="text-xs font-bold text-emerald-400 dark:text-emerald-400 text-[#C67D38] uppercase tracking-wider mb-2 block">Система</span>
+                    <h3 class="text-xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Пакет для постійних</h3>
+                    <p class="text-emerald-300/70 dark:text-emerald-300/70 text-[#6C7A89] text-sm mb-6">Спеціальні умови для довгострокових учнів та цілеспрямованої підготовки.</p>
                 </div>
+                <div>
+                    <div class="text-3xl font-['Playfair_Display'] font-bold text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] mb-6">Індивідуально</div>
+                    <a href="#contact" class="block text-center bg-emerald-950 dark:bg-emerald-950 bg-[#1B2A4A] border border-emerald-700/50 dark:border-emerald-700/50 border-[#1B2A4A] hover:bg-emerald-800 hover:bg-[#2C3E50] text-emerald-200 dark:text-emerald-200 text-white py-3 rounded-xl font-semibold transition">Обговорити</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Про мене / Досвід -->
+    <section id="experience" class="py-24 bg-emerald-900/10 dark:bg-emerald-900/10 bg-[#F4EADF]/30 border-y border-emerald-800/40 dark:border-emerald-800/40 border-[#E2DBD0]">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="bg-emerald-900/20 dark:bg-emerald-900/20 bg-white border border-emerald-800/60 dark:border-emerald-800/60 border-[#E2DBD0] p-10 rounded-3xl shadow-sm">
+                <h3 class="text-2xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Досвід та підхід</h3>
+                <p class="text-emerald-300/80 dark:text-emerald-300/80 text-[#6C7A89] text-base leading-relaxed mb-4">
+                    Як репетитор та ESL-дизайнер, я створюю власні навчальні матеріали, інтерактивні завдання і цифрові гайди, щоб кожен урок був цікавим, сучасним і приносив реальний результат.
+                </p>
+                <p class="text-emerald-200 dark:text-emerald-200 text-[#1B2A4A] font-semibold">
+                    Моя мета — зробити так, щоб ви заговорили англійською без страху та з задоволенням.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Контакти -->
     <section id="contact" class="py-24 max-w-4xl mx-auto px-6 text-center">
-        <div class="bg-emerald-900/30 border border-emerald-700/50 p-12 rounded-3xl backdrop-blur-md shadow-2xl">
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Зв'язатися зі мною</h2>
-            <p class="text-emerald-300/80 mb-8 max-w-lg mx-auto">Обирайте зручний месенджер — напишіть мені в Telegram або Instagram Direct, і ми підберемо зручний час.</p>
+        <div class="bg-emerald-900/30 dark:bg-emerald-900/30 bg-white border border-emerald-700/50 dark:border-emerald-700/50 border-[#E2DBD0] p-12 rounded-3xl backdrop-blur-md shadow-2xl">
+            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 dark:text-emerald-100 text-[#1B2A4A] mb-4">Зв'язатися зі мною</h2>
+            <p class="text-emerald-300/80 dark:text-emerald-300/80 text-[#6C7A89] mb-8 max-w-lg mx-auto">Обирайте зручний месенджер — напишіть мені в Telegram або Instagram Direct, і ми підберемо зручний час.</p>
             <div class="flex justify-center gap-4 flex-wrap">
-                <a href="https://t.me/your_telegram" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-900/40 transition">
+                <a href="https://t.me/your_telegram" target="_blank" class="bg-emerald-600 dark:bg-emerald-600 bg-[#C67D38] hover:bg-emerald-500 hover:bg-[#B06C2F] text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg transition">
                     Написати в Telegram
                 </a>
-                <a href="https://instagram.com/your_instagram" target="_blank" class="bg-emerald-950 border border-emerald-700/60 hover:bg-emerald-800 text-emerald-200 px-8 py-3.5 rounded-xl font-semibold transition">
+                <a href="https://instagram.com/your_instagram" target="_blank" class="bg-emerald-950 dark:bg-emerald-950 bg-[#1B2A4A] border border-emerald-700/60 dark:border-emerald-700/60 border-[#1B2A4A] hover:bg-emerald-800 hover:bg-[#2C3E50] text-emerald-200 dark:text-emerald-200 text-white px-8 py-3.5 rounded-xl font-semibold transition">
                     Instagram Direct
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-8 text-emerald-400/50 text-sm border-t border-emerald-800/40">
+    <footer class="text-center py-8 text-emerald-400/50 dark:text-emerald-400/50 text-[#6C7A89] text-sm border-t border-emerald-800/40 dark:border-emerald-800/40 border-[#E2DBD0]">
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
-    <!-- Скрипт перемикача тем -->
+    <!-- Скрипт перемикача тем та WebGL ефекту Halftone Nebula -->
     <script>
+        // Перемикач тем
         function toggleTheme() {
             const html = document.documentElement;
+            const themeBtn = document.getElementById('themeBtn');
+            const lightOverlay = document.getElementById('lightBgOverlay');
+            const canvas = document.getElementById('nebulaCanvas');
+
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
-                // Можна додати світлу тему або альтернативну смарагдову палітру
+                themeBtn.innerHTML = '🌙';
+                lightOverlay.style.opacity = '1';
+                canvas.style.opacity = '0';
+                document.body.style.backgroundColor = '#FBF9F5';
+                document.body.style.color = '#2C3E50';
             } else {
                 html.classList.add('dark');
+                themeBtn.innerHTML = '☀️';
+                lightOverlay.style.opacity = '0';
+                canvas.style.opacity = '0.4';
+                document.body.style.backgroundColor = '#021a10';
+                document.body.style.color = '#ecfdf5';
             }
+        }
+
+        // Рендерер для Halftone Nebula фону на WebGL
+        const canvas = document.getElementById('nebulaCanvas');
+        const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
+        
+        if (gl) {
+            const vsSource = `#version 300 es
+                void main(){
+                    vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
+                    gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
+                }`;
+
+            const fsSource = `#version 300 es
+                precision highp float;
+                uniform vec2 uRes;
+                uniform float uTime;
+                out vec4 frag;
+
+                float hash12(vec2 p){
+                    vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+                    p3 += dot(p3, p3.yzx + 33.33);
+                    return fract((p3.x + p3.y) * p3.z);
+                }
+                float vnoise(vec2 p){
+                    vec2 i = floor(p), f = fract(p);
+                    f = f * f * (3.0 - 2.0 * f);
+                    float a = hash12(i), b = hash12(i + vec2(1.0, 0.0));
+                    float c = hash12(i + vec2(0.0, 1.0)), d = hash12(i + vec2(1.0, 1.0));
+                    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+                }
+                float fbm(vec2 p){
+                    float s = 0.0, a = 0.5;
+                    mat2 r = mat2(0.8, -0.6, 0.6, 0.8);
+                    for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = r * p * 2.03 + 17.1; a *= 0.5; }
+                    return s / 0.9375;
+                }
+
+                void main(){
+                    vec2 uv = gl_FragCoord.xy / uRes.y;
+                    vec2 p = uv * 1.5 + vec2(uTime * 0.02, 0.0);
+                    float n = fbm(p + vec2(fbm(p), fbm(p + 1.3)));
+                    
+                    vec3 voidCol = vec3(0.007, 0.10, 0.06);
+                    vec3 emeraldGlow = vec3(0.02, 0.35, 0.20);
+                    vec3 highlight = vec3(0.06, 0.70, 0.41);
+
+                    vec3 col = mix(voidCol, emeraldGlow, smoothstep(0.2, 0.6, n));
+                    col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.6);
+                    
+                    // Halftone dot simulation
+                    vec2 grid = fract(gl_FragCoord.xy / 6.0) - 0.5;
+                    float d = length(grid);
+                    float dotMask = smoothstep(0.35, 0.38, d * (0.5 + n * 0.8));
+                    col *= mix(0.7, 1.0, dotMask);
+
+                    frag = vec4(col, 1.0);
+                }`;
+
+            const compile = (type, src) => {
+                const s = gl.createShader(type);
+                gl.shaderSource(s, src);
+                gl.compileShader(s);
+                return s;
+            };
+
+            const program = gl.createProgram();
+            gl.attachShader(program, compile(gl.VERTEX_SHADER, vsSource));
+            gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fsSource));
+            gl.linkProgram(program);
+
+            const uResLoc = gl.getUniformLocation(program, "uRes");
+            const uTimeLoc = gl.getUniformLocation(program, "uTime");
+
+            function resize() {
+                canvas.width = canvas.clientWidth * window.devicePixelRatio;
+                canvas.height = canvas.clientHeight * window.devicePixelRatio;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            let startTime = performance.now();
+            function render() {
+                gl.useProgram(program);
+                gl.uniform2f(uResLoc, canvas.width, canvas.height);
+                gl.uniform1f(uTimeLoc, (performance.now() - startTime) / 1000);
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
         }
     </script>
 </body>

@@ -17,6 +17,16 @@
                         darktext: '#022C22',
                         emeraldtext: '#064E3B',
                         silverborder: '#D1D5DB'
+                    },
+                    animation: {
+                        marquee: 'marquee 35s linear infinite',
+                        'marquee-reverse': 'marquee 35s linear infinite reverse',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(calc(-50% - 0.5rem))' },
+                        }
                     }
                 }
             }
@@ -25,12 +35,20 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
         #nebulaCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+        
         :root { --spotlight-fill: rgba(6, 78, 59, 0.06); --spotlight-ring: rgba(6, 78, 59, 0.25); }
         .dark { --spotlight-fill: rgba(16, 185, 129, 0.15); --spotlight-ring: rgba(16, 185, 129, 0.5); }
+        
         .spotlight-card { position: relative; isolation: isolate; }
         .spotlight-fill { pointer-events: none; position: absolute; inset: 0; z-index: -10; border-radius: inherit; opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-fill), transparent 70%); }
         .spotlight-ring { pointer-events: none; position: absolute; inset: -1px; padding: 1px; z-index: -10; border-radius: inherit; opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-ring), transparent 70%); mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; }
         .spotlight-card:hover .spotlight-fill, .spotlight-card:hover .spotlight-ring { opacity: 1; }
+
+        /* Маска для ефекту розчинення (Marquee) по краях */
+        .marquee-mask {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
     </style>
 </head>
 <body class="bg-lightbg text-darktext dark:bg-[#021a10] dark:text-emerald-50 transition-colors duration-500 selection:bg-emerald-500 selection:text-white">
@@ -48,7 +66,7 @@
     <!-- Інтерактивний фон -->
     <canvas id="nebulaCanvas"></canvas>
 
-    <!-- PULL CORD -->
+    <!-- PULL CORD (Шнурок-перемикач теми) -->
     <div id="pullCord" class="fixed top-0 right-6 sm:right-12 z-[100] flex flex-col items-center cursor-grab select-none group" style="touch-action: none;">
         <div id="cordLine" class="w-[2px] h-16 bg-emeraldtext dark:bg-emerald-500 transition-colors duration-500"></div>
         <div id="cordHandle" class="w-10 h-10 border-2 border-emeraldtext dark:border-emerald-500 rounded-full bg-lightbg dark:bg-[#021a10] -mt-1 shadow-lg transition-transform duration-300 flex items-center justify-center group-hover:scale-110 group-active:scale-95">
@@ -77,7 +95,7 @@
         </div>
     </header>
 
-    <!-- Головний блок із Карткою Профілю -->
+    <!-- Головний блок -->
     <section class="relative min-h-screen flex items-center pt-20 px-6 max-w-6xl mx-auto z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full py-16">
             <div>
@@ -96,23 +114,20 @@
                 </div>
             </div>
             
-            <!-- Картка Профілю -->
             <div class="flex justify-center">
                 <div class="spotlight-card w-full max-w-sm rounded-3xl border border-silverborder dark:border-emerald-700/40 bg-white/80 dark:bg-emerald-900/20 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-colors">
                     <span class="spotlight-fill"></span>
                     <span class="spotlight-ring"></span>
                     
                     <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50">
-                        <img src="photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
+                        <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
                         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full transition-colors"></div>
                         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
                     </div>
 
                     <h3 class="text-2xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-1 transition-colors">Maryna Likarchuk</h3>
                     <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-4 transition-colors">ESL Designer & English Mentor</p>
-                    <p class="text-sm text-darktext/80 dark:text-emerald-300/80 mb-8 leading-relaxed transition-colors">
-                        Розробляю авторські матеріали та комфортні навчальні системи під ваші цілі.
-                    </p>
+                    <p class="text-sm text-darktext/80 dark:text-emerald-300/80 mb-8 leading-relaxed transition-colors">Розробляю авторські матеріали та комфортні навчальні системи під ваші цілі.</p>
 
                     <div class="w-full flex flex-col gap-3">
                         <button onclick="copyTelegram('likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-lightbg dark:bg-emerald-950/60 border border-silverborder dark:border-emerald-700/50 hover:bg-silverborder/50 dark:hover:bg-emerald-800 text-emeraldtext dark:text-emerald-200 py-3 rounded-xl font-semibold transition text-sm">
@@ -125,7 +140,7 @@
         </div>
     </section>
 
-    <!-- Цифри / Статистика -->
+    <!-- Статистика -->
     <section id="stats" class="py-12 border-y border-silverborder dark:border-emerald-800/40 bg-white/50 dark:bg-emerald-900/10 backdrop-blur-sm relative z-10 transition-colors">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
@@ -150,7 +165,6 @@
             <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Реальні результати студентів, якими я пишаюся.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Кейс 1 -->
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
@@ -167,10 +181,10 @@
                 </div>
                 <div>
                     <p class="text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold mb-1">Точка Б (Впевнений B1+)</p>
-                    <p class="text-sm text-darktext dark:text-emerald-100 font-medium">Вільне висловлювання думок на різні теми. Розуміння складних граматичних конструкцій на рівні, близькому до рідної мови.</p>
+                    <p class="text-sm text-darktext dark:text-emerald-100 font-medium">Вільне висловлювання думок на різні теми. Розуміння складної граматики на рівні, близькому до рідної мови.</p>
                 </div>
             </div>
-            <!-- Кейс 2 -->
+            
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
@@ -187,10 +201,10 @@
                 </div>
                 <div>
                     <p class="text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold mb-1">Точка Б (Твердий А2 + Профіль)</p>
-                    <p class="text-sm text-darktext dark:text-emerald-100 font-medium">Чітка система знань. Додатково інтегровано курс професійної англійської (English for construction workers) під запит.</p>
+                    <p class="text-sm text-darktext dark:text-emerald-100 font-medium">Чітка система знань. Додатково інтегровано курс професійної англійської для будівельників під запит.</p>
                 </div>
             </div>
-            <!-- Кейс 3 -->
+
             <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors">
                 <span class="spotlight-fill"></span>
                 <span class="spotlight-ring"></span>
@@ -207,7 +221,7 @@
                 </div>
                 <div>
                     <p class="text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold mb-1">Точка Б (Впевнений B1)</p>
-                    <p class="text-sm text-darktext dark:text-emerald-100 font-medium">Вільне прослуховування подкастів та вебінарів. Побудова складних речень та підготовка до комунікації з іноземцями.</p>
+                    <p class="text-sm text-darktext dark:text-emerald-100 font-medium">Вільне прослуховування подкастів та вебінарів. Підготовка до активної комунікації з іноземцями.</p>
                 </div>
             </div>
         </div>
@@ -221,7 +235,6 @@
                 <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Обирайте комфортний для вас темп та вид навчання.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Формат 1 -->
                 <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
                     <span class="spotlight-fill"></span>
                     <span class="spotlight-ring"></span>
@@ -233,13 +246,12 @@
                         <p class="text-darktext/80 dark:text-emerald-300/80 text-sm mb-4">Курс, розроблений під ваші потреби (від 1 до 4 разів на тиждень).</p>
                         <ul class="text-sm text-darktext/90 dark:text-emerald-100/90 space-y-2 mb-8">
                             <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Власний кабінет студента</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Доступ до всіх матеріалів та оплат в одному місці</li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Доступ до всіх матеріалів</li>
                             <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Регулярна перевірка ДЗ</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Формат 2 -->
                 <div class="spotlight-card bg-gradient-to-b from-white to-gray-50 dark:from-emerald-900/40 dark:to-emerald-950 border-2 border-emerald-600 dark:border-emerald-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-colors">
                     <span class="spotlight-fill"></span>
                     <span class="spotlight-ring"></span>
@@ -251,14 +263,13 @@
                         <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4">Асинхронне навчання</h3>
                         <p class="text-darktext/80 dark:text-emerald-300/80 text-sm mb-4">Навчання у вашому темпі без прив'язки до розкладу дзвінків.</p>
                         <ul class="text-sm text-darktext/90 dark:text-emerald-100/90 space-y-2 mb-8">
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Щотижневий індивідуальний план та матеріали</li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Щотижневий план та матеріали</li>
                             <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Детальний фідбек від мене</li>
                             <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Періодичні Q&A сесії наживо</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Формат 3 -->
                 <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
                     <span class="spotlight-fill"></span>
                     <span class="spotlight-ring"></span>
@@ -266,12 +277,12 @@
                         <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl flex items-center justify-center mb-6">
                             <span class="text-2xl">💡</span>
                         </div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4">Індивідуальна консультація</h3>
+                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4">Інд. консультація</h3>
                         <p class="text-darktext/80 dark:text-emerald-300/80 text-sm mb-4">Точкове вирішення ваших запитів без довгострокових зобов'язань.</p>
                         <ul class="text-sm text-darktext/90 dark:text-emerald-100/90 space-y-2 mb-8">
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Детальний розбір конкретної складної теми</li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Розбір конкретної складної теми</li>
                             <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Визначення рівня</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Створення roadmap'у для самостійного навчання</li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Створення roadmap'у</li>
                         </ul>
                     </div>
                 </div>
@@ -279,16 +290,166 @@
         </div>
     </section>
 
-    <!-- Відгуки (Плейсхолдер) -->
-    <section id="reviews" class="py-24 max-w-4xl mx-auto px-6 text-center relative z-10">
-        <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-10 transition-colors">Відгуки учнів</h2>
-        <div class="spotlight-card bg-white/50 dark:bg-emerald-900/10 border border-dashed border-silverborder dark:border-emerald-700/50 p-16 rounded-3xl backdrop-blur-md shadow-sm transition-colors flex flex-col items-center justify-center min-h-[300px]">
-            <span class="spotlight-fill"></span>
-            <span class="spotlight-ring"></span>
-            <p class="text-darktext/60 dark:text-emerald-300/50 font-mono text-sm">[ Тут ви можете додати зображення/скріншоти ваших відгуків ]</p>
-            <!-- Приклад того, як вставити фото відгуку:
-            <img src="review1.jpg" class="w-full max-w-md rounded-xl shadow-md my-4" />
-            -->
+    <!-- НОВИЙ БЛОК ВІДГУКІВ (Marquee Effect) -->
+    <section id="reviews" class="py-24 relative z-10 overflow-hidden transition-colors">
+        <div class="text-center max-w-2xl mx-auto mb-16 px-6">
+            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Що кажуть учні</h2>
+            <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Результат і комфорт — найкраща оцінка моєї роботи.</p>
+        </div>
+        
+        <div class="relative flex w-full flex-col items-center justify-center marquee-mask group">
+            
+            <!-- Перший ряд (вліво) -->
+            <div class="flex w-full overflow-hidden mb-6">
+                <div class="flex shrink-0 gap-6 animate-marquee group-hover:[animation-play-state:paused] w-max">
+                    <!-- Картки відгуків (дублюються для нескінченної прокрутки) -->
+                    <!-- Блок 1 -->
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Олена&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Олена</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Нарешті перестала боятися говорити! Асинхронний формат ідеально підійшов для мого графіка."</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Ігор&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Ігор</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Дуже крута структура, все розкладено по поличках. Англійська для роботи тепер не проблема."</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Марія&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Марія</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Підготовка до НМТ</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Склала НМТ на 190+, хоча починали майже з нуля! Дуже вдячна за терпіння і підтримку."</blockquote>
+                    </figure>
+
+                    <!-- Дублікат Блоку 1 (Для безперервної анімації) -->
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Олена&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Олена</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Нарешті перестала боятися говорити! Асинхронний формат ідеально підійшов для мого графіка."</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Ігор&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Ігор</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Дуже крута структура, все розкладено по поличках. Англійська для роботи тепер не проблема."</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Марія&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Марія</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Підготовка до НМТ</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Склала НМТ на 190+, хоча починали майже з нуля! Дуже вдячна за терпіння і підтримку."</blockquote>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Другий ряд (вправо) -->
+            <div class="flex w-full overflow-hidden">
+                <div class="flex shrink-0 gap-6 animate-marquee-reverse group-hover:[animation-play-state:paused] w-max">
+                    <!-- Блок 2 -->
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Дмитро&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Дмитро</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Консультація</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Марина розклала все по поличках за одну консультацію. Тепер маю чіткий план."</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Катерина&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Катерина</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Надзвичайно комфортна атмосфера на уроках, жодного стресу при помилках. Рекомендую!"</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Андрій&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Андрій</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Ніколи не думав, що вчити мову можна так зручно. Авторські матеріали — це просто топ."</blockquote>
+                    </figure>
+
+                    <!-- Дублікат Блоку 2 -->
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Дмитро&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Дмитро</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Консультація</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Марина розклала все по поличках за одну консультацію. Тепер маю чіткий план."</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Катерина&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Катерина</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Надзвичайно комфортна атмосфера на уроках, жодного стресу при помилках. Рекомендую!"</blockquote>
+                    </figure>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors">
+                        <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3">
+                            <img class="rounded-full" width="40" height="40" alt="" src="https://ui-avatars.com/api/?name=Андрій&background=059669&color=fff" />
+                            <div class="flex flex-col">
+                                <figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Андрій</figcaption>
+                                <p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p>
+                            </div>
+                        </div>
+                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Ніколи не думав, що вчити мову можна так зручно. Авторські матеріали — це просто топ."</blockquote>
+                    </figure>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -327,10 +488,7 @@
         const cord = document.getElementById('pullCord');
         const cordLine = document.getElementById('cordLine');
         const cordHandle = document.getElementById('cordHandle');
-        let startY = 0;
-        let isDragging = false;
-        let currentY = 0;
-        let originalHeight = 64;
+        let startY = 0, isDragging = false, currentY = 0, originalHeight = 64;
 
         cord.addEventListener('pointerdown', (e) => {
             isDragging = true;
@@ -345,10 +503,8 @@
             if (!isDragging) return;
             currentY = e.clientY - startY;
             if (currentY < 0) currentY = 0;
-            
             let pullDistance = currentY;
             if (currentY > 40) pullDistance = 40 + (currentY - 40) * 0.3;
-            
             cordLine.style.height = `${originalHeight + pullDistance}px`;
         });
 
@@ -356,7 +512,6 @@
             if (!isDragging) return;
             isDragging = false;
             cord.style.cursor = 'grab';
-            
             cordLine.style.transition = 'height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             cordHandle.style.transition = 'transform 0.3s ease';
             cordLine.style.height = `${originalHeight}px`;
@@ -368,9 +523,8 @@
         let isDark = true;
         function toggleTheme() {
             isDark = !isDark;
-            const html = document.documentElement;
-            if (isDark) html.classList.add('dark');
-            else html.classList.remove('dark');
+            if (isDark) document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
         }
 
         function copyTelegram(username) {
@@ -430,7 +584,6 @@
                 void main(){
                     vec2 uv = gl_FragCoord.xy / uRes.y;
                     vec2 mouseUv = uMouse / uRes.y;
-                    
                     float dist = length(uv - mouseUv);
                     float lamp = exp(-dist * 2.2) * 0.55;
 

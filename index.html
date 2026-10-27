@@ -7,33 +7,39 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        paper: '#F2EFE9',
-                        navy: '#0F1C2E',
-                        ochre: '#A65D20',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #021a10;
+            color: #ecfdf5;
+            transition: color 0.3s ease;
         }
-        body, header, section, div, h1, p, a, button {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        /* Фіксований інтерактивний фон на всю сторінку */
+        #nebulaCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: auto;
+            cursor: crosshair;
+        }
+        .transition-all {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body class="bg-emerald-950 text-emerald-50 selection:bg-emerald-500 selection:text-white">
+<body>
+
+    <!-- Інтерактивний фон на всю сторінку -->
+    <canvas id="nebulaCanvas"></canvas>
 
     <!-- Навігація -->
-    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 bg-emerald-950/80 backdrop-blur-md border-b border-emerald-800/50">
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 bg-[#021a10]/80 backdrop-blur-md border-b border-emerald-800/40 transition-all">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div id="logoText" class="font-['Playfair_Display'] text-xl font-bold tracking-tight text-emerald-300">
                 Maryna <span class="text-emerald-500">Likarchuk</span>
@@ -55,21 +61,17 @@
         </div>
     </header>
 
-    <!-- Головний блок із Canvas-фоном, що реагує на курсор -->
-    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#020d08]" id="heroSection">
-        <canvas id="nebulaCanvas" class="absolute inset-0 block h-full w-full pointer-events-auto transition-opacity duration-500 cursor-crosshair"></canvas>
-        
-        <div id="lightBgOverlay" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-500 bg-gradient-to-br from-[#F2EFE9] via-[#E8E2D5] to-[#D6CEBE]"></div>
-
-        <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10 w-full pointer-events-none">
-            <div class="pointer-events-auto">
-                <span id="heroBadge" class="inline-block bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm">
+    <!-- Головний блок -->
+    <section class="relative min-h-screen flex items-center pt-20 px-6 max-w-6xl mx-auto z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full py-16">
+            <div>
+                <span id="heroBadge" class="inline-block bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm transition-all">
                     ✨ Індивідуальні заняття з англійської
                 </span>
-                <h1 id="heroTitle" class="text-4xl sm:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-emerald-100">
+                <h1 id="heroTitle" class="text-4xl sm:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-emerald-100 transition-all">
                     Сучасна англійська <span class="text-emerald-400">для дорослих</span>
                 </h1>
-                <p id="heroDesc" class="text-emerald-300/90 text-lg mb-8 leading-relaxed">
+                <p id="heroDesc" class="text-emerald-300/90 text-lg mb-8 leading-relaxed transition-all">
                     Допомагаю подолати мовний бар'єр, почуватися впевнено в роботі та житті, а також якісно готуватися до іспитів у комфортному темпі.
                 </p>
                 <div class="flex flex-wrap gap-4">
@@ -81,10 +83,10 @@
                     </a>
                 </div>
             </div>
-            <div class="flex justify-center pointer-events-auto">
-                <div id="profileBox" class="w-full max-w-sm h-[420px] rounded-2xl border border-emerald-700/40 bg-emerald-900/20 backdrop-blur-xl shadow-2xl flex items-center justify-center p-4 relative overflow-hidden group">
+            <div class="flex justify-center">
+                <div id="profileBox" class="w-full max-w-sm h-[420px] rounded-2xl border border-emerald-700/40 bg-emerald-900/20 backdrop-blur-md shadow-2xl flex items-center justify-center p-4 relative overflow-hidden group transition-all">
                     <div class="absolute inset-0 bg-cover bg-center opacity-90 transition group-hover:scale-105" style="background-image: url('your-photo.jpg');"></div>
-                    <div class="relative z-10 text-center text-emerald-300 font-mono text-sm bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-emerald-500/30">
+                    <div id="photoPlaceholder" class="relative z-10 text-center text-emerald-300 font-mono text-sm bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-emerald-500/30 transition-all">
                         [ Ваше реальне фото ]
                     </div>
                 </div>
@@ -93,96 +95,96 @@
     </section>
 
     <!-- Для кого ці заняття -->
-    <section id="audience" class="py-24 max-w-6xl mx-auto px-6">
+    <section id="audience" class="py-24 max-w-6xl mx-auto px-6 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="section-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Для кого ці заняття</h2>
-            <p class="section-subtitle text-emerald-300/80">Програма повністю адаптується під ваші цілі та робочий графік.</p>
+            <h2 class="section-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Для кого ці заняття</h2>
+            <p class="section-subtitle text-emerald-300/80 transition-all">Програма повністю адаптується під ваші цілі та робочий графік.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm shadow-sm">
-                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Дорослі учні (Pre-A1 — B1+)</h3>
-                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed">Для кар'єри, подорожей та повсякденного спілкування без нудної зубрилки.</p>
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-all">
+                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3 transition-all">Дорослі учні (Pre-A1 — B1+)</h3>
+                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed transition-all">Для кар'єри, подорожей та повсякденного спілкування без нудної зубрилки.</p>
             </div>
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm shadow-sm">
-                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Подолання мовного бар'єра</h3>
-                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed">Якщо ви все розумієте, але говорити складно чи є страх помилок — опрацюємо на практиці.</p>
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-all">
+                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3 transition-all">Подолання мовного бар'єра</h3>
+                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed transition-all">Якщо ви все розумієте, але говорити складно чи є страх помилок — опрацюємо на практиці.</p>
             </div>
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm shadow-sm">
-                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Учні з нуля (True Beginners)</h3>
-                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed">М'який та комфортний старт з чистого аркуша для побудови міцної бази.</p>
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-all">
+                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3 transition-all">Учні з нуля (True Beginners)</h3>
+                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed transition-all">М'який та комфортний старт з чистого аркуша для побудови міцної бази.</p>
             </div>
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-sm shadow-sm">
-                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3">Підготовка до НМТ</h3>
-                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed">Спеціалізовані матеріали, розбір усіх форматів завдань та впевнена підготовка.</p>
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-all">
+                <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-200 mb-3 transition-all">Підготовка до НМТ</h3>
+                <p class="card-desc text-emerald-300/80 text-sm leading-relaxed transition-all">Спеціалізовані матеріали, розбір усіх форматів завдань та впевнена підготовка.</p>
             </div>
         </div>
     </section>
 
     <!-- Рівні -->
-    <section id="levels" class="py-24 bg-emerald-900/10 border-y border-emerald-800/40">
+    <section id="levels" class="py-24 border-y border-emerald-800/40 relative z-10 transition-all">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="section-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Рівні, з якими я працюю</h2>
-                <p class="section-subtitle text-emerald-300/80">Обираємо комфортну точку старту для вашого прогресу.</p>
+                <h2 class="section-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Рівні, з якими я працюю</h2>
+                <p class="section-subtitle text-emerald-300/80 transition-all">Обираємо комфортну точку старту для вашого прогресу.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl shadow-sm">
-                    <h4 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-3">Pre-A1 (True Beginners)</h4>
-                    <p class="card-desc text-emerald-300/80 text-sm">М'який старт з нуля, побудова базової лексики та найнеобхідніших розмовних конструкцій.</p>
+                <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-all">
+                    <h4 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-3 transition-all">Pre-A1 (True Beginners)</h4>
+                    <p class="card-desc text-emerald-300/80 text-sm transition-all">М'який старт з нуля, побудова базової лексики та найнеобхідніших розмовних конструкцій.</p>
                 </div>
-                <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl shadow-sm">
-                    <h4 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-3">A2 (Elementary / Pre-Int)</h4>
-                    <p class="card-desc text-emerald-300/80 text-sm">Розширення словникового запасу, впевнене сприйняття мови на слух та побудова речень.</p>
+                <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-all">
+                    <h4 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-3 transition-all">A2 (Elementary / Pre-Int)</h4>
+                    <p class="card-desc text-emerald-300/80 text-sm transition-all">Розширення словникового запасу, впевнене сприйняття мови на слух та побудова речень.</p>
                 </div>
-                <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase">Advanced</div>
-                    <h4 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-3">B1+ (Intermediate)</h4>
-                    <p class="card-desc text-emerald-300/80 text-sm">Вільне спілкування, активація пасивного словника, робота зі складнішими темами.</p>
+                <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm relative overflow-hidden transition-all">
+                    <div id="advBadge" class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase">Advanced</div>
+                    <h4 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-3 transition-all">B1+ (Intermediate)</h4>
+                    <p class="card-desc text-emerald-300/80 text-sm transition-all">Вільне спілкування, активація пасивного словника, робота зі складнішими темами.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Формати та вартість -->
-    <section id="formats" class="py-24 max-w-6xl mx-auto px-6">
+    <section id="formats" class="py-24 max-w-6xl mx-auto px-6 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="section-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Формати та вартість</h2>
-            <p class="section-subtitle text-emerald-300/80">Обирайте найзручніший варіант для стабільного прогресу.</p>
+            <h2 class="section-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Формати та вартість</h2>
+            <p class="section-subtitle text-emerald-300/80 transition-all">Обирайте найзручніший варіант для стабільного прогресу.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between shadow-sm">
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-all">
                 <div>
                     <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 block">Гнучко</span>
-                    <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Разовий урок</h3>
-                    <p class="card-desc text-emerald-300/80 text-sm mb-6">Індивідуальне заняття (50 хв) для точкового вирішення мовних завдань.</p>
+                    <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Разовий урок</h3>
+                    <p class="card-desc text-emerald-300/80 text-sm mb-6 transition-all">Індивідуальне заняття (50 хв) для точкового вирішення мовних завдань.</p>
                 </div>
                 <div>
-                    <div class="price-text text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6">350 UAH <span class="text-sm font-sans text-emerald-400/60">/ 50 хв</span></div>
+                    <div class="price-text text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6 transition-all">350 UAH <span class="text-sm font-sans text-emerald-400/60">/ 50 хв</span></div>
                     <a href="#contact" class="price-btn block text-center bg-emerald-950 border border-emerald-700/50 hover:bg-emerald-800 text-emerald-200 py-3 rounded-xl font-semibold transition">Обрати урок</a>
                 </div>
             </div>
 
-            <div class="featured-card bg-gradient-to-b from-emerald-900/40 to-emerald-950 border-2 border-emerald-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl">
-                <span class="absolute -top-3 right-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">Популярно</span>
+            <div id="featuredCard" class="featured-card bg-gradient-to-b from-emerald-900/40 to-emerald-950 border-2 border-emerald-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-all">
+                <span id="popBadge" class="absolute -top-3 right-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">Популярно</span>
                 <div>
                     <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 block">Курс</span>
-                    <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Абонемент 8 уроків</h3>
-                    <p class="card-desc text-emerald-300/80 text-sm mb-6">Найвигідніші умови для стабільного прогресу та систематичних занять.</p>
+                    <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Абонемент 8 уроків</h3>
+                    <p class="card-desc text-emerald-300/80 text-sm mb-6 transition-all">Найвигідніші умови для стабільного прогресу та систематичних занять.</p>
                 </div>
                 <div>
-                    <div class="price-text text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6">2300 UAH <span class="text-sm font-sans text-emerald-400/60">/ курс</span></div>
+                    <div class="price-text text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6 transition-all">2300 UAH <span class="text-sm font-sans text-emerald-400/60">/ курс</span></div>
                     <a href="#contact" class="featured-btn block text-center bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-semibold transition shadow-md">Обрати абонемент</a>
                 </div>
             </div>
 
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between shadow-sm">
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-all">
                 <div>
                     <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 block">Система</span>
-                    <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Пакет для постійних</h3>
-                    <p class="card-desc text-emerald-300/80 text-sm mb-6">Спеціальні умови для довгострокових учнів та цілеспрямованої підготовки.</p>
+                    <h3 class="card-title text-xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Пакет для постійних</h3>
+                    <p class="card-desc text-emerald-300/80 text-sm mb-6 transition-all">Спеціальні умови для довгострокових учнів та цілеспрямованої підготовки.</p>
                 </div>
                 <div>
-                    <div class="price-text text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6">Індивідуально</div>
+                    <div class="price-text text-3xl font-['Playfair_Display'] font-bold text-emerald-200 mb-6 transition-all">Індивідуально</div>
                     <a href="#contact" class="price-btn block text-center bg-emerald-950 border border-emerald-700/50 hover:bg-emerald-800 text-emerald-200 py-3 rounded-xl font-semibold transition">Обговорити</a>
                 </div>
             </div>
@@ -190,14 +192,14 @@
     </section>
 
     <!-- Про мене -->
-    <section id="experience" class="py-24 bg-emerald-900/10 border-y border-emerald-800/40">
+    <section id="experience" class="py-24 border-y border-emerald-800/40 relative z-10 transition-all">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-10 rounded-3xl shadow-sm">
-                <h3 class="card-title text-2xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Досвід та підхід</h3>
-                <p class="card-desc text-emerald-300/90 text-base leading-relaxed mb-4">
+            <div class="content-card bg-emerald-900/20 border border-emerald-800/60 p-10 rounded-3xl backdrop-blur-md shadow-sm transition-all">
+                <h3 class="card-title text-2xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Досвід та підхід</h3>
+                <p class="card-desc text-emerald-300/90 text-base leading-relaxed mb-4 transition-all">
                     Як репетитор та ESL-дизайнер, я створюю власні навчальні матеріали, інтерактивні завдання і цифрові гайди, щоб кожен урок був цікавим, сучасним і приносив реальний результат.
                 </p>
-                <p class="card-sub text-emerald-200 font-semibold">
+                <p class="card-sub text-emerald-200 font-semibold transition-all">
                     Моя мета — зробити так, щоб ви заговорили англійською без страху та з задоволенням.
                 </p>
             </div>
@@ -205,10 +207,10 @@
     </section>
 
     <!-- Контакти -->
-    <section id="contact" class="py-24 max-w-4xl mx-auto px-6 text-center">
-        <div id="contactBox" class="bg-emerald-900/30 border border-emerald-700/50 p-12 rounded-3xl backdrop-blur-md shadow-2xl">
-            <h2 class="card-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4">Зв'язатися зі мною</h2>
-            <p class="card-desc text-emerald-300/90 mb-8 max-w-lg mx-auto">Обирайте зручний месенджер — напишіть мені в Telegram або Instagram Direct, і ми підберемо зручний час.</p>
+    <section id="contact" class="py-24 max-w-4xl mx-auto px-6 text-center relative z-10">
+        <div id="contactBox" class="bg-emerald-900/30 border border-emerald-700/50 p-12 rounded-3xl backdrop-blur-md shadow-2xl transition-all">
+            <h2 class="card-title text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emerald-100 mb-4 transition-all">Зв'язатися зі мною</h2>
+            <p class="card-desc text-emerald-300/90 mb-8 max-w-lg mx-auto transition-all">Обирайте зручний месенджер — напишіть мені в Telegram або Instagram Direct, і ми підберемо зручний час.</p>
             <div class="flex justify-center gap-4 flex-wrap">
                 <a href="https://t.me/your_telegram" target="_blank" class="contact-btn-primary bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg transition">
                     Написати в Telegram
@@ -220,20 +222,17 @@
         </div>
     </section>
 
-    <footer id="siteFooter" class="text-center py-8 text-emerald-400/60 text-sm border-t border-emerald-800/40">
+    <footer id="siteFooter" class="text-center py-8 text-emerald-400/60 text-sm border-t border-emerald-800/40 relative z-10 transition-all">
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
-    <!-- Інтерактивний скрипт (курсор у WebGL + контрастна світла/темна тема) -->
+    <!-- Скрипт (WebGL небула на весь екран + реакція на курсор + двотемність із темно-синім шрифтом у світлій темі) -->
     <script>
         let isDark = true;
 
         function toggleTheme() {
             isDark = !isDark;
             const themeBtn = document.getElementById('themeBtn');
-            const lightOverlay = document.getElementById('lightBgOverlay');
-            const canvas = document.getElementById('nebulaCanvas');
-            
             const siteHeader = document.getElementById('siteHeader');
             const logoText = document.getElementById('logoText');
             const ctaHeaderBtn = document.getElementById('ctaHeaderBtn');
@@ -243,70 +242,75 @@
             const heroBtnPrimary = document.getElementById('heroBtnPrimary');
             const heroBtnSecondary = document.getElementById('heroBtnSecondary');
             const profileBox = document.getElementById('profileBox');
+            const photoPlaceholder = document.getElementById('photoPlaceholder');
             const contactBox = document.getElementById('contactBox');
             const siteFooter = document.getElementById('siteFooter');
+            const advBadge = document.getElementById('advBadge');
+            const popBadge = document.getElementById('popBadge');
+            const featuredCard = document.getElementById('featuredCard');
 
             if (!isDark) {
-                // СВІТЛА ТЕМА (контрастні, темні комплементарні кольори для ідеальної читабельності)
+                // СВІТЛА ТЕМА: молочно-бежевий фон, темно-синій шрифт, рухливі нотки
                 themeBtn.innerHTML = '🌙';
-                lightOverlay.style.opacity = '1';
-                canvas.style.opacity = '0';
-                document.body.style.backgroundColor = '#F2EFE9';
-                document.body.style.color = '#111827';
+                document.body.style.backgroundColor = '#F9F6F0';
+                document.body.style.color = '#0F1C2E';
 
-                siteHeader.style.backgroundColor = 'rgba(242, 239, 233, 0.9)';
-                siteHeader.style.borderColor = '#D6CEBE';
+                siteHeader.style.backgroundColor = 'rgba(249, 246, 240, 0.9)';
+                siteHeader.style.borderColor = '#E2DBC8';
                 logoText.style.color = '#0F1C2E';
                 logoText.querySelector('span').style.color = '#A65D20';
                 
                 ctaHeaderBtn.className = "bg-[#0F1C2E] hover:bg-[#1E293B] text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md";
 
-                heroBadge.className = "inline-block bg-[#E8E2D5] text-[#0F1C2E] border border-[#D6CEBE] px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm";
+                heroBadge.className = "inline-block bg-[#EFECE4] text-[#0F1C2E] border border-[#E2DBC8] px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm transition-all";
                 heroTitle.style.color = '#0F1C2E';
                 heroTitle.querySelector('span').style.color = '#A65D20';
-                heroDesc.style.color = '#374151';
+                heroDesc.style.color = '#2C3E50';
 
                 heroBtnPrimary.className = "bg-[#0F1C2E] hover:bg-[#1E293B] text-white px-8 py-3.5 rounded-xl font-semibold shadow-xl transition transform hover:-translate-y-0.5";
-                heroBtnSecondary.className = "bg-white border border-[#D6CEBE] hover:bg-[#E8E2D5] text-[#0F1C2E] px-6 py-3.5 rounded-xl font-semibold transition shadow-sm";
+                heroBtnSecondary.className = "bg-white border border-[#E2DBC8] hover:bg-[#EFECE4] text-[#0F1C2E] px-6 py-3.5 rounded-xl font-semibold transition shadow-sm";
                 
-                profileBox.className = "w-full max-w-sm h-[420px] rounded-2xl border border-[#D6CEBE] bg-white shadow-xl flex items-center justify-center p-4 relative overflow-hidden group";
+                profileBox.className = "w-full max-w-sm h-[420px] rounded-2xl border border-[#E2DBC8] bg-white/90 shadow-xl flex items-center justify-center p-4 relative overflow-hidden group transition-all";
+                photoPlaceholder.className = "relative z-10 text-center text-[#0F1C2E] font-mono text-sm bg-[#F9F6F0] px-4 py-2 rounded-lg backdrop-blur-sm border border-[#E2DBC8]";
 
-                contactBox.className = "bg-white border border-[#D6CEBE] p-12 rounded-3xl shadow-2xl";
-                siteFooter.style.borderColor = '#D6CEBE';
+                contactBox.className = "bg-white/90 border border-[#E2DBC8] p-12 rounded-3xl shadow-2xl backdrop-blur-md transition-all";
+                siteFooter.style.borderColor = '#E2DBC8';
                 siteFooter.style.color = '#4B5563';
+                
+                advBadge.className = "absolute top-0 right-0 bg-[#A65D20] text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase";
+                popBadge.className = "absolute -top-3 right-6 bg-[#A65D20] text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm";
+                featuredCard.className = "featured-card bg-gradient-to-b from-white to-[#F2EFE9] border-2 border-[#A65D20] p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-all";
 
                 // Картки у світлій темі
-                document.querySelectorAll('.content-card, .featured-card').forEach(card => {
-                    card.style.backgroundColor = '#FFFFFF';
-                    card.style.borderColor = '#D6CEBE';
+                document.querySelectorAll('.content-card').forEach(card => {
+                    card.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+                    card.style.borderColor = '#E2DBC8';
                 });
                 document.querySelectorAll('.card-title, .section-title').forEach(el => el.style.color = '#0F1C2E');
-                document.querySelectorAll('.card-desc, .section-subtitle').forEach(el => el.style.color = '#374151');
+                document.querySelectorAll('.card-desc, .section-subtitle').forEach(el => el.style.color = '#2C3E50');
                 document.querySelectorAll('.card-sub').forEach(el => el.style.color = '#1F2937');
                 document.querySelectorAll('.price-text').forEach(el => el.style.color = '#0F1C2E');
                 document.querySelectorAll('.price-btn, .contact-btn-secondary').forEach(el => {
-                    el.className = "block text-center bg-[#F2EFE9] border border-[#D6CEBE] hover:bg-[#E8E2D5] text-[#0F1C2E] py-3 rounded-xl font-semibold transition";
+                    el.className = "block text-center bg-[#F2EFE9] border border-[#E2DBC8] hover:bg-[#E8E2D5] text-[#0F1C2E] py-3 rounded-xl font-semibold transition";
                 });
                 document.querySelectorAll('.featured-btn, .contact-btn-primary').forEach(el => {
                     el.className = "block text-center bg-[#0F1C2E] hover:bg-[#1E293B] text-white py-3 rounded-xl font-semibold transition shadow-md";
                 });
 
             } else {
-                // ТЕМНА ТЕМА (смарагдовий космос)
+                // ТЕМНА ТЕМА: смарагдовий космос
                 themeBtn.innerHTML = '☀️';
-                lightOverlay.style.opacity = '0';
-                canvas.style.opacity = '0.4';
                 document.body.style.backgroundColor = '#021a10';
                 document.body.style.color = '#ecfdf5';
 
                 siteHeader.style.backgroundColor = 'rgba(2, 26, 16, 0.8)';
-                siteHeader.style.borderColor = 'rgba(6, 95, 70, 0.5)';
+                siteHeader.style.borderColor = 'rgba(6, 95, 70, 0.4)';
                 logoText.style.color = '#6ee7b7';
                 logoText.querySelector('span').style.color = '#10b981';
 
                 ctaHeaderBtn.className = "bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-900/30";
 
-                heroBadge.className = "inline-block bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm";
+                heroBadge.className = "inline-block bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm transition-all";
                 heroTitle.style.color = '#ecfdf5';
                 heroTitle.querySelector('span').style.color = '#34d399';
                 heroDesc.style.color = '#6ee7b7';
@@ -314,14 +318,19 @@
                 heroBtnPrimary.className = "bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-xl shadow-emerald-900/50 transition transform hover:-translate-y-0.5";
                 heroBtnSecondary.className = "bg-emerald-900/50 border border-emerald-700/60 hover:bg-emerald-800/50 text-emerald-200 px-6 py-3.5 rounded-xl font-semibold transition shadow-sm";
 
-                profileBox.className = "w-full max-w-sm h-[420px] rounded-2xl border border-emerald-700/40 bg-emerald-900/20 backdrop-blur-xl shadow-2xl flex items-center justify-center p-4 relative overflow-hidden group";
+                profileBox.className = "w-full max-w-sm h-[420px] rounded-2xl border border-emerald-700/40 bg-emerald-900/20 backdrop-blur-md shadow-2xl flex items-center justify-center p-4 relative overflow-hidden group transition-all";
+                photoPlaceholder.className = "relative z-10 text-center text-emerald-300 font-mono text-sm bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-emerald-500/30 transition-all";
 
-                contactBox.className = "bg-emerald-900/30 border border-emerald-700/50 p-12 rounded-3xl backdrop-blur-md shadow-2xl";
+                contactBox.className = "bg-emerald-900/30 border border-emerald-700/50 p-12 rounded-3xl backdrop-blur-md shadow-2xl transition-all";
                 siteFooter.style.borderColor = 'rgba(6, 95, 70, 0.4)';
                 siteFooter.style.color = '#34d399';
+                
+                advBadge.className = "absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase";
+                popBadge.className = "absolute -top-3 right-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm";
+                featuredCard.className = "featured-card bg-gradient-to-b from-emerald-900/40 to-emerald-950 border-2 border-emerald-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-all";
 
                 // Картки у темній темі
-                document.querySelectorAll('.content-card, .featured-card').forEach(card => {
+                document.querySelectorAll('.content-card').forEach(card => {
                     card.style.backgroundColor = '';
                     card.style.borderColor = '';
                 });
@@ -338,7 +347,7 @@
             }
         }
 
-        // WebGL-шейдер фон із реакцією на курсор миші
+        // WebGL-шейдер на весь екран із двома кольоровими палітрами та реакцією на мишу
         const canvas = document.getElementById('nebulaCanvas');
         const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
         
@@ -354,6 +363,7 @@
                 uniform vec2 uRes;
                 uniform float uTime;
                 uniform vec2 uMouse;
+                uniform int uTheme; // 1 = dark, 0 = light
                 out vec4 frag;
 
                 float hash12(vec2 p){
@@ -379,25 +389,34 @@
                     vec2 uv = gl_FragCoord.xy / uRes.y;
                     vec2 mouseUv = uMouse / uRes.y;
                     
-                    // Реакція туманності на положення курсора
                     float dist = length(uv - mouseUv);
-                    float lamp = exp(-dist * 2.5) * 0.6;
+                    float lamp = exp(-dist * 2.2) * 0.55;
 
-                    vec2 p = uv * 1.5 + vec2(uTime * 0.02, 0.0);
+                    vec2 p = uv * 1.5 + vec2(uTime * 0.015, 0.0);
                     float n = fbm(p + vec2(fbm(p), fbm(p + 1.3))) + lamp;
                     
-                    vec3 voidCol = vec3(0.007, 0.10, 0.06);
-                    vec3 emeraldGlow = vec3(0.02, 0.38, 0.22);
-                    vec3 highlight = vec3(0.08, 0.75, 0.45);
-
-                    vec3 col = mix(voidCol, emeraldGlow, smoothstep(0.2, 0.6, n));
-                    col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.7);
+                    vec3 col;
+                    if (uTheme == 1) {
+                        // Темна тема: смарагдовий космос
+                        vec3 voidCol = vec3(0.007, 0.10, 0.06);
+                        vec3 emeraldGlow = vec3(0.02, 0.38, 0.22);
+                        vec3 highlight = vec3(0.08, 0.75, 0.45);
+                        col = mix(voidCol, emeraldGlow, smoothstep(0.2, 0.6, n));
+                        col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.7);
+                    } else {
+                        // Світла тема: молочний/бежевий фон із темно-синіми та теплими акцентами
+                        vec3 lightBg = vec3(0.976, 0.964, 0.941);     // #F9F6F0
+                        vec3 softBeige = vec3(0.910, 0.886, 0.843);   // #E8E2D5
+                        vec3 darkNavyGlow = vec3(0.058, 0.110, 0.180); // #0F1C2E
+                        col = mix(lightBg, softBeige, smoothstep(0.1, 0.5, n));
+                        col = mix(col, darkNavyGlow, smoothstep(0.55, 0.85, n) * 0.35);
+                    }
                     
-                    // Halftone ефект точок
+                    // Halftone ефект точок на весь екран
                     vec2 grid = fract(gl_FragCoord.xy / 6.0) - 0.5;
-                    float d = length(grid);
-                    float dotMask = smoothstep(0.35, 0.38, d * (0.5 + n * 0.8));
-                    col *= mix(0.75, 1.0, dotMask);
+                    float d_grid = length(grid);
+                    float dotMask = smoothstep(0.35, 0.38, d_grid * (0.5 + n * 0.8));
+                    col *= mix(uTheme == 1 ? 0.75 : 0.9, 1.0, dotMask);
 
                     frag = vec4(col, 1.0);
                 }`;
@@ -417,6 +436,7 @@
             const uResLoc = gl.getUniformLocation(program, "uRes");
             const uTimeLoc = gl.getUniformLocation(program, "uTime");
             const uMouseLoc = gl.getUniformLocation(program, "uMouse");
+            const uThemeLoc = gl.getUniformLocation(program, "uTheme");
 
             let mouseX = window.innerWidth / 2;
             let mouseY = window.innerHeight / 2;
@@ -425,12 +445,12 @@
 
             window.addEventListener('mousemove', (e) => {
                 targetMouseX = e.clientX;
-                targetMouseY = window.innerHeight - e.clientY; // інвертуємо Y для WebGL
+                targetMouseY = window.innerHeight - e.clientY;
             });
 
             function resize() {
-                canvas.width = canvas.clientWidth * window.devicePixelRatio;
-                canvas.height = canvas.clientHeight * window.devicePixelRatio;
+                canvas.width = window.innerWidth * window.devicePixelRatio;
+                canvas.height = window.innerHeight * window.devicePixelRatio;
                 gl.viewport(0, 0, canvas.width, canvas.height);
             }
             window.addEventListener('resize', resize);
@@ -438,7 +458,6 @@
 
             let startTime = performance.now();
             function render() {
-                // Плавне слідування курсору (lerp)
                 mouseX += (targetMouseX - mouseX) * 0.08;
                 mouseY += (targetMouseY - mouseY) * 0.08;
 
@@ -446,6 +465,7 @@
                 gl.uniform2f(uResLoc, canvas.width, canvas.height);
                 gl.uniform1f(uTimeLoc, (performance.now() - startTime) / 1000);
                 gl.uniform2f(uMouseLoc, mouseX * window.devicePixelRatio, mouseY * window.devicePixelRatio);
+                gl.uniform1i(uThemeLoc, isDark ? 1 : 0);
                 
                 gl.drawArrays(gl.TRIANGLES, 0, 3);
                 requestAnimationFrame(render);

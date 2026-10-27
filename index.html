@@ -53,7 +53,6 @@
             --spotlight-ring: rgba(16, 185, 129, 0.5);
         }
 
-        /* Spotlight Ефект для плашок */
         .spotlight-card {
             position: relative;
             isolation: isolate;
@@ -91,17 +90,40 @@
 </head>
 <body class="bg-lightbg text-darktext dark:bg-[#021a10] dark:text-emerald-50 transition-colors duration-500 selection:bg-emerald-500 selection:text-white">
 
+    <!-- ІНТРО ЕКРАН (Завантаження) -->
+    <div id="introScreen" class="fixed inset-0 z-[200] bg-[#021a10] flex items-center justify-center transition-opacity duration-700">
+        <div class="relative z-10 flex flex-col items-start p-6 sm:p-10 max-w-xl mx-auto w-full">
+            <p class="mb-4 font-mono text-[11px] uppercase tracking-[0.34em] text-emerald-500">
+                ✦ transmission received
+            </p>
+            <h1 class="text-5xl font-semibold leading-[0.95] tracking-tight text-emerald-100 sm:text-7xl mb-5">
+                Вітаю.<br/>Готові почати?
+            </h1>
+            <p class="mt-2 max-w-sm text-sm leading-relaxed text-emerald-100/60 mb-8">
+                Індивідуальні заняття, побудовані на практиці та живій комунікації. Потягніть за лампочку, щоб увімкнути світло.
+            </p>
+            <button onclick="startExperience()" type="button" class="pointer-events-auto border border-emerald-500 bg-emerald-500/10 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.28em] text-emerald-100 transition-colors hover:bg-emerald-500 hover:text-[#021a10]">
+                Увійти на сайт →
+            </button>
+        </div>
+    </div>
+
     <!-- Інтерактивний фон -->
     <canvas id="nebulaCanvas"></canvas>
 
-    <!-- PULL CORD (Шнурок-перемикач теми) -->
-    <div id="pullCord" class="fixed top-0 right-6 sm:right-12 z-[100] flex flex-col items-center cursor-grab select-none" style="touch-action: none;">
+    <!-- PULL CORD (Шнурок-перемикач теми з лампочкою) -->
+    <div id="pullCord" class="fixed top-0 right-6 sm:right-12 z-[100] flex flex-col items-center cursor-grab select-none group" style="touch-action: none;">
         <!-- Мотузка -->
         <div id="cordLine" class="w-[2px] h-16 bg-emeraldtext dark:bg-emerald-500 transition-colors duration-500"></div>
-        <!-- Кільце/Ручка -->
-        <div id="cordHandle" class="w-6 h-6 border-[3px] border-emeraldtext dark:border-emerald-500 rounded-full bg-lightbg dark:bg-[#021a10] -mt-[2px] shadow-md transition-colors duration-500 flex items-center justify-center">
-            <div class="w-1.5 h-1.5 rounded-full bg-emeraldtext/50 dark:bg-emerald-500/50"></div>
+        <!-- Лампочка -->
+        <div id="cordHandle" class="w-10 h-10 border-2 border-emeraldtext dark:border-emerald-500 rounded-full bg-lightbg dark:bg-[#021a10] -mt-1 shadow-lg transition-transform duration-300 flex items-center justify-center group-hover:scale-110 group-active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emeraldtext dark:text-emerald-400">
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/>
+                <path d="M9 18h6"/><path d="M10 22h4"/>
+            </svg>
         </div>
+        <!-- Підказка -->
+        <span class="absolute top-full mt-3 text-[10px] font-bold uppercase tracking-widest text-emeraldtext dark:text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Тема</span>
     </div>
 
     <!-- Навігація -->
@@ -116,7 +138,7 @@
                 <a href="#formats" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Формати</a>
                 <a href="#experience" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Про мене</a>
             </nav>
-            <div class="flex items-center space-x-4 pr-10 sm:pr-16">
+            <div class="flex items-center space-x-4 pr-12 sm:pr-20">
                 <a href="#contact" class="bg-emeraldtext hover:bg-darktext dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md">
                     Зв'язатися
                 </a>
@@ -154,6 +176,7 @@
                     <span class="spotlight-ring"></span>
                     
                     <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50">
+                        <!-- ТУТ ВАШЕ ФОТО -->
                         <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
                         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full transition-colors"></div>
                         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
@@ -341,9 +364,16 @@
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
-    <!-- Скрипти: Pull Cord, Копіювання, Spotlight, WebGL -->
+    <!-- Скрипти -->
     <script>
-        // 1. PULL CORD ФІЗИКА (Шнурок-перемикач тем)
+        // 1. Закриття Інтро Екрану
+        function startExperience() {
+            const intro = document.getElementById('introScreen');
+            intro.style.opacity = '0';
+            setTimeout(() => intro.remove(), 700);
+        }
+
+        // 2. PULL CORD ФІЗИКА (Шнурок-перемикач тем)
         const cord = document.getElementById('pullCord');
         const cordLine = document.getElementById('cordLine');
         let startY = 0;
@@ -386,7 +416,7 @@
             currentY = 0;
         });
 
-        // 2. Логіка перемикання тем
+        // 3. Логіка перемикання тем
         let isDark = true;
         function toggleTheme() {
             isDark = !isDark;
@@ -398,7 +428,7 @@
             }
         }
 
-        // 3. Копіювання Telegram-юзернейму
+        // 4. Копіювання Telegram-юзернейму
         function copyTelegram(username) {
             navigator.clipboard.writeText('@' + username).then(() => {
                 const copyText = document.getElementById('copyText');
@@ -410,7 +440,7 @@
             });
         }
 
-        // 4. Активація ефекту Spotlight для кожної картки
+        // 5. Активація ефекту Spotlight для кожної картки
         document.querySelectorAll('.spotlight-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -421,7 +451,7 @@
             });
         });
 
-        // 5. WebGL-шейдер (Фон)
+        // 6. WebGL-шейдер (Фон)
         const canvas = document.getElementById('nebulaCanvas');
         const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
         
@@ -467,33 +497,42 @@
                     float lamp = exp(-dist * 2.2) * 0.55;
 
                     vec2 p = uv * 1.5 + vec2(uTime * 0.015, 0.0);
-                    float n = fbm(p + vec2(fbm(p), fbm(p + 1.3))) + lamp;
+                    float rawN = fbm(p + vec2(fbm(p), fbm(p + 1.3)));
+                    float n = rawN + lamp;
                     
                     vec3 col;
                     if (uTheme == 1) {
+                        // ТЕМНА ТЕМА
                         vec3 voidCol = vec3(0.007, 0.10, 0.06);
                         vec3 emeraldGlow = vec3(0.02, 0.38, 0.22);
                         vec3 highlight = vec3(0.08, 0.75, 0.45);
                         col = mix(voidCol, emeraldGlow, smoothstep(0.2, 0.6, n));
                         col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.7);
                     } else {
+                        // СВІТЛА ТЕМА
                         vec3 lightBg = vec3(0.957, 0.961, 0.957);
                         vec3 silverGlow = vec3(0.898, 0.906, 0.902);
                         vec3 emeraldGlow = vec3(0.750, 0.850, 0.800);
                         
-                        col = mix(lightBg, silverGlow, smoothstep(0.1, 0.5, n));
-                        col = mix(col, emeraldGlow, smoothstep(0.55, 0.85, n) * 0.5);
+                        col = mix(lightBg, silverGlow, smoothstep(0.1, 0.5, rawN));
+                        col = mix(col, emeraldGlow, smoothstep(0.55, 0.85, rawN) * 0.5);
+                        
+                        // РОБИМО МИШУ ВИДИМОЮ В СВІТЛІЙ ТЕМІ (світло-зелене сяйво)
+                        vec3 cursorGlow = vec3(0.7, 0.9, 0.8);
+                        col = mix(col, cursorGlow, lamp * 0.85);
                     }
                     
                     vec2 grid = fract(gl_FragCoord.xy / 6.0) - 0.5;
                     float d_grid = length(grid);
-                    float dotMask = smoothstep(0.35, 0.38, d_grid * (0.5 + n * 0.8));
+                    
+                    // Миша впливає на розмір точок
+                    float dotMask = smoothstep(0.35, 0.38, d_grid * (0.5 + rawN * 0.8 - lamp * 0.5));
 
                     if (uTheme == 1) {
                         col *= mix(0.75, 1.0, dotMask);
                     } else {
                         vec3 dotColor = vec3(0.023, 0.305, 0.231);
-                        col = mix(mix(col, dotColor, 0.08), col, dotMask); 
+                        col = mix(mix(col, dotColor, 0.1 + lamp * 0.2), col, dotMask); 
                     }
 
                     frag = vec4(col, 1.0);

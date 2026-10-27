@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maryna Likarchuk | Англійська мова для дорослих</title>
+    <title>Maryna Likarchuk — Англійська, коли зручно і за результатами</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -34,23 +34,22 @@
             position: relative;
         }
 
-        /* Cursor Glow Effect (Cursify / Magic UI inspired) */
+        /* Cursor Glow Effect */
         .cursor-glow {
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(198, 125, 56, 0.08) 0%, rgba(27, 42, 74, 0) 70%);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(198, 125, 56, 0.07) 0%, rgba(27, 42, 74, 0) 70%);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
             z-index: 9999;
         }
 
-        /* Navigation Bar (Navbar Gallery style) */
+        /* Navigation */
         header {
-            background-color: rgba(251, 249, 245, 0.85);
-            backdrop-filter: blur(12px);
+            background-color: rgba(251, 249, 245, 0.9);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             padding: 1.25rem 2rem;
             display: flex;
@@ -59,14 +58,13 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            border-radius: 0 0 var(--radius) var(--radius);
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--navy);
             letter-spacing: -0.5px;
@@ -102,14 +100,14 @@
             transform: translateY(-1px);
         }
 
-        /* Hero Section (Godly / Aceternity style) */
+        /* Hero Section (Haw.classes style: sharp focus on value) */
         .hero {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 6rem 2rem 4rem;
+            padding: 5rem 2rem 4rem;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 3rem;
             align-items: center;
         }
 
@@ -127,7 +125,7 @@
 
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: var(--navy);
             line-height: 1.15;
             margin-bottom: 1.5rem;
@@ -136,14 +134,12 @@
 
         .hero-content h1 span {
             color: var(--ochre);
-            position: relative;
         }
 
         .hero-content p {
             font-size: 1.15rem;
             color: var(--text-muted);
             margin-bottom: 2.5rem;
-            max-width: 520px;
         }
 
         .btn-primary {
@@ -156,52 +152,53 @@
             text-decoration: none;
             font-weight: 600;
             box-shadow: 0 8px 24px rgba(198, 125, 56, 0.3);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s ease;
         }
 
         .btn-primary:hover {
             background-color: #B06C2F;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(198, 125, 56, 0.4);
+            transform: translateY(-2px);
         }
 
-        /* Bento Grid Style (BentoGrids.com inspired) */
-        .hero-bento {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.25rem;
-        }
-
-        .bento-card {
+        /* Hero Side Card (Manifesto style) */
+        .manifesto-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
             box-shadow: 0 10px 30px rgba(27, 42, 74, 0.03);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
-            position: relative;
-            overflow: hidden;
         }
 
-        .bento-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--ochre);
-        }
-
-        .bento-card h3 {
+        .manifesto-card h3 {
             color: var(--navy);
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
             font-family: 'Playfair Display', serif;
         }
 
-        .bento-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .manifesto-card ul {
+            list-style: none;
         }
 
+        .manifesto-card li {
+            margin-bottom: 0.85rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .manifesto-card li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--ochre);
+            font-weight: bold;
+        }
+
+        /* Sections */
         .section {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 5rem 2rem;
         }
@@ -214,7 +211,7 @@
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             color: var(--navy);
             margin-bottom: 1rem;
             letter-spacing: -0.5px;
@@ -225,29 +222,32 @@
             font-size: 1.05rem;
         }
 
-        /* Levels Bento Section */
-        .levels-grid {
+        /* Formats / Products Grid (Haw.bites & chews inspiration) */
+        .formats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
-        .level-card {
+        .format-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             padding: 2.5rem 2rem;
             border-radius: var(--radius);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .level-card:hover {
-            transform: translateY(-6px);
+        .format-card:hover {
+            transform: translateY(-5px);
             border-color: var(--ochre);
             box-shadow: 0 15px 35px rgba(27, 42, 74, 0.05);
         }
 
-        .level-badge {
-            font-size: 0.8rem;
+        .format-tag {
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--ochre);
             text-transform: uppercase;
@@ -256,151 +256,78 @@
             display: block;
         }
 
-        .level-card h3 {
+        .format-card h3 {
             color: var(--navy);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
             font-family: 'Playfair Display', serif;
         }
 
-        .level-card p {
+        .format-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
+            margin-bottom: 2rem;
         }
 
-        /* Pricing Grid (SaaS card styling) */
-        .pricing-grid {
+        .format-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .format-price span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 400;
+        }
+
+        /* Levels Overview */
+        .levels-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            align-items: stretch;
+            gap: 1.5rem;
         }
 
-        .price-card {
+        .level-box {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 3rem 2rem;
+            padding: 2rem;
             border-radius: var(--radius);
-            text-align: left;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.3s ease;
         }
 
-        .price-card.featured {
-            border-color: var(--ochre);
-            background: linear-gradient(145deg, #FFFFFF 0%, var(--ochre-light) 100%);
-            box-shadow: 0 20px 40px rgba(198, 125, 56, 0.12);
-        }
-
-        .price-card:hover {
-            transform: translateY(-6px);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            right: 2rem;
-            background-color: var(--ochre);
-            color: #FFFFFF;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.8rem;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .price-card h3 {
+        .level-box h4 {
             color: var(--navy);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
             font-family: 'Playfair Display', serif;
         }
 
-        .price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--navy);
-            margin: 1.5rem 0;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .price span {
-            font-size: 0.95rem;
+        .level-box p {
             color: var(--text-muted);
-            font-weight: 400;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem;
         }
 
-        .price-card ul {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .price-card li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-        }
-
-        .price-card li::before {
-            content: "✦";
-            color: var(--ochre);
-            margin-right: 0.75rem;
-            font-size: 0.8rem;
-        }
-
-        .btn-card {
-            display: block;
-            text-align: center;
-            background-color: var(--navy);
-            color: #FFFFFF;
-            padding: 0.85rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-
-        .price-card.featured .btn-card {
-            background-color: var(--ochre);
-        }
-
-        .price-card.featured .btn-card:hover {
-            background-color: #B06C2F;
-        }
-
-        .btn-card:hover {
-            background-color: var(--ochre);
-        }
-
-        /* Contact Section (CTA Gallery style) */
-        .contact-wrapper {
+        /* CTA Section */
+        .cta-wrapper {
             background-color: var(--navy);
             color: #FFFFFF;
             text-align: center;
             padding: 6rem 2rem;
-            border-radius: calc(var(--radius) * 1.5);
+            border-radius: var(--radius);
             margin: 2rem auto 5rem;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
+            max-width: 1100px;
         }
 
-        .contact-wrapper h2 {
+        .cta-wrapper h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 1.25rem;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
             letter-spacing: -0.5px;
         }
 
-        .contact-wrapper p {
+        .cta-wrapper p {
             color: #D1D8E0;
             font-size: 1.15rem;
             margin-bottom: 2.5rem;
@@ -430,23 +357,18 @@
             text-align: center;
             padding: 2.5rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border-top: 1px solid var(--border-color);
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        /* Responsive Breakpoints */
         @media (max-width: 968px) {
             .hero {
                 grid-template-columns: 1fr;
                 padding-top: 3rem;
-                gap: 3rem;
             }
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-            .levels-grid, .pricing-grid {
+            .formats-grid, .levels-grid {
                 grid-template-columns: 1fr;
             }
             nav {
@@ -457,109 +379,92 @@
 </head>
 <body>
 
-    <!-- Light Follow Cursor Effect -->
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <header>
         <div class="logo">Maryna <span>Likarchuk</span></div>
         <nav>
+            <a href="#formats">Формати</a>
             <a href="#levels">Рівні</a>
-            <a href="#pricing">Вартість</a>
             <a href="#contact" class="nav-btn">Записатися</a>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-badge">✨ Індивідуальний підхід & ESL Дизайн</span>
-            <h1>Сучасна англійська <span>для дорослих</span></h1>
-            <p>Персоналізовані заняття (від Pre-A1 до B1+), фокус на живій комунікації, подоланні мовного бар'єра та ефективній підготовці до НМТ.</p>
-            <a href="#contact" class="btn-primary">Записатися на пробний урок</a>
+            <span class="hero-badge">✨ Англійська, коли зручно вам</span>
+            <h1>Вам потрібні не просто курси. <span>Вам потрібні результати.</span></h1>
+            <p>Жодних занять о 19:00 щовівторка чи нудних підручників. Сучасні індивідуальні заняття та авторська методика для дорослих від Pre-A1 до B1+.</p>
+            <a href="#contact" class="btn-primary">Обрати свій формат</a>
         </div>
-        <div class="hero-bento">
-            <div class="bento-card">
-                <h3>Ефективна методика</h3>
-                <p>Scaffold-структура побудови розмови для впевненого говоріння з перших занять.</p>
+        <div class="manifesto-card">
+            <h3>Без зайвого води</h3>
+            <ul>
+                <li>Фокус на розмовну практику та живе мовлення</li>
+                <li>Авторські цифрові матеріали та воркбуки</li>
+                <li>Системна підтримка між уроками</li>
+                <li>Побудована робота з подоланням мовного бар'єра</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="formats" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Формати занять та вартість</h2>
+            <p class="section-subtitle">Обирайте зручний темп навчання, що ідеально вписується у ваш графік.</p>
+        </div>
+        <div class="formats-grid">
+            <div class="format-card">
+                <div>
+                    <span class="format-tag">Старт / Гнучко</span>
+                    <h3>Разовий урок</h3>
+                    <p>Індивідуальне заняття для точкового вирішення ваших мовних завдань або знайомства з методикою.</p>
+                </div>
+                <div class="format-price">350 UAH <span>/ 50 хв</span></div>
             </div>
-            <div class="bento-card" style="border-color: var(--ochre); background: linear-gradient(to right, #FFFFFF, var(--ochre-light));">
-                <h3>Авторські матеріалы</h3>
-                <p>Інтерактивні цифрові гайди, сучасні платформи та матеріали без нудних правил.</p>
+            <div class="format-card" style="border-color: var(--ochre); background: linear-gradient(145deg, #FFFFFF 0%, var(--ochre-light) 100%);">
+                <div>
+                    <span class="format-tag" style="color: var(--ochre);">Рекомендовано</span>
+                    <h3>Абонемент 8 уроків</h3>
+                    <p>Оптимальний курс для стабільного та помітного прогресу, гнучке планування та супровід.</p>
+                </div>
+                <div class="format-price">2300 UAH <span>/ курс</span></div>
+            </div>
+            <div class="format-card">
+                <div>
+                    <span class="format-tag">Система</span>
+                    <h3>Пакет для постійних</h3>
+                    <p>Спеціальні умови для довгострокових учнів, поглиблена робота та пріоритетний розклад.</p>
+                </div>
+                <div class="format-price">Індивідуально <span>/ пакети</span></div>
             </div>
         </div>
     </section>
 
     <section id="levels" class="section">
         <div class="section-header">
-            <h2 class="section-title">Формати та рівні навчання</h2>
-            <p class="section-subtitle">Програма адаптується під ваші індивідуальні цілі, темп та робочий графік.</p>
+            <h2 class="section-title">З якими рівнями працюємо</h2>
+            <p class="section-subtitle">Рівень — це орієнтир, а не паркан. Рухаємось у темпі, комфортному для вас.</p>
         </div>
         <div class="levels-grid">
-            <div class="level-card">
-                <span class="level-badge">True Beginners</span>
-                <h3>Pre-A1</h3>
-                <p>М'який та комфортний старт з нуля. Будуємо міцну лексичну та граматичну базу без зайвого стресу.</p>
+            <div class="level-box">
+                <h4>Pre-A1 (True Beginners)</h4>
+                <p>М'який старт з нуля, побудова базової лексики та розмовних каркасів без стресу.</p>
             </div>
-            <div class="level-card">
-                <h3>A2 – Elementary / Pre-Intermediate</h3>
-                <p>Розширюємо словниковий запас, вчимося вільно сприймати мову на слух та будувати розгорнуті висловлювання.</p>
+            <div class="level-box">
+                <h4>A2 (Elementary / Pre-Int)</h4>
+                <p>Розширення словникового запасу, подолання страху помилок та розуміння живої мови.</p>
             </div>
-            <div class="level-card" style="border-color: var(--ochre);">
-                <span class="level-badge">Advanced Growth</span>
-                <h3>B1+ Intermediate</h3>
-                <p>Впевнене вільне спілкування, активація пасивного словника, робота зі складними темами та нюансами мови.</p>
+            <div class="level-box" style="border-color: var(--ochre);">
+                <h4>B1+ (Intermediate)</h4>
+                <p>Впевнене вільне спілкування, виведення пасивного словника в актив, нюанси мови.</p>
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="section">
-        <div class="section-header">
-            <h2 class="section-title">Вартість та абонементи</h2>
-            <p class="section-subtitle">Обирайте зручний формат занять для стабільного та системного прогресу.</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div>
-                    <h3>Разовий урок</h3>
-                    <div class="price">350 UAH <span>/ 50 хв</span></div>
-                    <ul>
-                        <li>Індивідуальне заняття</li>
-                        <li>Інтерактивні платформи</li>
-                        <li>Гнучний графік планування</li>
-                    </ul>
-                </div>
-                <a href="#contact" class="btn-card">Обрати урок</a>
-            </div>
-            <div class="price-card featured">
-                <div class="popular-badge">Найвигідніше</div>
-                <div>
-                    <h3>Абонемент 8 уроків</h3>
-                    <div class="price">2300 UAH <span>/ курс</span></div>
-                    <ul>
-                        <li>Оптимальна ціна за заняття</li>
-                        <li>Постійна підтримка між уроками</li>
-                        <li>Авторські цифрові матеріали у подарунок</li>
-                    </ul>
-                </div>
-                <a href="#contact" class="btn-card">Обрати абонемент</a>
-            </div>
-            <div class="price-card">
-                <div>
-                    <h3>Пакет для постійних</h3>
-                    <div class="price">Індивідуально</div>
-                    <ul>
-                        <li>Спеціальні умови для довгострокових учнів</li>
-                        <li>Глибока підготовка до НМТ та цілей</li>
-                        <li>Пріоритет у бронюванні часу</li>
-                    </ul>
-                </div>
-                <a href="#contact" class="btn-card">Обговорити</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact-wrapper">
-        <h2>Почніть говорити англійською вже сьогодні</h2>
-        <p>Напишіть мені в Telegram, щоб узгодити зручний час пробного заняття та визначити ваш поточний рівень.</p>
+    <section id="contact" class="cta-wrapper">
+        <h2>Почніть говорити англійською</h2>
+        <p>Напишіть мені в Telegram, щоб обговорити ваш поточний рівень та підібрати зручний час для занять.</p>
         <a href="https://t.me/your_telegram" target="_blank" class="btn-white">Написати в Telegram</a>
     </section>
 
@@ -567,7 +472,6 @@
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
-    <!-- Interactive Mouse Follow Script -->
     <script>
         const cursorGlow = document.getElementById('cursorGlow');
         document.addEventListener('mousemove', (e) => {

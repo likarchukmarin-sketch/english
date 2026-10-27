@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Репетитор англійської мови | Індивідуальні заняття</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FBF9F5; /* Warm Paper */
+            --card-bg: #FFFFFF;
+            --navy: #1B2A4A;     /* Deep Navy */
+            --ochre: #C67D38;    /* Warm Ochre */
+            --ochre-light: #F4EADF;
+            --text-main: #2C3E50;
+            --text-muted: #6C7A89;
+            --border-color: #E2DBD0;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--navy);
+            color: #FFFFFF;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #FFFFFF;
+        }
+
+        .logo span {
+            color: var(--ochre);
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--ochre);
+        }
+
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--ochre);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--ochre);
+            color: #FFFFFF;
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(198, 125, 56, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #B06C2F;
+            transform: translateY(-2px);
+        }
+
+        .hero-badge-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(27, 42, 74, 0.05);
+        }
+
+        .hero-badge-card h3 {
+            color: var(--navy);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-badge-card ul {
+            list-style: none;
+        }
+
+        .hero-badge-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .hero-badge-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--ochre);
+            font-weight: bold;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            color: var(--navy);
+            margin-bottom: 3rem;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .level-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: var(--radius);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ochre);
+        }
+
+        .level-card h3 {
+            color: var(--navy);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .level-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .price-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--ochre);
+            background: linear-gradient(to bottom, #FFFFFF, var(--ochre-light));
+        }
+
+        .price-card h3 {
+            color: var(--navy);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 1.5rem 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-

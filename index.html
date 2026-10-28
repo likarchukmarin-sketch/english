@@ -12,11 +12,17 @@
             theme: {
                 extend: {
                     colors: {
-                        lightbg: '#F4F5F4',
-                        lightcard: '#FFFFFF',
-                        darktext: '#022C22',
-                        emeraldtext: '#064E3B',
-                        silverborder: '#D1D5DB'
+                        // Світла палітра
+                        warmmilk: '#F7F5EF',
+                        deepgreen: '#374709',
+                        oliveaccent: '#759242',
+                        sand: '#DED3A6',
+                        // Темна палітра
+                        deepolive: '#212517',
+                        softdarkgreen: '#303627',
+                        warmtext: '#F2F0E7',
+                        sectext: '#D0D0C4',
+                        sage: '#B6C58E'
                     },
                     animation: {
                         marquee: 'marquee 35s linear infinite',
@@ -36,8 +42,14 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
         #nebulaCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
         
-        :root { --spotlight-fill: rgba(6, 78, 59, 0.06); --spotlight-ring: rgba(6, 78, 59, 0.25); }
-        .dark { --spotlight-fill: rgba(16, 185, 129, 0.15); --spotlight-ring: rgba(16, 185, 129, 0.5); }
+        :root { 
+            --spotlight-fill: rgba(55, 71, 9, 0.05); 
+            --spotlight-ring: rgba(117, 146, 66, 0.3); 
+        }
+        .dark { 
+            --spotlight-fill: rgba(182, 197, 142, 0.08); 
+            --spotlight-ring: rgba(222, 211, 166, 0.35); 
+        }
         
         .spotlight-card { position: relative; isolation: isolate; }
         .spotlight-fill { pointer-events: none; position: absolute; inset: 0; z-index: -10; border-radius: inherit; opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-fill), transparent 70%); }
@@ -46,43 +58,25 @@
 
         .marquee-mask { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
 
-        /* 3D Фліп Картки Кейсів */
-        .flip-card {
-            perspective: 1000px;
-        }
-        .flip-card-inner {
-            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-        .flip-card-back {
-            transform: rotateY(180deg);
-        }
+        /* 3D Фліп Картки */
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner { transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; position: relative; width: 100%; height: 100%; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { -webkit-backface-visibility: hidden; backface-visibility: hidden; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .flip-card-back { transform: rotateY(180deg); }
         
         .tabular-nums { font-variant-numeric: tabular-nums; }
     </style>
 </head>
-<body class="bg-lightbg text-darktext dark:bg-[#021a10] dark:text-emerald-50 transition-colors duration-500 selection:bg-emerald-500 selection:text-white">
+<body class="bg-warmmilk text-deepolive dark:bg-deepolive dark:text-warmtext transition-colors duration-500 selection:bg-deepgreen selection:text-warmmilk dark:selection:bg-sand dark:selection:text-deepolive">
 
     <!-- ІНТРО ЕКРАН -->
-    <div id="introScreen" class="fixed inset-0 z-[200] bg-[#021a10] flex items-center justify-center transition-opacity duration-700">
+    <div id="introScreen" class="fixed inset-0 z-[200] bg-deepolive flex items-center justify-center transition-opacity duration-700">
         <div class="relative z-10 flex flex-col items-start p-6 sm:p-10 max-w-xl mx-auto w-full">
-            <p class="mb-4 font-mono text-[11px] uppercase tracking-[0.34em] text-emerald-500">✦ transmission received</p>
-            <h1 class="text-5xl font-semibold leading-[0.95] tracking-tight text-emerald-100 sm:text-7xl mb-5">Вітаю.<br/>Готові почати?</h1>
-            <p class="mt-2 max-w-sm text-sm leading-relaxed text-emerald-100/60 mb-8">Без шкільного офіціозу. Тільки жива англійська, практика та ваш результат. Потягніть за лампочку, щоб увімкнути світло.</p>
-            <button onclick="startExperience()" type="button" class="pointer-events-auto border border-emerald-500 bg-emerald-500/10 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.28em] text-emerald-100 transition-colors hover:bg-emerald-500 hover:text-[#021a10]">Увійти на сайт →</button>
+            <p class="mb-4 font-mono text-[11px] uppercase tracking-[0.34em] text-sage">✦ transmission received</p>
+            <h1 class="text-5xl font-semibold leading-[0.95] tracking-tight text-warmtext sm:text-7xl mb-5">Вітаю.<br/>Готові почати?</h1>
+            <p class="mt-2 max-w-sm text-sm leading-relaxed text-sectext mb-8">Без шкільного офіціозу. Тільки жива англійська, практика та ваш результат. Потягніть за лампочку, щоб увімкнути світло.</p>
+            <button onclick="startExperience()" type="button" class="pointer-events-auto border border-sand bg-sand/10 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.28em] text-sand transition-colors hover:bg-sand hover:text-deepolive">Увійти на сайт →</button>
         </div>
     </div>
 
@@ -91,30 +85,30 @@
 
     <!-- PULL CORD -->
     <div id="pullCord" class="fixed top-0 right-6 sm:right-12 z-[100] flex flex-col items-center cursor-grab select-none group" style="touch-action: none;">
-        <div id="cordLine" class="w-[2px] h-16 bg-emeraldtext dark:bg-emerald-500 transition-colors duration-500"></div>
-        <div id="cordHandle" class="w-10 h-10 border-2 border-emeraldtext dark:border-emerald-500 rounded-full bg-lightbg dark:bg-[#021a10] -mt-1 shadow-lg transition-transform duration-300 flex items-center justify-center group-hover:scale-110 group-active:scale-95">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emeraldtext dark:text-emerald-400">
+        <div id="cordLine" class="w-[2px] h-16 bg-deepgreen dark:bg-sage transition-colors duration-500"></div>
+        <div id="cordHandle" class="w-10 h-10 border-2 border-deepgreen dark:border-sage rounded-full bg-warmmilk dark:bg-deepolive -mt-1 shadow-lg transition-transform duration-300 flex items-center justify-center group-hover:scale-110 group-active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-deepgreen dark:text-sage">
                 <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
             </svg>
         </div>
-        <span class="absolute top-full mt-3 text-[10px] font-bold uppercase tracking-widest text-emeraldtext dark:text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Тема</span>
+        <span class="absolute top-full mt-3 text-[10px] font-bold uppercase tracking-widest text-deepgreen dark:text-sage opacity-0 group-hover:opacity-100 transition-opacity duration-300">Тема</span>
     </div>
 
     <!-- Навігація -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-lightbg/90 dark:bg-[#021a10]/80 backdrop-blur-md border-b border-silverborder dark:border-emerald-800/40 transition-colors duration-500">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-warmmilk/90 dark:bg-deepolive/80 backdrop-blur-md border-b border-sand/50 dark:border-softdarkgreen transition-colors duration-500">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-['Playfair_Display'] text-xl font-bold tracking-tight text-emeraldtext dark:text-emerald-300 transition-colors">
-                Maryna <span class="text-emerald-600 dark:text-emerald-500">Likarchuk</span>
+            <div class="font-['Playfair_Display'] text-xl font-bold tracking-tight text-deepolive dark:text-warmtext transition-colors">
+                Maryna <span class="text-deepgreen dark:text-sage">Likarchuk</span>
             </div>
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium mr-16">
-                <a href="#stats" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Досвід</a>
-                <a href="#cases" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Кейси</a>
-                <a href="#formats" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Формати</a>
-                <a href="#reviews" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Відгуки</a>
-                <a href="#faq" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">FAQ</a>
+                <a href="#stats" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Досвід</a>
+                <a href="#cases" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Кейси</a>
+                <a href="#formats" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Формати</a>
+                <a href="#reviews" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Відгуки</a>
+                <a href="#faq" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">FAQ</a>
             </nav>
             <div class="flex items-center space-x-4 pr-12 sm:pr-20">
-                <a href="#contact" class="bg-emeraldtext hover:bg-darktext dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md">Зв'язатися</a>
+                <a href="#contact" class="bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md">Зв'язатися</a>
             </div>
         </div>
     </header>
@@ -123,53 +117,53 @@
     <section class="relative min-h-screen flex items-center pt-20 px-6 max-w-6xl mx-auto z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full py-16">
             <div>
-                <span class="inline-block bg-white dark:bg-emerald-900/80 text-emeraldtext dark:text-emerald-300 border border-silverborder dark:border-emerald-700/50 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm transition-colors">
+                <span class="inline-block bg-white dark:bg-softdarkgreen text-deepgreen dark:text-sage border border-sand dark:border-sage/30 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm transition-colors">
                     ✨ Сертифікований TESOL/TEFL викладач
                 </span>
-                <h1 class="text-4xl sm:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-emeraldtext dark:text-emerald-100 transition-colors">
-                    Наставник, який <span class="text-emerald-600 dark:text-emerald-400">розуміє</span>
+                <h1 class="text-4xl sm:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-deepolive dark:text-warmtext transition-colors">
+                    Наставник, який <span class="text-deepgreen dark:text-sage">розуміє</span>
                 </h1>
-                <p class="text-darktext/80 dark:text-emerald-300/90 text-lg mb-8 leading-relaxed transition-colors">
+                <p class="text-deepolive/80 dark:text-sectext text-lg mb-8 leading-relaxed transition-colors">
                     Я не використовую суворий шкільний офіціоз. Допомагаю дорослим подолати мовний бар'єр, структурувати знання та заговорити англійською легко й із задоволенням.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#formats" class="bg-emeraldtext hover:bg-darktext dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-xl transition transform hover:-translate-y-0.5">Обрати формат</a>
-                    <a href="#cases" class="bg-white dark:bg-emerald-900/50 border border-silverborder dark:border-emerald-700/60 hover:bg-lightbg dark:hover:bg-emerald-800/50 text-emeraldtext dark:text-emerald-200 px-6 py-3.5 rounded-xl font-semibold transition shadow-sm">Мої кейси</a>
+                    <a href="#formats" class="bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-8 py-3.5 rounded-xl font-semibold shadow-xl transition transform hover:-translate-y-0.5">Обрати формат</a>
+                    <a href="#cases" class="bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/30 hover:bg-warmmilk dark:hover:bg-softdarkgreen/80 text-deepolive dark:text-warmtext px-6 py-3.5 rounded-xl font-semibold transition shadow-sm">Мої кейси</a>
                 </div>
             </div>
             
-            <!-- 3D ПЕРСОНАЛЬНА КАРАТКА (ACETERNITY STYLE) -->
+            <!-- 3D ПЕРСОНАЛЬНА КАРАТКА -->
             <div class="flex justify-center">
                 <div id="hero3DContainer" class="w-full max-w-sm flex items-center justify-center py-6" style="perspective: 1000px;">
-                    <div id="hero3DBody" class="spotlight-card w-full rounded-3xl border border-silverborder dark:border-emerald-700/40 bg-white/80 dark:bg-emerald-900/20 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-200 ease-out" style="transform-style: preserve-3d;">
+                    <div id="hero3DBody" class="spotlight-card w-full rounded-3xl border border-sand/70 dark:border-sage/20 bg-white/90 dark:bg-softdarkgreen/90 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-200 ease-out" style="transform-style: preserve-3d;">
                         <span class="spotlight-fill"></span>
                         <span class="spotlight-ring"></span>
                         
-                        <!-- 3D Аватар (translateZ: 60px) -->
-                        <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50 transition-transform duration-300" style="transform: translateZ(60px);">
-                            <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50 shadow-md" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
-                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full transition-colors"></div>
-                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
+                        <!-- 3D Аватар -->
+                        <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-oliveaccent/40 dark:border-sage/40 transition-transform duration-300" style="transform: translateZ(60px);">
+                            <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-warmmilk dark:bg-deepolive shadow-md" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=374709&color=fff&size=256'" />
+                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-oliveaccent dark:bg-sage border-4 border-white dark:border-deepolive rounded-full transition-colors"></div>
+                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-oliveaccent dark:bg-sage rounded-full animate-ping opacity-75"></div>
                         </div>
 
-                        <!-- 3D Ім'я (translateZ: 50px) -->
-                        <h3 class="text-2xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-1 transition-transform duration-300" style="transform: translateZ(50px);">
+                        <!-- 3D Ім'я -->
+                        <h3 class="text-2xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-1 transition-transform duration-300" style="transform: translateZ(50px);">
                             Maryna Likarchuk
                         </h3>
 
-                        <!-- 3D Посада (translateZ: 40px) -->
-                        <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-4 transition-transform duration-300" style="transform: translateZ(40px);">
+                        <!-- 3D Посада -->
+                        <p class="text-sm font-semibold text-deepgreen dark:text-sage mb-4 transition-transform duration-300" style="transform: translateZ(40px);">
                             ESL Designer & English Mentor
                         </p>
 
-                        <!-- 3D Опис (translateZ: 30px) -->
-                        <p class="text-sm text-darktext/80 dark:text-emerald-300/80 mb-8 leading-relaxed transition-transform duration-300" style="transform: translateZ(30px);">
+                        <!-- 3D Опис -->
+                        <p class="text-sm text-deepolive/80 dark:text-sectext mb-8 leading-relaxed transition-transform duration-300" style="transform: translateZ(30px);">
                             Розробляю авторські матеріали та комфортні навчальні системи під ваші цілі.
                         </p>
 
-                        <!-- 3D Кнопка (translateZ: 45px) -->
+                        <!-- 3D Кнопка -->
                         <div class="w-full flex flex-col gap-3 transition-transform duration-300" style="transform: translateZ(45px);">
-                            <button onclick="copyTelegram('likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-lightbg dark:bg-emerald-950/60 border border-silverborder dark:border-emerald-700/50 hover:bg-silverborder/50 dark:hover:bg-emerald-800 text-emeraldtext dark:text-emerald-200 py-3 rounded-xl font-semibold transition text-sm shadow-md">
+                            <button onclick="copyTelegram('likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-warmmilk dark:bg-deepolive border border-sand dark:border-sage/30 hover:bg-sand/40 dark:hover:bg-deepolive/80 text-deepolive dark:text-warmtext py-3 rounded-xl font-semibold transition text-sm shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                 <span id="copyText">Copy Telegram</span>
                             </button>
@@ -181,25 +175,25 @@
     </section>
 
     <!-- Статистика з анімацією CountUp -->
-    <section id="stats" class="py-12 border-y border-silverborder dark:border-emerald-800/40 bg-white/50 dark:bg-emerald-900/10 backdrop-blur-sm relative z-10 transition-colors">
+    <section id="stats" class="py-12 border-y border-sand/60 dark:border-softdarkgreen bg-white/60 dark:bg-softdarkgreen/40 backdrop-blur-sm relative z-10 transition-colors">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2 flex items-center justify-center gap-1 tabular-nums">
+                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-deepgreen dark:text-sage mb-2 flex items-center justify-center gap-1 tabular-nums">
                     <span>~</span><span class="stat-counter" data-target="4">0</span>
                 </div>
-                <p class="text-darktext/80 dark:text-emerald-300/80 font-medium">безперервного досвіду</p>
+                <p class="text-deepolive/80 dark:text-sectext font-medium">безперервного досвіду</p>
             </div>
             <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2 flex items-center justify-center gap-1 tabular-nums">
+                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-deepgreen dark:text-sage mb-2 flex items-center justify-center gap-1 tabular-nums">
                     <span class="stat-counter" data-target="95">0</span><span>+</span>
                 </div>
-                <p class="text-darktext/80 dark:text-emerald-300/80 font-medium">студентів досягли результату</p>
+                <p class="text-deepolive/80 dark:text-sectext font-medium">студентів досягли результату</p>
             </div>
             <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2 flex items-center justify-center gap-1 tabular-nums">
+                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-deepgreen dark:text-sage mb-2 flex items-center justify-center gap-1 tabular-nums">
                     <span class="stat-counter" data-target="2250">0</span><span>+</span>
                 </div>
-                <p class="text-darktext/80 dark:text-emerald-300/80 font-medium">проведених успішних уроків</p>
+                <p class="text-deepolive/80 dark:text-sectext font-medium">проведених успішних уроків</p>
             </div>
         </div>
     </section>
@@ -207,104 +201,104 @@
     <!-- КЕЙСИ -->
     <section id="cases" class="py-24 max-w-6xl mx-auto px-6 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Історії успіху</h2>
-            <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Наведіть курсор на картку, щоб побачити результат після навчання.</p>
+            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Історії успіху</h2>
+            <p class="text-deepolive/80 dark:text-sectext transition-colors">Наведіть курсор на картку, щоб побачити результат після навчання.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Кейс 1: Ніка -->
+            <!-- Кейс 1 -->
             <div class="flip-card h-[400px] w-full cursor-pointer">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
+                    <div class="flip-card-front spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-col items-center mb-2">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop" alt="Ніка" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-silverborder dark:border-emerald-700">
-                            <h3 class="font-bold text-lg text-emeraldtext dark:text-emerald-200">Ніка</h3>
-                            <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Час навчання: 2.5 роки</p>
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop" alt="Ніка" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-sand dark:border-sage/40">
+                            <h3 class="font-bold text-lg text-deepolive dark:text-warmtext">Ніка</h3>
+                            <p class="text-xs font-semibold text-deepgreen dark:text-sage">Час навчання: 2.5 роки</p>
                         </div>
                         <div class="flex-grow flex flex-col justify-center">
-                            <p class="text-sm text-darktext/80 dark:text-emerald-300/80 text-center leading-relaxed">
-                                <span class="font-bold text-rose-600 dark:text-rose-400 block mb-1 uppercase tracking-wide text-xs">До навчання (А1):</span>
+                            <p class="text-sm text-deepolive/80 dark:text-sectext text-center leading-relaxed">
+                                <span class="font-bold text-rose-700 dark:text-rose-400 block mb-1 uppercase tracking-wide text-xs">До навчання (А1):</span>
                                 Був панічний страх говорити, абсолютне нерозуміння структури англійського речення.
                             </p>
                         </div>
                         <div class="text-center mt-2">
-                            <span class="text-[10px] uppercase tracking-widest text-emerald-600/60 dark:text-emerald-400/60 font-bold">Наведіть курсор ➔</span>
+                            <span class="text-[10px] uppercase tracking-widest text-deepgreen/70 dark:text-sage/70 font-bold">Наведіть курсор ➔</span>
                         </div>
                     </div>
                     
-                    <div class="flip-card-back spotlight-card bg-gradient-to-b from-white to-gray-50 dark:from-emerald-900/60 dark:to-emerald-950 border-2 border-emerald-600 dark:border-emerald-500 p-8 rounded-2xl backdrop-blur-md shadow-xl flex flex-col justify-center items-center text-center transition-colors">
+                    <div class="flip-card-back spotlight-card bg-gradient-to-b from-white to-warmmilk dark:from-softdarkgreen dark:to-deepolive border-2 border-deepgreen dark:border-sand p-8 rounded-2xl backdrop-blur-md shadow-xl flex flex-col justify-center items-center text-center transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mb-4 text-2xl">✨</div>
-                        <h3 class="font-bold text-xl text-emeraldtext dark:text-emerald-100 mb-4">Результат</h3>
-                        <p class="text-sm font-medium text-darktext dark:text-emerald-100 leading-relaxed">
-                            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-2 uppercase tracking-wide text-xs">Точка Б (Впевнений B1+):</span>
+                        <div class="w-12 h-12 bg-sand/30 dark:bg-sand/10 rounded-full flex items-center justify-center mb-4 text-2xl">✨</div>
+                        <h3 class="font-bold text-xl text-deepolive dark:text-warmtext mb-4">Результат</h3>
+                        <p class="text-sm font-medium text-deepolive dark:text-warmtext leading-relaxed">
+                            <span class="font-bold text-deepgreen dark:text-sage block mb-2 uppercase tracking-wide text-xs">Точка Б (Впевнений B1+):</span>
                             Вільне висловлювання думок. Розуміння складної граматики та застосування її на рівні, близькому до рідної мови.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Кейс 2: Володимир -->
+            <!-- Кейс 2 -->
             <div class="flip-card h-[400px] w-full cursor-pointer">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
+                    <div class="flip-card-front spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-col items-center mb-2">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="Володимир" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-silverborder dark:border-emerald-700">
-                            <h3 class="font-bold text-lg text-emeraldtext dark:text-emerald-200">Володимир</h3>
-                            <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Час навчання: 1 рік</p>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="Володимир" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-sand dark:border-sage/40">
+                            <h3 class="font-bold text-lg text-deepolive dark:text-warmtext">Володимир</h3>
+                            <p class="text-xs font-semibold text-deepgreen dark:text-sage">Час навчання: 1 рік</p>
                         </div>
                         <div class="flex-grow flex flex-col justify-center">
-                            <p class="text-sm text-darktext/80 dark:text-emerald-300/80 text-center leading-relaxed">
-                                <span class="font-bold text-rose-600 dark:text-rose-400 block mb-1 uppercase tracking-wide text-xs">До навчання (А0+):</span>
+                            <p class="text-sm text-deepolive/80 dark:text-sectext text-center leading-relaxed">
+                                <span class="font-bold text-rose-700 dark:text-rose-400 block mb-1 uppercase tracking-wide text-xs">До навчання (А0+):</span>
                                 Відсутність структури в голові, фрагментарні знання. Нерозуміння, з чого почати та як вчити далі.
                             </p>
                         </div>
                         <div class="text-center mt-2">
-                            <span class="text-[10px] uppercase tracking-widest text-emerald-600/60 dark:text-emerald-400/60 font-bold">Наведіть курсор ➔</span>
+                            <span class="text-[10px] uppercase tracking-widest text-deepgreen/70 dark:text-sage/70 font-bold">Наведіть курсор ➔</span>
                         </div>
                     </div>
                     
-                    <div class="flip-card-back spotlight-card bg-gradient-to-b from-white to-gray-50 dark:from-emerald-900/60 dark:to-emerald-950 border-2 border-emerald-600 dark:border-emerald-500 p-8 rounded-2xl backdrop-blur-md shadow-xl flex flex-col justify-center items-center text-center transition-colors">
+                    <div class="flip-card-back spotlight-card bg-gradient-to-b from-white to-warmmilk dark:from-softdarkgreen dark:to-deepolive border-2 border-deepgreen dark:border-sand p-8 rounded-2xl backdrop-blur-md shadow-xl flex flex-col justify-center items-center text-center transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mb-4 text-2xl">🏗️</div>
-                        <h3 class="font-bold text-xl text-emeraldtext dark:text-emerald-100 mb-4">Результат</h3>
-                        <p class="text-sm font-medium text-darktext dark:text-emerald-100 leading-relaxed">
-                            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-2 uppercase tracking-wide text-xs">Точка Б (Твердий А2 + Профіль):</span>
+                        <div class="w-12 h-12 bg-sand/30 dark:bg-sand/10 rounded-full flex items-center justify-center mb-4 text-2xl">🏗️</div>
+                        <h3 class="font-bold text-xl text-deepolive dark:text-warmtext mb-4">Результат</h3>
+                        <p class="text-sm font-medium text-deepolive dark:text-warmtext leading-relaxed">
+                            <span class="font-bold text-deepgreen dark:text-sage block mb-2 uppercase tracking-wide text-xs">Точка Б (Твердий А2 + Профіль):</span>
                             Сформована чітка система знань. Додатково інтегровано курс професійної англійської.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Кейс 3: Людмила -->
+            <!-- Кейс 3 -->
             <div class="flip-card h-[400px] w-full cursor-pointer">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
+                    <div class="flip-card-front spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-col items-center mb-2">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" alt="Людмила" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-silverborder dark:border-emerald-700">
-                            <h3 class="font-bold text-lg text-emeraldtext dark:text-emerald-200">Людмила</h3>
-                            <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Час навчання: 1.5 роки</p>
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" alt="Людмила" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-sand dark:border-sage/40">
+                            <h3 class="font-bold text-lg text-deepolive dark:text-warmtext">Людмила</h3>
+                            <p class="text-xs font-semibold text-deepgreen dark:text-sage">Час навчання: 1.5 роки</p>
                         </div>
                         <div class="flex-grow flex flex-col justify-center">
-                            <p class="text-sm text-darktext/80 dark:text-emerald-300/80 text-center leading-relaxed">
-                                <span class="font-bold text-rose-600 dark:text-rose-400 block mb-1 uppercase tracking-wide text-xs">До навчання (Базовий А1):</span>
+                            <p class="text-sm text-deepolive/80 dark:text-sectext text-center leading-relaxed">
+                                <span class="font-bold text-rose-700 dark:text-rose-400 block mb-1 uppercase tracking-wide text-xs">До навчання (Базовий А1):</span>
                                 Панічний страх та сильний мовний бар'єр. Було дуже важко сприймати мову на слух.
                             </p>
                         </div>
                         <div class="text-center mt-2">
-                            <span class="text-[10px] uppercase tracking-widest text-emerald-600/60 dark:text-emerald-400/60 font-bold">Наведіть курсор ➔</span>
+                            <span class="text-[10px] uppercase tracking-widest text-deepgreen/70 dark:text-sage/70 font-bold">Наведіть курсор ➔</span>
                         </div>
                     </div>
                     
-                    <div class="flip-card-back spotlight-card bg-gradient-to-b from-white to-gray-50 dark:from-emerald-900/60 dark:to-emerald-950 border-2 border-emerald-600 dark:border-emerald-500 p-8 rounded-2xl backdrop-blur-md shadow-xl flex flex-col justify-center items-center text-center transition-colors">
+                    <div class="flip-card-back spotlight-card bg-gradient-to-b from-white to-warmmilk dark:from-softdarkgreen dark:to-deepolive border-2 border-deepgreen dark:border-sand p-8 rounded-2xl backdrop-blur-md shadow-xl flex flex-col justify-center items-center text-center transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mb-4 text-2xl">🎧</div>
-                        <h3 class="font-bold text-xl text-emeraldtext dark:text-emerald-100 mb-4">Результат</h3>
-                        <p class="text-sm font-medium text-darktext dark:text-emerald-100 leading-relaxed">
-                            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-2 uppercase tracking-wide text-xs">Точка Б (Впевнений B1):</span>
+                        <div class="w-12 h-12 bg-sand/30 dark:bg-sand/10 rounded-full flex items-center justify-center mb-4 text-2xl">🎧</div>
+                        <h3 class="font-bold text-xl text-deepolive dark:text-warmtext mb-4">Результат</h3>
+                        <p class="text-sm font-medium text-deepolive dark:text-warmtext leading-relaxed">
+                            <span class="font-bold text-deepgreen dark:text-sage block mb-2 uppercase tracking-wide text-xs">Точка Б (Впевнений B1):</span>
                             Вільне прослуховування англомовних подкастів. Смілива підготовка до активної комунікації з іноземцями.
                         </p>
                     </div>
@@ -314,52 +308,52 @@
     </section>
 
     <!-- Формати співпраці -->
-    <section id="formats" class="py-24 border-y border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
+    <section id="formats" class="py-24 border-y border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Формати співпраці</h2>
-                <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Обирайте комфортний для вас темп та вид навчання.</p>
+                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Формати співпраці</h2>
+                <p class="text-deepolive/80 dark:text-sectext transition-colors">Обирайте комфортний для вас темп та вид навчання.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
+                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
                     <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                     <div>
-                        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl flex items-center justify-center mb-6"><span class="text-2xl">👩‍💻</span></div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4">Індивідуальні заняття</h3>
-                        <p class="text-darktext/80 dark:text-emerald-300/80 text-sm mb-4">Курс, розроблений під ваші потреби (від 1 до 4 разів на тиждень).</p>
-                        <ul class="text-sm text-darktext/90 dark:text-emerald-100/90 space-y-2 mb-8">
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Власний кабінет студента</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Доступ до всіх матеріалів</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Регулярна перевірка ДЗ</li>
+                        <div class="w-12 h-12 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center mb-6"><span class="text-2xl">👩‍💻</span></div>
+                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4">Індивідуальні заняття</h3>
+                        <p class="text-deepolive/80 dark:text-sectext text-sm mb-4">Курс, розроблений під ваші потреби (від 1 до 4 разів на тиждень).</p>
+                        <ul class="text-sm text-deepolive dark:text-warmtext space-y-2 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Власний кабінет студента</li>
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Доступ до всіх матеріалів</li>
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Регулярна перевірка ДЗ</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="spotlight-card bg-gradient-to-b from-white to-gray-50 dark:from-emerald-900/40 dark:to-emerald-950 border-2 border-emerald-600 dark:border-emerald-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-colors">
+                <div class="spotlight-card bg-gradient-to-b from-white to-warmmilk dark:from-softdarkgreen dark:to-deepolive border-2 border-deepgreen dark:border-sand p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-colors">
                     <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <span class="absolute -top-3 right-6 bg-emerald-600 dark:bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm z-10">Гнучко</span>
+                    <span class="absolute -top-3 right-6 bg-deepgreen dark:bg-sand text-warmmilk dark:text-deepolive text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm z-10">Гнучко</span>
                     <div>
-                        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl flex items-center justify-center mb-6"><span class="text-2xl">⏳</span></div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4">Асинхронне навчання</h3>
-                        <p class="text-darktext/80 dark:text-emerald-300/80 text-sm mb-4">Навчання у вашому темпі без прив'язки до розкладу дзвінків.</p>
-                        <ul class="text-sm text-darktext/90 dark:text-emerald-100/90 space-y-2 mb-8">
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Щотижневий план та матеріали</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Детальний фідбек від мене</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Періодичні Q&A сесії наживо</li>
+                        <div class="w-12 h-12 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center mb-6"><span class="text-2xl">⏳</span></div>
+                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4">Асинхронне навчання</h3>
+                        <p class="text-deepolive/80 dark:text-sectext text-sm mb-4">Навчання у вашому темпі без прив'язки до розкладу дзвінків.</p>
+                        <ul class="text-sm text-deepolive dark:text-warmtext space-y-2 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Щотижневий план та матеріали</li>
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Детальний фідбек від мене</li>
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Періодичні Q&A сесії наживо</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
+                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
                     <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                     <div>
-                        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl flex items-center justify-center mb-6"><span class="text-2xl">💡</span></div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4">Інд. консультація</h3>
-                        <p class="text-darktext/80 dark:text-emerald-300/80 text-sm mb-4">Точкове вирішення ваших запитів без довгострокових зобов'язань.</p>
-                        <ul class="text-sm text-darktext/90 dark:text-emerald-100/90 space-y-2 mb-8">
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Розбір конкретної складної теми</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Визначення рівня</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500">✦</span> Створення roadmap'у</li>
+                        <div class="w-12 h-12 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center mb-6"><span class="text-2xl">💡</span></div>
+                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4">Інд. консультація</h3>
+                        <p class="text-deepolive/80 dark:text-sectext text-sm mb-4">Точкове вирішення ваших запитів без довгострокових зобов'язань.</p>
+                        <ul class="text-sm text-deepolive dark:text-warmtext space-y-2 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Розбір конкретної складної теми</li>
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Визначення рівня</li>
+                            <li class="flex items-start gap-2"><span class="text-oliveaccent dark:text-sage">✦</span> Створення roadmap'у</li>
                         </ul>
                     </div>
                 </div>
@@ -370,77 +364,77 @@
     <!-- БЛОК ВІДГУКІВ -->
     <section id="reviews" class="py-24 relative z-10 overflow-hidden transition-colors">
         <div class="text-center max-w-2xl mx-auto mb-16 px-6">
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Що кажуть учні</h2>
-            <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Результат і комфорт — найкраща оцінка моєї роботи.</p>
+            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Що кажуть учні</h2>
+            <p class="text-deepolive/80 dark:text-sectext transition-colors">Результат і комфорт — найкраща оцінка моєї роботи.</p>
         </div>
         
         <div class="relative flex w-full flex-col items-center justify-center marquee-mask group">
             <div class="flex w-full overflow-hidden mb-6">
                 <div class="flex shrink-0 gap-6 animate-marquee group-hover:[animation-play-state:paused] w-max">
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Олена&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Олена</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Нарешті перестала боятися говорити! Асинхронний формат ідеально підійшов для мого графіка."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Олена&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Олена</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Асинхронний формат</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Нарешті перестала боятися говорити! Асинхронний формат ідеально підійшов для мого графіка."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Ігор&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Ігор</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Дуже крута структура, все розкладено по поличках. Англійська для роботи тепер не проблема."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Ігор&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Ігор</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Індивідуально</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Дуже крута структура, все розкладено по поличках. Англійська для роботи тепер не проблема."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Марія&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Марія</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Підготовка до НМТ</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Склала НМТ на 190+, хоча починали майже з нуля! Дуже вдячна за терпіння і підтримку."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Марія&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Марія</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Підготовка до НМТ</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Склала НМТ на 190+, хоча починали майже з нуля! Дуже вдячна за терпіння і підтримку."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Олена&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Олена</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Нарешті перестала боятися говорити! Асинхронний формат ідеально підійшов для мого графіка."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Олена&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Олена</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Асинхронний формат</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Нарешті перестала боятися говорити! Асинхронний формат ідеально підійшов для мого графіка."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Ігор&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Ігор</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Дуже крута структура, все розкладено по поличках. Англійська для роботи тепер не проблема."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Ігор&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Ігор</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Індивідуально</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Дуже крута структура, все розкладено по поличках. Англійська для роботи тепер не проблема."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Марія&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Марія</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Підготовка до НМТ</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Склала НМТ на 190+, хоча починали майже з нуля! Дуже вдячна за терпіння і підтримку."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Марія&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Марія</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Підготовка до НМТ</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Склала НМТ на 190+, хоча починали майже з нуля! Дуже вдячна за терпіння і підтримку."</blockquote>
                     </figure>
                 </div>
             </div>
             
             <div class="flex w-full overflow-hidden">
                 <div class="flex shrink-0 gap-6 animate-marquee-reverse group-hover:[animation-play-state:paused] w-max">
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Дмитро&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Дмитро</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Консультація</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Марина розклала все по поличках за одну консультацію. Тепер маю чіткий план."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Дмитро&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Дмитро</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Консультація</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Марина розклала все по поличках за одну консультацію. Тепер маю чіткий план."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Катерина&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Катерина</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Надзвичайно комфортна атмосфера на уроках, жодного стресу при помилках. Рекомендую!"</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Катерина&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Катерина</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Індивідуально</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Надзвичайно комфортна атмосфера на уроках, жодного стресу при помилках. Рекомендую!"</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Андрій&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Андрій</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Ніколи не думав, що вчити мову можна так зручно. Авторські матеріали — це просто топ."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Андрій&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Андрій</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Асинхронний формат</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Ніколи не думав, що вчити мову можна так зручно. Авторські матеріали — це просто топ."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Дмитро&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Дмитро</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Консультація</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Марина розклала все по поличках за одну консультацію. Тепер маю чіткий план."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Дмитро&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Дмитро</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Консультація</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Марина розклала все по поличках за одну консультацію. Тепер маю чіткий план."</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Катерина&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Катерина</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Індивідуально</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Надзвичайно комфортна атмосфера на уроках, жодного стресу при помилках. Рекомендую!"</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Катерина&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Катерина</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Індивідуально</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Надзвичайно комфортна атмосфера на уроках, жодного стресу при помилках. Рекомендую!"</blockquote>
                     </figure>
-                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Андрій&background=059669&color=fff" />
-                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Андрій</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Асинхронний формат</p></div></div>
-                        <blockquote class="mt-4 text-sm text-darktext/90 dark:text-emerald-100/90 leading-relaxed">"Ніколи не думав, що вчити мову можна так зручно. Авторські матеріали — це просто топ."</blockquote>
+                    <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-sand dark:border-sage/20 bg-white dark:bg-softdarkgreen p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+                        <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Андрій&background=374709&color=fff" />
+                        <div class="flex flex-col"><figcaption class="text-sm font-bold text-deepolive dark:text-warmtext">Андрій</figcaption><p class="text-xs font-medium text-deepolive/60 dark:text-sectext">Асинхронний формат</p></div></div>
+                        <blockquote class="mt-4 text-sm text-deepolive/90 dark:text-warmtext leading-relaxed">"Ніколи не думав, що вчити мову можна так зручно. Авторські матеріали — це просто топ."</blockquote>
                     </figure>
                 </div>
             </div>
@@ -448,60 +442,60 @@
     </section>
 
     <!-- БЛОК FAQ -->
-    <section id="faq" class="py-24 border-t border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
+    <section id="faq" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Часті запитання</h2>
-                <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Відповіді на найпопулярніші питання про процес навчання.</p>
+                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Часті запитання</h2>
+                <p class="text-deepolive/80 dark:text-sectext transition-colors">Відповіді на найпопулярніші питання про процес навчання.</p>
             </div>
 
             <div class="space-y-4">
-                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
                         <span>Чи потрібно купувати якісь підручники чи робочі зошити?</span>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        <span class="text-deepgreen dark:text-sage text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                     </summary>
-                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed">
                         Ні, купувати нічого не потрібно. Усі навчальні матеріали, інтерактивні вправи та конспекти я надаю в особистому цифровому кабінеті студента.
                     </div>
                 </details>
 
-                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
                         <span>Якщо я не знаю свій рівень знань зараз?</span>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        <span class="text-deepgreen dark:text-sage text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                     </summary>
-                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed">
                         Це абсолютно нормально! На першій вступній зустрічі чи консультації ми проведемо тестування та коротку діагностичну розмову, щоб визначити ваш точний рівень та сформулювати цілі.
                     </div>
                 </details>
 
-                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
                         <span>Як проходять індивідуальні онлайн-заняття?</span>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        <span class="text-deepgreen dark:text-sage text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                     </summary>
-                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed">
                         Уроки найчастіше проходять на зручній платформі Zoom або Google Meet. Ми робимо акцент на живій розмовній практиці, розборі реальних ситуацій та матеріалів під ваші запити.
                     </div>
                 </details>
 
-                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
                         <span>Що робити, якщо я не знаю, який формат мені підходить?</span>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        <span class="text-deepgreen dark:text-sage text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                     </summary>
-                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed">
                         На першій консультації ми обговорюємо ваші цілі, графік та побажання і разом визначаємо формат та план навчання, який підійде вам найкраще.
                     </div>
                 </details>
 
-                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
                         <span>Як відбувається оплата занять?</span>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        <span class="text-deepgreen dark:text-sage text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                     </summary>
-                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed">
                         Оплата занять здійснюється пакетами або абонементами на конкретну кількість занять перед початком навчання на рахунок ФОП.
                     </div>
                 </details>
@@ -510,21 +504,21 @@
     </section>
 
     <!-- Контакти -->
-    <section id="contact" class="py-24 border-t border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
+    <section id="contact" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-700/50 p-12 rounded-3xl backdrop-blur-md shadow-2xl transition-colors">
+            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/30 p-12 rounded-3xl backdrop-blur-md shadow-2xl transition-colors">
                 <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Почніть свій шлях в англійській</h2>
-                <p class="text-darktext/90 dark:text-emerald-300/90 mb-8 max-w-lg mx-auto transition-colors">Напишіть мені в Telegram або Instagram Direct, ми визначимо ваші цілі та оберемо комфортний старт.</p>
+                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Почніть свій шлях в англійській</h2>
+                <p class="text-deepolive/90 dark:text-sectext mb-8 max-w-lg mx-auto transition-colors">Напишіть мені в Telegram або Instagram Direct, ми визначимо ваші цілі та оберемо комфортний старт.</p>
                 <div class="flex justify-center gap-4 flex-wrap">
-                    <a href="https://t.me/likarchuk" target="_blank" class="bg-emeraldtext hover:bg-darktext dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg transition">Написати в Telegram</a>
-                    <a href="https://instagram.com/marina.likarchuk" target="_blank" class="bg-lightbg dark:bg-emerald-950 border border-silverborder dark:border-emerald-700/60 hover:bg-silverborder dark:hover:bg-emerald-800 text-emeraldtext dark:text-emerald-200 px-8 py-3.5 rounded-xl font-semibold transition">Instagram Direct</a>
+                    <a href="https://t.me/likarchuk" target="_blank" class="bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-8 py-3.5 rounded-xl font-semibold shadow-lg transition">Написати в Telegram</a>
+                    <a href="https://instagram.com/marina.likarchuk" target="_blank" class="bg-warmmilk dark:bg-deepolive border border-sand dark:border-sage/30 hover:bg-sand/40 dark:hover:bg-deepolive/80 text-deepolive dark:text-warmtext px-8 py-3.5 rounded-xl font-semibold transition">Instagram Direct</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-8 text-emeraldtext/60 dark:text-emerald-400/60 text-sm border-t border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
+    <footer class="text-center py-8 text-deepolive/60 dark:text-sage/60 text-sm border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
@@ -536,9 +530,7 @@
             setTimeout(() => intro.remove(), 700);
         }
 
-        // -----------------------------------------------------
-        // 3D Card Interactivity (Aceternity 3D-Tilt Effect)
-        // -----------------------------------------------------
+        // 3D Card Interactivity
         const hero3DContainer = document.getElementById('hero3DContainer');
         const hero3DBody = document.getElementById('hero3DBody');
 
@@ -550,7 +542,6 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                // Максимальний кут нахилу в 20 градусів
                 const rotateX = (centerY - y) / 12;
                 const rotateY = (x - centerX) / 12;
 
@@ -626,7 +617,7 @@
             });
         });
 
-        // Анімація чисел при скролі (CountUp)
+        // Анімація чисел при скролі
         const animateValue = (obj, start, end, duration) => {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -667,7 +658,7 @@
             statsObserver.observe(statsSection);
         }
 
-        // WebGL-шейдер (Фон)
+        // WebGL-шейдер з вашими точними кольорами палітри
         const canvas = document.getElementById('nebulaCanvas');
         const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
         if (gl) {
@@ -696,15 +687,24 @@
                     float n = rawN + lamp;
                     vec3 col;
                     if (uTheme == 1) {
-                        vec3 voidCol = vec3(0.007, 0.10, 0.06); vec3 emeraldGlow = vec3(0.02, 0.38, 0.22); vec3 highlight = vec3(0.08, 0.75, 0.45);
-                        col = mix(voidCol, emeraldGlow, smoothstep(0.2, 0.6, n)); col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.7);
+                        // Темна палітра: #212517 (основний), #303627 (картки), #B6C58E (шавлієвий акцент)
+                        vec3 voidCol = vec3(0.129, 0.145, 0.090); 
+                        vec3 cardGlow = vec3(0.188, 0.212, 0.153); 
+                        vec3 highlight = vec3(0.714, 0.773, 0.557);
+                        col = mix(voidCol, cardGlow, smoothstep(0.2, 0.6, n)); 
+                        col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.4);
                     } else {
-                        vec3 lightBg = vec3(0.957, 0.961, 0.957); vec3 silverGlow = vec3(0.898, 0.906, 0.902); vec3 emeraldGlow = vec3(0.750, 0.850, 0.800);
-                        col = mix(lightBg, silverGlow, smoothstep(0.1, 0.5, rawN)); col = mix(col, emeraldGlow, smoothstep(0.55, 0.85, rawN) * 0.5);
-                        vec3 cursorGlow = vec3(0.7, 0.9, 0.8); col = mix(col, cursorGlow, lamp * 0.85);
+                        // Світла палітра: #F7F5EF (молочний), #DED3A6 (пісочний), #759242 (оливковий)
+                        vec3 lightBg = vec3(0.969, 0.961, 0.937); 
+                        vec3 sandGlow = vec3(0.871, 0.827, 0.651); 
+                        vec3 oliveGlow = vec3(0.459, 0.573, 0.259);
+                        col = mix(lightBg, sandGlow, smoothstep(0.1, 0.5, rawN)); 
+                        col = mix(col, oliveGlow, smoothstep(0.55, 0.85, rawN) * 0.35);
+                        vec3 cursorGlow = vec3(0.871, 0.827, 0.651); 
+                        col = mix(col, cursorGlow, lamp * 0.6);
                     }
                     vec2 grid = fract(gl_FragCoord.xy / 6.0) - 0.5; float d_grid = length(grid); float dotMask = smoothstep(0.35, 0.38, d_grid * (0.5 + rawN * 0.8 - lamp * 0.5));
-                    if (uTheme == 1) { col *= mix(0.75, 1.0, dotMask); } else { vec3 dotColor = vec3(0.023, 0.305, 0.231); col = mix(mix(col, dotColor, 0.1 + lamp * 0.2), col, dotMask); }
+                    if (uTheme == 1) { col *= mix(0.82, 1.0, dotMask); } else { vec3 dotColor = vec3(0.216, 0.278, 0.035); col = mix(mix(col, dotColor, 0.08 + lamp * 0.15), col, dotMask); }
                     frag = vec4(col, 1.0);
                 }`;
             const compile = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };

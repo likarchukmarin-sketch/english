@@ -70,13 +70,13 @@
 </head>
 <body class="bg-warmmilk text-deepolive dark:bg-deepolive dark:text-warmtext transition-colors duration-500 selection:bg-deepgreen selection:text-warmmilk dark:selection:bg-sand dark:selection:text-deepolive">
 
-    <!-- ІНТРО ЕКРАН -->
-    <div id="introScreen" class="fixed inset-0 z-[200] bg-deepolive flex items-center justify-center transition-opacity duration-700">
-        <div class="relative z-10 flex flex-col items-start p-6 sm:p-10 max-w-xl mx-auto w-full">
-            <p class="mb-4 font-mono text-[11px] uppercase tracking-[0.34em] text-sage">✦ transmission received</p>
-            <h1 class="text-5xl font-semibold leading-[0.95] tracking-tight text-warmtext sm:text-7xl mb-5">Вітаю.<br/>Готові почати?</h1>
-            <p class="mt-2 max-w-sm text-sm leading-relaxed text-sectext mb-8">Без шкільного офіціозу. Тільки жива англійська, практика та ваш результат. Потягніть за лампочку, щоб увімкнути світло.</p>
-            <button onclick="startExperience()" type="button" class="pointer-events-auto border border-sand bg-sand/10 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.28em] text-sand transition-colors hover:bg-sand hover:text-deepolive">Увійти на сайт →</button>
+    <!-- ІНТРО / ЕКРАН ЗАВАНТАЖЕННЯ З КИЦЕЮ -->
+    <div id="introScreen" class="fixed inset-0 z-[200] bg-white dark:bg-deepolive flex flex-col items-center justify-center transition-all duration-700 ease-in-out">
+        <div class="flex flex-col items-center max-w-sm px-6 text-center">
+            <img src="завантаження.gif" alt="Завантаження..." class="w-64 sm:w-80 h-auto mb-6 object-contain rounded-2xl" />
+            <p class="font-mono text-xs uppercase tracking-[0.28em] text-deepgreen dark:text-sage animate-pulse">
+                Готуємо найкраще для вас...
+            </p>
         </div>
     </div>
 
@@ -524,11 +524,16 @@
 
     <!-- Скрипти -->
     <script>
-        function startExperience() {
-            const intro = document.getElementById('introScreen');
-            intro.style.opacity = '0';
-            setTimeout(() => intro.remove(), 700);
-        }
+        // Плавне приховування лоадера після завантаження сторінки
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('introScreen');
+                if (intro) {
+                    intro.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+                    setTimeout(() => intro.remove(), 700);
+                }
+            }, 1800); // 1.8 секунди демонструється анімація з котиком
+        });
 
         // 3D Card Interactivity
         const hero3DContainer = document.getElementById('hero3DContainer');
@@ -658,7 +663,7 @@
             statsObserver.observe(statsSection);
         }
 
-        // WebGL-шейдер з вашими точними кольорами палітри
+        // WebGL-шейдер з точними кольорами палітри
         const canvas = document.getElementById('nebulaCanvas');
         const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
         if (gl) {
@@ -687,14 +692,12 @@
                     float n = rawN + lamp;
                     vec3 col;
                     if (uTheme == 1) {
-                        // Темна палітра: #212517 (основний), #303627 (картки), #B6C58E (шавлієвий акцент)
                         vec3 voidCol = vec3(0.129, 0.145, 0.090); 
                         vec3 cardGlow = vec3(0.188, 0.212, 0.153); 
                         vec3 highlight = vec3(0.714, 0.773, 0.557);
                         col = mix(voidCol, cardGlow, smoothstep(0.2, 0.6, n)); 
                         col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.4);
                     } else {
-                        // Світла палітра: #F7F5EF (молочний), #DED3A6 (пісочний), #759242 (оливковий)
                         vec3 lightBg = vec3(0.969, 0.961, 0.937); 
                         vec3 sandGlow = vec3(0.871, 0.827, 0.651); 
                         vec3 oliveGlow = vec3(0.459, 0.573, 0.259);

@@ -71,7 +71,6 @@
             transform: rotateY(180deg);
         }
         
-        /* Табличні цифри для анімації CountUp, щоб вони не смикалися по ширині */
         .tabular-nums { font-variant-numeric: tabular-nums; }
     </style>
 </head>
@@ -112,6 +111,7 @@
                 <a href="#cases" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Кейси</a>
                 <a href="#formats" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Формати</a>
                 <a href="#reviews" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Відгуки</a>
+                <a href="#faq" class="text-emeraldtext dark:text-emerald-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition">FAQ</a>
             </nav>
             <div class="flex items-center space-x-4 pr-12 sm:pr-20">
                 <a href="#contact" class="bg-emeraldtext hover:bg-darktext dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md">Зв'язатися</a>
@@ -144,7 +144,7 @@
                     <span class="spotlight-ring"></span>
                     
                     <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&h=500&fit=crop" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
+                        <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
                         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full transition-colors"></div>
                         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
                     </div>
@@ -433,6 +433,73 @@
         </div>
     </section>
 
+    <!-- БЛОК FAQ (ЧАСТІ ЗАПИТАННЯ) -->
+    <section id="faq" class="py-24 border-t border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-4 transition-colors">Часті запитання</h2>
+                <p class="text-darktext/80 dark:text-emerald-300/80 transition-colors">Відповіді на найпопулярніші питання про процес навчання.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                        <span>Чи потрібно купувати якісь підручники чи робочі зошити?</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                        Ні, купувати нічого не потрібно. Усі навчальні матеріали, інтерактивні вправи та конспекти я надаю в особистому цифровому кабінеті студента.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                        <span>Якщо я не знаю свій рівень знань зараз?</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                        Це абсолютно нормально! На першій вступній зустрічі чи консультації ми проведемо тестування та коротку діагностичну розмову, щоб визначити ваш точний рівень та сформулювати цілі.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                        <span>Як проходять індивідуальні онлайн-заняття?</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                        Уроки найчастіше проходять на зручній платформі Zoom або Google Meet. Ми робимо акцент на живій розмовній практиці, розборі реальних ситуацій та матеріалів під ваші запити.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 -->
+                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                        <span>Що робити, якщо я не знаю, який формат мені підходить?</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                        На першій консультації ми обговорюємо ваші цілі, графік та побажання і разом визначаємо формат та план навчання, який підійде вам найкраще.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 5 -->
+                <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
+                        <span>Як відбувається оплата занять?</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-darktext/80 dark:text-emerald-300/90 leading-relaxed">
+                        Оплата занять здійснюється пакетами або абонементами на конкретну кількість занять перед початком навчання на рахунок ФОП.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
     <!-- Контакти -->
     <section id="contact" class="py-24 border-t border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
         <div class="max-w-4xl mx-auto px-6 text-center">
@@ -518,15 +585,12 @@
             });
         });
 
-        // -----------------------------------------------------
         // Анімація чисел при скролі
-        // -----------------------------------------------------
         const animateValue = (obj, start, end, duration) => {
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                // Плавне сповільнення наприкінці (easeOutExpo)
                 const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
                 obj.innerHTML = Math.floor(easeProgress * (end - start) + start);
                 if (progress < 1) {
@@ -538,7 +602,6 @@
             window.requestAnimationFrame(step);
         }
 
-        // Observer для запуску анімації тільки коли блок видно на екрані
         const statsObserverOptions = {
             root: null,
             rootMargin: '0px',
@@ -551,7 +614,6 @@
                     const counters = entry.target.querySelectorAll('.stat-counter');
                     counters.forEach(counter => {
                         const target = parseInt(counter.getAttribute('data-target'));
-                        // Запускаємо анімацію на 2.5 секунди (2500 мс)
                         animateValue(counter, 0, target, 2500); 
                     });
                     observer.unobserve(entry.target);

@@ -46,7 +46,7 @@
 
         .marquee-mask { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
 
-        /* 3D Фліп Картки */
+        /* 3D Фліп Картки Кейсів */
         .flip-card {
             perspective: 1000px;
         }
@@ -119,7 +119,7 @@
         </div>
     </header>
 
-    <!-- Головний блок із Карткою Профілю -->
+    <!-- Головний блок із Персональною 3D Карткою -->
     <section class="relative min-h-screen flex items-center pt-20 px-6 max-w-6xl mx-auto z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full py-16">
             <div>
@@ -138,28 +138,42 @@
                 </div>
             </div>
             
+            <!-- 3D ПЕРСОНАЛЬНА КАРАТКА (ACETERNITY STYLE) -->
             <div class="flex justify-center">
-                <div class="spotlight-card w-full max-w-sm rounded-3xl border border-silverborder dark:border-emerald-700/40 bg-white/80 dark:bg-emerald-900/20 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-colors">
-                    <span class="spotlight-fill"></span>
-                    <span class="spotlight-ring"></span>
-                    
-                    <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50">
-                        <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
-                        <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full transition-colors"></div>
-                        <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
-                    </div>
+                <div id="hero3DContainer" class="w-full max-w-sm flex items-center justify-center py-6" style="perspective: 1000px;">
+                    <div id="hero3DBody" class="spotlight-card w-full rounded-3xl border border-silverborder dark:border-emerald-700/40 bg-white/80 dark:bg-emerald-900/20 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-200 ease-out" style="transform-style: preserve-3d;">
+                        <span class="spotlight-fill"></span>
+                        <span class="spotlight-ring"></span>
+                        
+                        <!-- 3D Аватар (translateZ: 60px) -->
+                        <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-emerald-500/30 dark:border-emerald-500/50 transition-transform duration-300" style="transform: translateZ(60px);">
+                            <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-lightbg dark:bg-emerald-900/50 shadow-md" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=059669&color=fff&size=256'" />
+                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#021a10] rounded-full transition-colors"></div>
+                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
+                        </div>
 
-                    <h3 class="text-2xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-1 transition-colors">Maryna Likarchuk</h3>
-                    <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-4 transition-colors">ESL Designer & English Mentor</p>
-                    <p class="text-sm text-darktext/80 dark:text-emerald-300/80 mb-8 leading-relaxed transition-colors">
-                        Розробляю авторські матеріали та комфортні навчальні системи під ваші цілі.
-                    </p>
+                        <!-- 3D Ім'я (translateZ: 50px) -->
+                        <h3 class="text-2xl font-['Playfair_Display'] font-bold text-emeraldtext dark:text-emerald-100 mb-1 transition-transform duration-300" style="transform: translateZ(50px);">
+                            Maryna Likarchuk
+                        </h3>
 
-                    <div class="w-full flex flex-col gap-3">
-                        <button onclick="copyTelegram('likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-lightbg dark:bg-emerald-950/60 border border-silverborder dark:border-emerald-700/50 hover:bg-silverborder/50 dark:hover:bg-emerald-800 text-emeraldtext dark:text-emerald-200 py-3 rounded-xl font-semibold transition text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                            <span id="copyText">Copy Telegram</span>
-                        </button>
+                        <!-- 3D Посада (translateZ: 40px) -->
+                        <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-4 transition-transform duration-300" style="transform: translateZ(40px);">
+                            ESL Designer & English Mentor
+                        </p>
+
+                        <!-- 3D Опис (translateZ: 30px) -->
+                        <p class="text-sm text-darktext/80 dark:text-emerald-300/80 mb-8 leading-relaxed transition-transform duration-300" style="transform: translateZ(30px);">
+                            Розробляю авторські матеріали та комфортні навчальні системи під ваші цілі.
+                        </p>
+
+                        <!-- 3D Кнопка (translateZ: 45px) -->
+                        <div class="w-full flex flex-col gap-3 transition-transform duration-300" style="transform: translateZ(45px);">
+                            <button onclick="copyTelegram('likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-lightbg dark:bg-emerald-950/60 border border-silverborder dark:border-emerald-700/50 hover:bg-silverborder/50 dark:hover:bg-emerald-800 text-emeraldtext dark:text-emerald-200 py-3 rounded-xl font-semibold transition text-sm shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                <span id="copyText">Copy Telegram</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -433,7 +447,7 @@
         </div>
     </section>
 
-    <!-- БЛОК FAQ (ЧАСТІ ЗАПИТАННЯ) -->
+    <!-- БЛОК FAQ -->
     <section id="faq" class="py-24 border-t border-silverborder dark:border-emerald-800/40 relative z-10 transition-colors">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -442,7 +456,6 @@
             </div>
 
             <div class="space-y-4">
-                <!-- FAQ Item 1 -->
                 <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
                     <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
                         <span>Чи потрібно купувати якісь підручники чи робочі зошити?</span>
@@ -453,7 +466,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 2 -->
                 <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
                     <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
                         <span>Якщо я не знаю свій рівень знань зараз?</span>
@@ -464,7 +476,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 3 -->
                 <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
                     <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
                         <span>Як проходять індивідуальні онлайн-заняття?</span>
@@ -475,7 +486,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 4 -->
                 <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
                     <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
                         <span>Що робити, якщо я не знаю, який формат мені підходить?</span>
@@ -486,7 +496,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 5 -->
                 <details class="spotlight-card bg-white/90 dark:bg-emerald-900/20 border border-silverborder dark:border-emerald-800/60 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors">
                     <summary class="flex justify-between items-center p-6 cursor-pointer font-semibold text-lg text-emeraldtext dark:text-emerald-100 list-none select-none">
                         <span>Як відбувається оплата занять?</span>
@@ -527,6 +536,38 @@
             setTimeout(() => intro.remove(), 700);
         }
 
+        // -----------------------------------------------------
+        // 3D Card Interactivity (Aceternity 3D-Tilt Effect)
+        // -----------------------------------------------------
+        const hero3DContainer = document.getElementById('hero3DContainer');
+        const hero3DBody = document.getElementById('hero3DBody');
+
+        if (hero3DContainer && hero3DBody) {
+            hero3DContainer.addEventListener('mousemove', (e) => {
+                const rect = hero3DContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Максимальний кут нахилу в 20 градусів
+                const rotateX = (centerY - y) / 12;
+                const rotateY = (x - centerX) / 12;
+
+                hero3DBody.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            hero3DContainer.addEventListener('mouseenter', () => {
+                hero3DBody.style.transition = 'none';
+            });
+
+            hero3DContainer.addEventListener('mouseleave', () => {
+                hero3DBody.style.transition = 'transform 0.5s ease';
+                hero3DBody.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            });
+        }
+
+        // Шнурок-перемикач теми
         const cord = document.getElementById('pullCord');
         const cordLine = document.getElementById('cordLine');
         const cordHandle = document.getElementById('cordHandle');
@@ -585,7 +626,7 @@
             });
         });
 
-        // Анімація чисел при скролі
+        // Анімація чисел при скролі (CountUp)
         const animateValue = (obj, start, end, duration) => {
             let startTimestamp = null;
             const step = (timestamp) => {

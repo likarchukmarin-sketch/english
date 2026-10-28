@@ -163,19 +163,19 @@
         </div>
     </section>
 
-    <!-- Статистика -->
+    <!-- Статистика (з ефектом Number Ticker) -->
     <section id="stats" class="py-12 border-y border-silverborder dark:border-emerald-800/40 bg-white/50 dark:bg-emerald-900/10 backdrop-blur-sm relative z-10 transition-colors">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2">~4 роки</div>
+                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2">~<span class="stat-counter" data-target="4">0</span> роки</div>
                 <p class="text-darktext/80 dark:text-emerald-300/80 font-medium">безперервного досвіду</p>
             </div>
             <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2">95+</div>
+                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2"><span class="stat-counter" data-target="95">0</span>+</div>
                 <p class="text-darktext/80 dark:text-emerald-300/80 font-medium">студентів досягли результату</p>
             </div>
             <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2">2250+</div>
+                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-emerald-600 dark:text-emerald-400 mb-2"><span class="stat-counter" data-target="2250">0</span>+</div>
                 <p class="text-darktext/80 dark:text-emerald-300/80 font-medium">проведених успішних уроків</p>
             </div>
         </div>
@@ -196,7 +196,7 @@
                     <div class="flip-card-front spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-col items-center mb-2">
-                            <!-- Фото Ніки (змініть src на своє) -->
+                            <!-- Фото Ніки -->
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop" alt="Ніка" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-silverborder dark:border-emerald-700">
                             <h3 class="font-bold text-lg text-emeraldtext dark:text-emerald-200">Ніка</h3>
                             <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Час навчання: 2.5 роки</p>
@@ -232,6 +232,7 @@
                     <div class="flip-card-front spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-col items-center mb-2">
+                            <!-- Фото Володимира -->
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="Володимир" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-silverborder dark:border-emerald-700">
                             <h3 class="font-bold text-lg text-emeraldtext dark:text-emerald-200">Володимир</h3>
                             <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Час навчання: 1 рік</p>
@@ -267,6 +268,7 @@
                     <div class="flip-card-front spotlight-card bg-white/90 dark:bg-emerald-900/30 border border-silverborder dark:border-emerald-800/60 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
                         <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-col items-center mb-2">
+                            <!-- Фото Людмили -->
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" alt="Людмила" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-silverborder dark:border-emerald-700">
                             <h3 class="font-bold text-lg text-emeraldtext dark:text-emerald-200">Людмила</h3>
                             <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Час навчання: 1.5 роки</p>
@@ -396,7 +398,6 @@
             
             <div class="flex w-full overflow-hidden">
                 <div class="flex shrink-0 gap-6 animate-marquee-reverse group-hover:[animation-play-state:paused] w-max">
-                    <!-- Замість тексту сюди ви можете вставляти скріншоти (тег <img>) -->
                     <figure class="spotlight-card relative h-full w-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-silverborder dark:border-emerald-800/60 bg-white/80 dark:bg-emerald-900/20 p-5 backdrop-blur-md shadow-sm transition-colors"><span class="spotlight-fill"></span><span class="spotlight-ring"></span>
                         <div class="flex flex-row items-center gap-3"><img class="rounded-full" width="40" height="40" src="https://ui-avatars.com/api/?name=Дмитро&background=059669&color=fff" />
                         <div class="flex flex-col"><figcaption class="text-sm font-bold text-emeraldtext dark:text-emerald-100">Дмитро</figcaption><p class="text-xs font-medium text-darktext/60 dark:text-emerald-300/60">Консультація</p></div></div>
@@ -516,6 +517,54 @@
                 card.style.setProperty('--spotlight-y', `${e.clientY - rect.top}px`);
             });
         });
+
+        // -----------------------------------------------------
+        // НОВИЙ КОД: Анімація чисел (Number Ticker)
+        // -----------------------------------------------------
+        const animateValue = (obj, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // Математична функція для плавного сповільнення наприкінці (easeOutExpo)
+                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                obj.innerHTML = Math.floor(easeProgress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end; // щоб точно встановилось кінцеве число
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Запускаємо анімацію тільки тоді, коли блок з цифрами з'являється на екрані (скрол)
+        const statsObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // 50% блоку має бути видно, щоб почалася анімація
+        };
+
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-counter');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        // Запускаємо анімацію на 2.5 секунди
+                        animateValue(counter, 0, target, 2500); 
+                    });
+                    // Перестаємо слідкувати після того, як анімація відбулася один раз
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, statsObserverOptions);
+
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+        // -----------------------------------------------------
 
         // WebGL-шейдер (Фон)
         const canvas = document.getElementById('nebulaCanvas');

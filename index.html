@@ -2,14 +2,14 @@
 <html lang="uk" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Maryna Likarchuk — Наставник з англійської мови</title>
     <meta name="description" content="Maryna Likarchuk — TESOL/TEFL-сертифікована менторка з англійської мови. Індивідуальні заняття для дорослих: заговорити без страху помилок, у Вашому темпі та під Ваші цілі.">
     <meta name="theme-color" content="#212517">
     <link rel="canonical" href="https://likarchukmarin-sketch.github.io/english/">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23374709'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23F7F5EF'%3EM%3C/text%3E%3C/svg%3E">
 
-    <!-- Прев'ю для соцмереж (Telegram, Instagram, Facebook, LinkedIn) -->
+    <!-- Прев'ю для соцмереж -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="uk_UA">
     <meta property="og:site_name" content="Maryna Likarchuk">
@@ -25,971 +25,1097 @@
     <meta name="twitter:description" content="Англійська, у якій можна бути собою. Індивідуальні заняття для дорослих.">
     <meta name="twitter:image" content="https://likarchukmarin-sketch.github.io/english/your-photo.jpg">
 
-    <!-- Тема застосовується одразу, до малювання сторінки (без спалаху) -->
+    <!-- Тема застосовується до першого малювання (без спалаху) -->
     <script>
         (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
             try {
                 var light = localStorage.getItem('theme') === 'light';
-                var root = document.documentElement;
                 if (light) root.classList.remove('dark'); else root.classList.add('dark');
                 var m = document.querySelector('meta[name="theme-color"]');
                 if (m) m.setAttribute('content', light ? '#F7F5EF' : '#212517');
             } catch (e) {}
         })();
     </script>
+    <noscript><style>#intro{display:none!important}</style></noscript>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        warmmilk: '#F7F5EF',
-                        deepgreen: '#374709',
-                        oliveaccent: '#759242',
-                        sand: '#DED3A6',
-                        deepolive: '#212517',
-                        softdarkgreen: '#303627',
-                        warmtext: '#F2F0E7',
-                        sectext: '#D0D0C4',
-                        sage: '#B6C58E'
-                    },
-                    animation: {
-                        marquee: 'marquee 35s linear infinite',
-                        'marquee-reverse': 'marquee 35s linear infinite reverse',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(calc(-50% - 0.5rem))' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-        #nebulaCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
-        
-        :root { 
-            --spotlight-fill: rgba(55, 71, 9, 0.05); 
-            --spotlight-ring: rgba(117, 146, 66, 0.3); 
+        /* ============ ТОКЕНИ ТА ТЕМИ ============ */
+        :root {
+            --bg:#F7F5EF; --bg2:#EFEBDD; --surface:#FFFFFF; --surface2:#F3F0E4;
+            --fg:#212517; --muted:#4b513d; --line:rgba(55,71,9,.14);
+            --accent:#374709; --accent2:#759242; --onaccent:#F7F5EF;
+            --glow1:rgba(117,146,66,.30); --glow2:rgba(222,211,166,.65);
+            --shadow:0 24px 50px -26px rgba(33,37,23,.38);
+            --font-head:'Geologica','Onest',system-ui,sans-serif;
+            --font-body:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
+            --header-h:72px;
+            --ease:cubic-bezier(.2,.8,.2,1);
         }
-        .dark { 
-            --spotlight-fill: rgba(182, 197, 142, 0.08); 
-            --spotlight-ring: rgba(222, 211, 166, 0.35); 
+        .dark {
+            --bg:#212517; --bg2:#1b1f12; --surface:#2b3122; --surface2:#343b2a;
+            --fg:#F2F0E7; --muted:#c3c6b4; --line:rgba(222,211,166,.16);
+            --accent:#B6C58E; --accent2:#DED3A6; --onaccent:#212517;
+            --glow1:rgba(117,146,66,.40); --glow2:rgba(222,211,166,.13);
+            --shadow:0 28px 60px -30px rgba(0,0,0,.75);
         }
-        
-        .spotlight-card { position: relative; isolation: isolate; }
-        .spotlight-fill { pointer-events: none; position: absolute; inset: 0; z-index: -10; border-radius: inherit; opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-fill), transparent 70%); }
-        .spotlight-ring { pointer-events: none; position: absolute; inset: -1px; padding: 1px; z-index: -10; border-radius: inherit; opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-ring), transparent 70%); mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; }
-        .spotlight-card:hover .spotlight-fill, .spotlight-card:hover .spotlight-ring { opacity: 1; }
+        /* Інверсні «плити»: у темній темі — пісочні, у світлій — глибокі зелені */
+        .dark .inv {
+            --bg:#DED3A6; --bg2:#d3c88f; --surface:#EDE7C8; --surface2:#F4F0DA;
+            --fg:#212517; --muted:#454a2c; --line:rgba(33,37,23,.18);
+            --accent:#374709; --accent2:#5b7a28; --onaccent:#F7F5EF;
+            --shadow:0 28px 50px -30px rgba(33,37,23,.5);
+        }
+        html:not(.dark) .inv {
+            --bg:#263010; --bg2:#1f2810; --surface:#2f3a15; --surface2:#39461c;
+            --fg:#F2F0E7; --muted:#cfd5bb; --line:rgba(222,211,166,.2);
+            --accent:#DED3A6; --accent2:#B6C58E; --onaccent:#212517;
+            --shadow:0 28px 60px -30px rgba(0,0,0,.65);
+        }
 
-        .marquee-mask { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        /* ============ БАЗА ============ */
+        *,*::before,*::after { box-sizing:border-box; }
+        html { scroll-behavior:smooth; scroll-padding-top:5.5rem; -webkit-text-size-adjust:100%; }
+        body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:17px; line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .5s,color .5s; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        button { font:inherit; color:inherit; cursor:pointer; background:none; border:0; padding:0; }
+        h1,h2,h3 { font-family:var(--font-head); font-weight:600; letter-spacing:-.025em; line-height:1.08; margin:0; }
+        p { margin:0; }
+        ::selection { background:var(--accent); color:var(--onaccent); }
+        .container { width:min(1180px,100% - 3rem); margin-inline:auto; }
+        .sect { position:relative; padding:clamp(4.5rem,9vw,8rem) 0; }
+        .muted { color:var(--muted); }
+        :focus-visible { outline:2px solid var(--accent2); outline-offset:3px; border-radius:6px; }
 
-        .tabular-nums { font-variant-numeric: tabular-nums; }
-        
-        /* Плавний анімований відкривач details */
-        details summary::-webkit-details-marker { display: none; }
-        details[open] summary .toggle-icon { transform: rotate(45deg); }
+        .kicker { display:inline-flex; align-items:center; gap:.75rem; font-size:.74rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
+        .kicker::before { content:""; width:2.2rem; height:1px; background:currentColor; transform-origin:left; transition:transform .9s var(--ease) .25s; }
+        .js .kicker::before { transform:scaleX(0); }
+        .js .kicker.in::before { transform:scaleX(1); }
+        .h2 { font-size:clamp(2rem,4.6vw,3.6rem); margin:1rem 0 1.1rem; }
+        .sec-head { max-width:46rem; margin-bottom:clamp(2.2rem,5vw,4rem); }
+        .sec-head p { color:var(--muted); font-size:1.05rem; }
 
-        /* Плавний перехід до розділів з урахуванням фіксованої шапки */
-        html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+        /* ============ ПОЯВА ПРИ СКРОЛІ ============ */
+        .js .rv { opacity:0; transform:translateY(30px); transition:opacity .95s var(--ease),transform .95s var(--ease); transition-delay:calc(var(--d,0) * 90ms); }
+        .js .rv.l { transform:translateX(-40px); }
+        .js .rv.r { transform:translateX(40px); }
+        .js .rv.s { transform:scale(.93) translateY(24px); }
+        .js .rv.in { opacity:1; transform:none; }
+        .js .split .w { display:inline-block; overflow:hidden; vertical-align:top; padding:.1em .03em .16em; margin:-.1em -.03em -.16em; }
+        .js .split .wi { display:inline-block; transform:translateY(112%); opacity:0; filter:blur(6px); transition:transform 1s var(--ease),opacity 1s var(--ease),filter 1s var(--ease); transition-delay:calc(var(--i) * 55ms); }
+        .js .split.in .wi { transform:none; opacity:1; filter:none; }
 
-        /* Підказка-«смикання» шнурка: короткий рух після інтро */
-        @keyframes cordNudge { 0%, 100% { height: 64px; } 35% { height: 88px; } 65% { height: 72px; } }
-        .cord-nudge #cordLine { animation: cordNudge 1.3s ease-in-out 0.4s 3; }
+        .accent { color:var(--accent); font-style:normal; position:relative; white-space:nowrap; }
+        .js .accent .wi { background:linear-gradient(100deg,var(--accent) 0%,var(--accent2) 45%,var(--accent) 90%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 7s linear infinite; }
+        .accent::after { content:""; position:absolute; left:0; right:0; bottom:-.08em; height:.2em; background:var(--accent2); opacity:.7; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 7c10-8 20 6 30-1s20-6 30 0 20 7 30 0 20-5 30 1' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 7c10-8 20 6 30-1s20-6 30 0 20 7 30 0 20-5 30 1' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat; transform-origin:left; }
+        .js .accent::after { transform:scaleX(0); transition:transform 1s var(--ease) .9s; }
+        .js .split.in .accent::after { transform:scaleX(1); }
+        @keyframes shine { to { background-position:-220% 0; } }
+        @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
 
-        /* Поява мобільного меню */
-        @keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-        .menu-open { animation: menuIn 0.25s ease-out; }
+        /* ============ КНОПКИ ============ */
+        .btn { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.6rem; padding:.95rem 1.7rem; border-radius:999px; font-weight:600; font-size:.97rem; line-height:1; overflow:hidden; isolation:isolate; white-space:nowrap; transition:box-shadow .3s,background-color .3s,color .3s,border-color .3s,translate .25s var(--ease); }
+        .btn-primary { background:var(--accent); color:var(--onaccent); box-shadow:0 16px 32px -16px color-mix(in srgb,var(--accent) 85%,transparent); }
+        .btn-primary:hover { box-shadow:0 20px 40px -14px color-mix(in srgb,var(--accent) 90%,transparent); }
+        .btn-ghost { border:1px solid var(--line); background:color-mix(in srgb,var(--surface) 62%,transparent); color:var(--fg); }
+        .btn-ghost:hover { border-color:var(--accent2); }
+        .btn-sm { padding:.7rem 1.25rem; font-size:.88rem; }
+        .btn-lg { padding:1.2rem 2.2rem; font-size:1.05rem; }
+        .btn .rip { position:absolute; border-radius:50%; background:currentColor; opacity:.25; transform:scale(0); animation:rip .75s ease-out forwards; pointer-events:none; z-index:-1; }
+        @keyframes rip { to { transform:scale(1); opacity:0; } }
 
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .cord-nudge #cordLine, .menu-open { animation: none; }
+        /* ============ ФОН: СВІТІННЯ ТА СІТКА ============ */
+        .bg { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+        .blob { position:absolute; width:62vmax; height:62vmax; border-radius:50%; background:radial-gradient(circle at center,var(--g) 0,transparent 66%); will-change:transform; }
+        .b1 { --g:var(--glow1); top:-24vmax; left:-18vmax; animation:drift1 28s ease-in-out infinite alternate; }
+        .b2 { --g:var(--glow2); right:-26vmax; top:22vh; animation:drift2 34s ease-in-out infinite alternate; }
+        .b3 { --g:var(--glow1); bottom:-34vmax; left:12vw; animation:drift1 40s ease-in-out infinite alternate-reverse; }
+        @keyframes drift1 { to { transform:translate(8vmax,6vmax) scale(1.12); } }
+        @keyframes drift2 { to { transform:translate(-7vmax,-5vmax) scale(.92); } }
+        .dots { position:absolute; inset:0; background-image:radial-gradient(color-mix(in srgb,var(--fg) 14%,transparent) 1px,transparent 1.3px); background-size:26px 26px; -webkit-mask-image:radial-gradient(ellipse at 50% 25%,#000 0,transparent 72%); mask-image:radial-gradient(ellipse at 50% 25%,#000 0,transparent 72%); opacity:.55; }
+        #liquid { position:fixed; inset:0; width:100%; height:100%; z-index:5; pointer-events:none; }
+        @media (hover:none) { #liquid { display:none; } }
+        .wave { position:fixed; width:18px; height:18px; margin:-9px 0 0 -9px; border-radius:50%; border:1.5px solid var(--accent2); pointer-events:none; z-index:9998; animation:wave 1s var(--ease) forwards; }
+        .wave.w2 { animation-delay:.12s; opacity:.6; }
+        .wave.sm { position:absolute; z-index:0; width:14px; height:14px; margin:-7px 0 0 -7px; animation-duration:1.5s; border-width:1px; }
+        @keyframes wave { 0% { transform:scale(.3); opacity:.9; } 100% { transform:scale(8); opacity:0; } }
+        #progress { position:fixed; top:0; left:0; right:0; height:2px; z-index:70; transform-origin:left; transform:scaleX(0); background:linear-gradient(90deg,var(--accent2),var(--accent)); }
+
+        /* ============ ЗАСТАВКА З КИЦЕЮ ============ */
+        #intro { position:fixed; inset:0; z-index:300; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.4rem; background:var(--bg); transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1),filter .8s,visibility 0s .8s; animation:introFailsafe .01s linear 6s forwards; }
+        #intro.hide { opacity:0; transform:scale(1.04); filter:blur(10px); visibility:hidden; pointer-events:none; }
+        @keyframes introFailsafe { to { opacity:0; visibility:hidden; pointer-events:none; } }
+        .intro-card { background:#fff; border-radius:30px; padding:16px; box-shadow:0 30px 70px -30px rgba(0,0,0,.5); animation:float 4s ease-in-out infinite; }
+        .intro-card img { width:clamp(190px,58vw,280px); height:auto; mix-blend-mode:multiply; }
+        .intro-text { font-family:var(--font-head); font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); }
+        .intro-bar { width:min(220px,50vw); height:3px; border-radius:3px; background:var(--line); overflow:hidden; }
+        .intro-bar i { display:block; height:100%; background:var(--accent); transform-origin:left; transform:scaleX(0); animation:bar 1.4s cubic-bezier(.4,0,.2,1) forwards; }
+        @keyframes bar { to { transform:scaleX(1); } }
+
+        /* ============ ШНУРОК-ПЕРЕМИКАЧ ТЕМИ ============ */
+        #pullCord { position:fixed; top:0; right:1.5rem; z-index:100; display:flex; flex-direction:column; align-items:center; cursor:grab; user-select:none; -webkit-user-select:none; touch-action:none; outline:none; -webkit-tap-highlight-color:transparent; }
+        @media (min-width:640px) { #pullCord { right:3rem; } }
+        #cordLine { width:2px; height:64px; background:var(--accent); transition:background-color .5s; }
+        #cordHandle { width:44px; height:44px; margin-top:-4px; border-radius:50%; border:2px solid var(--accent); background:var(--bg); color:var(--accent); box-shadow:0 10px 22px -8px rgba(0,0,0,.5); display:grid; place-items:center; transition:transform .3s,background-color .5s; }
+        #pullCord:hover #cordHandle { transform:scale(1.08); }
+        #pullCord:active #cordHandle { transform:scale(.95); }
+        #pullCord:focus-visible #cordHandle { outline:2px solid var(--accent2); outline-offset:3px; }
+        .cord-label { margin-top:.5rem; padding:.25rem .65rem; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:color-mix(in srgb,var(--bg) 88%,transparent); border:1px solid var(--line); color:var(--accent); white-space:nowrap; }
+        .ic-sun { display:none; } .dark .ic-sun { display:block; } .dark .ic-moon { display:none; }
+        @keyframes cordNudge { 0%,100% { height:64px; } 35% { height:88px; } 65% { height:72px; } }
+        .cord-nudge #cordLine { animation:cordNudge 1.3s ease-in-out .4s 3; }
+        ::view-transition-old(root),::view-transition-new(root) { animation:none; mix-blend-mode:normal; }
+        ::view-transition-old(root) { z-index:1; } ::view-transition-new(root) { z-index:2; }
+
+        /* ============ ШАПКА ТА МЕНЮ ============ */
+        .hdr { position:fixed; top:0; left:0; right:0; z-index:50; transition:background-color .4s,border-color .4s,backdrop-filter .4s; border-bottom:1px solid transparent; }
+        .hdr.scrolled { background:color-mix(in srgb,var(--bg) 80%,transparent); -webkit-backdrop-filter:blur(16px) saturate(1.2); backdrop-filter:blur(16px) saturate(1.2); border-color:var(--line); }
+        .hdr-in { height:var(--header-h); display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-right:clamp(3.75rem,6vw,5rem); }
+        .logo { font-family:var(--font-head); font-weight:600; font-size:1.2rem; letter-spacing:-.02em; white-space:nowrap; }
+        .logo span { color:var(--accent); }
+        .nav { display:flex; gap:clamp(1rem,2vw,2rem); font-size:.9rem; font-weight:500; }
+        .nav a { position:relative; padding:.3rem 0; }
+        .nav a::after { content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--accent2); transform:scaleX(0); transform-origin:right; transition:transform .4s var(--ease); }
+        .nav a:hover::after { transform:scaleX(1); transform-origin:left; }
+        .hdr-right { display:flex; align-items:center; gap:.75rem; }
+        .burger { display:none; width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:color-mix(in srgb,var(--surface) 70%,transparent); position:relative; }
+        .burger span { position:absolute; left:12px; right:12px; height:2px; border-radius:2px; background:var(--fg); transition:transform .35s var(--ease),top .35s var(--ease); }
+        .burger span:nth-child(1) { top:17px; } .burger span:nth-child(2) { top:25px; }
+        .burger[aria-expanded="true"] span:nth-child(1) { top:21px; transform:rotate(45deg); }
+        .burger[aria-expanded="true"] span:nth-child(2) { top:21px; transform:rotate(-45deg); }
+        @media (max-width:1099px) { .hdr-cta { display:none; } }
+        @media (max-width:899px) { .burger { display:block; } .nav { display:none; } }
+        .mmenu { position:fixed; inset:0; z-index:45; display:flex; flex-direction:column; justify-content:center; padding:6rem 4.75rem 3rem 1.75rem; background:color-mix(in srgb,var(--bg) 95%,transparent); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); opacity:0; visibility:hidden; transition:opacity .4s,visibility 0s .4s; }
+        .mmenu.open { opacity:1; visibility:visible; transition-delay:0s; }
+        .mmenu a.ml { font-family:var(--font-head); font-weight:600; font-size:clamp(1.8rem,8vw,2.6rem); letter-spacing:-.02em; padding:.4rem 0; border-bottom:1px solid var(--line); opacity:0; transform:translateY(18px); transition:opacity .5s var(--ease),transform .5s var(--ease); transition-delay:calc(var(--i) * 60ms + 100ms); }
+        .mmenu.open a.ml { opacity:1; transform:none; }
+        .mmenu .btn { margin-top:2rem; align-self:flex-start; }
+        @media (min-width:900px) { .mmenu { display:none; } }
+
+        /* ============ КАРТКИ, СПОТЛАЙТ ============ */
+        .card { position:relative; border-radius:30px; padding:clamp(1.5rem,3vw,2.4rem); background:var(--surface); border:1px solid var(--line); transition:translate .45s var(--ease),box-shadow .45s; }
+        .card:hover { translate:0 -4px; box-shadow:var(--shadow); }
+        .card h3 { font-size:clamp(1.3rem,2.3vw,1.85rem); margin:1rem 0 .7rem; }
+        .card p { color:var(--muted); }
+        .card p + p { margin-top:.8rem; }
+        .fill { background:var(--accent); color:var(--onaccent); border-color:transparent; --muted:color-mix(in srgb,var(--onaccent) 80%,transparent); --sp1:var(--onaccent); --sp2:var(--onaccent); --line:color-mix(in srgb,var(--onaccent) 25%,transparent); }
+        .spot { position:relative; isolation:isolate; overflow:hidden; --sp1:var(--accent); --sp2:var(--accent2); }
+        .spot::before { content:""; position:absolute; inset:0; z-index:-1; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .4s; background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--sp1) 16%,transparent),transparent 70%); }
+        .spot::after { content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none; opacity:0; transition:opacity .4s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--sp2) 75%,transparent),transparent 70%); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0); mask-composite:exclude; }
+        .spot:hover::before,.spot:hover::after { opacity:1; }
+        .bento { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:1.25rem; }
+        .cell { display:flex; }
+        .cell > .card { flex:1; }
+        .tilt3d { perspective:1100px; }
+        .pwrap { transition:transform .6s var(--ease); transform-style:preserve-3d; will-change:transform; }
+        .ghost-num { font-family:var(--font-head); font-weight:700; line-height:.85; font-size:clamp(4.5rem,10vw,8rem); color:transparent; -webkit-text-stroke:1.5px currentColor; opacity:.45; letter-spacing:-.04em; }
+        .deco { position:absolute; pointer-events:none; z-index:-1; }
+        .rings { right:-60px; bottom:-60px; width:260px; height:260px; border-radius:50%; background:repeating-radial-gradient(circle,transparent 0 22px,color-mix(in srgb,var(--accent2) 35%,transparent) 22px 23px); -webkit-mask-image:radial-gradient(circle,#000 30%,transparent 72%); mask-image:radial-gradient(circle,#000 30%,transparent 72%); }
+        .sparkles { right:1.5rem; top:1.5rem; font-size:1.6rem; color:var(--accent2); opacity:.7; }
+
+        /* ============ ПЛИТИ (ІНВЕРСНІ СЕКЦІЇ) ============ */
+        .slab { margin:clamp(.5rem,2vw,1.5rem) clamp(.5rem,1.5vw,1.25rem); border-radius:clamp(28px,4.5vw,56px); background:var(--bg); color:var(--fg); overflow:hidden; overflow:clip; isolation:isolate; transition:background-color .5s,color .5s; }
+        .slab::before { content:""; position:absolute; z-index:-1; width:62%; aspect-ratio:1; right:-16%; top:-30%; border-radius:50%; pointer-events:none; background:radial-gradient(circle,color-mix(in srgb,var(--accent2) 34%,transparent),transparent 66%); }
+        .slab::after { content:""; position:absolute; z-index:-1; width:50%; aspect-ratio:1; left:-18%; bottom:-30%; border-radius:50%; pointer-events:none; background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 66%); }
+
+        /* ============ ГЕРОЙ ============ */
+        .hero { min-height:100svh; display:flex; align-items:center; padding:calc(var(--header-h) + 1.5rem) 0 4.5rem; position:relative; }
+        .hero-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(2rem,5vw,5rem); align-items:center; }
+        .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.5rem 1rem; border-radius:999px; border:1px solid var(--line); background:color-mix(in srgb,var(--surface) 70%,transparent); font-size:.78rem; font-weight:600; letter-spacing:.03em; color:var(--accent); }
+        .hero-title { font-size:clamp(2.7rem,6.6vw,5.6rem); margin:1.5rem 0 1.6rem; }
+        .lead { font-size:clamp(1.02rem,1.5vw,1.2rem); color:var(--muted); max-width:34em; }
+        .cta-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.2rem; }
+        .stage { position:relative; width:min(380px,100%); margin-inline:auto; perspective:1100px; }
+        .pcard { border-radius:34px; padding:2.2rem 2rem; display:flex; flex-direction:column; align-items:center; text-align:center; background:color-mix(in srgb,var(--surface) 93%,transparent); border:1px solid var(--line); box-shadow:var(--shadow); transform-style:preserve-3d; }
+        .pcard.spot { overflow:visible; isolation:auto; }
+        .avatar { position:relative; width:128px; height:128px; border-radius:50%; padding:4px; margin-bottom:1.3rem; border:2px solid color-mix(in srgb,var(--accent2) 55%,transparent); transform:translateZ(60px); }
+        .avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+        .dot { position:absolute; right:6px; bottom:6px; width:20px; height:20px; border-radius:50%; background:var(--accent2); border:4px solid var(--surface); }
+        .dot::after { content:""; position:absolute; inset:-4px; border-radius:50%; background:var(--accent2); animation:ping 2s ease-out infinite; z-index:-1; }
+        @keyframes ping { 0% { transform:scale(.8); opacity:.7; } 80%,100% { transform:scale(2.2); opacity:0; } }
+        .pname { font-size:1.65rem; transform:translateZ(50px); }
+        .prole { font-size:.9rem; font-weight:600; color:var(--accent); margin:.2rem 0 1rem; transform:translateZ(40px); }
+        .pdesc { font-size:.93rem; color:var(--muted); margin-bottom:1.6rem; transform:translateZ(30px); }
+        .pcard .btn { width:100%; transform:translateZ(45px); }
+        .chip { position:absolute; padding:.5rem .95rem; border-radius:999px; background:var(--surface); border:1px solid var(--line); font-size:.8rem; font-weight:600; box-shadow:var(--shadow); white-space:nowrap; animation:float 5s ease-in-out infinite; z-index:2; }
+        .chip1 { top:5%; left:-15%; } .chip2 { top:46%; right:-17%; animation-delay:-1.6s; } .chip3 { bottom:3%; left:-9%; animation-delay:-3.2s; }
+        @media (max-width:560px) { .chip1 { left:-6px; } .chip2 { right:-6px; } .chip3 { left:6px; } }
+        .cue { position:absolute; left:50%; bottom:1.4rem; width:26px; height:42px; margin-left:-13px; border:1.5px solid var(--line); border-radius:20px; }
+        .cue::after { content:""; position:absolute; left:50%; top:8px; width:3px; height:8px; margin-left:-1.5px; border-radius:3px; background:var(--accent2); animation:cue 1.8s ease-in-out infinite; }
+        @keyframes cue { 0% { transform:translateY(0); opacity:1; } 80% { transform:translateY(14px); opacity:0; } 100% { opacity:0; } }
+
+        /* ============ БІГУЧИЙ РЯДОК ============ */
+        .marquee { overflow:hidden; padding:1.5rem 0; border-block:1px solid var(--line); -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+        .track { display:flex; width:max-content; animation:scroll 46s linear infinite; }
+        .marquee:hover .track { animation-play-state:paused; }
+        .track span { font-family:var(--font-head); font-weight:600; font-size:clamp(1.8rem,4.6vw,3.6rem); letter-spacing:-.03em; white-space:nowrap; padding-right:2.2rem; display:inline-flex; align-items:center; gap:2.2rem; }
+        .track span:nth-child(even) { color:transparent; -webkit-text-stroke:1.2px var(--fg); }
+        .track span::after { content:"✦"; font-size:.5em; color:var(--accent2); -webkit-text-stroke:0; }
+        @keyframes scroll { to { transform:translateX(-50%); } }
+
+        /* ============ СТАТИСТИКА ============ */
+        .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+        .stat { padding:1rem clamp(1rem,3vw,2.5rem); border-left:1px solid var(--line); }
+        .stat:first-child { border-left:0; padding-left:0; }
+        .num { font-family:var(--font-head); font-weight:600; font-size:clamp(2.8rem,6.2vw,5.4rem); letter-spacing:-.04em; line-height:1; display:flex; align-items:baseline; flex-wrap:wrap; gap:.15em; font-variant-numeric:tabular-nums; }
+        .num small { font-size:.32em; font-weight:500; letter-spacing:0; color:var(--accent); }
+        .num .u { font-size:.42em; font-weight:500; letter-spacing:-.01em; }
+        .stat p { margin-top:.9rem; color:var(--muted); font-weight:500; }
+
+        /* ============ ПІДХІД ============ */
+        .approach-head { display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem,5vw,5rem); align-items:end; margin-bottom:clamp(2.2rem,5vw,4rem); }
+        .approach-head .h2 { margin-bottom:0; }
+        .approach-head p { color:var(--muted); font-size:1.08rem; }
+        .a1 { grid-column:span 5; grid-row:span 2; } .a2 { grid-column:span 7; } .a3 { grid-column:span 7; }
+        .a1 .card { display:flex; flex-direction:column; justify-content:space-between; min-height:380px; }
+        .a1 h3 { font-size:clamp(1.6rem,3vw,2.4rem); }
+
+        /* ============ ПРО МЕНЕ ============ */
+        .about-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(2rem,5vw,4.5rem); align-items:start; }
+        .portrait { position:sticky; top:6.5rem; border-radius:34px; overflow:hidden; aspect-ratio:4/5; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow); }
+        .portrait img { width:100%; height:100%; object-fit:cover; object-position:center 20%; transform:scale(1.06); transition:transform 1.4s var(--ease); }
+        .portrait:hover img { transform:scale(1.12); }
+        .portrait::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(20,24,12,.82)); }
+        .pcap { position:absolute; left:1.5rem; right:1.5rem; bottom:1.4rem; z-index:2; color:#F2F0E7; }
+        .pcap b { display:block; font-family:var(--font-head); font-size:1.4rem; font-weight:600; }
+        .pcap span { font-size:.85rem; opacity:.85; }
+        .about-list { display:grid; gap:.9rem; }
+        .acc { border-radius:26px; background:var(--surface); border:1px solid var(--line); transition:box-shadow .4s,border-color .4s; }
+        .acc:nth-child(even) { margin-left:clamp(0rem,3vw,2.5rem); }
+        .acc.open { box-shadow:var(--shadow); border-color:color-mix(in srgb,var(--accent2) 55%,var(--line)); }
+        .acc-head { width:100%; display:flex; align-items:center; gap:1rem; padding:1.1rem 1.3rem; text-align:left; }
+        .acc-ic { flex:none; width:2.7rem; height:2.7rem; border-radius:50%; display:grid; place-items:center; background:var(--bg2); font-size:1.25rem; }
+        .acc-t { flex:1; font-family:var(--font-head); font-weight:500; font-size:1.1rem; letter-spacing:-.01em; }
+        .acc-plus { flex:none; position:relative; width:1.6rem; height:1.6rem; }
+        .acc-plus::before,.acc-plus::after { content:""; position:absolute; left:50%; top:50%; width:14px; height:2px; margin:-1px 0 0 -7px; background:var(--accent); border-radius:2px; transition:transform .4s var(--ease); }
+        .acc-plus::after { transform:rotate(90deg); }
+        .acc.open .acc-plus::after { transform:rotate(0); }
+        .acc-body { display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease); }
+        .acc.open .acc-body { grid-template-rows:1fr; }
+        .acc-body > div { overflow:hidden; }
+        .acc-body p { padding:0 1.5rem 1.35rem 5.1rem; color:var(--muted); font-size:.97rem; }
+
+        /* ============ НАПРЯМКИ (СТОПКА КАРТОК) ============ */
+        .stack { display:grid; gap:1.5rem; }
+        .scard { position:sticky; top:calc(var(--header-h) + 1rem + var(--n) * 16px); display:grid; grid-template-columns:auto 1fr; gap:clamp(1.2rem,4vw,3.5rem); align-items:center; border-radius:34px; padding:clamp(1.6rem,4vw,3.4rem); min-height:clamp(260px,42vh,380px); border:1px solid var(--line); box-shadow:0 -18px 40px -26px rgba(0,0,0,.35); }
+        .scard.s1 { background:var(--accent); color:var(--onaccent); --muted:color-mix(in srgb,var(--onaccent) 80%,transparent); border-color:transparent; }
+        .scard.s2 { background:var(--accent2); color:#212517; --muted:#3a3f26; border-color:transparent; }
+        .scard.s3 { background:var(--surface); }
+        .scard .big { font-family:var(--font-head); font-weight:700; line-height:.85; font-size:clamp(3.6rem,9vw,7.5rem); letter-spacing:-.05em; opacity:.35; }
+        .scard h3 { font-size:clamp(1.55rem,3.2vw,2.5rem); margin-bottom:.9rem; }
+        .scard p { color:var(--muted); max-width:36em; }
+        .chips { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.2rem; }
+        .chips span { padding:.5rem .95rem; border-radius:999px; font-size:.9rem; font-weight:500; background:color-mix(in srgb,#212517 10%,transparent); border:1px solid color-mix(in srgb,#212517 18%,transparent); }
+
+        /* ============ ФОРМАТИ ============ */
+        .f1 { grid-column:span 7; grid-row:span 2; } .f2 { grid-column:span 5; } .f3 { grid-column:span 5; } .f4 { grid-column:span 12; }
+        .f1 .card { display:flex; flex-direction:column; justify-content:space-between; gap:1.5rem; }
+        .tag { display:inline-block; padding:.3rem .8rem; border-radius:999px; font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; background:color-mix(in srgb,var(--onaccent) 18%,transparent); }
+        .emoji { font-size:2.1rem; line-height:1; }
+        .ul { list-style:none; margin:1.2rem 0 0; padding:0; }
+        .ul li { display:flex; gap:.7rem; margin:.65rem 0; }
+        .ul li::before { content:"✦"; flex:none; color:var(--accent2); }
+        .fill .ul li::before { color:var(--onaccent); opacity:.65; }
+        .f4 .card { display:flex; align-items:center; justify-content:space-between; gap:2rem; border-style:dashed; border-color:color-mix(in srgb,var(--accent) 45%,transparent); background:color-mix(in srgb,var(--surface) 55%,transparent); }
+        .f4 .tag { background:var(--accent); color:var(--onaccent); }
+        .f4 h3 { margin-top:.8rem; }
+
+        /* ============ КЕЙСИ ============ */
+        .tabs { display:grid; grid-template-columns:minmax(240px,320px) 1fr; gap:1.5rem; align-items:start; }
+        .tablist { display:flex; flex-direction:column; gap:.75rem; }
+        .tab { display:flex; align-items:center; gap:1rem; width:100%; text-align:left; padding:1rem 1.2rem; border-radius:24px; background:var(--surface); border:1px solid var(--line); transition:background-color .35s,color .35s,translate .35s var(--ease),border-color .35s; }
+        .tab:hover { translate:4px 0; border-color:var(--accent2); }
+        .tab[aria-selected="true"] { background:var(--accent); color:var(--onaccent); border-color:transparent; translate:8px 0; }
+        .av { flex:none; width:3rem; height:3rem; border-radius:50%; display:grid; place-items:center; font-family:var(--font-head); font-weight:600; font-size:1.2rem; background:var(--bg2); color:var(--accent); transition:background-color .35s,color .35s; }
+        .tab[aria-selected="true"] .av { background:color-mix(in srgb,var(--onaccent) 20%,transparent); color:var(--onaccent); }
+        .tab b { display:block; font-family:var(--font-head); font-weight:500; font-size:1.05rem; line-height:1.2; }
+        .tab small { display:block; font-size:.8rem; opacity:.75; margin-top:.15rem; }
+        .panel { padding:clamp(1.5rem,3.5vw,2.8rem); }
+        .panel:not([hidden]) { animation:panelIn .6s var(--ease); }
+        @keyframes panelIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+        .panel-top { display:flex; align-items:center; gap:1rem; margin-bottom:1.8rem; }
+        .panel-top .av { width:3.6rem; height:3.6rem; background:var(--accent); color:var(--onaccent); }
+        .panel-top h3 { margin:0; font-size:clamp(1.4rem,2.6vw,2rem); }
+        .panel-top p { font-size:.9rem; margin:0; }
+        .steps { display:grid; gap:1.5rem; position:relative; padding-left:2rem; }
+        .steps::before { content:""; position:absolute; left:.45rem; top:.5rem; bottom:.5rem; width:2px; background:linear-gradient(var(--accent2),var(--accent)); opacity:.5; }
+        .step { position:relative; }
+        .step::before { content:""; position:absolute; left:-1.85rem; top:.4rem; width:.9rem; height:.9rem; border-radius:50%; background:var(--surface); border:2px solid var(--accent); }
+        .step:last-child::before { background:var(--accent); }
+        .step b { display:block; font-weight:600; color:var(--accent); margin-bottom:.2rem; }
+        .step p { color:var(--muted); }
+        .story { margin-top:1.8rem; border-top:1px solid var(--line); padding-top:1.2rem; }
+        .story summary { cursor:pointer; font-weight:600; color:var(--accent); list-style:none; display:inline-flex; gap:.5rem; }
+        .story summary::-webkit-details-marker { display:none; }
+        .story p { margin-top:.9rem; font-family:var(--font-head); font-weight:400; font-size:1.12rem; line-height:1.5; color:var(--fg); }
+        .footnote { margin-top:1.5rem; font-size:.85rem; color:var(--muted); }
+
+        /* ============ ВІДГУКИ ТА КОНТАКТИ ============ */
+        .rev { text-align:center; max-width:46rem; margin-inline:auto; }
+        .rev .kicker { justify-content:center; }
+        .rev-note { margin-top:2rem; padding:1.4rem; border:1.5px dashed color-mix(in srgb,var(--accent) 45%,transparent); border-radius:26px; font-size:.82rem; font-family:ui-monospace,'SF Mono',Menlo,monospace; color:var(--muted); }
+        .cta-wrap { position:relative; text-align:center; padding:clamp(1rem,3vw,2rem) 0; }
+        .cta-wrap .h2 { font-size:clamp(2.4rem,6.6vw,5.4rem); margin-bottom:1.4rem; }
+        .cta-wrap p { max-width:34rem; margin:0 auto 2.4rem; color:var(--muted); font-size:1.1rem; }
+        .cta-btns { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; }
+        .foot { padding:2.2rem 0 3rem; text-align:center; color:var(--muted); font-size:.9rem; }
+
+        /* ============ АДАПТИВНІСТЬ ============ */
+        @media (max-width:899px) {
+            .hero-grid,.approach-head,.about-grid,.tabs { grid-template-columns:1fr; }
+            .hero { align-items:flex-start; }
+            .stage { margin-top:1rem; }
+            .portrait { position:relative; top:0; aspect-ratio:4/4.2; max-width:420px; }
+            .a1,.a2,.a3,.f1,.f2,.f3,.f4 { grid-column:1 / -1; grid-row:auto; }
+            .a1 .card { min-height:280px; }
+            .acc:nth-child(even) { margin-left:0; }
+            .tablist { flex-direction:row; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:.5rem; margin-inline:-1.5rem; padding-inline:1.5rem; scrollbar-width:none; }
+            .tablist::-webkit-scrollbar { display:none; }
+            .tab { flex:none; width:auto; min-width:210px; scroll-snap-align:start; }
+            .tab:hover,.tab[aria-selected="true"] { translate:0 0; }
+            .f4 .card { flex-direction:column; align-items:flex-start; }
+        }
+        @media (max-width:760px) {
+            .stats-grid { grid-template-columns:1fr; }
+            .stat { border-left:0; border-top:1px solid var(--line); padding:1.4rem 0; }
+            .stat:first-child { border-top:0; padding-top:0; }
+            .scard { grid-template-columns:1fr; min-height:0; }
+            .scard .big { font-size:3.6rem; }
+            .cue { display:none; }
+            .acc-body p { padding-left:1.5rem; }
+        }
+        @media (prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto; }
+            *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+            .js .rv,.js .split .wi { opacity:1; transform:none; filter:none; }
+            .js .accent::after { transform:none; }
+            .track { animation:none; }
         }
     </style>
 </head>
-<body class="bg-warmmilk text-deepolive dark:bg-deepolive dark:text-warmtext transition-colors duration-500 selection:bg-deepgreen selection:text-warmmilk dark:selection:bg-sand dark:selection:text-deepolive">
+<body>
 
-    <!-- ІНТРО / ЕКРАН ЗАВАНТАЖЕННЯ З КИЦЕЮ -->
-    <div id="introScreen" role="status" aria-label="Завантаження" class="fixed inset-0 z-[200] bg-warmmilk dark:bg-deepolive flex flex-col items-center justify-center transition-all duration-700 ease-in-out">
-        <div class="flex flex-col items-center max-w-sm px-6 text-center">
-            <div class="bg-white rounded-3xl shadow-xl p-4 mb-6">
-                <img src="завантаження.gif" alt="Завантаження..." class="w-56 sm:w-72 h-auto object-contain mix-blend-multiply" />
-            </div>
-            <p class="font-mono text-xs uppercase tracking-[0.28em] text-deepgreen dark:text-sage animate-pulse">
-                Готуємо найкраще для вас...
-            </p>
+    <!-- ЗАСТАВКА З КИЦЕЮ -->
+    <div id="intro" role="status" aria-label="Завантаження">
+        <div class="intro-card">
+            <img src="завантаження.gif" alt="Завантаження...">
         </div>
+        <p class="intro-text">Готуємо найкраще для вас...</p>
+        <div class="intro-bar"><i></i></div>
     </div>
 
-    <!-- Інтерактивний фон -->
-    <canvas id="nebulaCanvas"></canvas>
+    <!-- ФОН: світіння, сітка, рідкий курсор -->
+    <div class="bg" aria-hidden="true">
+        <i class="blob b1" data-bg="0.05"></i>
+        <i class="blob b2" data-bg="-0.04"></i>
+        <i class="blob b3" data-bg="0.07"></i>
+        <div class="dots"></div>
+    </div>
+    <canvas id="liquid" aria-hidden="true"></canvas>
+    <div id="progress" aria-hidden="true"></div>
 
     <!-- ШНУРОК-ПЕРЕМИКАЧ ТЕМИ (потягни або торкнись) -->
-    <div id="pullCord" role="button" tabindex="0" aria-label="Перемкнути тему: світла або темна" class="fixed top-0 right-6 sm:right-12 z-[100] flex flex-col items-center cursor-grab select-none group focus:outline-none" style="touch-action: none;">
-        <div id="cordLine" class="w-[2px] h-16 bg-deepgreen dark:bg-sage transition-colors duration-500"></div>
-        <div id="cordHandle" class="w-11 h-11 border-2 border-deepgreen dark:border-sage rounded-full bg-warmmilk dark:bg-deepolive -mt-1 shadow-lg transition-transform duration-300 flex items-center justify-center group-hover:scale-110 group-active:scale-95 group-focus-visible:ring-2 group-focus-visible:ring-oliveaccent">
-            <!-- Сонце: видно в темній темі (натяк «увімкнути світло») -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden dark:block text-sage" aria-hidden="true">
-                <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
-            </svg>
-            <!-- Місяць: видно у світлій темі -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="block dark:hidden text-deepgreen" aria-hidden="true">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-            </svg>
+    <div id="pullCord" role="button" tabindex="0" aria-label="Перемкнути тему: світла або темна">
+        <div id="cordLine"></div>
+        <div id="cordHandle">
+            <svg class="ic-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg class="ic-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
         </div>
-        <span class="mt-2 px-2.5 py-1 rounded-full bg-warmmilk/90 dark:bg-deepolive/90 border border-sand dark:border-sage/30 text-[11px] font-bold uppercase tracking-wider text-deepgreen dark:text-sage shadow-sm whitespace-nowrap">Тема ↓</span>
+        <span class="cord-label">Тема ↓</span>
     </div>
 
-    <!-- Навігація -->
-    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 bg-warmmilk/90 dark:bg-deepolive/80 backdrop-blur-md border-b border-sand/50 dark:border-softdarkgreen transition-colors duration-500">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-['Playfair_Display'] text-lg sm:text-xl font-bold tracking-tight text-deepolive dark:text-warmtext transition-colors">
-                Maryna <span class="text-deepgreen dark:text-sage">Likarchuk</span>
-            </div>
-            <nav class="hidden md:flex items-center space-x-7 text-sm font-medium mr-12" aria-label="Головне меню">
-                <a href="#approach" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Підхід</a>
-                <a href="#about" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Про мене</a>
-                <a href="#help" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">З чим допоможу</a>
-                <a href="#formats" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Формати</a>
-                <a href="#cases" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Кейси</a>
-                <a href="#reviews" class="text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Відгуки</a>
+    <!-- ШАПКА -->
+    <header id="siteHeader" class="hdr">
+        <div class="container hdr-in">
+            <a href="#top" class="logo">Maryna <span>Likarchuk</span></a>
+            <nav class="nav" aria-label="Головне меню">
+                <a href="#approach">Підхід</a>
+                <a href="#about">Про мене</a>
+                <a href="#help">З чим допоможу</a>
+                <a href="#formats">Формати</a>
+                <a href="#cases">Кейси</a>
+                <a href="#reviews">Відгуки</a>
             </nav>
-            <div class="flex items-center gap-3 pr-14 sm:pr-20">
-                <a href="#contact" class="hidden sm:inline-block bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md">Обговорити заняття ↗</a>
-                <!-- Гамбургер (лише на телефонах і планшетах) -->
-                <button id="menuBtn" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg border border-sand dark:border-sage/30 bg-white/70 dark:bg-softdarkgreen/70 text-deepolive dark:text-warmtext transition">
-                    <svg id="iconBurger" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
-                    <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                </button>
+            <div class="hdr-right">
+                <a href="#contact" class="btn btn-primary btn-sm hdr-cta magnetic">Обговорити заняття ↗</a>
+                <button id="menuBtn" class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span></button>
             </div>
         </div>
-        <!-- Мобільне меню -->
-        <nav id="mobileMenu" class="hidden md:hidden border-t border-sand/50 dark:border-softdarkgreen bg-warmmilk/95 dark:bg-deepolive/95 backdrop-blur-md" aria-label="Мобільне меню">
-            <div class="max-w-6xl mx-auto px-6 pr-24 pt-1 pb-5 flex flex-col">
-            <a href="#approach" class="block py-3.5 text-base font-medium border-b border-sand/40 dark:border-softdarkgreen text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Підхід</a>
-            <a href="#about" class="block py-3.5 text-base font-medium border-b border-sand/40 dark:border-softdarkgreen text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Про мене</a>
-            <a href="#help" class="block py-3.5 text-base font-medium border-b border-sand/40 dark:border-softdarkgreen text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">З чим допоможу</a>
-            <a href="#formats" class="block py-3.5 text-base font-medium border-b border-sand/40 dark:border-softdarkgreen text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Формати</a>
-            <a href="#cases" class="block py-3.5 text-base font-medium border-b border-sand/40 dark:border-softdarkgreen text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Кейси</a>
-            <a href="#reviews" class="block py-3.5 text-base font-medium border-b border-sand/40 dark:border-softdarkgreen text-deepolive dark:text-warmtext hover:text-oliveaccent dark:hover:text-sage transition">Відгуки</a>
-                <a href="#contact" class="mt-5 text-center bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-6 py-3.5 rounded-xl font-semibold shadow-md transition">Обговорити заняття ↗</a>
-            </div>
-        </nav>
     </header>
+    <nav id="mobileMenu" class="mmenu" aria-label="Мобільне меню">
+        <a class="ml" style="--i:0" href="#approach">Підхід</a>
+        <a class="ml" style="--i:1" href="#about">Про мене</a>
+        <a class="ml" style="--i:2" href="#help">З чим допоможу</a>
+        <a class="ml" style="--i:3" href="#formats">Формати</a>
+        <a class="ml" style="--i:4" href="#cases">Кейси</a>
+        <a class="ml" style="--i:5" href="#reviews">Відгуки</a>
+        <a class="btn btn-primary btn-lg" href="#contact">Обговорити заняття ↗</a>
+    </nav>
 
-    <!-- ГОЛОВНИЙ БЛОК (ПЕРШИЙ ЕКРАН) -->
-    <section class="relative min-h-screen flex items-center pt-20 px-6 max-w-6xl mx-auto z-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full py-16">
-            <div>
-                <span class="inline-block bg-white dark:bg-softdarkgreen text-deepgreen dark:text-sage border border-sand dark:border-sage/30 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide shadow-sm transition-colors">
-                    ✨ TESOL / TEFL Certified • Менторка з англійської
-                </span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-6 text-deepolive dark:text-warmtext transition-colors">
-                    Англійська, у якій можна бути <span class="text-deepgreen dark:text-sage">собою</span>.
-                </h1>
-                <p class="text-deepolive/80 dark:text-sectext text-base sm:text-lg mb-8 leading-relaxed transition-colors">
-                    Вам не потрібно знати все або боятися помилок, щоб почати говорити. На індивідуальних заняттях ми рухаємося у Вашому темпі, працюємо над Вашими цілями й крок за кроком перетворюємо знання на живе спілкування.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#contact" class="bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-8 py-3.5 rounded-xl font-semibold shadow-xl transition transform hover:-translate-y-0.5">
-                        Обговорити заняття ↗
-                    </a>
-                    <a href="#cases" class="bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/30 hover:bg-warmmilk dark:hover:bg-softdarkgreen/80 text-deepolive dark:text-warmtext px-6 py-3.5 rounded-xl font-semibold transition shadow-sm">
-                        Мої кейси ↓
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 3D ПЕРСОНАЛЬНА КАРАТКА -->
-            <div class="flex justify-center">
-                <div id="hero3DContainer" class="w-full max-w-sm flex items-center justify-center py-6" style="perspective: 1000px;">
-                    <div id="hero3DBody" class="spotlight-card w-full rounded-3xl border border-sand/70 dark:border-sage/20 bg-white/90 dark:bg-softdarkgreen/90 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-200 ease-out" style="transform-style: preserve-3d;">
-                        <span class="spotlight-fill"></span>
-                        <span class="spotlight-ring"></span>
-                        
-                        <!-- 3D Аватар -->
-                        <div class="relative w-32 h-32 mb-5 rounded-full p-1 border-2 border-oliveaccent/40 dark:border-sage/40 transition-transform duration-300" style="transform: translateZ(60px);">
-                            <img src="your-photo.jpg" alt="Maryna Likarchuk" class="w-full h-full object-cover rounded-full bg-warmmilk dark:bg-deepolive shadow-md" onerror="this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=374709&color=fff&size=256'" />
-                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-oliveaccent dark:bg-sage border-4 border-white dark:border-deepolive rounded-full transition-colors"></div>
-                            <div class="absolute bottom-2 right-2 w-5 h-5 bg-oliveaccent dark:bg-sage rounded-full animate-ping opacity-75"></div>
-                        </div>
-
-                        <!-- 3D Ім'я -->
-                        <h3 class="text-2xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-1 transition-transform duration-300" style="transform: translateZ(50px);">
-                            Maryna Likarchuk
-                        </h3>
-
-                        <!-- 3D Посада -->
-                        <p class="text-sm font-semibold text-deepgreen dark:text-sage mb-4 transition-transform duration-300" style="transform: translateZ(40px);">
-                            ESL Designer & English Mentor
-                        </p>
-
-                        <!-- 3D Опис -->
-                        <p class="text-sm text-deepolive/80 dark:text-sectext mb-8 leading-relaxed transition-transform duration-300" style="transform: translateZ(30px);">
-                            Розробляю авторські матеріали та комфортні навчальні системи для дорослих.
-                        </p>
-
-                        <!-- 3D Кнопка -->
-                        <div class="w-full flex flex-col gap-3 transition-transform duration-300" style="transform: translateZ(45px);">
-                            <button onclick="copyTelegram('likarchuk')" id="copyBtn" class="flex items-center justify-center gap-2 w-full bg-warmmilk dark:bg-deepolive border border-sand dark:border-sage/30 hover:bg-sand/40 dark:hover:bg-deepolive/80 text-deepolive dark:text-warmtext py-3 rounded-xl font-semibold transition text-sm shadow-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                <span id="copyText">Скопіювати Telegram</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- СТАТИСТИКА -->
-    <section id="stats" class="py-12 border-y border-sand/60 dark:border-softdarkgreen bg-white/60 dark:bg-softdarkgreen/40 backdrop-blur-sm relative z-10 transition-colors">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-deepgreen dark:text-sage mb-2 flex items-baseline justify-center gap-1 tabular-nums">
-                    <span class="text-xl sm:text-2xl">понад ~</span><span class="stat-counter" data-target="3.5" data-decimal="true">3,5</span><span> року</span>
-                </div>
-                <p class="text-deepolive/80 dark:text-sectext font-medium">досвіду викладання</p>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-deepgreen dark:text-sage mb-2 flex items-center justify-center gap-1 tabular-nums">
-                    <span>&gt;</span><span class="stat-counter" data-target="110">110</span><span>+</span>
-                </div>
-                <p class="text-deepolive/80 dark:text-sectext font-medium">студентів досягли результату</p>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold text-deepgreen dark:text-sage mb-2 flex items-center justify-center gap-1 tabular-nums">
-                    <span class="stat-counter" data-target="2250">2250</span><span>+</span>
-                </div>
-                <p class="text-deepolive/80 dark:text-sectext font-medium">проведених успішних уроків</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. БЛОК «МІЙ ПІДХІД» -->
-    <section id="approach" class="py-24 max-w-6xl mx-auto px-6 relative z-10">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs font-bold uppercase tracking-widest text-deepgreen dark:text-sage mb-3 block">Концепція навчання</span>
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-6 transition-colors">
-                Тут можна бути собою. Навіть коли Ви ще не все знаєте.
-            </h2>
-            <p class="text-deepolive/80 dark:text-sectext text-base sm:text-lg leading-relaxed transition-colors">
-                Я хочу, щоб англійська була простором, де не потрібно боятися помилок, соромитися запитань чи прагнути до ідеальності. Де можна розбиратися у своєму темпі, пробувати й поступово знаходити впевненість у власних словах.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors flex flex-col">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <div class="w-10 h-10 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center text-deepgreen dark:text-sage font-bold text-lg mb-6">01</div>
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Ваші цілі — наш орієнтир</h3>
-                <p class="text-deepolive/80 dark:text-sectext text-sm leading-relaxed">
-                    Адаптую заняття до Ваших потреб, інтересів і темпу. Ми працюємо над тим, що важливо саме для Вас.
-                </p>
-            </div>
-
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors flex flex-col">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <div class="w-10 h-10 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center text-deepgreen dark:text-sage font-bold text-lg mb-6">02</div>
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Зрозуміти й застосувати</h3>
-                <p class="text-deepolive/80 dark:text-sectext text-sm leading-relaxed">
-                    Розбираємося в мові без складних зазубрених правил та відразу використовуємо нові знання на практиці в діалогах.
-                </p>
-            </div>
-
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm transition-colors flex flex-col">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <div class="w-10 h-10 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center text-deepgreen dark:text-sage font-bold text-lg mb-6">03</div>
-                <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Закріпити й рухатися далі</h3>
-                <p class="text-deepolive/80 dark:text-sectext text-sm leading-relaxed">
-                    Повертаємося до вивченого й системно повторюємо матеріал, щоб знання поступово ставали автоматичними навичками.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. БЛОК LITTLE ABOUT ME (ТРОХИ ПРО МЕНЕ) -->
-    <section id="about" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-deepgreen dark:text-sage mb-3 block">Знайомство</span>
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Трохи про мене</h2>
-                <p class="text-deepolive/80 dark:text-sectext transition-colors">Натисніть на картку, щоб дізнатися більше про мої цінності та джерела натхнення.</p>
-            </div>
-
-            <div class="space-y-4">
-                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors cursor-pointer">
-                    <summary class="flex justify-between items-center p-6 font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
-                        <span class="flex items-center gap-3"><span class="text-xl">🌱</span> Як усе почалося</span>
-                        <span class="text-deepgreen dark:text-sage text-2xl font-light transition-transform duration-300 toggle-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed border-t border-sand/30 dark:border-sage/10 pt-4">
-                        Я починала з допомоги дітям та родичам у вивченні англійської. Згодом зрозуміла, що мені справді добре вдається пояснювати складні речі простими словами й щиро подобається допомагати людям долати страх перед мовою.
-                    </div>
-                </details>
-
-                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors cursor-pointer">
-                    <summary class="flex justify-between items-center p-6 font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
-                        <span class="flex items-center gap-3"><span class="text-xl">💬</span> На моїх уроках…</span>
-                        <span class="text-deepgreen dark:text-sage text-2xl font-light transition-transform duration-300 toggle-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed border-t border-sand/30 dark:border-sage/10 pt-4">
-                        Ви знайдете не лише правила й сухі вправи, а й доречні жарти, життєві історії, цікаві запитання та дійсно живі й щирі розмови про все на світі.
-                    </div>
-                </details>
-
-                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors cursor-pointer">
-                    <summary class="flex justify-between items-center p-6 font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
-                        <span class="flex items-center gap-3"><span class="text-xl">💡</span> Завжди щось створюю</span>
-                        <span class="text-deepgreen dark:text-sage text-2xl font-light transition-transform duration-300 toggle-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed border-t border-sand/30 dark:border-sage/10 pt-4">
-                        Маю щиру любов до безперервного навчання, нових ідей і проектування власних інтерактивних навчальних матеріалів для студентів.
-                    </div>
-                </details>
-
-                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors cursor-pointer">
-                    <summary class="flex justify-between items-center p-6 font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
-                        <span class="flex items-center gap-3"><span class="text-xl">🫖</span> Чай — це любов</span>
-                        <span class="text-deepgreen dark:text-sage text-2xl font-light transition-transform duration-300 toggle-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed border-t border-sand/30 dark:border-sage/10 pt-4">
-                        Ціную затишні моменти, спокійний відпочинок та чашку ароматного гарячого чаю під час відновлення сил після насиченого дня.
-                    </div>
-                </details>
-
-                <details class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 rounded-2xl backdrop-blur-md shadow-sm group overflow-hidden transition-colors cursor-pointer">
-                    <summary class="flex justify-between items-center p-6 font-semibold text-lg text-deepolive dark:text-warmtext list-none select-none">
-                        <span class="flex items-center gap-3"><span class="text-xl">🐾</span> Котики мають перевагу</span>
-                        <span class="text-deepgreen dark:text-sage text-2xl font-light transition-transform duration-300 toggle-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-sm text-deepolive/80 dark:text-sectext leading-relaxed border-t border-sand/30 dark:border-sage/10 pt-4">
-                        Особлива любов до котиків, повз яких просто неможливо пройти, щоб не зупинитися і не погладити!
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. БЛОК «З ЧИМ Я МОЖУ ВАМ ДОПОМОГТИ?» -->
-    <section id="help" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-deepgreen dark:text-sage mb-3 block">Напрямки</span>
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">З чим я можу Вам допомогти?</h2>
-                <p class="text-deepolive/80 dark:text-sectext transition-colors">Фокусуємося на практичних цілях, які необхідні у Вашому щоденному житті.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <div>
-                        <span class="text-2xl font-bold font-['Playfair_Display'] text-deepgreen dark:text-sage block mb-4">01.</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Заговорити англійською</h3>
-                        <p class="text-deepolive/80 dark:text-sectext text-sm leading-relaxed">
-                            Допомагаю дорослим поступово переходити від знання окремих слів і правил до самостійного висловлення думок, практики говоріння та більшої впевненості в спілкуванні.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <div>
-                        <span class="text-2xl font-bold font-['Playfair_Display'] text-deepgreen dark:text-sage block mb-4">02.</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Використовувати англійську у житті</h3>
-                        <p class="text-deepolive/80 dark:text-sectext text-sm mb-5 leading-relaxed">
-                            Застосовуємо мову під Ваші реальні життєві ситуації:
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-warmmilk dark:bg-deepolive text-deepolive dark:text-warmtext border border-sand/50 dark:border-sage/20 text-xs px-3 py-1 rounded-full">💼 для роботи</span>
-                            <span class="bg-warmmilk dark:bg-deepolive text-deepolive dark:text-warmtext border border-sand/50 dark:border-sage/20 text-xs px-3 py-1 rounded-full">✈️ для подорожей</span>
-                            <span class="bg-warmmilk dark:bg-deepolive text-deepolive dark:text-warmtext border border-sand/50 dark:border-sage/20 text-xs px-3 py-1 rounded-full">🎬 для фільмів та серіалів</span>
-                            <span class="bg-warmmilk dark:bg-deepolive text-deepolive dark:text-warmtext border border-sand/50 dark:border-sage/20 text-xs px-3 py-1 rounded-full">🗣️ для спілкування</span>
-                            <span class="bg-warmmilk dark:bg-deepolive text-deepolive dark:text-warmtext border border-sand/50 dark:border-sage/20 text-xs px-3 py-1 rounded-full">📚 для саморозвитку</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <div>
-                        <span class="text-2xl font-bold font-['Playfair_Display'] text-deepgreen dark:text-sage block mb-4">03.</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Розкласти знання по поличках</h3>
-                        <p class="text-deepolive/80 dark:text-sectext text-sm leading-relaxed">
-                            Систематизувати граматику, заповнити прогалини, розширити словниковий запас і навчитися впевнено застосовувати знання на практиці.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. БЛОК «ФОРМАТИ РОБОТИ» -->
-    <section id="formats" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-deepgreen dark:text-sage mb-3 block">Навчання</span>
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Формати роботи</h2>
-                <p class="text-deepolive/80 dark:text-sectext transition-colors">Обирайте комфортний спосіб взаємодії відповідно до Вашого графіка та цілей.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Картка 1: ОСНОВНИЙ ФОРМАТ (Пріоритет) -->
-                <div class="spotlight-card bg-gradient-to-b from-white to-warmmilk dark:from-softdarkgreen dark:to-deepolive border-2 border-deepgreen dark:border-sand p-8 rounded-2xl flex flex-col justify-between relative shadow-xl backdrop-blur-md transition-colors lg:col-span-1 md:col-span-2">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <span class="absolute -top-3 right-6 bg-deepgreen dark:bg-sand text-warmmilk dark:text-deepolive text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">Основний формат</span>
-                    <div>
-                        <div class="w-10 h-10 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center mb-6 text-xl">👩‍💻</div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Індивідуальні заняття</h3>
-                        <p class="text-deepolive/80 dark:text-sectext text-xs mb-4 leading-relaxed">
-                            Онлайн, один на один. Індивідуальний підхід з урахуванням Ваших цілей, інтересів та темпу.
-                        </p>
-                        <ul class="text-xs text-deepolive dark:text-warmtext space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><span class="text-deepgreen dark:text-sage font-bold">✦</span> Тривалість уроку — 50 хвилин</li>
-                            <li class="flex items-start gap-2"><span class="text-deepgreen dark:text-sage font-bold">✦</span> Практика говоріння, граматика та словниковий запас</li>
-                            <li class="flex items-start gap-2"><span class="text-deepgreen dark:text-sage font-bold">✦</span> Гнучка частота: від 1 до 4 разів на тиждень</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Картка 2: Персональна консультація -->
-                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <div>
-                        <div class="w-10 h-10 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center mb-6 text-xl">💡</div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Персональна консультація</h3>
-                        <p class="text-deepolive/80 dark:text-sectext text-xs leading-relaxed mb-4">
-                            Одна онлайн-зустріч, під час якої визначаємо цілі та пріоритети навчання.
-                        </p>
-                        <p class="text-xs text-deepolive/90 dark:text-warmtext/90 leading-relaxed">
-                            Після зустрічі Ви отримуєте персональний план подальших кроків та відповідні навчальні матеріали.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Картка 3: Асинхронне навчання -->
-                <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <div>
-                        <div class="w-10 h-10 bg-sand/30 dark:bg-deepolive rounded-xl flex items-center justify-center mb-6 text-xl">⏳</div>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-3">Асинхронне навчання</h3>
-                        <p class="text-deepolive/80 dark:text-sectext text-xs leading-relaxed mb-4">
-                            Отримуєте матеріали та завдання, працюєте у зручний час і отримуєте фідбек (переписка, голосові, пояснення).
-                        </p>
-                        <p class="text-xs text-deepgreen dark:text-sage font-medium leading-relaxed">
-                            Ідеально для людей із нестабільним графіком або під час відключень світла. За потреби — зустрічі для практики.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Картка 4: Курси та вебінари -->
-                <div class="spotlight-card bg-white/60 dark:bg-softdarkgreen/60 border border-sand/40 dark:border-sage/10 p-8 rounded-2xl flex flex-col justify-between backdrop-blur-md shadow-sm transition-colors relative">
-                    <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                    <div>
-                        <span class="bg-sand/40 dark:bg-deepolive text-deepolive dark:text-sage text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Скоро</span>
-                        <h3 class="text-xl font-['Playfair_Display'] font-bold text-deepolive/70 dark:text-warmtext/70 mb-3">Курси та вебінари</h3>
-                        <p class="text-deepolive/60 dark:text-sectext/60 text-xs leading-relaxed">
-                            Практичні навчальні продукти, які допоможуть розібратися з конкретними темами та продовжувати навчання самостійно.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. БЛОК ІЗ КЕЙСАМИ СТУДЕНТІВ -->
-    <section id="cases" class="py-24 border-t border-sand/60 dark:border-softdarkgreen max-w-6xl mx-auto px-6 relative z-10">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-bold uppercase tracking-widest text-deepgreen dark:text-sage mb-3 block">Досвід учнів</span>
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Кейси студентів</h2>
-            <p class="text-deepolive/80 dark:text-sectext transition-colors">Реальні історії дорослих студентів та їхніх результатів у вивченні мови.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Кейс 1: Ніка -->
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
+    <main>
+        <!-- ГОЛОВНИЙ ЕКРАН -->
+        <section id="top" class="hero">
+            <div class="container hero-grid">
                 <div>
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 rounded-full bg-sand/30 dark:bg-deepolive border border-sand dark:border-sage/30 flex items-center justify-center text-xl font-bold text-deepgreen dark:text-sage">Н</div>
-                        <div>
-                            <h3 class="font-bold text-lg text-deepolive dark:text-warmtext">Ніка</h3>
-                            <p class="text-xs text-deepgreen dark:text-sage font-medium">Тривалість: ~2,5–3 роки</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4 text-xs">
-                        <div>
-                            <span class="font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block mb-1">На старті (орієнтовано A1):</span>
-                            <p class="text-deepolive/80 dark:text-sectext leading-relaxed">
-                                Знала окремі слова та деякі конструкції, але не мала цілісного розуміння структури мови. Соромилася говорити.
-                            </p>
-                        </div>
-
-                        <div>
-                            <span class="font-bold text-deepgreen dark:text-sage uppercase tracking-wider block mb-1">Над чим працювали:</span>
-                            <p class="text-deepolive/80 dark:text-sectext leading-relaxed">
-                                Побудова граматичного фундаменту, розширення словникового запасу, практика говоріння та робота над вимовою.
-                            </p>
-                        </div>
-
-                        <div>
-                            <span class="font-bold text-deepgreen dark:text-sage uppercase tracking-wider block mb-1">Результат (орієнтовано B1 / B1+)*:</span>
-                            <p class="text-deepolive/90 dark:text-warmtext font-medium leading-relaxed">
-                                Навчилася самостійно будувати речення та висловлювати думки. Стала впевнено користуватися англійською поза уроками.
-                            </p>
-                        </div>
+                    <span class="badge rv">✨ TESOL / TEFL Certified • Менторка з англійської</span>
+                    <h1 class="hero-title split">Англійська, у якій можна бути <em class="accent">собою</em>.</h1>
+                    <p class="lead rv" style="--d:4">Вам не потрібно знати все або боятися помилок, щоб почати говорити. На індивідуальних заняттях ми рухаємося у Вашому темпі, працюємо над Вашими цілями й крок за кроком перетворюємо знання на живе спілкування.</p>
+                    <div class="cta-row rv" style="--d:5">
+                        <a href="#contact" class="btn btn-primary btn-lg magnetic">Обговорити заняття ↗</a>
+                        <a href="#cases" class="btn btn-ghost btn-lg magnetic">Мої кейси ↓</a>
                     </div>
                 </div>
-
-                <details class="mt-6 border-t border-sand/40 dark:border-sage/10 pt-4">
-                    <summary class="text-xs font-bold text-deepgreen dark:text-sage cursor-pointer select-none flex items-center justify-between">
-                        <span>Переглянути історію ➔</span>
-                    </summary>
-                    <p class="text-xs text-deepolive/80 dark:text-sectext leading-relaxed mt-3 pt-2 italic border-t border-sand/20 dark:border-sage/5">
-                        «Реальний випадок: у Києві Ніка самостійно допомогла іноземному туристу розібратися із складним маршрутом до Одеси та пояснила навігацію в метро.»
-                    </p>
-                </details>
+                <div class="rv s" style="--d:3">
+                    <div class="stage" data-tilt>
+                        <div class="pwrap">
+                            <article class="pcard spot">
+                                <div class="avatar">
+                                    <img src="your-photo.jpg" width="128" height="128" alt="Maryna Likarchuk" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=374709&color=fff&size=256'">
+                                    <span class="dot"></span>
+                                </div>
+                                <h3 class="pname">Maryna Likarchuk</h3>
+                                <p class="prole">ESL Designer &amp; English Mentor</p>
+                                <p class="pdesc">Розробляю авторські матеріали та комфортні навчальні системи для дорослих.</p>
+                                <button id="copyBtn" type="button" class="btn btn-ghost">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                    <span id="copyText">Скопіювати Telegram</span>
+                                </button>
+                            </article>
+                        </div>
+                        <span class="chip chip1" data-depth="34">50 хв · онлайн · 1:1</span>
+                        <span class="chip chip2" data-depth="-26">Для дорослих</span>
+                        <span class="chip chip3" data-depth="22">Авторські матеріали</span>
+                    </div>
+                </div>
             </div>
+            <a class="cue" href="#stats" aria-label="Прокрутити вниз"></a>
+        </section>
 
-            <!-- Кейс 2: Володимир -->
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <div>
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 rounded-full bg-sand/30 dark:bg-deepolive border border-sand dark:border-sage/30 flex items-center justify-center text-xl font-bold text-deepgreen dark:text-sage">В</div>
-                        <div>
-                            <h3 class="font-bold text-lg text-deepolive dark:text-warmtext">Володимир (30 років)</h3>
-                            <p class="text-xs text-deepgreen dark:text-sage font-medium">Тривалість: понад 1 рік</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4 text-xs">
-                        <div>
-                            <span class="font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block mb-1">На старті (майже з нуля):</span>
-                            <p class="text-deepolive/80 dark:text-sectext leading-relaxed">
-                                Окремі слова та базове читання. Відсутність граматичної основи. Потребував англійської для подорожей і роботи.
-                            </p>
-                        </div>
-
-                        <div>
-                            <span class="font-bold text-deepgreen dark:text-sage uppercase tracking-wider block mb-1">Над чим працювали:</span>
-                            <p class="text-deepolive/80 dark:text-sectext leading-relaxed">
-                                Базова граматика, розширення словникового запасу, говоріння + додавання мови для сфери будівництва.
-                            </p>
-                        </div>
-
-                        <div>
-                            <span class="font-bold text-deepgreen dark:text-sage uppercase tracking-wider block mb-1">Результат (Рівень A2):</span>
-                            <p class="text-deepolive/90 dark:text-warmtext font-medium leading-relaxed">
-                                Досяг рівня A2, вільно почувається в подорожах та у спілкуванні з іноземцями. Почав вивчати професійну лексику.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <details class="mt-6 border-t border-sand/40 dark:border-sage/10 pt-4">
-                    <summary class="text-xs font-bold text-deepgreen dark:text-sage cursor-pointer select-none flex items-center justify-between">
-                        <span>Переглянути історію ➔</span>
-                    </summary>
-                    <p class="text-xs text-deepolive/80 dark:text-sectext leading-relaxed mt-3 pt-2 italic border-t border-sand/20 dark:border-sage/5">
-                        «Тепер впевнено спілкується з іноземними учасниками на змаганнях з армреслінгу та опрацьовує тему будівництва англійською.»
-                    </p>
-                </details>
-            </div>
-
-            <!-- Кейс 3: Людмила -->
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/20 p-8 rounded-2xl backdrop-blur-md shadow-sm flex flex-col justify-between transition-colors">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <div>
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 rounded-full bg-sand/30 dark:bg-deepolive border border-sand dark:border-sage/30 flex items-center justify-center text-xl font-bold text-deepgreen dark:text-sage">Л</div>
-                        <div>
-                            <h3 class="font-bold text-lg text-deepolive dark:text-warmtext">Людмила (40+ років)</h3>
-                            <p class="text-xs text-deepgreen dark:text-sage font-medium">Тривалість: ~1,5 року</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4 text-xs">
-                        <div>
-                            <span class="font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block mb-1">На старті (орієнтовано A1):</span>
-                            <p class="text-deepolive/80 dark:text-sectext leading-relaxed">
-                                Мала базові знання, але складно будувала речення. Відчувала невпевненість під час говоріння.
-                            </p>
-                        </div>
-
-                        <div>
-                            <span class="font-bold text-deepgreen dark:text-sage uppercase tracking-wider block mb-1">Над чим працювали:</span>
-                            <p class="text-deepolive/80 dark:text-sectext leading-relaxed">
-                                Систематизація граматики, розширення та активізація слів, подолання мовного бар'єра у розмові.
-                            </p>
-                        </div>
-
-                        <div>
-                            <span class="font-bold text-deepgreen dark:text-sage uppercase tracking-wider block mb-1">Результат (орієнтовано B1 / B1+)*:</span>
-                            <p class="text-deepolive/90 dark:text-warmtext font-medium leading-relaxed">
-                                Почала чітко структурувати думки мовою, перейшла до впевненого користування та розвиває усне мовлення.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <details class="mt-6 border-t border-sand/40 dark:border-sage/10 pt-4">
-                    <summary class="text-xs font-bold text-deepgreen dark:text-sage cursor-pointer select-none flex items-center justify-between">
-                        <span>Переглянути історію ➔</span>
-                    </summary>
-                    <p class="text-xs text-deepolive/80 dark:text-sectext leading-relaxed mt-3 pt-2 italic border-t border-sand/20 dark:border-sage/5">
-                        «Поступово пройшла шлях від скутості у реченнях до нормального повсякденного висловлення власних думок.»
-                    </p>
-                </details>
+        <!-- БІГУЧИЙ РЯДОК -->
+        <div class="marquee" aria-hidden="true">
+            <div class="track" id="track">
+                <span>Говоріння</span><span>Граматична основа</span><span>Словниковий запас</span><span>Вимова</span><span>Живе спілкування</span><span>Авторські матеріали</span><span>Ваш темп</span><span>Без страху помилок</span>
             </div>
         </div>
 
-        <p class="text-center text-[11px] text-deepolive/60 dark:text-sage/60 mt-8">
-            * Рівні B1 / B1+ наведено як орієнтовні на основі оцінки навчального прогресу.
-        </p>
-    </section>
-
-    <!-- 8. БЛОК ВІДГУКІВ -->
-    <section id="reviews" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <span class="text-xs font-bold uppercase tracking-widest text-deepgreen dark:text-sage mb-3 block">Враження</span>
-            <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">Відгуки студентів</h2>
-            <p class="text-deepolive/80 dark:text-sectext max-w-xl mx-auto text-sm leading-relaxed mb-10">
-                Справжні текстові, аудіо- та відеовідгуки студентів зараз впорядковуються і незабаром з'являться на цій сторінці.
-            </p>
-            <div class="spotlight-card bg-white/50 dark:bg-softdarkgreen/30 border border-dashed border-sand dark:border-sage/30 p-8 rounded-2xl text-center">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <p class="text-xs text-deepolive/60 dark:text-sectext/60 font-mono">
-                    ✦ Секція готується до оновлення перевіреними матеріалами
-                </p>
+        <!-- СТАТИСТИКА (плита) -->
+        <section id="stats" class="sect inv slab">
+            <div class="container stats-grid">
+                <div class="stat rv">
+                    <div class="num"><small>понад ~</small><span class="stat-counter" data-target="3.5" data-decimal="true">3,5</span><span class="u">року</span></div>
+                    <p>досвіду викладання</p>
+                </div>
+                <div class="stat rv" style="--d:1">
+                    <div class="num"><small>&gt;</small><span class="stat-counter" data-target="110">110</span><span>+</span></div>
+                    <p>студентів досягли результату</p>
+                </div>
+                <div class="stat rv" style="--d:2">
+                    <div class="num"><span class="stat-counter" data-target="2250">2250</span><span>+</span></div>
+                    <p>проведених успішних уроків</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 9. ФІНАЛЬНИЙ CTA (КОНТАКТИ) -->
-    <section id="contact" class="py-24 border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="spotlight-card bg-white dark:bg-softdarkgreen border border-sand dark:border-sage/30 p-10 sm:p-14 rounded-3xl backdrop-blur-md shadow-2xl transition-colors">
-                <span class="spotlight-fill"></span><span class="spotlight-ring"></span>
-                <h2 class="text-3xl sm:text-4xl font-['Playfair_Display'] font-bold text-deepolive dark:text-warmtext mb-4 transition-colors">
-                    Готові зробити перший крок?
-                </h2>
-                <p class="text-deepolive/90 dark:text-sectext mb-8 max-w-lg mx-auto text-sm sm:text-base leading-relaxed transition-colors">
-                    Напишіть мені — обговоримо Ваші цілі, запити й те, який формат навчання підійде саме Вам.
-                </p>
-                <div class="flex justify-center gap-4 flex-wrap">
-                    <a href="https://t.me/likarchuk" target="_blank" rel="noopener noreferrer" class="bg-deepgreen hover:bg-deepolive dark:bg-sand dark:hover:bg-sage text-warmmilk dark:text-deepolive px-8 py-3.5 rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+        <!-- МІЙ ПІДХІД (бенто) -->
+        <section id="approach" class="sect">
+            <div class="container">
+                <div class="approach-head">
+                    <div>
+                        <span class="kicker rv">Концепція навчання</span>
+                        <h2 class="h2 split">Тут можна бути собою. Навіть коли Ви ще не все знаєте.</h2>
+                    </div>
+                    <p class="rv" style="--d:2">Я хочу, щоб англійська була простором, де не потрібно боятися помилок, соромитися запитань чи прагнути до ідеальності. Де можна розбиратися у своєму темпі, пробувати й поступово знаходити впевненість у власних словах.</p>
+                </div>
+                <div class="bento">
+                    <div class="cell a1 rv l">
+                        <article class="card fill spot">
+                            <span class="deco sparkles" data-speed="-0.06" aria-hidden="true">✦</span>
+                            <div class="ghost-num">01</div>
+                            <div>
+                                <h3>Ваші цілі — наш орієнтир</h3>
+                                <p>Адаптую заняття до Ваших потреб, інтересів і темпу. Ми працюємо над тим, що важливо саме для Вас.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="cell a2 rv r" style="--d:1">
+                        <article class="card spot">
+                            <span class="deco rings" data-speed="0.08" aria-hidden="true"></span>
+                            <div class="ghost-num" style="font-size:3.4rem;color:var(--accent)">02</div>
+                            <h3>Зрозуміти й застосувати</h3>
+                            <p>Розбираємося в мові без складних зазубрених правил та відразу використовуємо нові знання на практиці в діалогах.</p>
+                        </article>
+                    </div>
+                    <div class="cell a3 rv r" style="--d:2">
+                        <article class="card spot" style="background:var(--surface2)">
+                            <div class="ghost-num" style="font-size:3.4rem;color:var(--accent)">03</div>
+                            <h3>Закріпити й рухатися далі</h3>
+                            <p>Повертаємося до вивченого й системно повторюємо матеріал, щоб знання поступово ставали автоматичними навичками.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ТРОХИ ПРО МЕНЕ (плита) -->
+        <section id="about" class="sect inv slab">
+            <div class="container about-grid">
+                <figure class="portrait rv l" style="margin:0">
+                    <img src="your-photo.jpg" width="640" height="640" loading="lazy" alt="Maryna Likarchuk" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=374709&color=fff&size=640'">
+                    <figcaption class="pcap"><b>Maryna Likarchuk</b><span>ESL Designer &amp; English Mentor</span></figcaption>
+                </figure>
+                <div>
+                    <div class="sec-head" style="margin-bottom:2rem">
+                        <span class="kicker rv">Знайомство</span>
+                        <h2 class="h2 split">Трохи про мене</h2>
+                        <p class="rv" style="--d:2">Натисніть на картку, щоб дізнатися більше про мої цінності та джерела натхнення.</p>
+                    </div>
+                    <div class="about-list">
+                        <div class="acc open rv">
+                            <button class="acc-head" type="button" aria-expanded="true" aria-controls="ab1"><span class="acc-ic">🌱</span><span class="acc-t">Як усе почалося</span><span class="acc-plus"></span></button>
+                            <div class="acc-body" id="ab1" role="region"><div><p>Я починала з допомоги дітям та родичам у вивченні англійської. Згодом зрозуміла, що мені справді добре вдається пояснювати складні речі простими словами й щиро подобається допомагати людям долати страх перед мовою.</p></div></div>
+                        </div>
+                        <div class="acc rv" style="--d:1">
+                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab2"><span class="acc-ic">💬</span><span class="acc-t">На моїх уроках…</span><span class="acc-plus"></span></button>
+                            <div class="acc-body" id="ab2" role="region"><div><p>Ви знайдете не лише правила й сухі вправи, а й доречні жарти, життєві історії, цікаві запитання та дійсно живі й щирі розмови про все на світі.</p></div></div>
+                        </div>
+                        <div class="acc rv" style="--d:2">
+                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab3"><span class="acc-ic">💡</span><span class="acc-t">Завжди щось створюю</span><span class="acc-plus"></span></button>
+                            <div class="acc-body" id="ab3" role="region"><div><p>Маю щиру любов до безперервного навчання, нових ідей і проектування власних інтерактивних навчальних матеріалів для студентів.</p></div></div>
+                        </div>
+                        <div class="acc rv" style="--d:3">
+                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab4"><span class="acc-ic">🫖</span><span class="acc-t">Чай — це любов</span><span class="acc-plus"></span></button>
+                            <div class="acc-body" id="ab4" role="region"><div><p>Ціную затишні моменти, спокійний відпочинок та чашку ароматного гарячого чаю під час відновлення сил після насиченого дня.</p></div></div>
+                        </div>
+                        <div class="acc rv" style="--d:4">
+                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab5"><span class="acc-ic">🐾</span><span class="acc-t">Котики мають перевагу</span><span class="acc-plus"></span></button>
+                            <div class="acc-body" id="ab5" role="region"><div><p>Особлива любов до котиків, повз яких просто неможливо пройти, щоб не зупинитися і не погладити!</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- З ЧИМ ДОПОМОЖУ (стопка карток) -->
+        <section id="help" class="sect">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">Напрямки</span>
+                    <h2 class="h2 split">З чим я можу Вам допомогти?</h2>
+                    <p class="rv" style="--d:2">Фокусуємося на практичних цілях, які необхідні у Вашому щоденному житті.</p>
+                </div>
+                <div class="stack">
+                    <article class="scard s1 spot" style="--n:0">
+                        <div class="big" data-speed="0.05">01</div>
+                        <div>
+                            <h3>Заговорити англійською</h3>
+                            <p>Допомагаю дорослим поступово переходити від знання окремих слів і правил до самостійного висловлення думок, практики говоріння та більшої впевненості в спілкуванні.</p>
+                        </div>
+                    </article>
+                    <article class="scard s2 spot" style="--n:1">
+                        <div class="big" data-speed="0.05">02</div>
+                        <div>
+                            <h3>Використовувати англійську у житті</h3>
+                            <p>Застосовуємо мову під Ваші реальні життєві ситуації:</p>
+                            <div class="chips">
+                                <span>💼 для роботи</span><span>✈️ для подорожей</span><span>🎬 для фільмів та серіалів</span><span>🗣️ для спілкування</span><span>📚 для саморозвитку</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="scard s3 spot" style="--n:2">
+                        <div class="big" data-speed="0.05" style="color:var(--accent)">03</div>
+                        <div>
+                            <h3>Розкласти знання по поличках</h3>
+                            <p>Систематизувати граматику, заповнити прогалини, розширити словниковий запас і навчитися впевнено застосовувати знання на практиці.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ФОРМАТИ РОБОТИ (плита, бенто) -->
+        <section id="formats" class="sect inv slab">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">Навчання</span>
+                    <h2 class="h2 split">Формати роботи</h2>
+                    <p class="rv" style="--d:2">Обирайте комфортний спосіб взаємодії відповідно до Вашого графіка та цілей.</p>
+                </div>
+                <div class="bento">
+                    <div class="cell f1 tilt3d rv l" data-tilt>
+                        <article class="card fill spot pwrap">
+                            <div>
+                                <span class="tag">Основний формат</span>
+                                <div class="emoji" style="margin-top:1.4rem">👩‍💻</div>
+                                <h3>Індивідуальні заняття</h3>
+                                <p>Онлайн, один на один. Індивідуальний підхід з урахуванням Ваших цілей, інтересів та темпу.</p>
+                            </div>
+                            <ul class="ul">
+                                <li>Тривалість уроку — 50 хвилин</li>
+                                <li>Практика говоріння, граматика та словниковий запас</li>
+                                <li>Гнучка частота: від 1 до 4 разів на тиждень</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="cell f2 rv r" style="--d:1">
+                        <article class="card spot">
+                            <div class="emoji">💡</div>
+                            <h3>Персональна консультація</h3>
+                            <p>Одна онлайн-зустріч, під час якої визначаємо цілі та пріоритети навчання.</p>
+                            <p>Після зустрічі Ви отримуєте персональний план подальших кроків та відповідні навчальні матеріали.</p>
+                        </article>
+                    </div>
+                    <div class="cell f3 rv r" style="--d:2">
+                        <article class="card spot">
+                            <div class="emoji">⏳</div>
+                            <h3>Асинхронне навчання</h3>
+                            <p>Отримуєте матеріали та завдання, працюєте у зручний час і отримуєте фідбек (переписка, голосові, пояснення).</p>
+                            <p>Ідеально для людей із нестабільним графіком або під час відключень світла. За потреби — зустрічі для практики.</p>
+                        </article>
+                    </div>
+                    <div class="cell f4 rv s">
+                        <article class="card spot">
+                            <div>
+                                <span class="tag">Скоро</span>
+                                <h3>Курси та вебінари</h3>
+                                <p>Практичні навчальні продукти, які допоможуть розібратися з конкретними темами та продовжувати навчання самостійно.</p>
+                            </div>
+                            <div class="ghost-num" style="color:var(--accent)" aria-hidden="true">✦</div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КЕЙСИ СТУДЕНТІВ (вкладки) -->
+        <section id="cases" class="sect">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">Досвід учнів</span>
+                    <h2 class="h2 split">Кейси студентів</h2>
+                    <p class="rv" style="--d:2">Реальні історії дорослих студентів та їхніх результатів у вивченні мови.</p>
+                </div>
+                <div class="tabs rv">
+                    <div class="tablist" role="tablist" aria-label="Кейси студентів">
+                        <button class="tab" role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1" type="button"><span class="av">Н</span><span><b>Ніка</b><small>Тривалість: ~2,5–3 роки</small></span></button>
+                        <button class="tab" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1" type="button"><span class="av">В</span><span><b>Володимир (30 років)</b><small>Тривалість: понад 1 рік</small></span></button>
+                        <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1" type="button"><span class="av">Л</span><span><b>Людмила (40+ років)</b><small>Тривалість: ~1,5 року</small></span></button>
+                    </div>
+                    <div>
+                        <article class="card panel spot" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+                            <div class="panel-top"><span class="av">Н</span><div><h3>Ніка</h3><p class="muted">Тривалість: ~2,5–3 роки</p></div></div>
+                            <div class="steps">
+                                <div class="step"><b>На старті (орієнтовано A1):</b><p>Знала окремі слова та деякі конструкції, але не мала цілісного розуміння структури мови. Соромилася говорити.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Побудова граматичного фундаменту, розширення словникового запасу, практика говоріння та робота над вимовою.</p></div>
+                                <div class="step"><b>Результат (орієнтовано B1 / B1+)*:</b><p>Навчилася самостійно будувати речення та висловлювати думки. Стала впевнено користуватися англійською поза уроками.</p></div>
+                            </div>
+                            <details class="story"><summary>Переглянути історію ➔</summary><p>«Реальний випадок: у Києві Ніка самостійно допомогла іноземному туристу розібратися із складним маршрутом до Одеси та пояснила навігацію в метро.»</p></details>
+                        </article>
+                        <article class="card panel spot" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+                            <div class="panel-top"><span class="av">В</span><div><h3>Володимир (30 років)</h3><p class="muted">Тривалість: понад 1 рік</p></div></div>
+                            <div class="steps">
+                                <div class="step"><b>На старті (майже з нуля):</b><p>Окремі слова та базове читання. Відсутність граматичної основи. Потребував англійської для подорожей і роботи.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Базова граматика, розширення словникового запасу, говоріння + додавання мови для сфери будівництва.</p></div>
+                                <div class="step"><b>Результат (Рівень A2):</b><p>Досяг рівня A2, вільно почувається в подорожах та у спілкуванні з іноземцями. Почав вивчати професійну лексику.</p></div>
+                            </div>
+                            <details class="story"><summary>Переглянути історію ➔</summary><p>«Тепер впевнено спілкується з іноземними учасниками на змаганнях з армреслінгу та опрацьовує тему будівництва англійською.»</p></details>
+                        </article>
+                        <article class="card panel spot" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
+                            <div class="panel-top"><span class="av">Л</span><div><h3>Людмила (40+ років)</h3><p class="muted">Тривалість: ~1,5 року</p></div></div>
+                            <div class="steps">
+                                <div class="step"><b>На старті (орієнтовано A1):</b><p>Мала базові знання, але складно будувала речення. Відчувала невпевненість під час говоріння.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Систематизація граматики, розширення та активізація слів, подолання мовного бар'єра у розмові.</p></div>
+                                <div class="step"><b>Результат (орієнтовано B1 / B1+)*:</b><p>Почала чітко структурувати думки мовою, перейшла до впевненого користування та розвиває усне мовлення.</p></div>
+                            </div>
+                            <details class="story"><summary>Переглянути історію ➔</summary><p>«Поступово пройшла шлях від скутості у реченнях до нормального повсякденного висловлення власних думок.»</p></details>
+                        </article>
+                        <p class="footnote">* Рівні B1 / B1+ наведено як орієнтовні на основі оцінки навчального прогресу.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ВІДГУКИ -->
+        <section id="reviews" class="sect" style="padding-top:clamp(1rem,3vw,2rem)">
+            <div class="container">
+                <div class="rev">
+                    <span class="kicker rv">Враження</span>
+                    <h2 class="h2 split">Відгуки студентів</h2>
+                    <p class="muted rv" style="--d:2">Справжні текстові, аудіо- та відеовідгуки студентів зараз впорядковуються і незабаром з'являться на цій сторінці.</p>
+                    <div class="rev-note rv s spot">✦ Секція готується до оновлення перевіреними матеріалами</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНТАКТИ (плита) -->
+        <section id="contact" class="sect inv slab">
+            <div class="container cta-wrap" id="ctaWrap">
+                <h2 class="h2 split">Готові зробити перший крок?</h2>
+                <p class="rv" style="--d:2">Напишіть мені — обговоримо Ваші цілі, запити й те, який формат навчання підійде саме Вам.</p>
+                <div class="cta-btns rv" style="--d:3">
+                    <a href="https://t.me/likarchuk" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg magnetic">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                         Написати в Telegram ↗
                     </a>
-                    <a href="https://instagram.com/marina.likarchuk" target="_blank" rel="noopener noreferrer" class="bg-warmmilk dark:bg-deepolive border border-sand dark:border-sage/30 hover:bg-sand/40 dark:hover:bg-deepolive/80 text-deepolive dark:text-warmtext px-8 py-3.5 rounded-xl font-semibold transition flex items-center gap-2">
+                    <a href="https://instagram.com/marina.likarchuk" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-lg magnetic">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><path d="M17.5 6.5h.01"/></svg>
                         Написати в Instagram ↗
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="text-center py-8 text-deepolive/60 dark:text-sage/60 text-sm border-t border-sand/60 dark:border-softdarkgreen relative z-10 transition-colors">
+    <footer class="foot">
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
 
-    <!-- СКРИПТИ -->
     <script>
-        // Заставка з кицею: не зависає і плавно зникає
-        const introStart = performance.now();
-        const INTRO_MIN_MS = 1400;   // мінімум, щоб кицю встигли побачити
-        const INTRO_MAX_MS = 3500;   // страховка, якщо щось вантажиться надто довго
-        let introHidden = false;
-        function hideIntro() {
-            if (introHidden) return;
-            introHidden = true;
-            const intro = document.getElementById('introScreen');
-            if (!intro) { startCordHint(); return; }
-            intro.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
-            intro.setAttribute('aria-hidden', 'true');
-            setTimeout(() => { intro.remove(); startCordHint(); }, 700);
-        }
-        function scheduleIntroHide() {
-            const left = Math.max(0, INTRO_MIN_MS - (performance.now() - introStart));
-            setTimeout(hideIntro, left);
-        }
-        if (document.readyState === 'complete') scheduleIntroHide();
-        else window.addEventListener('load', scheduleIntroHide);
-        setTimeout(hideIntro, INTRO_MAX_MS);
+    (function () {
+        'use strict';
+        var root = document.documentElement;
+        var $ = function (s, c) { return (c || document).querySelector(s); };
+        var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-        // 3D Картка профілю
-        const hero3DContainer = document.getElementById('hero3DContainer');
-        const hero3DBody = document.getElementById('hero3DBody');
+        /* ---------- Розбиття заголовків на слова ---------- */
+        $$('.split').forEach(function (el) {
+            var i = 0;
+            (function walk(node) {
+                Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+                    if (n.nodeType === 3) {
+                        var frag = document.createDocumentFragment();
+                        n.textContent.split(/(\s+)/).forEach(function (p) {
+                            if (!p) return;
+                            if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(' ')); return; }
+                            var w = document.createElement('span'); w.className = 'w';
+                            var wi = document.createElement('span'); wi.className = 'wi';
+                            wi.style.setProperty('--i', i++); wi.textContent = p;
+                            w.appendChild(wi); frag.appendChild(w);
+                        });
+                        n.parentNode.replaceChild(frag, n);
+                    } else if (n.nodeType === 1) { walk(n); }
+                });
+            })(el);
+        });
 
-        if (hero3DContainer && hero3DBody) {
-            hero3DContainer.addEventListener('mousemove', (e) => {
-                const rect = hero3DContainer.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (centerY - y) / 12;
-                const rotateY = (x - centerX) / 12;
-
-                hero3DBody.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            hero3DContainer.addEventListener('mouseenter', () => {
-                hero3DBody.style.transition = 'none';
-            });
-
-            hero3DContainer.addEventListener('mouseleave', () => {
-                hero3DBody.style.transition = 'transform 0.5s ease';
-                hero3DBody.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            });
+        /* ---------- Поява елементів при скролі ---------- */
+        function initReveal() {
+            var els = $$('.rv, .split');
+            if (!('IntersectionObserver' in window) || reduce) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+            var io = new IntersectionObserver(function (es) {
+                es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+            }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+            els.forEach(function (e) { io.observe(e); });
         }
 
-        // Шнурок-перемикач теми: потягнути, торкнутися або натиснути Enter/Пробіл
-        const cord = document.getElementById('pullCord');
-        const cordLine = document.getElementById('cordLine');
-        const cordHandle = document.getElementById('cordHandle');
-        let startY = 0, isDragging = false, currentY = 0, maxPull = 0, originalHeight = 64;
+        /* ---------- Заставка з кицею: не зависає, плавно зникає ---------- */
+        var intro = $('#intro'), t0 = performance.now(), introDone = false;
+        function finishIntro() {
+            if (introDone) return; introDone = true;
+            if (intro) { intro.classList.add('hide'); intro.setAttribute('aria-hidden', 'true'); }
+            setTimeout(initReveal, intro ? 380 : 0);
+            setTimeout(function () { if (intro) intro.remove(); startCordHint(); }, intro ? 900 : 0);
+        }
+        function scheduleIntro() { setTimeout(finishIntro, Math.max(0, 1400 - (performance.now() - t0))); }
+        if (document.readyState === 'complete') scheduleIntro(); else window.addEventListener('load', scheduleIntro);
+        setTimeout(finishIntro, 3500);
 
+        /* ---------- Лічильники ---------- */
+        $$('.stat-counter').forEach(function (c) { c.textContent = '0'; });
+        function animateValue(obj, end, dur, dec) {
+            var st = null;
+            function step(ts) {
+                if (!st) st = ts;
+                var p = Math.min((ts - st) / dur, 1), e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p), v = e * end;
+                obj.textContent = dec ? v.toFixed(1).replace('.', ',') : Math.floor(v);
+                if (p < 1) requestAnimationFrame(step);
+                else obj.textContent = dec ? String(end).replace('.', ',') : Math.floor(end);
+            }
+            requestAnimationFrame(step);
+        }
+        var stats = $('#stats');
+        if (stats && 'IntersectionObserver' in window) {
+            var so = new IntersectionObserver(function (es, ob) {
+                es.forEach(function (en) {
+                    if (!en.isIntersecting) return;
+                    $$('.stat-counter', en.target).forEach(function (c) {
+                        animateValue(c, parseFloat(c.getAttribute('data-target')), 2200, c.getAttribute('data-decimal') === 'true');
+                    });
+                    ob.unobserve(en.target);
+                });
+            }, { threshold: 0.4 });
+            so.observe(stats);
+        }
+
+        /* ---------- Бігучий рядок: дублюємо для безшовності ---------- */
+        var track = $('#track'); if (track) track.innerHTML += track.innerHTML;
+
+        /* ---------- Тема: шнурок, тап, клавіатура, плавний перехід ---------- */
+        var cord = $('#pullCord'), cordLine = $('#cordLine'), cordHandle = $('#cordHandle');
+        var startY = 0, dragging = false, curY = 0, maxPull = 0, baseH = 64;
+        var isDark = root.classList.contains('dark');
+        var liquidColor = [222, 211, 166];
+        function readLiquidColor() {
+            var v = getComputedStyle(root).getPropertyValue('--accent2').trim();
+            var m = /^#?([0-9a-f]{6})$/i.exec(v);
+            if (m) { var n = parseInt(m[1], 16); liquidColor = [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+        }
+        function applyTheme(dark) {
+            isDark = dark;
+            root.classList.toggle('dark', dark);
+            try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+            var meta = $('meta[name="theme-color"]'); if (meta) meta.setAttribute('content', dark ? '#212517' : '#F7F5EF');
+            readLiquidColor();
+        }
+        function toggleTheme() {
+            var next = !isDark;
+            if (!document.startViewTransition || reduce) { applyTheme(next); return; }
+            var r = cordHandle.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+            var rad = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            var vt = document.startViewTransition(function () { applyTheme(next); });
+            vt.ready.then(function () {
+                root.animate({ clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + rad + 'px at ' + x + 'px ' + y + 'px)'] },
+                    { duration: 700, easing: 'cubic-bezier(.2,.7,.2,1)', pseudoElement: '::view-transition-new(root)' });
+            }).catch(function () {});
+        }
         function stopCordHint() { cord.classList.remove('cord-nudge'); }
-        function startCordHint() {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            cord.classList.add('cord-nudge');
-        }
+        function startCordHint() { if (!reduce) cord.classList.add('cord-nudge'); }
         cordLine.addEventListener('animationend', stopCordHint);
-
-        cord.addEventListener('pointerdown', (e) => {
-            stopCordHint();
-            isDragging = true;
-            maxPull = 0;
-            startY = e.clientY - currentY;
-            cordLine.style.transition = 'none';
-            cordHandle.style.transition = 'none';
-            cord.style.cursor = 'grabbing';
+        cord.addEventListener('pointerdown', function (e) {
+            stopCordHint(); dragging = true; maxPull = 0; startY = e.clientY - curY;
+            cordLine.style.transition = 'none'; cordHandle.style.transition = 'none'; cord.style.cursor = 'grabbing';
             e.preventDefault();
         });
-        window.addEventListener('pointermove', (e) => {
-            if (!isDragging) return;
-            currentY = e.clientY - startY;
-            if (currentY < 0) currentY = 0;
-            if (currentY > maxPull) maxPull = currentY;
-            let pullDistance = currentY;
-            if (currentY > 40) pullDistance = 40 + (currentY - 40) * 0.3;
-            cordLine.style.height = `${originalHeight + pullDistance}px`;
+        window.addEventListener('pointermove', function (e) {
+            if (!dragging) return;
+            curY = Math.max(0, e.clientY - startY);
+            if (curY > maxPull) maxPull = curY;
+            var pull = curY > 40 ? 40 + (curY - 40) * 0.3 : curY;
+            cordLine.style.height = (baseH + pull) + 'px';
         });
-        function releaseCord(allowToggle) {
-            if (!isDragging) return;
-            isDragging = false;
-            cord.style.cursor = 'grab';
-            cordLine.style.transition = 'height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            cordHandle.style.transition = 'transform 0.3s ease';
-            cordLine.style.height = `${originalHeight}px`;
-
-            const pulled = currentY > 60;   // потягнули
-            const tapped = maxPull < 8;     // просто торкнулися
-            if (allowToggle && (pulled || tapped)) toggleTheme();
-            currentY = 0;
-            maxPull = 0;
+        function release(allow) {
+            if (!dragging) return;
+            dragging = false; cord.style.cursor = 'grab';
+            cordLine.style.transition = 'height .6s cubic-bezier(.175,.885,.32,1.275)';
+            cordHandle.style.transition = 'transform .3s ease, background-color .5s';
+            cordLine.style.height = baseH + 'px';
+            var pulled = curY > 60, tapped = maxPull < 8;
+            curY = 0; maxPull = 0;
+            if (allow && (pulled || tapped)) toggleTheme();
         }
-        window.addEventListener('pointerup', () => releaseCord(true));
-        window.addEventListener('pointercancel', () => releaseCord(false));
-        cord.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                stopCordHint();
-                toggleTheme();
-            }
+        window.addEventListener('pointerup', function () { release(true); });
+        window.addEventListener('pointercancel', function () { release(false); });
+        cord.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stopCordHint(); toggleTheme(); }
         });
 
-        let isDark = document.documentElement.classList.contains('dark');
-        function toggleTheme() {
-            isDark = !isDark;
-            document.documentElement.classList.toggle('dark', isDark);
-            try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
-            const meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', isDark ? '#212517' : '#F7F5EF');
-        }
-
-        // Мобільне меню (гамбургер)
-        const siteHeader = document.getElementById('siteHeader');
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const iconBurger = document.getElementById('iconBurger');
-        const iconClose = document.getElementById('iconClose');
+        /* ---------- Мобільне меню ---------- */
+        var hdr = $('#siteHeader'), menuBtn = $('#menuBtn'), mmenu = $('#mobileMenu');
         function setMenu(open) {
-            mobileMenu.classList.toggle('hidden', !open);
-            mobileMenu.classList.remove('menu-open');
-            if (open) { void mobileMenu.offsetWidth; mobileMenu.classList.add('menu-open'); }
-            iconBurger.classList.toggle('hidden', open);
-            iconClose.classList.toggle('hidden', !open);
+            mmenu.classList.toggle('open', open);
             menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
             menuBtn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+            document.body.style.overflow = open ? 'hidden' : '';
         }
-        menuBtn.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
-        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.classList.contains('hidden') && !siteHeader.contains(e.target)) setMenu(false);
-        });
-        window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+        menuBtn.addEventListener('click', function () { setMenu(!mmenu.classList.contains('open')); });
+        $$('a', mmenu).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+        window.matchMedia('(min-width: 900px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
 
-        // Копіювання Telegram (з запасним варіантом, якщо буфер обміну недоступний)
-        const COPY_LABEL = 'Скопіювати Telegram';
-        let copyTimer;
+        /* ---------- «Про мене»: розкриття карток ---------- */
+        $$('.acc').forEach(function (acc) {
+            var btn = $('.acc-head', acc);
+            btn.addEventListener('click', function () {
+                var open = !acc.classList.contains('open');
+                acc.classList.toggle('open', open);
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+        });
+
+        /* ---------- Кейси: вкладки ---------- */
+        var tabs = $$('[role="tab"]');
+        function selectTab(i, focus) {
+            tabs.forEach(function (t, j) {
+                var on = i === j;
+                t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+                $('#' + t.getAttribute('aria-controls')).hidden = !on;
+            });
+            if (focus) tabs[i].focus();
+        }
+        tabs.forEach(function (t, i) {
+            t.addEventListener('click', function () { selectTab(i); });
+            t.addEventListener('keydown', function (e) {
+                var k = e.key, n = tabs.length;
+                if (k === 'ArrowDown' || k === 'ArrowRight') { e.preventDefault(); selectTab((i + 1) % n, true); }
+                else if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); selectTab((i - 1 + n) % n, true); }
+                else if (k === 'Home') { e.preventDefault(); selectTab(0, true); }
+                else if (k === 'End') { e.preventDefault(); selectTab(n - 1, true); }
+            });
+        });
+
+        /* ---------- Копіювання Telegram ---------- */
+        var COPY_LABEL = 'Скопіювати Telegram', copyTimer;
         function copyTelegram(username) {
-            const text = '@' + username;
-            const label = document.getElementById('copyText');
-            const done = (msg) => {
-                label.innerText = msg;
-                clearTimeout(copyTimer);
-                copyTimer = setTimeout(() => { label.innerText = COPY_LABEL; }, 2000);
-            };
-            const fallback = () => {
+            var text = '@' + username, label = $('#copyText');
+            function done(msg) { label.textContent = msg; clearTimeout(copyTimer); copyTimer = setTimeout(function () { label.textContent = COPY_LABEL; }, 2000); }
+            function fallback() {
                 try {
-                    const ta = document.createElement('textarea');
-                    ta.value = text;
-                    ta.setAttribute('readonly', '');
-                    ta.style.position = 'fixed';
-                    ta.style.opacity = '0';
-                    document.body.appendChild(ta);
-                    ta.select();
-                    const ok = document.execCommand('copy');
-                    document.body.removeChild(ta);
+                    var ta = document.createElement('textarea');
+                    ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
+                    document.body.appendChild(ta); ta.select();
+                    var ok = document.execCommand('copy'); document.body.removeChild(ta);
                     done(ok ? 'Скопійовано!' : text);
                 } catch (err) { done(text); }
-            };
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => done('Скопійовано!')).catch(fallback);
-            } else {
-                fallback();
             }
+            if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function () { done('Скопійовано!'); }).catch(fallback);
+            else fallback();
+        }
+        $('#copyBtn').addEventListener('click', function () { copyTelegram('likarchuk'); });
+
+        /* ---------- Spotlight на картках ---------- */
+        if (finePointer) {
+            document.addEventListener('pointermove', function (e) {
+                var el = e.target.closest && e.target.closest('.spot');
+                if (!el) return;
+                var r = el.getBoundingClientRect();
+                el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            }, { passive: true });
         }
 
-        // Spotlight Effect
-        document.querySelectorAll('.spotlight-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--spotlight-x', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--spotlight-y', `${e.clientY - rect.top}px`);
-            });
-        });
-
-        // Анімація чисел при скролі
-        const animateValue = (obj, start, end, duration, isDecimal) => {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-                const val = (easeProgress * (end - start) + start);
-                obj.innerHTML = isDecimal ? val.toFixed(1).replace('.', ',') : Math.floor(val);
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    obj.innerHTML = isDecimal ? String(end).replace('.', ',') : Math.floor(end);
+        /* ---------- Хвилі від кліку та від кнопок ---------- */
+        if (!reduce) {
+            document.addEventListener('pointerdown', function (e) {
+                if (e.target.closest && e.target.closest('#pullCord')) return;
+                [0, 1].forEach(function (k) {
+                    var w = document.createElement('span'); w.className = 'wave' + (k ? ' w2' : '');
+                    w.style.left = e.clientX + 'px'; w.style.top = e.clientY + 'px';
+                    w.addEventListener('animationend', function () { w.remove(); });
+                    document.body.appendChild(w);
+                });
+                var btn = e.target.closest && e.target.closest('.btn');
+                if (btn) {
+                    var r = btn.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2.2;
+                    var s = document.createElement('span'); s.className = 'rip';
+                    s.style.cssText = 'width:' + d + 'px;height:' + d + 'px;left:' + (e.clientX - r.left - d / 2) + 'px;top:' + (e.clientY - r.top - d / 2) + 'px';
+                    s.addEventListener('animationend', function () { s.remove(); });
+                    btn.appendChild(s);
                 }
-            };
-            window.requestAnimationFrame(step);
+            }, { passive: true });
         }
 
-        document.querySelectorAll('.stat-counter').forEach(c => { c.textContent = '0'; });
-
-        const statsObserverOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 
-        };
-
-        const statsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.stat-counter');
-                    counters.forEach(counter => {
-                        const target = parseFloat(counter.getAttribute('data-target'));
-                        const isDecimal = counter.getAttribute('data-decimal') === 'true';
-                        animateValue(counter, 0, target, 2500, isDecimal); 
-                    });
-                    observer.unobserve(entry.target);
-                }
+        /* ---------- Магнітні кнопки ---------- */
+        if (finePointer && !reduce) {
+            $$('.magnetic').forEach(function (el) {
+                el.addEventListener('pointermove', function (e) {
+                    var r = el.getBoundingClientRect();
+                    el.style.translate = ((e.clientX - (r.left + r.width / 2)) * 0.28).toFixed(1) + 'px ' + ((e.clientY - (r.top + r.height / 2)) * 0.34).toFixed(1) + 'px';
+                });
+                el.addEventListener('pointerleave', function () { el.style.translate = ''; });
             });
-        }, statsObserverOptions);
-
-        const statsSection = document.getElementById('stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
         }
 
-        // WebGL-шейдер фон
-        const canvas = document.getElementById('nebulaCanvas');
-        const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
-        if (gl) {
-            const vsSource = `#version 300 es
-                void main(){
-                    vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
-                    gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
-                }`;
-            const fsSource = `#version 300 es
-                precision highp float;
-                uniform vec2 uRes;
-                uniform float uTime;
-                uniform vec2 uMouse;
-                uniform int uTheme;
-                out vec4 frag;
-                float hash12(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
-                float vnoise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); float a = hash12(i), b = hash12(i + vec2(1.0, 0.0)); float c = hash12(i + vec2(0.0, 1.0)), d = hash12(i + vec2(1.0, 1.0)); return mix(mix(a, b, f.x), mix(c, d, f.x), f.y); }
-                float fbm(vec2 p){ float s = 0.0, a = 0.5; mat2 r = mat2(0.8, -0.6, 0.6, 0.8); for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = r * p * 2.03 + 17.1; a *= 0.5; } return s / 0.9375; }
-                void main(){
-                    vec2 uv = gl_FragCoord.xy / uRes.y;
-                    vec2 mouseUv = uMouse / uRes.y;
-                    float dist = length(uv - mouseUv);
-                    float lamp = exp(-dist * 2.2) * 0.55;
-                    vec2 p = uv * 1.5 + vec2(uTime * 0.015, 0.0);
-                    float rawN = fbm(p + vec2(fbm(p), fbm(p + 1.3)));
-                    float n = rawN + lamp;
-                    vec3 col;
-                    if (uTheme == 1) {
-                        vec3 voidCol = vec3(0.129, 0.145, 0.090); 
-                        vec3 cardGlow = vec3(0.188, 0.212, 0.153); 
-                        vec3 highlight = vec3(0.714, 0.773, 0.557);
-                        col = mix(voidCol, cardGlow, smoothstep(0.2, 0.6, n)); 
-                        col = mix(col, highlight, smoothstep(0.6, 0.9, n) * 0.4);
-                    } else {
-                        vec3 lightBg = vec3(0.969, 0.961, 0.937); 
-                        vec3 sandGlow = vec3(0.871, 0.827, 0.651); 
-                        vec3 oliveGlow = vec3(0.459, 0.573, 0.259);
-                        col = mix(lightBg, sandGlow, smoothstep(0.1, 0.5, rawN)); 
-                        col = mix(col, oliveGlow, smoothstep(0.55, 0.85, rawN) * 0.35);
-                        vec3 cursorGlow = vec3(0.871, 0.827, 0.651); 
-                        col = mix(col, cursorGlow, lamp * 0.6);
-                    }
-                    vec2 grid = fract(gl_FragCoord.xy / 6.0) - 0.5; float d_grid = length(grid); float dotMask = smoothstep(0.35, 0.38, d_grid * (0.5 + rawN * 0.8 - lamp * 0.5));
-                    if (uTheme == 1) { col *= mix(0.82, 1.0, dotMask); } else { vec3 dotColor = vec3(0.216, 0.278, 0.035); col = mix(mix(col, dotColor, 0.08 + lamp * 0.15), col, dotMask); }
-                    frag = vec4(col, 1.0);
-                }`;
-            const compile = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
-            const program = gl.createProgram(); gl.attachShader(program, compile(gl.VERTEX_SHADER, vsSource)); gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fsSource)); gl.linkProgram(program);
-            const uResLoc = gl.getUniformLocation(program, "uRes"); const uTimeLoc = gl.getUniformLocation(program, "uTime"); const uMouseLoc = gl.getUniformLocation(program, "uMouse"); const uThemeLoc = gl.getUniformLocation(program, "uTheme");
-            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2, targetMouseX = mouseX, targetMouseY = mouseY;
-            window.addEventListener('mousemove', (e) => { targetMouseX = e.clientX; targetMouseY = window.innerHeight - e.clientY; });
-            function resize() { canvas.width = window.innerWidth * window.devicePixelRatio; canvas.height = window.innerHeight * window.devicePixelRatio; gl.viewport(0, 0, canvas.width, canvas.height); }
-            window.addEventListener('resize', resize); resize();
-            let startTime = performance.now();
-            function render() {
-                mouseX += (targetMouseX - mouseX) * 0.08; mouseY += (targetMouseY - mouseY) * 0.08;
-                gl.useProgram(program); gl.uniform2f(uResLoc, canvas.width, canvas.height); gl.uniform1f(uTimeLoc, (performance.now() - startTime) / 1000); gl.uniform2f(uMouseLoc, mouseX * window.devicePixelRatio, mouseY * window.devicePixelRatio); gl.uniform1i(uThemeLoc, isDark ? 1 : 0);
-                gl.drawArrays(gl.TRIANGLES, 0, 3); requestAnimationFrame(render);
+        /* ---------- 3D-нахил та глибина (паралакс від курсору) ---------- */
+        if (finePointer && !reduce) {
+            $$('[data-tilt]').forEach(function (stage) {
+                var body = $('.pwrap', stage) || stage;
+                var chips = $$('[data-depth]', stage);
+                stage.addEventListener('pointermove', function (e) {
+                    var r = stage.getBoundingClientRect();
+                    var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+                    body.style.transition = 'transform .12s linear';
+                    body.style.transform = 'rotateX(' + (-py * 9).toFixed(2) + 'deg) rotateY(' + (px * 11).toFixed(2) + 'deg)';
+                    chips.forEach(function (c) { var d = +c.getAttribute('data-depth'); c.style.translate = (px * d).toFixed(1) + 'px ' + (py * d).toFixed(1) + 'px'; });
+                });
+                stage.addEventListener('pointerleave', function () {
+                    body.style.transition = 'transform .7s cubic-bezier(.2,.8,.2,1)'; body.style.transform = '';
+                    chips.forEach(function (c) { c.style.translate = ''; });
+                });
+            });
+        }
+
+        /* ---------- Скрол: шапка, прогрес, паралакс ---------- */
+        var prog = $('#progress'), parEls = $$('[data-speed]'), blobs = $$('[data-bg]');
+        var mx = 0, my = 0, tx = 0, ty = 0, ticking = false;
+        function frame() {
+            ticking = false;
+            var sy = window.pageYOffset || 0, vh = window.innerHeight;
+            hdr.classList.toggle('scrolled', sy > 24);
+            var max = document.documentElement.scrollHeight - vh;
+            prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(sy / max, 1) : 0) + ')';
+            if (reduce) return;
+            parEls.forEach(function (el) {
+                var host = el.closest('.card, .scard, section') || el.parentElement, r = host.getBoundingClientRect();
+                if (r.bottom < -200 || r.top > vh + 200) return;
+                el.style.translate = '0 ' + (((r.top + r.height / 2) - vh / 2) * parseFloat(el.getAttribute('data-speed'))).toFixed(1) + 'px';
+            });
+            mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+            blobs.forEach(function (b) {
+                var k = parseFloat(b.getAttribute('data-bg'));
+                b.style.translate = (mx * k * 900).toFixed(1) + 'px ' + (sy * -k * 1.4 + my * k * 900).toFixed(1) + 'px';
+            });
+            if (Math.abs(tx - mx) > 0.0005 || Math.abs(ty - my) > 0.0005) request();
+        }
+        function request() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+        window.addEventListener('scroll', request, { passive: true });
+        window.addEventListener('resize', request);
+        if (finePointer && !reduce) {
+            window.addEventListener('pointermove', function (e) { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; request(); }, { passive: true });
+        }
+        request();
+
+        /* ---------- Рідкий курсор (канвас, лише для миші) ---------- */
+        (function () {
+            var c = $('#liquid');
+            if (!c || !finePointer || reduce || !c.getContext) return;
+            var ctx = c.getContext('2d'), pts = [], raf = 0, lx = -1, ly = -1, dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+            function size() { c.width = innerWidth * dpr; c.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+            size(); window.addEventListener('resize', size); readLiquidColor();
+            function add(x, y, speed) { pts.push({ x: x, y: y, r: Math.min(20 + speed * 0.55, 54), life: 1 }); if (pts.length > 70) pts.shift(); }
+            window.addEventListener('pointermove', function (e) {
+                if (lx >= 0) {
+                    var dx = e.clientX - lx, dy = e.clientY - ly, d = Math.hypot(dx, dy), n = Math.max(1, Math.floor(d / 14));
+                    for (var i = 1; i <= n; i++) add(lx + dx * i / n, ly + dy * i / n, d);
+                }
+                lx = e.clientX; ly = e.clientY;
+                if (!raf) raf = requestAnimationFrame(draw);
+            }, { passive: true });
+            function draw() {
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                var col = liquidColor.join(',');
+                for (var i = pts.length - 1; i >= 0; i--) {
+                    var p = pts[i]; p.life -= 0.028; p.r *= 0.992;
+                    if (p.life <= 0) { pts.splice(i, 1); continue; }
+                    var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+                    g.addColorStop(0, 'rgba(' + col + ',' + (0.22 * p.life * p.life).toFixed(3) + ')');
+                    g.addColorStop(1, 'rgba(' + col + ',0)');
+                    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+                }
+                raf = pts.length && !document.hidden ? requestAnimationFrame(draw) : 0;
             }
-            requestAnimationFrame(render);
-        }
+        })();
+
+        /* ---------- Краплі води у блоці контактів ---------- */
+        (function () {
+            var sec = $('#contact');
+            if (!sec || !finePointer || reduce) return;
+            var last = 0;
+            sec.addEventListener('pointermove', function (e) {
+                var now = performance.now(); if (now - last < 150) return; last = now;
+                var r = sec.getBoundingClientRect(), w = document.createElement('span');
+                w.className = 'wave sm'; w.style.left = (e.clientX - r.left) + 'px'; w.style.top = (e.clientY - r.top) + 'px';
+                w.addEventListener('animationend', function () { w.remove(); });
+                sec.appendChild(w);
+            }, { passive: true });
+        })();
+    })();
     </script>
 </body>
 </html>

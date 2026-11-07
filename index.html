@@ -412,8 +412,51 @@
         /* ============ ВІДГУКИ ТА КОНТАКТИ ============ */
         .rev { text-align:center; max-width:46rem; margin-inline:auto; }
         .rev .kicker { justify-content:center; }
-        .rev-grid { columns:3 300px; column-gap:1rem; margin-top:2.5rem; text-align:left; }
-        .rev-card { break-inside:avoid; margin:0 0 1rem; padding:1.5rem 1.5rem 1.3rem; border-radius:26px; background:var(--surface); border:1px solid var(--line); }
+        /* --- головна цитата --- */
+        .rev-featured { max-width:54rem; margin:2.4rem auto 0; text-align:center; }
+        .rev-featured blockquote { margin:0; }
+        .rev-featured blockquote::before { content:"\201C"; display:block; font-family:var(--font-head); font-size:5rem; line-height:.6; height:2.4rem; color:var(--accent2); }
+        .rev-featured p { font-family:var(--font-head); font-weight:500; font-size:clamp(1.4rem,3.2vw,2.3rem); line-height:1.25; letter-spacing:-.02em; text-wrap:balance; }
+        .rev-featured mark { color:inherit; padding:0 .08em; background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent2) 48%,transparent) 62%); }
+        .rev-featured figcaption { margin-top:1.1rem; font-size:.92rem; font-weight:600; color:var(--muted); }
+        /* --- стіна відгуків --- */
+        .rev-wall { position:relative; margin-top:2.8rem; }
+        .rev-ctl { display:flex; align-items:center; justify-content:flex-end; gap:.6rem; min-height:2.7rem; margin-bottom:.6rem; }
+        .rev-count { margin-right:auto; font-size:.88rem; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; }
+        .rev-nav { display:flex; gap:.5rem; }
+        .rev-btn { width:2.7rem; height:2.7rem; border-radius:50%; border:1px solid var(--line); background:var(--surface); display:grid; place-items:center; transition:border-color .3s,translate .25s var(--ease); }
+        .rev-btn:hover { border-color:var(--accent2); translate:0 -2px; }
+        .rev-pause { display:none; align-items:center; gap:.5rem; padding:.55rem 1.05rem; border-radius:999px; border:1px solid var(--line); background:var(--surface); font-size:.85rem; font-weight:600; transition:border-color .3s; }
+        .rev-pause:hover { border-color:var(--accent2); }
+        .rev-pause svg { width:14px; height:14px; }
+        .rev-pause .i-play { display:none; }
+        .rev-wall.paused .rev-pause .i-play { display:block; }
+        .rev-wall.paused .rev-pause .i-pause { display:none; }
+        /* телефон: стрічка, яку гортають пальцем */
+        .rev-grid { position:relative; display:flex; align-items:stretch; gap:1rem; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; padding:.5rem 1.5rem 1.4rem; margin-inline:-1.5rem; scrollbar-width:none; text-align:left; }
+        .rev-grid::-webkit-scrollbar { display:none; }
+        .rev-grid:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; border-radius:26px; }
+        .rev-card { flex:none; width:min(84vw,360px); scroll-snap-align:center; margin:0; padding:1.5rem 1.5rem 1.3rem; border-radius:26px; background:var(--surface); border:1px solid var(--line); transition:box-shadow .4s,border-color .4s; }
+        .rev-card:hover { box-shadow:var(--shadow); border-color:color-mix(in srgb,var(--accent2) 55%,var(--line)); }
+        @media (max-width:899px) { .rev-card.shot { display:flex; align-items:center; } .rev-card.shot .shot-btn { flex:1; } .rev-card:not(.shot) { display:flex; flex-direction:column; justify-content:center; } }
+        /* комп'ютер без руху: акуратна мозаїка */
+        @media (min-width:900px) {
+            .rev-grid { display:block; columns:3 300px; column-gap:1rem; overflow:visible; scroll-snap-type:none; padding:0; margin-inline:0; }
+            .rev-card { width:auto; margin:0 0 1rem; break-inside:avoid; }
+            .rev-count, .rev-nav { display:none; }
+        }
+        /* комп'ютер з рухом: три колонки, що повільно пливуть у різні боки */
+        .rev-cols { display:none; }
+        .is-marquee .rev-grid { display:none; }
+        .is-marquee .rev-pause { display:inline-flex; }
+        .is-marquee .rev-cols { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; height:clamp(560px,80vh,740px); overflow:hidden; text-align:left; -webkit-mask-image:linear-gradient(transparent,#000 11%,#000 89%,transparent); mask-image:linear-gradient(transparent,#000 11%,#000 89%,transparent); }
+        .rev-col { overflow:hidden; }
+        .rev-track { display:flex; flex-direction:column; animation:revScroll var(--dur,70s) linear infinite; will-change:transform; }
+        .rev-col:nth-child(2) .rev-track { animation-direction:reverse; }
+        .rev-set { display:flex; flex-direction:column; flex:none; }
+        .rev-track .rev-card { width:auto; margin:0 0 1rem; scroll-snap-align:none; }
+        @keyframes revScroll { to { transform:translateY(var(--shift,-50%)); } }
+        .rev-wall:hover .rev-track, .rev-wall:focus-within .rev-track, .rev-wall.paused .rev-track { animation-play-state:paused; }
         .rev-card.shot { padding:.55rem; }
         .rev-card.shot img { display:block; width:100%; height:auto; margin-inline:auto; border-radius:18px; }
         .shot-btn { display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; border-radius:18px; }
@@ -431,9 +474,6 @@
         .rev-by { margin-top:1rem; font-size:.88rem; color:var(--muted); }
         .rev-by b { color:var(--fg); font-weight:600; }
         .rev-card.fill .rev-by, .rev-card.fill .rev-by b { color:inherit; opacity:.9; }
-        .js .rev-grid:not(.all) .rev-card:nth-child(n+7) { display:none; }
-        .rev-more { display:none; margin-top:.6rem; }
-        .js .rev-more { display:inline-flex; }
         .rev-foot { margin:1.8rem auto 0; max-width:40rem; font-size:.82rem; color:var(--muted); }
         .rev-note { margin-top:2rem; padding:1.5rem 1.4rem; border:1.5px dashed color-mix(in srgb,var(--accent) 45%,transparent); border-radius:26px; font-size:.97rem; color:var(--muted); }
         .rev-note .btn { margin-top:1rem; }
@@ -480,6 +520,7 @@
             .foot { padding-bottom:6rem; }
         }
         @media (prefers-reduced-motion:reduce) {
+            .rev-track { animation:none; }
             html { scroll-behavior:auto; }
             *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
             .js .rv,.js .split .wi { opacity:1; transform:none; filter:none; }
@@ -857,27 +898,43 @@
                     <h2 class="h2 split">Відгуки студентів</h2>
                     <p class="muted rv" style="--d:2">Справжні повідомлення, які учні та їхні батьки надсилали після занять.</p>
                 </div>
-                <div class="rev-grid" id="revGrid">
-                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-01.jpg" width="760" height="532" alt="Скриншот відгуку: «Мариночко, дякую Вам, це наш спільний результат. Безмежно Вам вдячна за кожну нашу зустріч: це більше ніж навчання, це гарний настрій, гумор, це на одній хвилі. Дякую Всесвіту за зустріч з Вами. Я обов&#x27;язково повернусь і думаю, що скоро.»" loading="lazy" decoding="async" style="max-width:760px"></button></article>
-                    <article class="rev-card fill rv" style="--d:1"><blockquote><p>Хочу [Марині] висловити подяку та сказати велике „дякую” за те, що завжди допомагала на уроках, виправляла та пояснювала нові теми уроків, які не завжди мені вдавалося зрозуміти. На наших заняттях завжди були цікаві вправи та завдання. Завдяки [Марині] зараз я не боюся говорити англійською мовою. І це мій головний результат!</p></blockquote><footer class="rev-by"><b>Учениця</b></footer></article>
-                    <article class="rev-card shot rv" style="--d:2"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-02.png" width="347" height="222" alt="Скриншот відгуку: «Я сьогодні розмовляв по телефону з людиною, яка розмовляє англійською, і скажу, що я майже все розумів, що він говорив, але відповідав так, як вмію, але він усе зрозумів.»" loading="lazy" decoding="async" style="max-width:434px"></button></article>
-                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-03.png" width="363" height="219" alt="Скриншот відгуку: «Нам все подобається, Ніка повністю задоволена навчанням з вами. Говорить, що за останній місяць дізналась більше, ніж з початку навчального року, їй подобається, коли вся увага на неї. А мені подобається, що вона не скиглить, що не хоче вчитись. На уроки з вами іде з задоволенням, а це великий плюс.»" loading="lazy" decoding="async" style="max-width:454px"></button></article>
-                    <article class="rev-card rv" style="--d:1"><blockquote><p lang="en">I studied with her for two levels. It was a really nice and fun time. Besides new knowledge, I also picked up a new habit: now I listen to English podcasts and read an English blog every day as part of my daily routine. I have also become more confident in my knowledge for small talks with foreigners, which makes me incredibly happy.</p></blockquote><footer class="rev-by"><b>Студент(ка), пройшов(ла) два рівні</b></footer></article>
-                    <article class="rev-card shot rv" style="--d:2"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-04.png" width="335" height="187" alt="Скриншот відгуку: «Dear Maryna. Thank you so much for everything you&#x27;ve done for teaching me. Your lessons were not just about grammar or words — you made English fun, interesting, and real. You believed in me, even when I made a lot of mistakes. I&#x27;m really grateful to have had you as my teacher.»" loading="lazy" decoding="async" style="max-width:419px"></button></article>
-                    <article class="rev-card rv"><blockquote><p>Завдяки моєму вчителю Марині Лікарчук… моє навчання англійської проходить дуже легко та цікаво… Зараз я закінчила курс Elementary та дуже задоволена своїм результатом!</p></blockquote><footer class="rev-by"><b>Учениця</b></footer></article>
-                    <article class="rev-card shot rv" style="--d:1"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-05.png" width="466" height="111" alt="Скриншот відгуку: «Дякую Марина, це наша сумісна невелика перемога, бо як би не Ви я б напевно здалась на пів дороги, також дякую за чудові слова підтримки.»" loading="lazy" decoding="async" style="max-width:582px"></button></article>
-                    <article class="rev-card rv" style="--d:2"><blockquote><p lang="en">It was a real pleasure learning from you. I always felt your support, and it inspired me to keep learning. Our lessons were fun and relaxed. I learned a lot from you and improved my pronunciation skills.</p></blockquote><footer class="rev-by"><b>Студент(ка)</b></footer></article>
-                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-06.png" width="338" height="113" alt="Скриншот відгуку: «Дякую! Моє бажання подолати цю вершину тільки зросло! Ви даруєте мені в цьому впевненість!»" loading="lazy" decoding="async" style="max-width:422px"></button></article>
-                    <article class="rev-card shot rv" style="--d:1"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-07.png" width="341" height="169" alt="Скриншот відгуку: «Добрий день Марино! Дякую Вам за увагу, за навчання, за підтримку, за спілкування, за допомогу. Мені дійсно подобається навчання, сам процес навчання.»" loading="lazy" decoding="async" style="max-width:426px"></button></article>
-                    <article class="rev-card rv" style="--d:2"><blockquote><p>Подобається її спокій, терпіння і підтримка.</p></blockquote><footer class="rev-by"><b>Студентка, після першого тижня занять</b></footer></article>
-                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-08.png" width="332" height="69" alt="Скриншот відгуку: «Thank you, you are the best teacher, that I have ever had.»" loading="lazy" decoding="async" style="max-width:415px"></button></article>
-                    <article class="rev-card shot rv" style="--d:1"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-09.png" width="335" height="115" alt="Скриншот відгуку: «Hello, дуже дякую, також вам дякую за уроки та підтримку, навчатися було надзвичайно цікаво.»" loading="lazy" decoding="async" style="max-width:419px"></button></article>
-                    <article class="rev-card shot rv" style="--d:2"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-10.jpg" width="760" height="327" alt="Скриншот відгуку: «Дякую за чудові слова! Дякую Вам за Ваше терпіння та допомогу у вивченні English.»" loading="lazy" decoding="async" style="max-width:760px"></button></article>
-                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-11.png" width="259" height="115" alt="Скриншот відгуку: «I am very greateful to you. It was a pleasure to study with you. I wish you all the best as well!»" loading="lazy" decoding="async" style="max-width:324px"></button></article>
+                <figure class="rev-featured rv">
+                    <blockquote><p>Завдяки [Марині] зараз я <mark>не боюся говорити англійською</mark> мовою. І це мій головний результат!</p></blockquote>
+                    <figcaption>Учениця</figcaption>
+                </figure>
+                <div class="rev-wall rv" id="revWall">
+                    <div class="rev-ctl">
+                        <span class="rev-count" id="revCount" aria-live="off">1 / 15</span>
+                        <div class="rev-nav">
+                            <button type="button" class="rev-btn" id="revPrev" aria-label="Попередній відгук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+                            <button type="button" class="rev-btn" id="revNext" aria-label="Наступний відгук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                        </div>
+                        <button type="button" class="rev-pause" id="revPause" aria-pressed="false">
+                            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                            <span id="revPauseText">Пауза</span>
+                        </button>
+                    </div>
+                <div class="rev-grid" id="revGrid" tabindex="0" role="region" aria-label="Відгуки учнів: гортайте вліво і вправо">
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-01.jpg" width="760" height="532" alt="Скриншот відгуку: «Мариночко, дякую Вам, це наш спільний результат. Безмежно Вам вдячна за кожну нашу зустріч: це більше ніж навчання, це гарний настрій, гумор, це на одній хвилі. Дякую Всесвіту за зустріч з Вами. Я обов&#x27;язково повернусь і думаю, що скоро.»" loading="lazy" decoding="async" style="max-width:760px"></button></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-02.png" width="347" height="222" alt="Скриншот відгуку: «Я сьогодні розмовляв по телефону з людиною, яка розмовляє англійською, і скажу, що я майже все розумів, що він говорив, але відповідав так, як вмію, але він усе зрозумів.»" loading="lazy" decoding="async" style="max-width:434px"></button></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-03.png" width="363" height="219" alt="Скриншот відгуку: «Нам все подобається, Ніка повністю задоволена навчанням з вами. Говорить, що за останній місяць дізналась більше, ніж з початку навчального року, їй подобається, коли вся увага на неї. А мені подобається, що вона не скиглить, що не хоче вчитись. На уроки з вами іде з задоволенням, а це великий плюс.»" loading="lazy" decoding="async" style="max-width:454px"></button></article>
+                    <article class="rev-card"><blockquote><p lang="en">I studied with her for two levels. It was a really nice and fun time. Besides new knowledge, I also picked up a new habit: now I listen to English podcasts and read an English blog every day as part of my daily routine. I have also become more confident in my knowledge for small talks with foreigners, which makes me incredibly happy.</p></blockquote><footer class="rev-by"><b>Студент(ка), пройшов(ла) два рівні</b></footer></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-04.png" width="335" height="187" alt="Скриншот відгуку: «Dear Maryna. Thank you so much for everything you&#x27;ve done for teaching me. Your lessons were not just about grammar or words — you made English fun, interesting, and real. You believed in me, even when I made a lot of mistakes. I&#x27;m really grateful to have had you as my teacher.»" loading="lazy" decoding="async" style="max-width:419px"></button></article>
+                    <article class="rev-card"><blockquote><p>Завдяки моєму вчителю Марині Лікарчук… моє навчання англійської проходить дуже легко та цікаво… Зараз я закінчила курс Elementary та дуже задоволена своїм результатом!</p></blockquote><footer class="rev-by"><b>Учениця</b></footer></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-05.png" width="466" height="111" alt="Скриншот відгуку: «Дякую Марина, це наша сумісна невелика перемога, бо як би не Ви я б напевно здалась на пів дороги, також дякую за чудові слова підтримки.»" loading="lazy" decoding="async" style="max-width:582px"></button></article>
+                    <article class="rev-card"><blockquote><p lang="en">It was a real pleasure learning from you. I always felt your support, and it inspired me to keep learning. Our lessons were fun and relaxed. I learned a lot from you and improved my pronunciation skills.</p></blockquote><footer class="rev-by"><b>Студент(ка)</b></footer></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-06.png" width="338" height="113" alt="Скриншот відгуку: «Дякую! Моє бажання подолати цю вершину тільки зросло! Ви даруєте мені в цьому впевненість!»" loading="lazy" decoding="async" style="max-width:422px"></button></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-07.png" width="341" height="169" alt="Скриншот відгуку: «Добрий день Марино! Дякую Вам за увагу, за навчання, за підтримку, за спілкування, за допомогу. Мені дійсно подобається навчання, сам процес навчання.»" loading="lazy" decoding="async" style="max-width:426px"></button></article>
+                    <article class="rev-card"><blockquote><p>Подобається її спокій, терпіння і підтримка.</p></blockquote><footer class="rev-by"><b>Студентка, після першого тижня занять</b></footer></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-08.png" width="332" height="69" alt="Скриншот відгуку: «Thank you, you are the best teacher, that I have ever had.»" loading="lazy" decoding="async" style="max-width:415px"></button></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-09.png" width="335" height="115" alt="Скриншот відгуку: «Hello, дуже дякую, також вам дякую за уроки та підтримку, навчатися було надзвичайно цікаво.»" loading="lazy" decoding="async" style="max-width:419px"></button></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-10.jpg" width="760" height="327" alt="Скриншот відгуку: «Дякую за чудові слова! Дякую Вам за Ваше терпіння та допомогу у вивченні English.»" loading="lazy" decoding="async" style="max-width:760px"></button></article>
+                    <article class="rev-card shot"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-11.png" width="259" height="115" alt="Скриншот відгуку: «I am very greateful to you. It was a pleasure to study with you. I wish you all the best as well!»" loading="lazy" decoding="async" style="max-width:324px"></button></article>
+                </div>
                 </div>
                 <div style="text-align:center">
-                    <button type="button" class="btn btn-ghost rev-more" id="revMore" aria-expanded="false" aria-controls="revGrid">Показати всі відгуки (16)</button>
-                    <p class="rev-foot">Це справжні повідомлення від учнів та їхніх батьків: скриншоти й витримки з листування. Імена та фото не показано; у текстових витягах скорочення позначено «…», виправлено лише друкарські помилки.</p>
+                    <p class="rev-foot">Це справжні повідомлення від учнів та їхніх батьків: скриншоти й витримки з листування. Імена та фото не показано. У текстових витягах скорочення позначено «…», у квадратних дужках — замінене ім'я; виправлено лише друкарські помилки.</p>
                 </div>
             </div>
         </section>
@@ -1329,23 +1386,78 @@
             new IntersectionObserver(function (es) { inContact = es[0].isIntersecting; upd(); }, { threshold: 0.1 }).observe(contact);
         })();
 
-        /* ---------- Відгуки: показати всі / згорнути ---------- */
+        /* ---------- Відгуки: стіна (комп'ютер) / стрічка (телефон) ---------- */
         (function () {
-            var grid = $('#revGrid'), btn = $('#revMore');
-            if (!grid || !btn) return;
-            var total = $$('.rev-card', grid).length;
-            btn.addEventListener('click', function () {
-                var open = grid.classList.toggle('all');
-                $$('.rev-card', grid).forEach(function (c) { c.classList.add('in'); });
-                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-                btn.textContent = open ? 'Згорнути' : 'Показати всі відгуки (' + total + ')';
-                if (!open) { var sec = $('#reviews'); if (sec) sec.scrollIntoView({ block: 'start' }); }
+            var wall = $('#revWall'), grid = $('#revGrid');
+            if (!wall || !grid) return;
+            var cards = $$('.rev-card', grid), total = cards.length;
+            var desk = window.matchMedia('(min-width: 900px)'), cols = null, rt = 0, rz = 0;
+            var pauseBtn = $('#revPause'), pauseText = $('#revPauseText'), countEl = $('#revCount');
+            var SPEED = 24; /* пікселів за секунду */
+
+            function teardown() { if (cols) { cols.remove(); cols = null; } wall.classList.remove('is-marquee', 'paused'); if (pauseBtn) { pauseBtn.setAttribute('aria-pressed', 'false'); pauseText.textContent = 'Пауза'; } }
+            function fit() {
+                if (!cols) return;
+                var h = cols.clientHeight;
+                $$('.rev-track', cols).forEach(function (t) {
+                    while (t.children.length > 1) t.removeChild(t.lastChild);
+                    var base = t.firstElementChild, sh = base.offsetHeight;
+                    if (!sh) return;
+                    var copies = Math.max(2, Math.ceil(h / sh) + 1);
+                    for (var i = 1; i < copies; i++) {
+                        var c = base.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.inert = true; t.appendChild(c);
+                    }
+                    t.style.setProperty('--shift', (-100 / copies) + '%');
+                    t.style.setProperty('--dur', (sh / SPEED).toFixed(1) + 's');
+                });
+            }
+            function build() {
+                teardown();
+                if (!desk.matches || reduce) return;
+                cols = document.createElement('div'); cols.className = 'rev-cols';
+                for (var k = 0; k < 3; k++) {
+                    var col = document.createElement('div'); col.className = 'rev-col';
+                    var track = document.createElement('div'); track.className = 'rev-track';
+                    var set = document.createElement('div'); set.className = 'rev-set';
+                    cards.forEach(function (c, i) {
+                        if (i % 3 !== k) return;
+                        var n = c.cloneNode(true);
+                        $$('img', n).forEach(function (im) { im.loading = 'eager'; });
+                        set.appendChild(n);
+                    });
+                    track.appendChild(set); col.appendChild(track); cols.appendChild(col);
+                }
+                wall.insertBefore(cols, grid);
+                wall.classList.add('is-marquee');
+                fit();
+            }
+            build();
+            if (desk.addEventListener) desk.addEventListener('change', build);
+            window.addEventListener('load', fit);
+            window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(fit, 200); });
+
+            if (pauseBtn) pauseBtn.addEventListener('click', function () {
+                var p = wall.classList.toggle('paused');
+                pauseBtn.setAttribute('aria-pressed', p ? 'true' : 'false');
+                pauseText.textContent = p ? 'Продовжити' : 'Пауза';
             });
+
+            /* телефон: лічильник і стрілки */
+            function upd() {
+                var mid = grid.scrollLeft + grid.clientWidth / 2, best = 0, bd = 1e9;
+                cards.forEach(function (c, i) { var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = i; } });
+                if (countEl) countEl.textContent = (best + 1) + ' / ' + total;
+            }
+            grid.addEventListener('scroll', function () { cancelAnimationFrame(rt); rt = requestAnimationFrame(upd); }, { passive: true });
+            function step(dir) { var w = cards[0].getBoundingClientRect().width + 16; grid.scrollBy({ left: dir * w, behavior: reduce ? 'auto' : 'smooth' }); }
+            var pv = $('#revPrev'), nx = $('#revNext');
+            if (pv) pv.addEventListener('click', function () { step(-1); });
+            if (nx) nx.addEventListener('click', function () { step(1); });
         })();
 
         /* ---------- Збільшення скриншотів відгуків ---------- */
         (function () {
-            var dlg = $('#lightbox'), grid = $('#revGrid');
+            var dlg = $('#lightbox'), grid = $('#revWall');
             if (!dlg || !grid) return;
             var big = $('img', dlg);
             grid.addEventListener('click', function (e) {

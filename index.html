@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Maryna Likarchuk — Наставник з англійської мови</title>
-    <meta name="description" content="Maryna Likarchuk — TESOL/TEFL-сертифікована менторка з англійської мови. Індивідуальні заняття для дорослих: заговорити без страху помилок, у Вашому темпі та під Ваші цілі.">
+    <title>Репетитор з англійської онлайн для дорослих — Maryna Likarchuk</title>
+    <meta name="description" content="Репетитор з англійської онлайн для дорослих: індивідуальні заняття 1:1 по 50 хвилин, у Вашому темпі та під Ваші цілі. Maryna Likarchuk — TESOL/TEFL-сертифікована менторка.">
     <meta name="theme-color" content="#212517">
+    <meta name="color-scheme" content="light dark">
+    <meta name="robots" content="index,follow,max-image-preview:large">
     <link rel="canonical" href="https://likarchukmarin-sketch.github.io/english/">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23374709'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23F7F5EF'%3EM%3C/text%3E%3C/svg%3E">
 
@@ -13,28 +15,33 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="uk_UA">
     <meta property="og:site_name" content="Maryna Likarchuk">
-    <meta property="og:title" content="Maryna Likarchuk — Наставник з англійської мови">
+    <meta property="og:title" content="Репетитор з англійської онлайн для дорослих — Maryna Likarchuk">
     <meta property="og:description" content="Англійська, у якій можна бути собою. Індивідуальні заняття для дорослих — у Вашому темпі, під Ваші цілі.">
     <meta property="og:url" content="https://likarchukmarin-sketch.github.io/english/">
     <meta property="og:image" content="https://likarchukmarin-sketch.github.io/english/your-photo.jpg">
     <meta property="og:image:width" content="640">
     <meta property="og:image:height" content="640">
     <meta property="og:image:alt" content="Maryna Likarchuk">
+    <meta property="og:image:type" content="image/jpeg">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Maryna Likarchuk — Наставник з англійської мови">
+    <meta name="twitter:title" content="Репетитор з англійської онлайн для дорослих — Maryna Likarchuk">
     <meta name="twitter:description" content="Англійська, у якій можна бути собою. Індивідуальні заняття для дорослих.">
     <meta name="twitter:image" content="https://likarchukmarin-sketch.github.io/english/your-photo.jpg">
 
-    <!-- Тема застосовується до першого малювання (без спалаху) -->
+    <!-- Тема та заставка визначаються до першого малювання (без спалаху) -->
     <script>
         (function () {
             var root = document.documentElement;
             root.classList.add('js');
             try {
-                var light = localStorage.getItem('theme') === 'light';
+                var saved = localStorage.getItem('theme');
+                var light = saved ? saved === 'light' : !window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (light) root.classList.remove('dark'); else root.classList.add('dark');
                 var m = document.querySelector('meta[name="theme-color"]');
                 if (m) m.setAttribute('content', light ? '#F7F5EF' : '#212517');
+            } catch (e) {}
+            try {
+                if (sessionStorage.getItem('introSeen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('skip-intro');
             } catch (e) {}
         })();
     </script>
@@ -54,10 +61,11 @@
             --shadow:0 24px 50px -26px rgba(33,37,23,.38);
             --font-head:'Geologica','Onest',system-ui,sans-serif;
             --font-body:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
-            --header-h:72px;
+            --header-h:72px; color-scheme:light;
             --ease:cubic-bezier(.2,.8,.2,1);
         }
         .dark {
+            color-scheme:dark;
             --bg:#212517; --bg2:#1b1f12; --surface:#2b3122; --surface2:#343b2a;
             --fg:#F2F0E7; --muted:#c3c6b4; --line:rgba(222,211,166,.16);
             --accent:#B6C58E; --accent2:#DED3A6; --onaccent:#212517;
@@ -86,8 +94,14 @@
         a { color:inherit; text-decoration:none; }
         button { font:inherit; color:inherit; cursor:pointer; background:none; border:0; padding:0; }
         h1,h2,h3 { font-family:var(--font-head); font-weight:600; letter-spacing:-.025em; line-height:1.08; margin:0; }
-        p { margin:0; }
+        p { margin:0; text-wrap:pretty; }
+        h1,h2,h3 { text-wrap:balance; }
+        .nb { white-space:nowrap; }
         ::selection { background:var(--accent); color:var(--onaccent); }
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+        .skip { position:fixed; left:1rem; top:-4rem; z-index:400; padding:.8rem 1.2rem; border-radius:999px; background:var(--accent); color:var(--onaccent); font-weight:600; transition:top .2s; }
+        .skip:focus { top:1rem; }
+        main:focus { outline:none; }
         .container { width:min(1180px,100% - 3rem); margin-inline:auto; }
         .sect { position:relative; padding:clamp(4.5rem,9vw,8rem) 0; }
         .muted { color:var(--muted); }
@@ -117,6 +131,7 @@
         .js .accent::after { transform:scaleX(0); transition:transform 1s var(--ease) .9s; }
         .js .split.in .accent::after { transform:scaleX(1); }
         @keyframes shine { to { background-position:-220% 0; } }
+        @supports not ((-webkit-background-clip:text) or (background-clip:text)) { .js .accent .wi { color:var(--accent); background:none; animation:none; } }
         @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
 
         /* ============ КНОПКИ ============ */
@@ -149,6 +164,8 @@
 
         /* ============ ЗАСТАВКА З КИЦЕЮ ============ */
         #intro { position:fixed; inset:0; z-index:300; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.4rem; background:var(--bg); transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1),filter .8s,visibility 0s .8s; animation:introFailsafe .01s linear 6s forwards; }
+        .skip-intro #intro { display:none; }
+        #intro { cursor:pointer; }
         #intro.hide { opacity:0; transform:scale(1.04); filter:blur(10px); visibility:hidden; pointer-events:none; }
         @keyframes introFailsafe { to { opacity:0; visibility:hidden; pointer-events:none; } }
         .intro-card { background:#fff; border-radius:30px; padding:16px; box-shadow:0 30px 70px -30px rgba(0,0,0,.5); animation:float 4s ease-in-out infinite; }
@@ -166,7 +183,8 @@
         #pullCord:hover #cordHandle { transform:scale(1.08); }
         #pullCord:active #cordHandle { transform:scale(.95); }
         #pullCord:focus-visible #cordHandle { outline:2px solid var(--accent2); outline-offset:3px; }
-        .cord-label { margin-top:.5rem; padding:.25rem .65rem; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:color-mix(in srgb,var(--bg) 88%,transparent); border:1px solid var(--line); color:var(--accent); white-space:nowrap; }
+        .cord-label { margin-top:.5rem; padding:.25rem .65rem; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:color-mix(in srgb,var(--bg) 88%,transparent); border:1px solid var(--line); color:var(--accent); white-space:nowrap; }
+        @media (max-width:899px) { .cord-label { display:none; } }
         .ic-sun { display:none; } .dark .ic-sun { display:block; } .dark .ic-moon { display:none; }
         @keyframes cordNudge { 0%,100% { height:64px; } 35% { height:88px; } 65% { height:72px; } }
         .cord-nudge #cordLine { animation:cordNudge 1.3s ease-in-out .4s 3; }
@@ -228,6 +246,8 @@
         .hero { min-height:100svh; display:flex; align-items:center; padding:calc(var(--header-h) + 1.5rem) 0 4.5rem; position:relative; }
         .hero-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(2rem,5vw,5rem); align-items:center; }
         .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.5rem 1rem; border-radius:999px; border:1px solid var(--line); background:color-mix(in srgb,var(--surface) 70%,transparent); font-size:.78rem; font-weight:600; letter-spacing:.03em; color:var(--accent); }
+        .badge { max-width:100%; text-wrap:balance; }
+        @media (max-width:560px) { .badge { border-radius:18px; line-height:1.45; } }
         .hero-title { font-size:clamp(2.7rem,6.6vw,5.6rem); margin:1.5rem 0 1.6rem; }
         .lead { font-size:clamp(1.02rem,1.5vw,1.2rem); color:var(--muted); max-width:34em; }
         .cta-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.2rem; }
@@ -239,13 +259,22 @@
         .dot { position:absolute; right:6px; bottom:6px; width:20px; height:20px; border-radius:50%; background:var(--accent2); border:4px solid var(--surface); }
         .dot::after { content:""; position:absolute; inset:-4px; border-radius:50%; background:var(--accent2); animation:ping 2s ease-out infinite; z-index:-1; }
         @keyframes ping { 0% { transform:scale(.8); opacity:.7; } 80%,100% { transform:scale(2.2); opacity:0; } }
-        .pname { font-size:1.65rem; transform:translateZ(50px); }
+        .pname { font-family:var(--font-head); font-weight:600; letter-spacing:-.025em; line-height:1.1; font-size:1.65rem; transform:translateZ(50px); }
         .prole { font-size:.9rem; font-weight:600; color:var(--accent); margin:.2rem 0 1rem; transform:translateZ(40px); }
         .pdesc { font-size:.93rem; color:var(--muted); margin-bottom:1.6rem; transform:translateZ(30px); }
-        .pcard .btn { width:100%; transform:translateZ(45px); }
+        .pactions { position:relative; display:flex; gap:.6rem; width:100%; transform:translateZ(45px); }
+        .pactions .btn-primary { flex:1; padding-inline:1rem; }
+        .btn-icon { flex:none; width:3.1rem; padding:0; }
+        .copy-tip { position:absolute; right:0; bottom:calc(100% + 10px); padding:.35rem .75rem; border-radius:999px; background:var(--fg); color:var(--bg); font-size:.78rem; font-weight:600; white-space:nowrap; opacity:0; translate:0 6px; transition:opacity .25s,translate .25s var(--ease); pointer-events:none; }
+        .copy-tip.on { opacity:1; translate:0 0; }
         .chip { position:absolute; padding:.5rem .95rem; border-radius:999px; background:var(--surface); border:1px solid var(--line); font-size:.8rem; font-weight:600; box-shadow:var(--shadow); white-space:nowrap; animation:float 5s ease-in-out infinite; z-index:2; }
-        .chip1 { top:5%; left:-15%; } .chip2 { top:46%; right:-17%; animation-delay:-1.6s; } .chip3 { bottom:3%; left:-9%; animation-delay:-3.2s; }
-        @media (max-width:560px) { .chip1 { left:-6px; } .chip2 { right:-6px; } .chip3 { left:6px; } }
+        .chip-row { display:contents; }
+        .chip1 { top:-30px; left:6%; } .chip2 { top:9%; right:-26px; animation-delay:-1.6s; } .chip3 { bottom:-30px; left:9%; animation-delay:-3.2s; }
+        @media (max-width:1099px) { .chip2 { right:-10px; } }
+        @media (max-width:899px) {
+            .chip-row { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:1.1rem; }
+            .chip { position:static; animation:none; translate:none !important; }
+        }
         .cue { position:absolute; left:50%; bottom:1.4rem; width:26px; height:42px; margin-left:-13px; border:1.5px solid var(--line); border-radius:20px; }
         .cue::after { content:""; position:absolute; left:50%; top:8px; width:3px; height:8px; margin-left:-1.5px; border-radius:3px; background:var(--accent2); animation:cue 1.8s ease-in-out infinite; }
         @keyframes cue { 0% { transform:translateY(0); opacity:1; } 80% { transform:translateY(14px); opacity:0; } 100% { opacity:0; } }
@@ -263,9 +292,11 @@
         .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); }
         .stat { padding:1rem clamp(1rem,3vw,2.5rem); border-left:1px solid var(--line); }
         .stat:first-child { border-left:0; padding-left:0; }
-        .num { font-family:var(--font-head); font-weight:600; font-size:clamp(2.8rem,6.2vw,5.4rem); letter-spacing:-.04em; line-height:1; display:flex; align-items:baseline; flex-wrap:wrap; gap:.15em; font-variant-numeric:tabular-nums; }
+        .num { font-family:var(--font-head); font-weight:600; font-size:clamp(2.8rem,6.2vw,5.4rem); letter-spacing:-.04em; line-height:1; display:flex; align-items:baseline; flex-wrap:nowrap; white-space:nowrap; gap:0; font-variant-numeric:tabular-nums; }
+        .num .plus { color:var(--accent); margin-left:.04em; }
+        .stat-counter { display:inline-block; }
         .num small { font-size:.32em; font-weight:500; letter-spacing:0; color:var(--accent); }
-        .num .u { font-size:.42em; font-weight:500; letter-spacing:-.01em; }
+        .num .u { font-size:.42em; font-weight:500; letter-spacing:-.01em; margin-left:.3em; }
         .stat p { margin-top:.9rem; color:var(--muted); font-weight:500; }
 
         /* ============ ПІДХІД ============ */
@@ -296,16 +327,32 @@
         .acc-plus::before,.acc-plus::after { content:""; position:absolute; left:50%; top:50%; width:14px; height:2px; margin:-1px 0 0 -7px; background:var(--accent); border-radius:2px; transition:transform .4s var(--ease); }
         .acc-plus::after { transform:rotate(90deg); }
         .acc.open .acc-plus::after { transform:rotate(0); }
-        .acc-body { display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease); }
-        .acc.open .acc-body { grid-template-rows:1fr; }
+        .acc-body { display:grid; grid-template-rows:0fr; visibility:hidden; transition:grid-template-rows .5s var(--ease),visibility 0s .5s; }
+        .acc.open .acc-body { grid-template-rows:1fr; visibility:visible; transition-delay:0s; }
         .acc-body > div { overflow:hidden; }
+        .about-cred { display:flex; gap:1rem; padding:1.3rem 1.4rem; border-radius:26px; margin-bottom:1rem; background:color-mix(in srgb,var(--accent2) 16%,var(--surface)); border:1px solid color-mix(in srgb,var(--accent2) 55%,var(--line)); box-shadow:var(--shadow); }
+        .about-cred h3, .mini h3 { font-size:1.12rem; font-weight:600; letter-spacing:-.01em; margin:.15rem 0 .4rem; }
+        .about-cred p, .mini p { color:var(--muted); font-size:.97rem; }
+        .about-cred p + p { margin-top:.5rem; }
+        .about-cred strong { color:var(--fg); font-weight:600; }
+        .certs { display:grid; grid-template-columns:1.35fr 1fr; gap:.8rem; margin-bottom:1rem; }
+        @media (max-width:520px) { .certs { grid-template-columns:1fr; } }
+        .cert { display:block; border-radius:22px; overflow:hidden; background:var(--surface); border:1px solid var(--line); transition:translate .4s var(--ease),box-shadow .4s; }
+        .cert[hidden] { display:none; }
+        .cert:hover { translate:0 -3px; box-shadow:var(--shadow); }
+        .cert img { display:block; width:100%; height:210px; object-fit:cover; object-position:top; background:#fff; }
+        .cert > span { display:block; padding:.7rem 1rem; font-size:.85rem; font-weight:600; color:var(--accent); }
+        .about-cred a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; font-weight:600; }
+        .about-cards { display:grid; gap:.8rem; }
+        .mini { display:flex; gap:1rem; padding:1.1rem 1.3rem; border-radius:26px; background:var(--surface); border:1px solid var(--line); }
         .acc-body p { padding:0 1.5rem 1.35rem 5.1rem; color:var(--muted); font-size:.97rem; }
 
         /* ============ НАПРЯМКИ (СТОПКА КАРТОК) ============ */
         .stack { display:grid; gap:1.5rem; }
         .scard { position:sticky; top:calc(var(--header-h) + 1rem + var(--n) * 16px); display:grid; grid-template-columns:auto 1fr; gap:clamp(1.2rem,4vw,3.5rem); align-items:center; border-radius:34px; padding:clamp(1.6rem,4vw,3.4rem); min-height:clamp(260px,42vh,380px); border:1px solid var(--line); box-shadow:0 -18px 40px -26px rgba(0,0,0,.35); }
         .scard.s1 { background:var(--accent); color:var(--onaccent); --muted:color-mix(in srgb,var(--onaccent) 80%,transparent); border-color:transparent; }
-        .scard.s2 { background:var(--accent2); color:#212517; --muted:#3a3f26; border-color:transparent; }
+        .scard.s2 { background:#9DB86B; color:#1a1f0e; --muted:#2a3217; border-color:transparent; }
+        .dark .scard.s2 { background:var(--accent2); color:#212517; --muted:#3a3f26; }
         .scard.s3 { background:var(--surface); }
         .scard .big { font-family:var(--font-head); font-weight:700; line-height:.85; font-size:clamp(3.6rem,9vw,7.5rem); letter-spacing:-.05em; opacity:.35; }
         .scard h3 { font-size:clamp(1.55rem,3.2vw,2.5rem); margin-bottom:.9rem; }
@@ -316,6 +363,10 @@
         /* ============ ФОРМАТИ ============ */
         .f1 { grid-column:span 7; grid-row:span 2; } .f2 { grid-column:span 5; } .f3 { grid-column:span 5; } .f4 { grid-column:span 12; }
         .f1 .card { display:flex; flex-direction:column; justify-content:space-between; gap:1.5rem; }
+        .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; }
+        .fact { padding:1rem 1rem .9rem; border-radius:20px; background:color-mix(in srgb,var(--onaccent) 10%,transparent); border:1px solid var(--line); }
+        .fact b { display:block; font-family:var(--font-head); font-weight:600; font-size:clamp(1.5rem,3vw,2.3rem); letter-spacing:-.03em; line-height:1; }
+        .fact span { display:block; margin-top:.5rem; font-size:.82rem; line-height:1.3; opacity:.85; }
         .tag { display:inline-block; padding:.3rem .8rem; border-radius:999px; font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; background:color-mix(in srgb,var(--onaccent) 18%,transparent); }
         .emoji { font-size:2.1rem; line-height:1; }
         .ul { list-style:none; margin:1.2rem 0 0; padding:0; }
@@ -339,7 +390,9 @@
         .panel { padding:clamp(1.5rem,3.5vw,2.8rem); }
         .panel:not([hidden]) { animation:panelIn .6s var(--ease); }
         @keyframes panelIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
-        .panel-top { display:flex; align-items:center; gap:1rem; margin-bottom:1.8rem; }
+        .panel-top { display:flex; flex-wrap:wrap; align-items:center; gap:1rem; margin-bottom:1.8rem; }
+        .lvl { margin-left:auto; flex:none; padding:.35rem .85rem; border-radius:999px; font-size:.85rem; font-weight:700; letter-spacing:.02em; white-space:nowrap; background:color-mix(in srgb,var(--accent) 14%,transparent); color:var(--accent); border:1px solid color-mix(in srgb,var(--accent) 32%,transparent); }
+        .panel:focus-visible { outline-offset:4px; border-radius:30px; }
         .panel-top .av { width:3.6rem; height:3.6rem; background:var(--accent); color:var(--onaccent); }
         .panel-top h3 { margin:0; font-size:clamp(1.4rem,2.6vw,2rem); }
         .panel-top p { font-size:.9rem; margin:0; }
@@ -359,17 +412,52 @@
         /* ============ ВІДГУКИ ТА КОНТАКТИ ============ */
         .rev { text-align:center; max-width:46rem; margin-inline:auto; }
         .rev .kicker { justify-content:center; }
-        .rev-note { margin-top:2rem; padding:1.4rem; border:1.5px dashed color-mix(in srgb,var(--accent) 45%,transparent); border-radius:26px; font-size:.82rem; font-family:ui-monospace,'SF Mono',Menlo,monospace; color:var(--muted); }
+        .rev-grid { columns:3 300px; column-gap:1rem; margin-top:2.5rem; text-align:left; }
+        .rev-card { break-inside:avoid; margin:0 0 1rem; padding:1.5rem 1.5rem 1.3rem; border-radius:26px; background:var(--surface); border:1px solid var(--line); }
+        .rev-card.shot { padding:.55rem; }
+        .rev-card.shot img { display:block; width:100%; height:auto; margin-inline:auto; border-radius:18px; }
+        .shot-btn { display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; border-radius:18px; }
+        .shot-btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+        #lightbox { border:0; padding:0; background:transparent; max-width:100vw; max-height:100vh; overflow:visible; }
+        #lightbox::backdrop { background:rgba(10,12,6,.84); backdrop-filter:blur(6px); }
+        #lightbox img { display:block; margin:auto; max-width:94vw; max-height:86vh; height:auto; border-radius:20px; box-shadow:0 30px 80px -20px rgba(0,0,0,.7); cursor:zoom-out; }
+        .lb-close { position:absolute; top:-3.2rem; right:0; width:2.7rem; height:2.7rem; border-radius:50%; border:1px solid rgba(255,255,255,.35); background:rgba(255,255,255,.12); color:#fff; font-size:1.1rem; cursor:pointer; }
+        .lb-close:hover { background:rgba(255,255,255,.24); }
+        .rev-card.fill { background:var(--accent); color:var(--onaccent); border-color:transparent; }
+        .rev-card blockquote { margin:0; }
+        .rev-card blockquote::before { content:"\201C"; display:block; font-family:var(--font-head); font-size:2.8rem; line-height:.7; height:1.2rem; color:var(--accent2); }
+        .rev-card.fill blockquote::before { color:currentColor; opacity:.55; }
+        .rev-card p { font-size:.98rem; line-height:1.6; }
+        .rev-by { margin-top:1rem; font-size:.88rem; color:var(--muted); }
+        .rev-by b { color:var(--fg); font-weight:600; }
+        .rev-card.fill .rev-by, .rev-card.fill .rev-by b { color:inherit; opacity:.9; }
+        .js .rev-grid:not(.all) .rev-card:nth-child(n+7) { display:none; }
+        .rev-more { display:none; margin-top:.6rem; }
+        .js .rev-more { display:inline-flex; }
+        .rev-foot { margin:1.8rem auto 0; max-width:40rem; font-size:.82rem; color:var(--muted); }
+        .rev-note { margin-top:2rem; padding:1.5rem 1.4rem; border:1.5px dashed color-mix(in srgb,var(--accent) 45%,transparent); border-radius:26px; font-size:.97rem; color:var(--muted); }
+        .rev-note .btn { margin-top:1rem; }
+        .faq { max-width:52rem; }
+        .faq .acc:nth-child(even) { margin-left:0; }
+        .faq .acc-head { padding:1.2rem 1.4rem; }
+        .faq .acc-body p { padding:0 1.5rem 1.35rem 1.4rem; }
         .cta-wrap { position:relative; text-align:center; padding:clamp(1rem,3vw,2rem) 0; }
         .cta-wrap .h2 { font-size:clamp(2.4rem,6.6vw,5.4rem); margin-bottom:1.4rem; }
         .cta-wrap p { max-width:34rem; margin:0 auto 2.4rem; color:var(--muted); font-size:1.1rem; }
         .cta-btns { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; }
         .foot { padding:2.2rem 0 3rem; text-align:center; color:var(--muted); font-size:.9rem; }
+        .foot-links { display:flex; flex-wrap:wrap; justify-content:center; gap:.4rem 1.6rem; margin-bottom:1rem; font-weight:500; color:var(--fg); }
+        .foot-links a { text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px; transition:color .3s,text-decoration-color .3s; }
+        .foot-links a:hover { color:var(--accent); text-decoration-color:var(--accent2); }
+        .fab { position:fixed; left:50%; bottom:max(1rem,env(safe-area-inset-bottom)); z-index:60; translate:-50% 160%; opacity:0; visibility:hidden; box-shadow:0 18px 34px -14px rgba(0,0,0,.55); transition:translate .45s var(--ease),opacity .3s,visibility 0s .45s; }
+        .fab.show { translate:-50% 0; opacity:1; visibility:visible; transition-delay:0s; }
+        .menu-open .fab { display:none; }
+        @media (min-width:900px) { .fab { display:none; } }
 
         /* ============ АДАПТИВНІСТЬ ============ */
         @media (max-width:899px) {
             .hero-grid,.approach-head,.about-grid,.tabs { grid-template-columns:1fr; }
-            .hero { align-items:flex-start; }
+            .hero { align-items:flex-start; padding-top:calc(var(--header-h) + 2.4rem); }
             .stage { margin-top:1rem; }
             .portrait { position:relative; top:0; aspect-ratio:4/4.2; max-width:420px; }
             .a1,.a2,.a3,.f1,.f2,.f3,.f4 { grid-column:1 / -1; grid-row:auto; }
@@ -389,6 +477,7 @@
             .scard .big { font-size:3.6rem; }
             .cue { display:none; }
             .acc-body p { padding-left:1.5rem; }
+            .foot { padding-bottom:6rem; }
         }
         @media (prefers-reduced-motion:reduce) {
             html { scroll-behavior:auto; }
@@ -398,15 +487,19 @@
             .track { animation:none; }
         }
     </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":"Maryna Likarchuk","jobTitle":"Менторка з англійської мови (TESOL/TEFL)","description":"TESOL/TEFL-сертифікована менторка з англійської мови. Індивідуальні онлайн-заняття для дорослих.","url":"https://likarchukmarin-sketch.github.io/english/","image":"https://likarchukmarin-sketch.github.io/english/your-photo.jpg","knowsLanguage":["uk","en"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"120-hour Accredited TESOL/TEFL Certificate","dateCreated":"2024-08-30","recognizedBy":{"@type":"Organization","name":"World TESOL Academy"}},{"@type":"EducationalOccupationalCredential","name":"EF SET English Certificate: C2 Proficient (72/100)","dateCreated":"2026-10-05","url":"https://cert.efset.org/AdLqdd"}],"knowsAbout":["English language teaching","TESOL","TEFL"],"sameAs":["https://t.me/likarchuk","https://instagram.com/marina.likarchuk"]}
+    </script>
 </head>
 <body>
+    <a class="skip" href="#main">Перейти до змісту</a>
 
     <!-- ЗАСТАВКА З КИЦЕЮ -->
     <div id="intro" role="status" aria-label="Завантаження">
         <div class="intro-card">
             <img src="завантаження.gif" alt="Завантаження...">
         </div>
-        <p class="intro-text">Готуємо найкраще для вас...</p>
+        <p class="intro-text">Готуємо найкраще для Вас…</p>
         <div class="intro-bar"><i></i></div>
     </div>
 
@@ -421,7 +514,7 @@
     <div id="progress" aria-hidden="true"></div>
 
     <!-- ШНУРОК-ПЕРЕМИКАЧ ТЕМИ (потягни або торкнись) -->
-    <div id="pullCord" role="button" tabindex="0" aria-label="Перемкнути тему: світла або темна">
+    <div id="pullCord" role="switch" aria-checked="true" tabindex="0" aria-label="Темна тема">
         <div id="cordLine"></div>
         <div id="cordHandle">
             <svg class="ic-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
@@ -439,11 +532,11 @@
                 <a href="#about">Про мене</a>
                 <a href="#help">З чим допоможу</a>
                 <a href="#formats">Формати</a>
-                <a href="#cases">Кейси</a>
+                <a href="#cases">Історії</a>
                 <a href="#reviews">Відгуки</a>
             </nav>
             <div class="hdr-right">
-                <a href="#contact" class="btn btn-primary btn-sm hdr-cta magnetic">Обговорити заняття ↗</a>
+                <a href="#contact" class="btn btn-primary btn-sm hdr-cta magnetic">Почати навчання ↗</a>
                 <button id="menuBtn" class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span></button>
             </div>
         </div>
@@ -453,22 +546,22 @@
         <a class="ml" style="--i:1" href="#about">Про мене</a>
         <a class="ml" style="--i:2" href="#help">З чим допоможу</a>
         <a class="ml" style="--i:3" href="#formats">Формати</a>
-        <a class="ml" style="--i:4" href="#cases">Кейси</a>
+        <a class="ml" style="--i:4" href="#cases">Історії учнів</a>
         <a class="ml" style="--i:5" href="#reviews">Відгуки</a>
-        <a class="btn btn-primary btn-lg" href="#contact">Обговорити заняття ↗</a>
+        <a class="btn btn-primary btn-lg" href="#contact">Почати навчання ↗</a>
     </nav>
 
-    <main>
+    <main id="main" tabindex="-1">
         <!-- ГОЛОВНИЙ ЕКРАН -->
         <section id="top" class="hero">
             <div class="container hero-grid">
                 <div>
-                    <span class="badge rv">✨ TESOL / TEFL Certified • Менторка з англійської</span>
-                    <h1 class="hero-title split">Англійська, у якій можна бути <em class="accent">собою</em>.</h1>
-                    <p class="lead rv" style="--d:4">Вам не потрібно знати все або боятися помилок, щоб почати говорити. На індивідуальних заняттях ми рухаємося у Вашому темпі, працюємо над Вашими цілями й крок за кроком перетворюємо знання на живе спілкування.</p>
+                    <span class="badge rv"><span aria-hidden="true">✨</span><span><span lang="en">TESOL / TEFL</span>-сертифікована менторка з англійської мови</span></span>
+                    <h1 class="hero-title split">Англійська, у якій можна бути <span class="nb"><em class="accent">собою</em>.</span></h1>
+                    <p class="lead rv" style="--d:4">Індивідуальні онлайн-заняття з англійської для дорослих — від перших слів до живої розмови. Вам не потрібно знати все чи боятися помилок: ми рухаємося у Вашому темпі й працюємо над тим, що важливо саме Вам.</p>
                     <div class="cta-row rv" style="--d:5">
-                        <a href="#contact" class="btn btn-primary btn-lg magnetic">Обговорити заняття ↗</a>
-                        <a href="#cases" class="btn btn-ghost btn-lg magnetic">Мої кейси ↓</a>
+                        <a href="#contact" class="btn btn-primary btn-lg magnetic">Почати навчання ↗</a>
+                        <a href="#cases" class="btn btn-ghost btn-lg magnetic">Історії учнів ↓</a>
                     </div>
                 </div>
                 <div class="rv s" style="--d:3">
@@ -476,21 +569,30 @@
                         <div class="pwrap">
                             <article class="pcard spot">
                                 <div class="avatar">
-                                    <img src="your-photo.jpg" width="128" height="128" alt="Maryna Likarchuk" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=374709&color=fff&size=256'">
+                                    <img src="your-photo.jpg" width="128" height="128" alt="Maryna Likarchuk" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23374709%27/%3E%3Ctext x=%2732%27 y=%2742%27 font-family=%27Georgia,serif%27 font-size=%2726%27 text-anchor=%27middle%27 fill=%27%23F7F5EF%27%3EML%3C/text%3E%3C/svg%3E'">
                                     <span class="dot"></span>
                                 </div>
-                                <h3 class="pname">Maryna Likarchuk</h3>
-                                <p class="prole">ESL Designer &amp; English Mentor</p>
-                                <p class="pdesc">Розробляю авторські матеріали та комфортні навчальні системи для дорослих.</p>
-                                <button id="copyBtn" type="button" class="btn btn-ghost">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                    <span id="copyText">Скопіювати Telegram</span>
-                                </button>
+                                <p class="pname">Maryna Likarchuk</p>
+                                <p class="prole">Менторка з англійської мови</p>
+                                <p class="pdesc">Проводжу індивідуальні онлайн-заняття для дорослих і створюю для них власні навчальні матеріали.</p>
+                                <div class="pactions">
+                                    <a class="btn btn-primary" href="https://t.me/likarchuk" target="_blank" rel="noopener noreferrer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                                        Написати в Telegram
+                                    </a>
+                                    <button id="copyBtn" type="button" class="btn btn-ghost btn-icon" aria-label="Скопіювати нікнейм Telegram" title="Скопіювати нікнейм">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                    </button>
+                                    <span id="copyTip" class="copy-tip" aria-hidden="true"></span>
+                                    <span id="copyText" class="sr-only" role="status"></span>
+                                </div>
                             </article>
                         </div>
-                        <span class="chip chip1" data-depth="34">50 хв · онлайн · 1:1</span>
-                        <span class="chip chip2" data-depth="-26">Для дорослих</span>
-                        <span class="chip chip3" data-depth="22">Авторські матеріали</span>
+                        <div class="chip-row">
+                            <span class="chip chip1" data-depth="34">50 хв · онлайн · 1:1</span>
+                            <span class="chip chip2" data-depth="-26">Для дорослих</span>
+                            <span class="chip chip3" data-depth="22">Авторські матеріали</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -508,16 +610,16 @@
         <section id="stats" class="sect inv slab">
             <div class="container stats-grid">
                 <div class="stat rv">
-                    <div class="num"><small>понад ~</small><span class="stat-counter" data-target="3.5" data-decimal="true">3,5</span><span class="u">року</span></div>
+                    <div class="num"><span class="sr-only">понад </span><span class="stat-counter" data-target="3.5" data-decimal="true">3,5</span><span class="plus" aria-hidden="true">+</span><span class="u">року</span></div>
                     <p>досвіду викладання</p>
                 </div>
                 <div class="stat rv" style="--d:1">
-                    <div class="num"><small>&gt;</small><span class="stat-counter" data-target="110">110</span><span>+</span></div>
+                    <div class="num"><span class="sr-only">понад </span><span class="stat-counter" data-target="110">110</span><span class="plus" aria-hidden="true">+</span></div>
                     <p>студентів досягли результату</p>
                 </div>
                 <div class="stat rv" style="--d:2">
-                    <div class="num"><span class="stat-counter" data-target="2250">2250</span><span>+</span></div>
-                    <p>проведених успішних уроків</p>
+                    <div class="num"><span class="sr-only">понад </span><span class="stat-counter" data-target="2250">2&nbsp;250</span><span class="plus" aria-hidden="true">+</span></div>
+                    <p>проведених уроків</p>
                 </div>
             </div>
         </section>
@@ -527,16 +629,16 @@
             <div class="container">
                 <div class="approach-head">
                     <div>
-                        <span class="kicker rv">Концепція навчання</span>
+                        <span class="kicker rv">Як я навчаю</span>
                         <h2 class="h2 split">Тут можна бути собою. Навіть коли Ви ще не все знаєте.</h2>
                     </div>
-                    <p class="rv" style="--d:2">Я хочу, щоб англійська була простором, де не потрібно боятися помилок, соромитися запитань чи прагнути до ідеальності. Де можна розбиратися у своєму темпі, пробувати й поступово знаходити впевненість у власних словах.</p>
+                    <p class="rv" style="--d:2">Хочу, щоб на моїх заняттях не треба було боятися помилок, соромитися запитань чи прагнути ідеальності. Тут можна розбиратися у власному темпі, пробувати й поступово знаходити впевненість у своїх словах.</p>
                 </div>
                 <div class="bento">
                     <div class="cell a1 rv l">
                         <article class="card fill spot">
                             <span class="deco sparkles" data-speed="-0.06" aria-hidden="true">✦</span>
-                            <div class="ghost-num">01</div>
+                            <div class="ghost-num" aria-hidden="true">01</div>
                             <div>
                                 <h3>Ваші цілі — наш орієнтир</h3>
                                 <p>Адаптую заняття до Ваших потреб, інтересів і темпу. Ми працюємо над тим, що важливо саме для Вас.</p>
@@ -546,14 +648,14 @@
                     <div class="cell a2 rv r" style="--d:1">
                         <article class="card spot">
                             <span class="deco rings" data-speed="0.08" aria-hidden="true"></span>
-                            <div class="ghost-num" style="font-size:3.4rem;color:var(--accent)">02</div>
+                            <div class="ghost-num" aria-hidden="true" style="font-size:3.4rem;color:var(--accent)">02</div>
                             <h3>Зрозуміти й застосувати</h3>
-                            <p>Розбираємося в мові без складних зазубрених правил та відразу використовуємо нові знання на практиці в діалогах.</p>
+                            <p>Розбираємося в мові без зубріння складних правил і одразу застосовуємо нове в діалогах.</p>
                         </article>
                     </div>
                     <div class="cell a3 rv r" style="--d:2">
                         <article class="card spot" style="background:var(--surface2)">
-                            <div class="ghost-num" style="font-size:3.4rem;color:var(--accent)">03</div>
+                            <div class="ghost-num" aria-hidden="true" style="font-size:3.4rem;color:var(--accent)">03</div>
                             <h3>Закріпити й рухатися далі</h3>
                             <p>Повертаємося до вивченого й системно повторюємо матеріал, щоб знання поступово ставали автоматичними навичками.</p>
                         </article>
@@ -566,39 +668,43 @@
         <section id="about" class="sect inv slab">
             <div class="container about-grid">
                 <figure class="portrait rv l" style="margin:0">
-                    <img src="your-photo.jpg" width="640" height="640" loading="lazy" alt="Maryna Likarchuk" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Maryna+Likarchuk&background=374709&color=fff&size=640'">
-                    <figcaption class="pcap"><b>Maryna Likarchuk</b><span>ESL Designer &amp; English Mentor</span></figcaption>
+                    <img src="your-photo.jpg" width="640" height="640" loading="lazy" alt="Maryna Likarchuk" decoding="async" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23374709%27/%3E%3Ctext x=%2732%27 y=%2742%27 font-family=%27Georgia,serif%27 font-size=%2726%27 text-anchor=%27middle%27 fill=%27%23F7F5EF%27%3EML%3C/text%3E%3C/svg%3E'">
+                    <figcaption class="pcap"><b>Maryna Likarchuk</b><span>Менторка з англійської мови</span></figcaption>
                 </figure>
                 <div>
                     <div class="sec-head" style="margin-bottom:2rem">
                         <span class="kicker rv">Знайомство</span>
                         <h2 class="h2 split">Трохи про мене</h2>
-                        <p class="rv" style="--d:2">Натисніть на картку, щоб дізнатися більше про мої цінності та джерела натхнення.</p>
+                        <p class="rv" style="--d:2">Коротко: яка в мене підготовка, як проходять заняття і чим я живу поза уроками.</p>
                     </div>
-                    <div class="about-list">
-                        <div class="acc open rv">
-                            <button class="acc-head" type="button" aria-expanded="true" aria-controls="ab1"><span class="acc-ic">🌱</span><span class="acc-t">Як усе почалося</span><span class="acc-plus"></span></button>
-                            <div class="acc-body" id="ab1" role="region"><div><p>Я починала з допомоги дітям та родичам у вивченні англійської. Згодом зрозуміла, що мені справді добре вдається пояснювати складні речі простими словами й щиро подобається допомагати людям долати страх перед мовою.</p></div></div>
+                    <div class="about-cred rv">
+                            <span class="acc-ic" aria-hidden="true">🎓</span>
+                            <div>
+                                <h3>Кваліфікація</h3>
+                                <p><strong>120-годинний акредитований курс <span lang="en">TESOL / TEFL</span></strong> — <span lang="en">World TESOL Academy</span>, 30 серпня 2024. Курс акредитовано <span lang="en">ACCREDITAT</span> та <span lang="en">The CPD Certification Service</span> (Велика Британія).</p>
+                                <p><span lang="en">TESOL / TEFL</span> — міжнародна підготовка викладачів англійської мови для тих, для кого вона не рідна: у класі та онлайн.</p>
+                                <p><strong>Мій рівень англійської: <span lang="en">C2 Proficient</span></strong> — <span lang="en">EF SET</span>, 72/100 за тестом читання й аудіювання (жовтень 2026). C2 — найвищий рівень європейської шкали CEFR. <a href="https://cert.efset.org/AdLqdd" target="_blank" rel="noopener noreferrer">Перевірити сертифікат ↗</a></p>
+                            </div>
                         </div>
-                        <div class="acc rv" style="--d:1">
-                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab2"><span class="acc-ic">💬</span><span class="acc-t">На моїх уроках…</span><span class="acc-plus"></span></button>
-                            <div class="acc-body" id="ab2" role="region"><div><p>Ви знайдете не лише правила й сухі вправи, а й доречні жарти, життєві історії, цікаві запитання та дійсно живі й щирі розмови про все на світі.</p></div></div>
+                        <div class="certs rv">
+                            <a class="cert" href="tesol-certificate.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="tesol-certificate.jpg" width="1600" height="1130" alt="Сертифікат TESOL / TEFL, 120 годин, World TESOL Academy, 30 серпня 2024" loading="lazy" decoding="async" onerror="this.closest('.cert').hidden=true">
+                                <span>Сертифікат <span lang="en">TESOL / TEFL</span> ↗</span>
+                            </a>
+                            <a class="cert" href="ef-set-certificate.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="ef-set-certificate.jpg" width="1242" height="1756" alt="Сертифікат EF SET: 72 зі 100, рівень C2 Proficient, жовтень 2026" loading="lazy" decoding="async" onerror="this.closest('.cert').hidden=true">
+                                <span>Сертифікат <span lang="en">EF SET</span> · C2 ↗</span>
+                            </a>
                         </div>
-                        <div class="acc rv" style="--d:2">
-                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab3"><span class="acc-ic">💡</span><span class="acc-t">Завжди щось створюю</span><span class="acc-plus"></span></button>
-                            <div class="acc-body" id="ab3" role="region"><div><p>Маю щиру любов до безперервного навчання, нових ідей і проектування власних інтерактивних навчальних матеріалів для студентів.</p></div></div>
-                        </div>
-                        <div class="acc rv" style="--d:3">
-                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab4"><span class="acc-ic">🫖</span><span class="acc-t">Чай — це любов</span><span class="acc-plus"></span></button>
-                            <div class="acc-body" id="ab4" role="region"><div><p>Ціную затишні моменти, спокійний відпочинок та чашку ароматного гарячого чаю під час відновлення сил після насиченого дня.</p></div></div>
-                        </div>
-                        <div class="acc rv" style="--d:4">
-                            <button class="acc-head" type="button" aria-expanded="false" aria-controls="ab5"><span class="acc-ic">🐾</span><span class="acc-t">Котики мають перевагу</span><span class="acc-plus"></span></button>
-                            <div class="acc-body" id="ab5" role="region"><div><p>Особлива любов до котиків, повз яких просто неможливо пройти, щоб не зупинитися і не погладити!</p></div></div>
+                        <div class="about-cards">
+                            <article class="mini rv"><span class="acc-ic" aria-hidden="true">🌱</span><div><h3>Як усе почалося</h3><p>Я починала з допомоги дітям та родичам у вивченні англійської. Згодом зрозуміла, що мені справді добре вдається пояснювати складні речі простими словами й щиро подобається допомагати людям долати страх перед мовою.</p></div></article>
+                            <article class="mini rv" style="--d:1"><span class="acc-ic" aria-hidden="true">💬</span><div><h3>На моїх уроках…</h3><p>Ви знайдете не лише правила й сухі вправи, а й доречні жарти, життєві історії, цікаві запитання та дійсно живі й щирі розмови про все на світі.</p></div></article>
+                            <article class="mini rv" style="--d:2"><span class="acc-ic" aria-hidden="true">💡</span><div><h3>Створюю власні матеріали</h3><p>Люблю вчитися сама, шукати нові ідеї й створювати для учнів власні інтерактивні матеріали.</p></div></article>
+                            <article class="mini rv" style="--d:3"><span class="acc-ic" aria-hidden="true">🫖</span><div><h3>Чай — це любов</h3><p>Ціную затишні моменти й чашку ароматного гарячого чаю, щоб відновити сили після насиченого дня.</p></div></article>
+                            <article class="mini rv" style="--d:4"><span class="acc-ic" aria-hidden="true">🐾</span><div><h3>Котики мають перевагу</h3><p>Особлива любов до котиків, повз яких просто неможливо пройти, щоб не зупинитися і не погладити!</p></div></article>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!-- З ЧИМ ДОПОМОЖУ (стопка карток) -->
@@ -607,20 +713,20 @@
                 <div class="sec-head">
                     <span class="kicker rv">Напрямки</span>
                     <h2 class="h2 split">З чим я можу Вам допомогти?</h2>
-                    <p class="rv" style="--d:2">Фокусуємося на практичних цілях, які необхідні у Вашому щоденному житті.</p>
+                    <p class="rv" style="--d:2">Працюємо з тим, що справді потрібно Вам у щоденному житті.</p>
                 </div>
                 <div class="stack">
                     <article class="scard s1 spot" style="--n:0">
-                        <div class="big" data-speed="0.05">01</div>
+                        <div class="big" aria-hidden="true" data-speed="0.05">01</div>
                         <div>
                             <h3>Заговорити англійською</h3>
-                            <p>Допомагаю дорослим поступово переходити від знання окремих слів і правил до самостійного висловлення думок, практики говоріння та більшої впевненості в спілкуванні.</p>
+                            <p>Допоможу перейти від окремих слів і правил до живої розмови: Ви навчитеся самостійно висловлювати думки й упевнено почуватися в спілкуванні.</p>
                         </div>
                     </article>
                     <article class="scard s2 spot" style="--n:1">
-                        <div class="big" data-speed="0.05">02</div>
+                        <div class="big" aria-hidden="true" data-speed="0.05">02</div>
                         <div>
-                            <h3>Використовувати англійську у житті</h3>
+                            <h3>Користуватися англійською в житті</h3>
                             <p>Застосовуємо мову під Ваші реальні життєві ситуації:</p>
                             <div class="chips">
                                 <span>💼 для роботи</span><span>✈️ для подорожей</span><span>🎬 для фільмів та серіалів</span><span>🗣️ для спілкування</span><span>📚 для саморозвитку</span>
@@ -628,7 +734,7 @@
                         </div>
                     </article>
                     <article class="scard s3 spot" style="--n:2">
-                        <div class="big" data-speed="0.05" style="color:var(--accent)">03</div>
+                        <div class="big" aria-hidden="true" data-speed="0.05" style="color:var(--accent)">03</div>
                         <div>
                             <h3>Розкласти знання по поличках</h3>
                             <p>Систематизувати граматику, заповнити прогалини, розширити словниковий запас і навчитися впевнено застосовувати знання на практиці.</p>
@@ -642,40 +748,43 @@
         <section id="formats" class="sect inv slab">
             <div class="container">
                 <div class="sec-head">
-                    <span class="kicker rv">Навчання</span>
-                    <h2 class="h2 split">Формати роботи</h2>
-                    <p class="rv" style="--d:2">Обирайте комфортний спосіб взаємодії відповідно до Вашого графіка та цілей.</p>
+                    <span class="kicker rv">Як навчаємося</span>
+                    <h2 class="h2 split">Формати занять</h2>
+                    <p class="rv" style="--d:2">Оберіть формат, який підходить Вашому графіку й цілям.</p>
                 </div>
                 <div class="bento">
                     <div class="cell f1 tilt3d rv l" data-tilt>
                         <article class="card fill spot pwrap">
                             <div>
                                 <span class="tag">Основний формат</span>
-                                <div class="emoji" style="margin-top:1.4rem">👩‍💻</div>
+                                <div class="emoji" aria-hidden="true" style="margin-top:1.4rem">👩‍💻</div>
                                 <h3>Індивідуальні заняття</h3>
-                                <p>Онлайн, один на один. Індивідуальний підхід з урахуванням Ваших цілей, інтересів та темпу.</p>
+                                <p>Онлайн, один на один: заняття будуються навколо Ваших цілей, інтересів і темпу.</p>
+                            </div>
+                            <div class="facts">
+                                <div class="fact"><b>50 хв</b><span>тривалість уроку</span></div>
+                                <div class="fact"><b>1–4×</b><span>на тиждень — гнучка частота</span></div>
+                                <div class="fact"><b>1:1</b><span>онлайн, індивідуально</span></div>
                             </div>
                             <ul class="ul">
-                                <li>Тривалість уроку — 50 хвилин</li>
                                 <li>Практика говоріння, граматика та словниковий запас</li>
-                                <li>Гнучка частота: від 1 до 4 разів на тиждень</li>
                             </ul>
                         </article>
                     </div>
                     <div class="cell f2 rv r" style="--d:1">
                         <article class="card spot">
-                            <div class="emoji">💡</div>
+                            <div class="emoji" aria-hidden="true">💡</div>
                             <h3>Персональна консультація</h3>
-                            <p>Одна онлайн-зустріч, під час якої визначаємо цілі та пріоритети навчання.</p>
-                            <p>Після зустрічі Ви отримуєте персональний план подальших кроків та відповідні навчальні матеріали.</p>
+                            <p>Одна онлайн-зустріч, на якій ми визначаємо Ваші цілі та пріоритети в навчанні. Добрий старт, якщо ще не знаєте, з чого почати.</p>
+                            <p>Після неї Ви отримуєте персональний план наступних кроків і навчальні матеріали.</p>
                         </article>
                     </div>
                     <div class="cell f3 rv r" style="--d:2">
                         <article class="card spot">
-                            <div class="emoji">⏳</div>
-                            <h3>Асинхронне навчання</h3>
-                            <p>Отримуєте матеріали та завдання, працюєте у зручний час і отримуєте фідбек (переписка, голосові, пояснення).</p>
-                            <p>Ідеально для людей із нестабільним графіком або під час відключень світла. За потреби — зустрічі для практики.</p>
+                            <div class="emoji" aria-hidden="true">⏳</div>
+                            <h3>Навчання у зручний час</h3>
+                            <p>Це асинхронний формат: Ви отримуєте матеріали й завдання, працюєте, коли Вам зручно, а я надсилаю відгук — письмово чи голосовими повідомленнями, з поясненнями.</p>
+                            <p>Підходить, якщо графік нестабільний або бувають відключення світла. За потреби — зустрічі для практики.</p>
                         </article>
                     </div>
                     <div class="cell f4 rv s">
@@ -683,7 +792,7 @@
                             <div>
                                 <span class="tag">Скоро</span>
                                 <h3>Курси та вебінари</h3>
-                                <p>Практичні навчальні продукти, які допоможуть розібратися з конкретними темами та продовжувати навчання самостійно.</p>
+                                <p>Короткі практичні курси й вебінари з окремих тем — щоб розібратися в темі та продовжувати навчання самостійно.</p>
                             </div>
                             <div class="ghost-num" style="color:var(--accent)" aria-hidden="true">✦</div>
                         </article>
@@ -697,44 +806,44 @@
             <div class="container">
                 <div class="sec-head">
                     <span class="kicker rv">Досвід учнів</span>
-                    <h2 class="h2 split">Кейси студентів</h2>
-                    <p class="rv" style="--d:2">Реальні історії дорослих студентів та їхніх результатів у вивченні мови.</p>
+                    <h2 class="h2 split">Історії учнів</h2>
+                    <p class="rv" style="--d:2">Реальні історії учнів: з чого вони починали і чого досягли.</p>
                 </div>
                 <div class="tabs rv">
-                    <div class="tablist" role="tablist" aria-label="Кейси студентів">
-                        <button class="tab" role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1" type="button"><span class="av">Н</span><span><b>Ніка</b><small>Тривалість: ~2,5–3 роки</small></span></button>
-                        <button class="tab" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1" type="button"><span class="av">В</span><span><b>Володимир (30 років)</b><small>Тривалість: понад 1 рік</small></span></button>
-                        <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1" type="button"><span class="av">Л</span><span><b>Людмила (40+ років)</b><small>Тривалість: ~1,5 року</small></span></button>
+                    <div class="tablist" role="tablist" aria-label="Історії учнів">
+                        <button class="tab" role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1" type="button"><span class="av">Н</span><span><b>Ніка (підліток)</b><small>Навчалася ~2,5–3 роки</small></span></button>
+                        <button class="tab" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1" type="button"><span class="av">В</span><span><b>Володимир (30 років)</b><small>Навчався понад 1 рік</small></span></button>
+                        <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1" type="button"><span class="av">Л</span><span><b>Людмила (40+ років)</b><small>Навчалася ~1,5 року</small></span></button>
                     </div>
                     <div>
-                        <article class="card panel spot" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
-                            <div class="panel-top"><span class="av">Н</span><div><h3>Ніка</h3><p class="muted">Тривалість: ~2,5–3 роки</p></div></div>
+                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-1" aria-labelledby="tab-1">
+                            <div class="panel-top"><span class="av">Н</span><div><h3>Ніка (підліток)</h3><p class="muted">Навчалася ~2,5–3 роки</p></div><span class="lvl" aria-label="Рівень: від A1 до B1+, орієнтовно">A1 → B1+*</span></div>
                             <div class="steps">
-                                <div class="step"><b>На старті (орієнтовано A1):</b><p>Знала окремі слова та деякі конструкції, але не мала цілісного розуміння структури мови. Соромилася говорити.</p></div>
+                                <div class="step"><b>На старті (орієнтовно A1 — початковий рівень):</b><p>Знала окремі слова та деякі конструкції, але не мала цілісного розуміння структури мови. Соромилася говорити.</p></div>
                                 <div class="step"><b>Над чим працювали:</b><p>Побудова граматичного фундаменту, розширення словникового запасу, практика говоріння та робота над вимовою.</p></div>
-                                <div class="step"><b>Результат (орієнтовано B1 / B1+)*:</b><p>Навчилася самостійно будувати речення та висловлювати думки. Стала впевнено користуватися англійською поза уроками.</p></div>
+                                <div class="step"><b>Результат (орієнтовно B1 / B1+, середній рівень)*:</b><p>Навчилася самостійно будувати речення та висловлювати думки. Стала впевнено користуватися англійською поза уроками.</p></div>
                             </div>
-                            <details class="story"><summary>Переглянути історію ➔</summary><p>«Реальний випадок: у Києві Ніка самостійно допомогла іноземному туристу розібратися із складним маршрутом до Одеси та пояснила навігацію в метро.»</p></details>
+                            <details class="story"><summary>Що змінилося ➔</summary><p>«Реальний випадок: у Києві Ніка самостійно допомогла іноземному туристу розібратися зі складним маршрутом до Одеси й пояснила, як користуватися метро.»</p></details>
                         </article>
-                        <article class="card panel spot" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
-                            <div class="panel-top"><span class="av">В</span><div><h3>Володимир (30 років)</h3><p class="muted">Тривалість: понад 1 рік</p></div></div>
+                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-2" aria-labelledby="tab-2" hidden>
+                            <div class="panel-top"><span class="av">В</span><div><h3>Володимир (30 років)</h3><p class="muted">Навчався понад 1 рік</p></div><span class="lvl" aria-label="Рівень: з нуля до A2">0 → A2</span></div>
                             <div class="steps">
-                                <div class="step"><b>На старті (майже з нуля):</b><p>Окремі слова та базове читання. Відсутність граматичної основи. Потребував англійської для подорожей і роботи.</p></div>
-                                <div class="step"><b>Над чим працювали:</b><p>Базова граматика, розширення словникового запасу, говоріння + додавання мови для сфери будівництва.</p></div>
-                                <div class="step"><b>Результат (Рівень A2):</b><p>Досяг рівня A2, вільно почувається в подорожах та у спілкуванні з іноземцями. Почав вивчати професійну лексику.</p></div>
+                                <div class="step"><b>На старті (майже з нуля):</b><p>Знав окремі слова й умів базово читати. Граматичної основи не було. Англійська була потрібна для подорожей і роботи.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Базова граматика, розширення словникового запасу, говоріння та лексика зі сфери будівництва.</p></div>
+                                <div class="step"><b>Результат (рівень A2 — елементарний):</b><p>Досяг рівня A2: впевнено почувається в подорожах і в простому спілкуванні з іноземцями. Почав вивчати професійну лексику.</p></div>
                             </div>
-                            <details class="story"><summary>Переглянути історію ➔</summary><p>«Тепер впевнено спілкується з іноземними учасниками на змаганнях з армреслінгу та опрацьовує тему будівництва англійською.»</p></details>
+                            <details class="story"><summary>Що змінилося ➔</summary><p>«Тепер впевнено спілкується з іноземними учасниками на змаганнях з армреслінгу та опрацьовує професійну лексику зі сфери будівництва.»</p></details>
                         </article>
-                        <article class="card panel spot" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
-                            <div class="panel-top"><span class="av">Л</span><div><h3>Людмила (40+ років)</h3><p class="muted">Тривалість: ~1,5 року</p></div></div>
+                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-3" aria-labelledby="tab-3" hidden>
+                            <div class="panel-top"><span class="av">Л</span><div><h3>Людмила (40+ років)</h3><p class="muted">Навчалася ~1,5 року</p></div><span class="lvl" aria-label="Рівень: від A1 до B1+, орієнтовно">A1 → B1+*</span></div>
                             <div class="steps">
-                                <div class="step"><b>На старті (орієнтовано A1):</b><p>Мала базові знання, але складно будувала речення. Відчувала невпевненість під час говоріння.</p></div>
-                                <div class="step"><b>Над чим працювали:</b><p>Систематизація граматики, розширення та активізація слів, подолання мовного бар'єра у розмові.</p></div>
-                                <div class="step"><b>Результат (орієнтовано B1 / B1+)*:</b><p>Почала чітко структурувати думки мовою, перейшла до впевненого користування та розвиває усне мовлення.</p></div>
+                                <div class="step"><b>На старті (орієнтовно A1 — початковий рівень):</b><p>Мала базові знання, але складно будувала речення. Відчувала невпевненість під час говоріння.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Систематизація граматики, розширення словникового запасу, уміння користуватися словами в мові, подолання мовного бар'єра.</p></div>
+                                <div class="step"><b>Результат (орієнтовно B1 / B1+, середній рівень)*:</b><p>Навчилася чітко формулювати думки англійською, впевнено користується мовою й далі розвиває усне мовлення.</p></div>
                             </div>
-                            <details class="story"><summary>Переглянути історію ➔</summary><p>«Поступово пройшла шлях від скутості у реченнях до нормального повсякденного висловлення власних думок.»</p></details>
+                            <details class="story"><summary>Що змінилося ➔</summary><p>«Поступово пройшла шлях від скутості у реченнях до спокійного повсякденного висловлення власних думок.»</p></details>
                         </article>
-                        <p class="footnote">* Рівні B1 / B1+ наведено як орієнтовні на основі оцінки навчального прогресу.</p>
+                        <p class="footnote">* Рівні B1 / B1+ орієнтовні — їх визначено за навчальним прогресом. Для довідки (шкала CEFR): A1 — початковий, A2 — елементарний, B1 — середній.</p>
                     </div>
                 </div>
             </div>
@@ -746,8 +855,69 @@
                 <div class="rev">
                     <span class="kicker rv">Враження</span>
                     <h2 class="h2 split">Відгуки студентів</h2>
-                    <p class="muted rv" style="--d:2">Справжні текстові, аудіо- та відеовідгуки студентів зараз впорядковуються і незабаром з'являться на цій сторінці.</p>
-                    <div class="rev-note rv s spot">✦ Секція готується до оновлення перевіреними матеріалами</div>
+                    <p class="muted rv" style="--d:2">Справжні повідомлення, які учні та їхні батьки надсилали після занять.</p>
+                </div>
+                <div class="rev-grid" id="revGrid">
+                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-01.jpg" width="760" height="532" alt="Скриншот відгуку: «Мариночко, дякую Вам, це наш спільний результат. Безмежно Вам вдячна за кожну нашу зустріч: це більше ніж навчання, це гарний настрій, гумор, це на одній хвилі. Дякую Всесвіту за зустріч з Вами. Я обов&#x27;язково повернусь і думаю, що скоро.»" loading="lazy" decoding="async" style="max-width:760px"></button></article>
+                    <article class="rev-card fill rv" style="--d:1"><blockquote><p>Хочу [Марині] висловити подяку та сказати велике „дякую” за те, що завжди допомагала на уроках, виправляла та пояснювала нові теми уроків, які не завжди мені вдавалося зрозуміти. На наших заняттях завжди були цікаві вправи та завдання. Завдяки [Марині] зараз я не боюся говорити англійською мовою. І це мій головний результат!</p></blockquote><footer class="rev-by"><b>Учениця</b></footer></article>
+                    <article class="rev-card shot rv" style="--d:2"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-02.png" width="347" height="222" alt="Скриншот відгуку: «Я сьогодні розмовляв по телефону з людиною, яка розмовляє англійською, і скажу, що я майже все розумів, що він говорив, але відповідав так, як вмію, але він усе зрозумів.»" loading="lazy" decoding="async" style="max-width:434px"></button></article>
+                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-03.png" width="363" height="219" alt="Скриншот відгуку: «Нам все подобається, Ніка повністю задоволена навчанням з вами. Говорить, що за останній місяць дізналась більше, ніж з початку навчального року, їй подобається, коли вся увага на неї. А мені подобається, що вона не скиглить, що не хоче вчитись. На уроки з вами іде з задоволенням, а це великий плюс.»" loading="lazy" decoding="async" style="max-width:454px"></button></article>
+                    <article class="rev-card rv" style="--d:1"><blockquote><p lang="en">I studied with her for two levels. It was a really nice and fun time. Besides new knowledge, I also picked up a new habit: now I listen to English podcasts and read an English blog every day as part of my daily routine. I have also become more confident in my knowledge for small talks with foreigners, which makes me incredibly happy.</p></blockquote><footer class="rev-by"><b>Студент(ка), пройшов(ла) два рівні</b></footer></article>
+                    <article class="rev-card shot rv" style="--d:2"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-04.png" width="335" height="187" alt="Скриншот відгуку: «Dear Maryna. Thank you so much for everything you&#x27;ve done for teaching me. Your lessons were not just about grammar or words — you made English fun, interesting, and real. You believed in me, even when I made a lot of mistakes. I&#x27;m really grateful to have had you as my teacher.»" loading="lazy" decoding="async" style="max-width:419px"></button></article>
+                    <article class="rev-card rv"><blockquote><p>Завдяки моєму вчителю Марині Лікарчук… моє навчання англійської проходить дуже легко та цікаво… Зараз я закінчила курс Elementary та дуже задоволена своїм результатом!</p></blockquote><footer class="rev-by"><b>Учениця</b></footer></article>
+                    <article class="rev-card shot rv" style="--d:1"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-05.png" width="466" height="111" alt="Скриншот відгуку: «Дякую Марина, це наша сумісна невелика перемога, бо як би не Ви я б напевно здалась на пів дороги, також дякую за чудові слова підтримки.»" loading="lazy" decoding="async" style="max-width:582px"></button></article>
+                    <article class="rev-card rv" style="--d:2"><blockquote><p lang="en">It was a real pleasure learning from you. I always felt your support, and it inspired me to keep learning. Our lessons were fun and relaxed. I learned a lot from you and improved my pronunciation skills.</p></blockquote><footer class="rev-by"><b>Студент(ка)</b></footer></article>
+                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-06.png" width="338" height="113" alt="Скриншот відгуку: «Дякую! Моє бажання подолати цю вершину тільки зросло! Ви даруєте мені в цьому впевненість!»" loading="lazy" decoding="async" style="max-width:422px"></button></article>
+                    <article class="rev-card shot rv" style="--d:1"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-07.png" width="341" height="169" alt="Скриншот відгуку: «Добрий день Марино! Дякую Вам за увагу, за навчання, за підтримку, за спілкування, за допомогу. Мені дійсно подобається навчання, сам процес навчання.»" loading="lazy" decoding="async" style="max-width:426px"></button></article>
+                    <article class="rev-card rv" style="--d:2"><blockquote><p>Подобається її спокій, терпіння і підтримка.</p></blockquote><footer class="rev-by"><b>Студентка, після першого тижня занять</b></footer></article>
+                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-08.png" width="332" height="69" alt="Скриншот відгуку: «Thank you, you are the best teacher, that I have ever had.»" loading="lazy" decoding="async" style="max-width:415px"></button></article>
+                    <article class="rev-card shot rv" style="--d:1"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-09.png" width="335" height="115" alt="Скриншот відгуку: «Hello, дуже дякую, також вам дякую за уроки та підтримку, навчатися було надзвичайно цікаво.»" loading="lazy" decoding="async" style="max-width:419px"></button></article>
+                    <article class="rev-card shot rv" style="--d:2"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-10.jpg" width="760" height="327" alt="Скриншот відгуку: «Дякую за чудові слова! Дякую Вам за Ваше терпіння та допомогу у вивченні English.»" loading="lazy" decoding="async" style="max-width:760px"></button></article>
+                    <article class="rev-card shot rv"><button type="button" class="shot-btn" aria-label="Збільшити скриншот відгуку"><img src="review-11.png" width="259" height="115" alt="Скриншот відгуку: «I am very greateful to you. It was a pleasure to study with you. I wish you all the best as well!»" loading="lazy" decoding="async" style="max-width:324px"></button></article>
+                </div>
+                <div style="text-align:center">
+                    <button type="button" class="btn btn-ghost rev-more" id="revMore" aria-expanded="false" aria-controls="revGrid">Показати всі відгуки (16)</button>
+                    <p class="rev-foot">Це справжні повідомлення від учнів та їхніх батьків: скриншоти й витримки з листування. Імена та фото не показано; у текстових витягах скорочення позначено «…», виправлено лише друкарські помилки.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЧАСТІ ЗАПИТАННЯ -->
+        <section id="faq" class="sect" style="padding-top:clamp(1rem,3vw,2rem)">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">FAQ</span>
+                    <h2 class="h2 split">Часті запитання</h2>
+                </div>
+                <div class="faq about-list">
+                    <div class="acc open rv">
+                        <button class="acc-head" type="button" id="fqh1" aria-expanded="true" aria-controls="fq1"><span class="acc-t">Чи потрібно щось знати, щоб почати?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq1" role="region" aria-labelledby="fqh1"><div><p>Ні. Можна починати майже з нуля: ми рухаємося у Вашому темпі, а помилки — природна частина навчання. Саме так починав, наприклад, Володимир з розділу «Історії учнів».</p></div></div>
+                    </div>
+                    <div class="acc rv" style="--d:1">
+                        <button class="acc-head" type="button" id="fqh2" aria-expanded="false" aria-controls="fq2"><span class="acc-t">Як проходять заняття і як часто?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq2" role="region" aria-labelledby="fqh2"><div><p>Онлайн, один на один, по 50 хвилин — від 1 до 4 разів на тиждень. На уроках — практика говоріння, граматика та словниковий запас під Ваші цілі.</p></div></div>
+                    </div>
+                    <div class="acc rv" style="--d:2">
+                        <button class="acc-head" type="button" id="fqh3" aria-expanded="false" aria-controls="fq3"><span class="acc-t">Для чого можна вчити англійську?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq3" role="region" aria-labelledby="fqh3"><div><p>Для роботи, подорожей, фільмів та серіалів, спілкування й саморозвитку. Заняття будуємо навколо Ваших реальних життєвих ситуацій.</p></div></div>
+                    </div>
+                    <div class="acc rv" style="--d:3">
+                        <button class="acc-head" type="button" id="fqh4" aria-expanded="false" aria-controls="fq4"><span class="acc-t">А якщо графік нестабільний або немає світла?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq4" role="region" aria-labelledby="fqh4"><div><p>Для цього є навчання у зручний час: Ви отримуєте матеріали й завдання, працюєте, коли можете, а я надсилаю відгук письмово чи голосовими повідомленнями. За потреби — зустрічі для практики.</p></div></div>
+                    </div>
+                    <div class="acc rv" style="--d:2">
+                        <button class="acc-head" type="button" id="fqh7" aria-expanded="false" aria-controls="fq7"><span class="acc-t">Який у Вас рівень англійської та яка підготовка?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq7" role="region" aria-labelledby="fqh7"><div><p>У мене 120-годинний акредитований сертифікат TESOL / TEFL (2024) і результат EF SET — C2 Proficient, 72/100 за тестом читання й аудіювання (жовтень 2026). Сертифікати можна переглянути в розділі «Про мене».</p></div></div>
+                    </div>
+                    <div class="acc rv" style="--d:3">
+                        <button class="acc-head" type="button" id="fqh6" aria-expanded="false" aria-controls="fq6"><span class="acc-t">Я не знаю свого рівня. Чи підійдуть заняття?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq6" role="region" aria-labelledby="fqh6"><div><p>Так: заняття підлаштовуються під Ваш рівень і цілі. В «Історіях учнів» є шлях від A1 до B1+, але якщо Ви не впевнені, з чого починати, просто напишіть мені — розберемося.</p></div></div>
+                    </div>
+                    <div class="acc rv" style="--d:4">
+                        <button class="acc-head" type="button" id="fqh5" aria-expanded="false" aria-controls="fq5"><span class="acc-t">З чого почати?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq5" role="region" aria-labelledby="fqh5"><div><p>Напишіть мені в Telegram або Instagram. Можна почати з персональної консультації: на ній визначаємо цілі та пріоритети, а після неї Ви отримуєте план наступних кроків і навчальні матеріали.</p></div></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -772,8 +942,17 @@
     </main>
 
     <footer class="foot">
+        <nav class="foot-links" aria-label="Контакти">
+            <a href="https://t.me/likarchuk" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="https://instagram.com/marina.likarchuk" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="#top">Нагору ↑</a>
+        </nav>
         <p>&copy; 2026 Maryna Likarchuk. Усі права захищені.</p>
     </footer>
+
+    <dialog id="lightbox" aria-label="Скриншот відгуку"><img alt=""><button type="button" class="lb-close" aria-label="Закрити">✕</button></dialog>
+
+    <a href="#contact" id="fab" class="btn btn-primary fab">Почати навчання ↗</a>
 
     <script>
     (function () {
@@ -791,14 +970,21 @@
                 Array.prototype.slice.call(node.childNodes).forEach(function (n) {
                     if (n.nodeType === 3) {
                         var frag = document.createDocumentFragment();
-                        n.textContent.split(/(\s+)/).forEach(function (p) {
-                            if (!p) return;
-                            if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(' ')); return; }
+                        var SHORT = /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*[A-Za-zА-Яа-яІіЇїЄєҐґ]{1,2}[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/;
+                        var pend = '';
+                        function word(txt) {
                             var w = document.createElement('span'); w.className = 'w';
                             var wi = document.createElement('span'); wi.className = 'wi';
-                            wi.style.setProperty('--i', i++); wi.textContent = p;
+                            wi.style.setProperty('--i', i++); wi.textContent = txt;
                             w.appendChild(wi); frag.appendChild(w);
+                        }
+                        n.textContent.split(/(\s+)/).forEach(function (p) {
+                            if (!p) return;
+                            if (/^\s+$/.test(p)) { if (!pend) frag.appendChild(document.createTextNode(' ')); return; }
+                            if (SHORT.test(p)) { pend += p + '\u00A0'; return; }
+                            word(pend + p); pend = '';
                         });
+                        if (pend) word(pend.replace(/\u00A0$/, ''));
                         n.parentNode.replaceChild(frag, n);
                     } else if (n.nodeType === 1) { walk(n); }
                 });
@@ -817,31 +1003,40 @@
 
         /* ---------- Заставка з кицею: не зависає, плавно зникає ---------- */
         var intro = $('#intro'), t0 = performance.now(), introDone = false;
+        var skipIntro = root.classList.contains('skip-intro');
         function finishIntro() {
             if (introDone) return; introDone = true;
+            try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
             if (intro) { intro.classList.add('hide'); intro.setAttribute('aria-hidden', 'true'); }
-            setTimeout(initReveal, intro ? 380 : 0);
-            setTimeout(function () { if (intro) intro.remove(); startCordHint(); }, intro ? 900 : 0);
+            setTimeout(initReveal, intro && !skipIntro ? 380 : 0);
+            setTimeout(function () { if (intro) intro.remove(); startCordHint(); }, intro && !skipIntro ? 900 : 0);
         }
-        function scheduleIntro() { setTimeout(finishIntro, Math.max(0, 1400 - (performance.now() - t0))); }
+        function scheduleIntro() { setTimeout(finishIntro, skipIntro ? 0 : Math.max(0, 1200 - (performance.now() - t0))); }
         if (document.readyState === 'complete') scheduleIntro(); else window.addEventListener('load', scheduleIntro);
         setTimeout(finishIntro, 3500);
+        if (intro) intro.addEventListener('click', finishIntro);
 
         /* ---------- Лічильники ---------- */
-        $$('.stat-counter').forEach(function (c) { c.textContent = '0'; });
+        function fmt(n, dec) { return dec ? String(n).replace('.', ',') : String(Math.floor(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0'); }
+        var canAnimate = 'IntersectionObserver' in window && !reduce;
+        $$('.stat-counter').forEach(function (c) {
+            var end = parseFloat(c.getAttribute('data-target')), dec = c.getAttribute('data-decimal') === 'true';
+            c.textContent = fmt(end, dec);
+            if (!canAnimate) return;
+            c.textContent = dec ? '0,0' : '0';
+        });
         function animateValue(obj, end, dur, dec) {
             var st = null;
             function step(ts) {
                 if (!st) st = ts;
                 var p = Math.min((ts - st) / dur, 1), e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p), v = e * end;
-                obj.textContent = dec ? v.toFixed(1).replace('.', ',') : Math.floor(v);
-                if (p < 1) requestAnimationFrame(step);
-                else obj.textContent = dec ? String(end).replace('.', ',') : Math.floor(end);
+                obj.textContent = dec ? v.toFixed(1).replace('.', ',') : fmt(v);
+                if (p < 1) requestAnimationFrame(step); else obj.textContent = fmt(end, dec);
             }
             requestAnimationFrame(step);
         }
         var stats = $('#stats');
-        if (stats && 'IntersectionObserver' in window) {
+        if (stats && canAnimate) {
             var so = new IntersectionObserver(function (es, ob) {
                 es.forEach(function (en) {
                     if (!en.isIntersecting) return;
@@ -861,6 +1056,7 @@
         var cord = $('#pullCord'), cordLine = $('#cordLine'), cordHandle = $('#cordHandle');
         var startY = 0, dragging = false, curY = 0, maxPull = 0, baseH = 64;
         var isDark = root.classList.contains('dark');
+        cord.setAttribute('aria-checked', isDark ? 'true' : 'false');
         var liquidColor = [222, 211, 166];
         function readLiquidColor() {
             var v = getComputedStyle(root).getPropertyValue('--accent2').trim();
@@ -869,6 +1065,7 @@
         }
         function applyTheme(dark) {
             isDark = dark;
+            cord.setAttribute('aria-checked', dark ? 'true' : 'false');
             root.classList.toggle('dark', dark);
             try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
             var meta = $('meta[name="theme-color"]'); if (meta) meta.setAttribute('content', dark ? '#212517' : '#F7F5EF');
@@ -923,10 +1120,13 @@
             menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
             menuBtn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
             document.body.style.overflow = open ? 'hidden' : '';
+            document.body.classList.toggle('menu-open', open);
+            var m = $('main'), f = $('footer'); if (m) m.inert = open; if (f) f.inert = open;
+            if (open) { var first = $('a', mmenu); if (first) setTimeout(function () { first.focus(); }, 60); }
         }
         menuBtn.addEventListener('click', function () { setMenu(!mmenu.classList.contains('open')); });
         $$('a', mmenu).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mmenu.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
         window.matchMedia('(min-width: 900px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
 
         /* ---------- «Про мене»: розкриття карток ---------- */
@@ -961,20 +1161,23 @@
         });
 
         /* ---------- Копіювання Telegram ---------- */
-        var COPY_LABEL = 'Скопіювати Telegram', copyTimer;
+        var copyTimer;
         function copyTelegram(username) {
-            var text = '@' + username, label = $('#copyText');
-            function done(msg) { label.textContent = msg; clearTimeout(copyTimer); copyTimer = setTimeout(function () { label.textContent = COPY_LABEL; }, 2000); }
+            var text = '@' + username, tip = $('#copyTip'), live = $('#copyText');
+            function done(msg) {
+                tip.textContent = msg; tip.classList.add('on'); live.textContent = msg;
+                clearTimeout(copyTimer); copyTimer = setTimeout(function () { tip.classList.remove('on'); live.textContent = ''; }, 1800);
+            }
             function fallback() {
                 try {
                     var ta = document.createElement('textarea');
                     ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
                     document.body.appendChild(ta); ta.select();
                     var ok = document.execCommand('copy'); document.body.removeChild(ta);
-                    done(ok ? 'Скопійовано!' : text);
+                    done(ok ? 'Скопійовано ' + text : text);
                 } catch (err) { done(text); }
             }
-            if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function () { done('Скопійовано!'); }).catch(fallback);
+            if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function () { done('Скопійовано ' + text); }).catch(fallback);
             else fallback();
         }
         $('#copyBtn').addEventListener('click', function () { copyTelegram('likarchuk'); });
@@ -1114,6 +1317,47 @@
                 w.addEventListener('animationend', function () { w.remove(); });
                 sec.appendChild(w);
             }, { passive: true });
+        })();
+
+        /* ---------- Плаваюча кнопка (телефони): після героя і до контактів ---------- */
+        (function () {
+            var fab = $('#fab'), hero = $('#top'), contact = $('#contact');
+            if (!fab || !hero || !contact || !('IntersectionObserver' in window)) return;
+            var inHero = true, inContact = false;
+            function upd() { fab.classList.toggle('show', !inHero && !inContact); }
+            new IntersectionObserver(function (es) { inHero = es[0].isIntersecting; upd(); }, { threshold: 0.35 }).observe(hero);
+            new IntersectionObserver(function (es) { inContact = es[0].isIntersecting; upd(); }, { threshold: 0.1 }).observe(contact);
+        })();
+
+        /* ---------- Відгуки: показати всі / згорнути ---------- */
+        (function () {
+            var grid = $('#revGrid'), btn = $('#revMore');
+            if (!grid || !btn) return;
+            var total = $$('.rev-card', grid).length;
+            btn.addEventListener('click', function () {
+                var open = grid.classList.toggle('all');
+                $$('.rev-card', grid).forEach(function (c) { c.classList.add('in'); });
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                btn.textContent = open ? 'Згорнути' : 'Показати всі відгуки (' + total + ')';
+                if (!open) { var sec = $('#reviews'); if (sec) sec.scrollIntoView({ block: 'start' }); }
+            });
+        })();
+
+        /* ---------- Збільшення скриншотів відгуків ---------- */
+        (function () {
+            var dlg = $('#lightbox'), grid = $('#revGrid');
+            if (!dlg || !grid) return;
+            var big = $('img', dlg);
+            grid.addEventListener('click', function (e) {
+                var b = e.target.closest('.shot-btn'); if (!b) return;
+                var im = $('img', b);
+                if (typeof dlg.showModal !== 'function') { window.open(im.getAttribute('src'), '_blank'); return; }
+                big.src = im.getAttribute('src'); big.alt = im.alt;
+                big.style.width = Math.min(window.innerWidth * 0.94, im.naturalWidth * 2.4, 1000) + 'px';
+                dlg.showModal();
+            });
+            dlg.addEventListener('click', function (e) { if (e.target !== $('.lb-close', dlg)) dlg.close(); });
+            $('.lb-close', dlg).addEventListener('click', function () { dlg.close(); });
         })();
     })();
     </script>

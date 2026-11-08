@@ -8,7 +8,7 @@
             instagram: 'marina.likarchuk',
             emailUser: 'likarchukmarin',      /* частина до @ */
             emailDomain: 'gmail.com',    /* частина після @ */
-            goatcounter: ''              /* код лічильника GoatCounter, напр. 'marynalikarchuk' (порожньо = вимкнено) */
+            goatcounter: 'marynalikarchuk'              /* код лічильника GoatCounter, напр. 'marynalikarchuk' (порожньо = вимкнено) */
         };
         var EMAIL = CONFIG.emailUser + '@' + CONFIG.emailDomain;
         var $ = function (s, c) { return (c || document).querySelector(s); };

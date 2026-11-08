@@ -8,7 +8,7 @@
             instagram: 'marina.likarchuk',
             emailUser: 'likarchukmarin',      /* частина до @ */
             emailDomain: 'gmail.com',    /* частина після @ */
-            goatcounter: 'marynalikarchuk'              /* код лічильника GoatCounter, напр. 'marynalikarchuk' (порожньо = вимкнено) */
+            goatcounter: ''              /* код лічильника GoatCounter, напр. 'marynalikarchuk' (порожньо = вимкнено) */
         };
         var EMAIL = CONFIG.emailUser + '@' + CONFIG.emailDomain;
         var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -121,7 +121,7 @@
             cord.setAttribute('aria-checked', dark ? 'true' : 'false');
             root.classList.toggle('dark', dark);
             try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
-            var meta = $('meta[name="theme-color"]'); if (meta) meta.setAttribute('content', dark ? '#212517' : '#F7F5EF');
+            var meta = $('meta[name="theme-color"]'); if (meta) meta.setAttribute('content', dark ? '#12261F' : '#F5F0E6');
             readLiquidColor();
         }
         function toggleTheme() {

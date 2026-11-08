@@ -487,8 +487,8 @@
         .tl-step { position:relative; }
         .tl-n { position:relative; z-index:1; display:grid; place-items:center; width:3.2rem; height:3.2rem; border-radius:50%; background:var(--surface); border:2px solid var(--accent); color:var(--accent); font-family:var(--font-head); font-weight:600; font-size:1.15rem; box-shadow:var(--shadow); }
         .tl-step:last-child .tl-n { background:var(--accent); color:var(--onaccent); }
-        .tl-line { position:absolute; top:1.6rem; left:3.6rem; right:-1.2rem; height:2px; margin-top:-1px; background:repeating-linear-gradient(90deg,var(--accent2) 0 7px,transparent 7px 13px); transform-origin:left; }
-        .tl-line::after { content:""; position:absolute; right:.1rem; top:50%; width:10px; height:10px; border-top:2px solid var(--accent2); border-right:2px solid var(--accent2); transform:translateY(-50%) rotate(45deg); }
+        .tl-line { position:absolute; top:1.6rem; left:3.6rem; right:-1.2rem; height:2px; margin-top:-1px; background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--accent) 60%,var(--accent2)) 0 7px,transparent 7px 13px); transform-origin:left; }
+        .tl-line::after { content:""; position:absolute; right:.1rem; top:50%; width:10px; height:10px; border-top:2px solid color-mix(in srgb,var(--accent) 60%,var(--accent2)); border-right:2px solid color-mix(in srgb,var(--accent) 60%,var(--accent2)); transform:translateY(-50%) rotate(45deg); }
         .tl-step:last-child .tl-line { display:none; }
         .tl h3 { font-size:1.12rem; margin:1rem 0 .4rem; letter-spacing:-.01em; }
         .tl p { color:var(--muted); font-size:.95rem; }
@@ -505,7 +505,7 @@
             .tl-step { display:grid; grid-template-columns:3.2rem 1fr; column-gap:1rem; padding-bottom:1.9rem; }
             .tl-step:last-child { padding-bottom:0; }
             .tl h3 { margin:.55rem 0 .3rem; }
-            .tl-line { left:1.6rem; right:auto; top:3.6rem; bottom:.4rem; width:2px; height:auto; margin:0 0 0 -1px; background:repeating-linear-gradient(180deg,var(--accent2) 0 7px,transparent 7px 13px); transform-origin:top; }
+            .tl-line { left:1.6rem; right:auto; top:3.6rem; bottom:.4rem; width:2px; height:auto; margin:0 0 0 -1px; background:repeating-linear-gradient(180deg,color-mix(in srgb,var(--accent) 60%,var(--accent2)) 0 7px,transparent 7px 13px); transform-origin:top; }
             .tl-line::after { right:auto; left:50%; top:auto; bottom:.1rem; transform:translateX(-50%) rotate(135deg); }
             .js .tl-line { transform:scaleY(0); }
             .js .tl.in .tl-line { transform:scaleY(1); }
@@ -529,11 +529,11 @@
         .opt span { display:inline-flex; padding:.6rem 1.05rem; border-radius:999px; border:1px solid var(--line); background:var(--bg2); font-size:.93rem; font-weight:500; line-height:1.25; transition:background-color .25s,color .25s,border-color .25s,translate .25s var(--ease); }
         .opt:hover span { border-color:var(--accent2); translate:0 -1px; }
         .opt input:checked + span { background:var(--accent); color:var(--onaccent); border-color:transparent; }
-        .opt input:focus-visible + span { outline:2px solid var(--accent2); outline-offset:2px; }
+        .opt input:focus-visible + span { outline:2px solid color-mix(in srgb,var(--accent) 60%,var(--accent2)); outline-offset:2px; }
         .lead .field { margin-bottom:1.1rem; }
         .lead input[type="text"], .lead textarea { width:100%; padding:.9rem 1.1rem; border-radius:18px; border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit; line-height:1.55; }
         .lead textarea { min-height:7.5rem; resize:vertical; }
-        .lead input[type="text"]:focus, .lead textarea:focus { outline:2px solid var(--accent2); outline-offset:1px; border-color:transparent; }
+        .lead input[type="text"]:focus, .lead textarea:focus { outline:2px solid color-mix(in srgb,var(--accent) 60%,var(--accent2)); outline-offset:1px; border-color:transparent; }
         .lead-actions { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.3rem; }
         .lead-actions .btn { white-space:normal; text-align:center; }
         .lead-actions .btn[hidden] { display:none; }
@@ -557,3 +557,14 @@
         .info-grid .emoji { font-size:1.8rem; }
         @media (max-width:899px) { .info-grid, .info-grid.two { grid-template-columns:1fr; } }
         .tl.big p { font-size:1rem; }
+
+/* ============ КОНСУЛЬТАЦІЯ, ЦІНА, ПЛАН, УРОК ============ */
+.how-consult { margin-top:1.6rem; }
+.how-consult h3 { margin:0 0 .5rem; }
+.how-consult .ul { margin:.9rem 0 1rem; }
+.how-consult .no-oblig { margin:0; padding:.8rem 1rem; border-radius:16px; background:color-mix(in srgb,var(--accent2) 28%,var(--surface)); }
+.how-price p b { color:var(--accent); font-size:1.15em; }
+.how-price .pay-note { margin-top:.5rem; font-size:.95rem; color:var(--muted); }
+.note-p { max-width:42rem; margin-top:1.4rem; color:var(--muted); font-size:.95rem; }
+.mins { display:inline-block; margin-bottom:.5rem; padding:.2rem .7rem; border-radius:999px; font-weight:700; font-size:.9rem; background:color-mix(in srgb,var(--accent2) 45%,transparent); color:var(--fg); }
+.stat .plus { margin-right:.1em; }

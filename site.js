@@ -19,9 +19,9 @@
                 noticeHours: 4,                               /* попередити не пізніше ніж за N годин */
                 noShowMinutes: 15,                            /* неявка без зв'язку протягом N хвилин */
                 packs: {
-                    4:  { validity: 'приблизно 3 тижні',            reschedule: 2, cancel: 0 },
-                    8:  { validity: 'приблизно місяць і тиждень',   reschedule: 2, cancel: 2 },
-                    12: { validity: 'приблизно півтора місяця',     reschedule: 2, cancel: 2 }
+                    4:  { validity: '2 тижні',  rhythm: 'по 2 заняття на тиждень', alt: 'Можливий і спокійніший темп: 4 тижні, по 1 занятті на тиждень.', reschedule: 2, cancel: 0 },
+                    8:  { validity: '4 тижні',  rhythm: 'по 2 заняття на тиждень', reschedule: 2, cancel: 2 },
+                    12: { validity: '4 тижні',  rhythm: 'по 3 заняття на тиждень', reschedule: 2, cancel: 2 }
                 }
             },
             goatcounter: ''              /* код лічильника GoatCounter, напр. 'marynalikarchuk' (порожньо = вимкнено) */
@@ -31,6 +31,46 @@
         var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        /* ---------- Міні-вправа (сторінка «Як проходить навчання») ---------- */
+        (function miniExercise() {
+            var root = $('[data-mx]'); if (!root) return;
+            var qs = $$('.mq', root), dots = $$('.mx-dots i', root), end = $('.mx-end', root), cnt = $('.mx-cnt', root), cur = 0, done = 0;
+            function show(i) {
+                qs.forEach(function (q, k) { q.classList.toggle('show', k === i); });
+                if (cnt) cnt.textContent = Math.min(i + 1, qs.length) + ' / ' + qs.length;
+            }
+            function reset() {
+                cur = 0; done = 0;
+                qs.forEach(function (q) {
+                    $$('.opt', q).forEach(function (b) { b.disabled = false; b.className = 'opt'; });
+                    var fb = $('.fb', q); fb.textContent = ''; fb.className = 'fb';
+                    var nx = $('.mx-next', q); if (nx) nx.hidden = true;
+                });
+                dots.forEach(function (d) { d.classList.remove('done'); });
+                end.classList.remove('show'); show(0);
+            }
+            qs.forEach(function (q, i) {
+                var fb = $('.fb', q), next = $('.mx-next', q);
+                $$('.opt', q).forEach(function (b) {
+                    b.addEventListener('click', function () {
+                        if (b.hasAttribute('data-ok')) {
+                            $$('.opt', q).forEach(function (x) { x.disabled = true; });
+                            b.classList.add('ok');
+                            fb.textContent = q.getAttribute('data-yes'); fb.className = 'fb good';
+                            dots[i].classList.add('done'); done++;
+                            if (next) { next.hidden = false; next.focus(); } else { end.classList.add('show'); }
+                        } else {
+                            b.classList.add('no'); b.disabled = true;
+                            fb.textContent = b.getAttribute('data-hint') || 'Майже. Спробуйте ще раз: помилка тут — це підказка.'; fb.className = 'fb';
+                        }
+                    });
+                });
+                if (next) next.addEventListener('click', function () { cur = i + 1; show(cur); });
+            });
+            $('.mx-again', root).addEventListener('click', reset);
+            reset();
+        })();
 
         /* ---------- Ціни й умови: підстановка з CONFIG ---------- */
         (function fillPricing() {
@@ -55,11 +95,12 @@
                 el.textContent = v;
             });
             $$('[data-term]').forEach(function (el) {
-                var k = el.getAttribute('data-term'), m = /^(validity|resched|cancel)-(\d+)$/.exec(k), pk;
+                var k = el.getAttribute('data-term'), m = /^(validity|rhythm|alt|resched|cancel)-(\d+)$/.exec(k), pk;
                 if (k === 'notice') { el.textContent = T.noticeHours + NB + plural(T.noticeHours, 'годину', 'години', 'годин'); return; }
                 if (k === 'wait') { el.textContent = T.noShowMinutes + NB + plural(T.noShowMinutes, 'хвилини', 'хвилин', 'хвилин'); return; }
                 if (!m || !(pk = T.packs[+m[2]])) return;
-                el.textContent = m[1] === 'validity' ? pk.validity : m[1] === 'resched' ? limit(pk.reschedule) : limit(pk.cancel);
+                el.textContent = m[1] === 'validity' ? pk.validity : m[1] === 'rhythm' ? pk.rhythm : m[1] === 'alt' ? (pk.alt || '') : m[1] === 'resched' ? limit(pk.reschedule) : limit(pk.cancel);
+                if (m[1] === 'alt' && !pk.alt) el.hidden = true;
             });
         })();
 
@@ -219,6 +260,7 @@
             mmenu.classList.toggle('open', open);
             menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
             menuBtn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+            var bl = menuBtn.querySelector('.bl'); if (bl) bl.textContent = open ? 'Закрити' : 'Меню';
             document.body.style.overflow = open ? 'hidden' : '';
             document.body.classList.toggle('menu-open', open);
             var m = $('main'), f = $('footer'); if (m) m.inert = open; if (f) f.inert = open;

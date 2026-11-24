@@ -39,7 +39,7 @@
         /* ============ БАЗА ============ */
         *,*::before,*::after { box-sizing:border-box; }
         html { scroll-behavior:smooth; scroll-padding-top:5.5rem; -webkit-text-size-adjust:100%; }
-        body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:17px; line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .5s,color .5s; }
+        body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:17px; line-height:1.65; overflow-x:clip; -webkit-font-smoothing:antialiased; transition:background-color .5s,color .5s; }
         img { max-width:100%; display:block; }
         a { color:inherit; text-decoration:none; }
         button { font:inherit; color:inherit; cursor:pointer; background:none; border:0; padding:0; }
@@ -153,10 +153,6 @@
         .nav a:hover::after { transform:scaleX(1); transform-origin:left; }
         .hdr-right { display:flex; align-items:center; gap:.75rem; }
         .burger { display:none; width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:color-mix(in srgb,var(--surface) 70%,transparent); position:relative; }
-        .burger span { position:absolute; left:12px; right:12px; height:2px; border-radius:2px; background:var(--fg); transition:transform .35s var(--ease),top .35s var(--ease); }
-        .burger span:nth-child(1) { top:17px; } .burger span:nth-child(2) { top:25px; }
-        .burger[aria-expanded="true"] span:nth-child(1) { top:21px; transform:rotate(45deg); }
-        .burger[aria-expanded="true"] span:nth-child(2) { top:21px; transform:rotate(-45deg); }
         @media (max-width:1179px) { .hdr-cta { display:none; } }
         @media (max-width:899px) { .burger { display:block; } .nav { display:none; } }
         .mmenu { position:fixed; inset:0; z-index:45; display:flex; flex-direction:column; justify-content:center; padding:6rem 4.75rem 3rem 1.75rem; background:color-mix(in srgb,var(--bg) 95%,transparent); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); opacity:0; visibility:hidden; transition:opacity .4s,visibility 0s .4s; }
@@ -611,3 +607,51 @@
 }
 html { overflow-x:clip; }
 @media (max-width:380px) { .h2 { font-size:1.75rem; } }
+
+/* sticky-фото в «Про мене»: body не має бути scroll-контейнером */
+@supports not (overflow:clip) { body { overflow-x:hidden; } }
+
+/* ---- Бургер з підписом «Меню» ---- */
+.burger { width:auto; min-width:44px; height:44px; padding:0 .95rem 0 .8rem; border-radius:999px; gap:.55rem; align-items:center; justify-content:center; font:600 .9rem/1 var(--font-body); color:var(--fg); cursor:pointer; }
+@media (max-width:899px) { .burger { display:inline-flex; } }
+.burger .bi { position:relative; width:20px; height:20px; flex:none; display:block; }
+.burger .bi i { position:absolute; left:1px; right:1px; height:2px; border-radius:2px; background:var(--fg); transition:transform .35s var(--ease),top .35s var(--ease); }
+.burger .bi i:nth-child(1) { top:6px; } .burger .bi i:nth-child(2) { top:13px; }
+.burger[aria-expanded="true"] .bi i:nth-child(1) { top:9px; transform:rotate(45deg); }
+.burger[aria-expanded="true"] .bi i:nth-child(2) { top:9px; transform:rotate(-45deg); }
+@media (max-width:430px) { .logo { font-size:.98rem; } .hdr-in { gap:.5rem; } .burger { padding:0 .8rem 0 .65rem; gap:.4rem; } }
+@media (max-width:359px) { .burger .bl { display:none; } .burger { padding:0; width:44px; } }
+.mmenu .m-hint { font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 .8rem; opacity:0; transition:opacity .5s .1s; }
+.mmenu.open .m-hint { opacity:1; }
+.mmenu a.ml { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.mmenu a.ml::after { content:"→"; font-family:var(--font-body); font-weight:400; font-size:.7em; color:var(--accent); flex:none; }
+
+/* ---- Умови: сітка пакетів, 4 рядки ---- */
+.pack .pk-alt { font-size:.88rem; color:var(--muted); margin:.7rem 0 0; }
+
+/* ---- Інтерактивна міні-вправа ---- */
+.mini-ex { display:none; }
+.js .mini-ex { display:block; }
+.mx { max-width:46rem; margin-inline:auto; border-radius:30px; padding:clamp(1.25rem,3vw,2.2rem); background:var(--surface); border:1px solid var(--line); }
+.mx-top { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1.2rem; font-size:.9rem; color:var(--muted); }
+.mx-top b { color:var(--fg); }
+.mx-dots { display:flex; gap:.4rem; }
+.mx-dots i { width:.7rem; height:.7rem; border-radius:50%; background:var(--line); transition:background .3s; }
+.mx-dots i.done { background:var(--accent); }
+.mq { display:none; }
+.mq.show { display:block; animation:mxIn .5s var(--ease); }
+@keyframes mxIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+.mq .say { font-size:1.15rem; margin:0 0 1rem; color:var(--fg); }
+.mq .say em { font-style:normal; font-weight:600; color:var(--accent); }
+.mq .opts { display:grid; gap:.6rem; }
+.mq .opt { text-align:left; padding:.85rem 1.1rem; border-radius:16px; border:1px solid var(--line); background:transparent; color:var(--fg); font:inherit; cursor:pointer; transition:background .25s,border-color .25s,translate .25s; }
+.mq .opt:hover:not(:disabled) { translate:0 -2px; border-color:var(--accent); }
+.mq .opt.ok { background:color-mix(in srgb,var(--accent) 18%,transparent); border-color:var(--accent); }
+.mq .opt.no { opacity:.55; text-decoration:line-through; }
+.mq .opt:disabled { cursor:default; }
+.mq .fb { margin:1rem 0 0; min-height:1.6em; color:var(--muted); }
+.mq .fb.good { color:var(--fg); }
+.mx-next, .mx-again { margin-top:1rem; }
+.mx-end { display:none; }
+.mx-end.show { display:block; animation:mxIn .5s var(--ease); }
+.mx-end p { color:var(--muted); }

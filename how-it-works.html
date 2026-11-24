@@ -52,7 +52,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=4"></head>
+    <link rel="stylesheet" href="styles.css?v=5"></head>
 <body>
     <a class="skip" href="#main">Перейти до змісту</a>
 
@@ -81,25 +81,26 @@
         <div class="container hdr-in">
             <a href="./" class="logo">Maryna <span>Likarchuk</span></a>
             <nav class="nav" aria-label="Головне меню">
-                <a href="./#approach">Підхід</a>
                 <a href="./#about">Про мене</a>
                 <a href="./#help">Допомога</a>
                 <a href="./#formats">Формати</a>
+                <a href="./#approach">Як я навчаю</a>
                 <a href="./#how">Як це працює</a>
                 <a href="./#cases">Історії</a>
                 <a href="./#reviews">Відгуки</a>
             </nav>
             <div class="hdr-right">
                 <a href="./#contact" data-track="cta-header" class="btn btn-primary btn-sm hdr-cta magnetic">Безкоштовна консультація ↗</a>
-                <button id="menuBtn" class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span></button>
+                <button id="menuBtn" class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu"><span class="bi" aria-hidden="true"><i></i><i></i></span><span class="bl">Меню</span></button>
             </div>
         </div>
     </header>
     <nav id="mobileMenu" class="mmenu" aria-label="Мобільне меню">
-        <a class="ml" style="--i:0" href="./#approach">Підхід</a>
-        <a class="ml" style="--i:1" href="./#about">Про мене</a>
-        <a class="ml" style="--i:2" href="./#help">З чим допоможу</a>
-        <a class="ml" style="--i:3" href="./#formats">Формати</a>
+        <p class="m-hint">Розділи сайту</p>
+        <a class="ml" style="--i:0" href="./#about">Про мене</a>
+        <a class="ml" style="--i:1" href="./#help">З чим допоможу</a>
+        <a class="ml" style="--i:2" href="./#formats">Формати</a>
+        <a class="ml" style="--i:3" href="./#approach">Як я навчаю</a>
         <a class="ml" style="--i:4" href="./#how">Як це працює</a>
         <a class="ml" style="--i:5" href="./#cases">Історії учнів</a>
         <a class="ml" style="--i:6" href="./#reviews">Відгуки</a>
@@ -166,6 +167,53 @@
             </div>
         </section>
 
+        <section class="sect mini-ex" aria-labelledby="mxTitle">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">Спробуйте самі</span>
+                    <h2 class="h2 split" id="mxTitle">Фрагмент уроку: у кафе</h2>
+                    <p class="rv" style="--d:2">Приблизно так виглядає практика на уроці. Тут немає балів і оцінок: натискайте варіант, а помилка стає підказкою.</p>
+                </div>
+                <div class="mx rv" data-mx>
+                    <div class="mx-top"><span>Рівень <b>A2</b> · тема <b lang="en">Ordering food</b></span><span class="mx-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mx-cnt" aria-live="polite"></span></div>
+                    <div class="mq" data-yes="Так, звучить ввічливо й природно. Саме такі фрази ми відпрацьовуємо в діалогах.">
+                        <p class="say" lang="en"><em>Waiter:</em> Hi! What would you like?</p>
+                        <div class="opts">
+                            <button type="button" class="opt" lang="en" data-hint="Зрозуміло, але звучить різкувато. Спробуйте ввічливіший варіант.">Give me a coffee.</button>
+                            <button type="button" class="opt" lang="en" data-ok>Could I have a coffee, please?</button>
+                            <button type="button" class="opt" lang="en" data-hint="Майже! Але з want так не кажуть, а в кафе краще звучить ввічливіше.">I am wanting a coffee.</button>
+                        </div>
+                        <p class="fb" aria-live="polite"></p>
+                        <button type="button" class="btn btn-primary mx-next" hidden>Далі →</button>
+                    </div>
+                    <div class="mq" data-yes="Правильно: ціна — одна, тож is. Подібні моменти ми розбираємо на прикладах, без зубріння правил.">
+                        <p class="say" lang="en">How much <em>___</em> the cake?</p>
+                        <div class="opts">
+                            <button type="button" class="opt" lang="en" data-hint="Are — для кількох предметів (cakes). Тут торт один.">are</button>
+                            <button type="button" class="opt" lang="en" data-hint="Does потрібне, коли є інше дієслово. Тут його немає.">does</button>
+                            <button type="button" class="opt" lang="en" data-ok>is</button>
+                        </div>
+                        <p class="fb" aria-live="polite"></p>
+                        <button type="button" class="btn btn-primary mx-next" hidden>Далі →</button>
+                    </div>
+                    <div class="mq" data-yes="Точно: the bill. У британській англійській часто кажуть так само, в американській ще — the check.">
+                        <p class="say" lang="en">Could we have the <em>___</em>, please?</p>
+                        <div class="opts">
+                            <button type="button" class="opt" lang="en" data-hint="Count — це «рахувати», а не рахунок у кафе.">count</button>
+                            <button type="button" class="opt" lang="en" data-ok>bill</button>
+                            <button type="button" class="opt" lang="en" data-hint="Account — це «обліковий запис» чи банківський рахунок.">account</button>
+                        </div>
+                        <p class="fb" aria-live="polite"></p>
+                    </div>
+                    <div class="mx-end">
+                        <h3>Готово!</h3>
+                        <p>Це лише маленький фрагмент. На уроці ми ще проговорюємо це вголос у живому діалозі, а Ви вчитеся діяти впевнено в реальних ситуаціях.</p>
+                        <div class="cta-btns"><a href="./#contact" data-track="cta-mini-ex" class="btn btn-primary">Записатися на консультацію ↗</a><button type="button" class="btn btn-ghost mx-again">Спробувати ще раз</button></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="sect">
             <div class="container">
                 <div class="sec-head">
@@ -199,6 +247,6 @@
         <p class="foot-small" data-gc-note hidden>Сайт веде анонімну статистику відвідувань без cookies і без особистих даних.</p>
     </footer>
 
-    <script src="site.js?v=2" defer></script>
+    <script src="site.js?v=3" defer></script>
 </body>
 </html>

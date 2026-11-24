@@ -8,6 +8,22 @@
             instagram: 'marina.likarchuk',
             emailUser: 'likarchukmarin',      /* частина до @ */
             emailDomain: 'gmail.com',    /* частина після @ */
+            /* ЦІНИ: змінюйте лише числа тут — таблиця цін, FAQ і картки на обох сторінках оновляться самі.
+               Ціна за урок (з округленням вгору) і економія рахуються автоматично. */
+            prices: {
+                single: 550,                                  /* один урок, грн */
+                packs: { 4: 2200, 8: 4100, 12: 6000 }         /* пакет: кількість уроків → ціна пакета, грн */
+            },
+            /* УМОВИ СПІВПРАЦІ (орієнтовні терміни, ліміти на один пакет, 0 = недоступно) */
+            terms: {
+                noticeHours: 4,                               /* попередити не пізніше ніж за N годин */
+                noShowMinutes: 15,                            /* неявка без зв'язку протягом N хвилин */
+                packs: {
+                    4:  { validity: 'приблизно 3 тижні',            reschedule: 2, cancel: 0 },
+                    8:  { validity: 'приблизно місяць і тиждень',   reschedule: 2, cancel: 2 },
+                    12: { validity: 'приблизно півтора місяця',     reschedule: 2, cancel: 2 }
+                }
+            },
             goatcounter: ''              /* код лічильника GoatCounter, напр. 'marynalikarchuk' (порожньо = вимкнено) */
         };
         var EMAIL = CONFIG.emailUser + '@' + CONFIG.emailDomain;
@@ -15,6 +31,37 @@
         var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        /* ---------- Ціни й умови: підстановка з CONFIG ---------- */
+        (function fillPricing() {
+            var P = CONFIG.prices, T = CONFIG.terms, NB = '\u00A0';
+            function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NB) + NB + 'грн'; }
+            function plural(n, one, few, many) {
+                var m10 = n % 10, m100 = n % 100;
+                if (m10 === 1 && m100 !== 11) return one;
+                if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+                return many;
+            }
+            function limit(n) { return n > 0 ? 'до' + NB + n : 'не передбачені'; }
+            $$('[data-price]').forEach(function (el) {
+                var k = el.getAttribute('data-price'), m = /^(pack|per|save)-(\d+)$/.exec(k), v;
+                if (k === 'single') { el.textContent = money(P.single); return; }
+                if (!m) return;
+                var n = +m[2], total = P.packs[n];
+                if (!total) return;
+                if (m[1] === 'pack') v = money(total);
+                else if (m[1] === 'per') v = money(Math.ceil(total / n));
+                else { var s = P.single * n - total; v = s > 0 ? ' · економія' + NB + money(s) : ''; }
+                el.textContent = v;
+            });
+            $$('[data-term]').forEach(function (el) {
+                var k = el.getAttribute('data-term'), m = /^(validity|resched|cancel)-(\d+)$/.exec(k), pk;
+                if (k === 'notice') { el.textContent = T.noticeHours + NB + plural(T.noticeHours, 'годину', 'години', 'годин'); return; }
+                if (k === 'wait') { el.textContent = T.noShowMinutes + NB + plural(T.noShowMinutes, 'хвилини', 'хвилин', 'хвилин'); return; }
+                if (!m || !(pk = T.packs[+m[2]])) return;
+                el.textContent = m[1] === 'validity' ? pk.validity : m[1] === 'resched' ? limit(pk.reschedule) : limit(pk.cancel);
+            });
+        })();
 
         /* ---------- Розбиття заголовків на слова ---------- */
         $$('.split').forEach(function (el) {

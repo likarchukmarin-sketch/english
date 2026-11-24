@@ -1,3 +1,7 @@
+/* ===== Шрифт заголовків: KyivType Sans (Dmitry Rastvortsev), freeware, використано без змін ===== */
+@font-face { font-family:'KyivType Sans'; src:url('fonts/KyivTypeSans-Regular2.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'KyivType Sans'; src:url('fonts/KyivTypeSans-Medium2.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'KyivType Sans'; src:url('fonts/KyivTypeSans-Bold2.woff2') format('woff2'); font-weight:600 800; font-style:normal; font-display:swap; }
 /* ============ ТОКЕНИ ТА ТЕМИ ============ */
         :root {
             --bg:#F5F0E6; --bg2:#ECE5D5; --surface:#FBF8F1; --surface2:#E7EEE6;
@@ -5,7 +9,7 @@
             --accent:#1F5A47; --accent2:#E6C4BF; --onaccent:#F5F0E6;
             --glow1:rgba(31,90,71,.20); --glow2:rgba(230,196,191,.60);
             --shadow:0 24px 50px -26px rgba(18,38,31,.38);
-            --font-head:'Geologica','Onest',system-ui,sans-serif;
+            --font-head:'KyivType Sans','Onest',system-ui,sans-serif;
             --font-body:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
             --header-h:72px; color-scheme:light;
             --ease:cubic-bezier(.2,.8,.2,1);
@@ -281,7 +285,7 @@
         .about-cred p, .mini p { color:var(--muted); font-size:.97rem; }
         .about-cred p + p { margin-top:.5rem; }
         .about-cred strong { color:var(--fg); font-weight:600; }
-        .certs { display:grid; grid-template-columns:1.35fr 1fr; gap:.8rem; margin-bottom:1rem; }
+        .certs { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),26rem)); gap:.8rem; margin-bottom:1rem; }
         @media (max-width:520px) { .certs { grid-template-columns:1fr; } }
         .cert { display:block; border-radius:22px; overflow:hidden; background:var(--surface); border:1px solid var(--line); transition:translate .4s var(--ease),box-shadow .4s; }
         .cert[hidden] { display:none; }
@@ -442,7 +446,7 @@
 
         /* ============ АДАПТИВНІСТЬ ============ */
         @media (max-width:899px) {
-            .hero-grid,.approach-head,.about-grid,.tabs { grid-template-columns:1fr; }
+            .hero-grid,.approach-head,.about-grid,.tabs { grid-template-columns:minmax(0,1fr); }
             .hero { align-items:flex-start; padding-top:calc(var(--header-h) + 2.4rem); }
             .stage { margin-top:1rem; }
             .portrait { position:relative; top:0; aspect-ratio:4/4.2; max-width:420px; }
@@ -568,3 +572,42 @@
 .note-p { max-width:42rem; margin-top:1.4rem; color:var(--muted); font-size:.95rem; }
 .mins { display:inline-block; margin-bottom:.5rem; padding:.2rem .7rem; border-radius:999px; font-weight:700; font-size:.9rem; background:color-mix(in srgb,var(--accent2) 45%,transparent); color:var(--fg); }
 .stat .plus { margin-right:.1em; }
+
+/* ===== Ціни й умови співпраці ===== */
+.price-main { flex:1; min-width:0; }
+.price-list { list-style:none; margin:1.1rem 0 0; padding:0; max-width:40rem; border-top:1px solid var(--line); }
+.price-list li { display:grid; grid-template-columns:1fr auto; column-gap:1rem; row-gap:.1rem; align-items:baseline; padding:.85rem 0; border-bottom:1px solid var(--line); }
+.pl-name { font-family:var(--font-head); font-weight:500; font-size:1.08rem; letter-spacing:-.01em; }
+.pl-val { grid-column:2; grid-row:1 / span 2; align-self:center; font-family:var(--font-head); font-weight:600; font-size:1.4rem; letter-spacing:-.02em; color:var(--accent); white-space:nowrap; }
+.pl-note { grid-column:1; color:var(--muted); font-size:.92rem; }
+.how-price .price-list li b { font-size:1.4rem; }
+.how-terms { margin-top:1.6rem; }
+.how-terms h3 { margin:0 0 .5rem; }
+.how-terms > p { max-width:42rem; }
+.pack-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin:1.4rem 0 1rem; }
+.pack { padding:1.1rem 1.2rem; border-radius:22px; border:1px solid var(--line); background:color-mix(in srgb,var(--accent2) 12%,var(--surface)); }
+.pack h4 { margin:0 0 .6rem; font-family:var(--font-head); font-weight:600; font-size:1.08rem; letter-spacing:-.01em; color:var(--accent); }
+.pack dl { margin:0; display:grid; gap:.45rem; }
+.pack dl div { display:flex; flex-wrap:wrap; justify-content:space-between; column-gap:.8rem; }
+.pack dt { color:var(--muted); font-size:.9rem; }
+.pack dd { margin:0; font-weight:600; font-size:.95rem; text-align:right; }
+.terms-sum { margin:.2rem 0 1.2rem; padding:.8rem 1rem; border-radius:16px; background:color-mix(in srgb,var(--accent2) 28%,var(--surface)); }
+.terms-list { list-style:none; margin:0; padding:0; display:grid; gap:.55rem; }
+.terms-list li { position:relative; padding-left:1.4rem; color:var(--muted); }
+.terms-list li::before { content:"✦"; position:absolute; left:0; top:.05em; color:var(--accent2); font-size:.8em; }
+.terms-list b { color:var(--fg); font-weight:600; }
+@media (max-width:899px) { .pack-grid { grid-template-columns:1fr; } .pack dl div { justify-content:flex-start; } .pack dd { text-align:left; margin-left:auto; } }
+@media (max-width:420px) { .pl-val, .how-price .price-list li b { font-size:1.2rem; } }
+@media (max-width:560px) { .how-actions { width:100%; } .how-actions .btn { width:100%; white-space:normal; text-align:center; } }
+
+/* ===== Захист від виходу за правий край на вузьких екранах ===== */
+.hero-grid > * { min-width:0; }
+@media (max-width:899px) {
+    /* блоки, що ще не з'явилися, стартують зі зсувом лише вгору, а не вбік за межі екрана */
+    .js .rv.l:not(.in), .js .rv.r:not(.in) { transform:translateY(30px); }
+}
+@media (max-width:480px) {
+    .cta-row .btn { width:100%; white-space:normal; text-align:center; }
+}
+html { overflow-x:clip; }
+@media (max-width:380px) { .h2 { font-size:1.75rem; } }

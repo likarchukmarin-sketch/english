@@ -47,13 +47,14 @@
     </script>
     <noscript><style>#intro{display:none!important}</style></noscript>
 
+    <link rel="preload" href="fonts/KyivTypeSans-Bold2.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=1">
+    <link rel="stylesheet" href="styles.css?v=4">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Person","name":"Maryna Likarchuk","jobTitle":"Репетитор з англійської мови (TESOL/TEFL)","description":"TESOL/TEFL-сертифікований репетитор з англійської мови. Індивідуальні онлайн-заняття для дорослих.","url":"https://likarchukmarin-sketch.github.io/english/","image":"https://likarchukmarin-sketch.github.io/english/your-photo.jpg","knowsLanguage":["uk","en"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"120-hour Accredited TESOL/TEFL Certificate","dateCreated":"2024-08-30","recognizedBy":{"@type":"Organization","name":"World TESOL Academy"}},{"@type":"EducationalOccupationalCredential","name":"EF SET English Certificate: C2 Proficient (72/100)","dateCreated":"2026-10-05","url":"https://cert.efset.org/AdLqdd"}],"knowsAbout":["English language teaching","TESOL","TEFL"],"sameAs":["https://t.me/likarchuk","https://instagram.com/marina.likarchuk"]}
+    {"@context":"https://schema.org","@type":"Person","name":"Maryna Likarchuk","jobTitle":"Репетитор з англійської мови (TESOL/TEFL)","description":"TESOL/TEFL-сертифікований репетитор з англійської мови. Індивідуальні онлайн-заняття для дорослих.","url":"https://likarchukmarin-sketch.github.io/english/","image":"https://likarchukmarin-sketch.github.io/english/your-photo.jpg","knowsLanguage":["uk","en"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"120-hour Accredited TESOL/TEFL Certificate","dateCreated":"2024-08-30","recognizedBy":{"@type":"Organization","name":"World TESOL Academy"}}],"knowsAbout":["English language teaching","TESOL","TEFL"],"sameAs":["https://t.me/likarchuk","https://instagram.com/marina.likarchuk"]}
     </script>
 </head>
 <body>
@@ -255,17 +256,12 @@
                                 <h3>Кваліфікація</h3>
                                 <p><strong>120-годинний акредитований курс <span lang="en">TESOL / TEFL</span></strong> — <span lang="en">World TESOL Academy</span>, 30 серпня 2024. Курс акредитовано <span lang="en">ACCREDITAT</span> та <span lang="en">The CPD Certification Service</span> (Велика Британія).</p>
                                 <p><span lang="en">TESOL / TEFL</span> — міжнародна підготовка викладачів англійської мови для тих, для кого вона не рідна: у класі та онлайн.</p>
-                                <p><strong>Мій рівень англійської: <span lang="en">C2 Proficient</span></strong> — <span lang="en">EF SET</span>, 72/100 за тестом читання й аудіювання (жовтень 2026). C2 — найвищий рівень європейської шкали CEFR. <a href="https://cert.efset.org/AdLqdd" target="_blank" rel="noopener noreferrer">Перевірити сертифікат ↗</a></p>
                             </div>
                         </div>
                         <div class="certs rv">
                             <a class="cert" href="tesol-certificate.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="tesol-certificate.jpg" width="1600" height="1130" alt="Сертифікат TESOL / TEFL, 120 годин, World TESOL Academy, 30 серпня 2024" loading="lazy" decoding="async" onerror="this.closest('.cert').hidden=true">
                                 <span>Сертифікат <span lang="en">TESOL / TEFL</span> ↗</span>
-                            </a>
-                            <a class="cert" href="ef-set-certificate.jpg" target="_blank" rel="noopener noreferrer">
-                                <img src="ef-set-certificate.jpg" width="1242" height="1756" alt="Сертифікат EF SET: 72 зі 100, рівень C2 Proficient, жовтень 2026" loading="lazy" decoding="async" onerror="this.closest('.cert').hidden=true">
-                                <span>Сертифікат <span lang="en">EF SET</span> · C2 ↗</span>
                             </a>
                         </div>
                         <div class="about-cards">
@@ -413,16 +409,63 @@
                     <p class="no-oblig"><b>Без зобов'язань:</b> Вас ніхто не змушує купувати. Якщо не підійде, я нічого від Вас не вимагатиму.</p>
                 </article>
                 <article class="card how-price spot rv">
-                    <div>
+                    <div class="price-main">
                         <h3>Скільки це коштує</h3>
-                        <!-- ЩОБ ЗМІНИТИ ЦІНУ: відредагуйте «500 грн» нижче та в розділі FAQ -->
-                        <p>Від <b>500 грн</b> за заняття (50 хвилин). Пакети на 4, 8 або 12 занять; на пакети по 8 і 12 занять діє знижка. Почати можна з 4 занять. Остаточну вартість для Ваших цілей назву на безкоштовній консультації.</p>
-                        <p class="pay-note">Оплата — за реквізитами ФОП (IBAN) до першого заняття пакета.</p>
+                        <!-- ЩОБ ЗМІНИТИ ЦІНУ: відредагуйте блок prices на початку файлу site.js — тут і в FAQ усе оновиться само -->
+                        <p>Індивідуальні уроки по 50 хвилин. Консультація безкоштовна.</p>
+                        <ul class="price-list">
+                            <li><span class="pl-name">Один урок</span><b class="pl-val" data-price="single"></b></li>
+                            <li><span class="pl-name">Пакет 4 уроки</span><b class="pl-val" data-price="pack-4"></b><span class="pl-note">пробний формат, без знижки · <span data-price="per-4"></span> за урок</span></li>
+                            <li><span class="pl-name">Пакет 8 уроків</span><b class="pl-val" data-price="pack-8"></b><span class="pl-note"><span data-price="per-8"></span> за урок<span data-price="save-8"></span></span></li>
+                            <li><span class="pl-name">Пакет 12 уроків</span><b class="pl-val" data-price="pack-12"></b><span class="pl-note"><span data-price="per-12"></span> за урок<span data-price="save-12"></span></span></li>
+                        </ul>
+                        <p class="pay-note">Ціни — для нових студентів. Оплата за реквізитами ФОП (IBAN) до початку занять пакета.</p>
                     </div>
                     <div class="how-actions">
                         <a href="#contact" data-track="cta-how" class="btn btn-primary">Записатися на консультацію ↗</a>
                         <a href="how-it-works.html" data-track="how-more" class="btn btn-ghost">Приклад плану й уроку →</a>
                     </div>
+                </article>
+                <article class="card how-terms spot rv" id="terms">
+                    <h3>Умови співпраці</h3>
+                    <p>Коротко про головне, щоб заняття були зручними для нас обох. Умови для нових студентів; повний текст фіксуємо в договорі.</p>
+                    <div class="pack-grid">
+                        <div class="pack">
+                            <h4>Пакет 4 уроки</h4>
+                            <dl>
+                                <div><dt>Термін дії</dt><dd data-term="validity-4"></dd></div>
+                                <div><dt>Перенесення</dt><dd data-term="resched-4"></dd></div>
+                                <div><dt>Скасування</dt><dd data-term="cancel-4"></dd></div>
+                            </dl>
+                        </div>
+                        <div class="pack">
+                            <h4>Пакет 8 уроків</h4>
+                            <dl>
+                                <div><dt>Термін дії</dt><dd data-term="validity-8"></dd></div>
+                                <div><dt>Перенесення</dt><dd data-term="resched-8"></dd></div>
+                                <div><dt>Скасування</dt><dd data-term="cancel-8"></dd></div>
+                            </dl>
+                        </div>
+                        <div class="pack">
+                            <h4>Пакет 12 уроків</h4>
+                            <dl>
+                                <div><dt>Термін дії</dt><dd data-term="validity-12"></dd></div>
+                                <div><dt>Перенесення</dt><dd data-term="resched-12"></dd></div>
+                                <div><dt>Скасування</dt><dd data-term="cancel-12"></dd></div>
+                            </dl>
+                        </div>
+                    </div>
+                    <p class="terms-sum">Уроки, не використані за цей термін, згорають. Мета проста: щоб усі оплачені уроки відбулися в межах терміну пакета.</p>
+                    <ul class="terms-list">
+                        <li><b>Оплата наперед.</b> Пакет оплачується до початку занять.</li>
+                        <li><b>Скасування й перенесення.</b> Прошу попередити не пізніше ніж за <span data-term="notice"></span>, також у разі хвороби. Якщо попередити пізніше, урок оплачується, окрім форс-мажору.</li>
+                        <li><b>Перенесення.</b> Урок переходить на інший день у межах терміну пакета. Кількість перенесень обмежена (див. вище).</li>
+                        <li><b>Скасування.</b> Урок лишається в пакеті, і ми призначаємо його пізніше. Понад ліміт урок згорає.</li>
+                        <li><b>Якщо урок скасовую я,</b> перенесення безкоштовне.</li>
+                        <li><b>Запізнення.</b> Якщо Ви запізнилися, урок не подовжується. Якщо запізнилася я, цей час компенсую.</li>
+                        <li><b>Неявка.</b> Якщо Ви не з'явилися й не вийшли на зв'язок протягом <span data-term="wait"></span>, урок оплачується.</li>
+                        <li><b>Домашнє завдання.</b> Воно очікується: це частина навчання.</li>
+                    </ul>
                 </article>
             </div>
         </section>
@@ -535,7 +578,7 @@
                 <div class="faq about-list">
                     <div class="acc open rv">
                         <button class="acc-head" type="button" id="fqh1" aria-expanded="true" aria-controls="fq1"><span class="acc-t">Скільки коштують заняття?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq1" role="region" aria-labelledby="fqh1"><div><p>Від 500 грн за заняття (50 хвилин). Є пакети на 4, 8 або 12 занять, на 8 і 12 діє знижка. Остаточну вартість для Ваших цілей назву на безкоштовній консультації.</p></div></div>
+                        <div class="acc-body" id="fq1" role="region" aria-labelledby="fqh1"><div><p>Один урок (50 хвилин) — <span data-price="single"></span>. Пакети: 4 уроки — <span data-price="pack-4"></span>, 8 уроків — <span data-price="pack-8"></span>, 12 уроків — <span data-price="pack-12"></span>; у пакетах на 8 і 12 уроків вартість уроку нижча. Консультація безкоштовна.</p></div></div>
                     </div>
                     <div class="acc rv">
                         <button class="acc-head" type="button" id="fqh11" aria-expanded="false" aria-controls="fq11"><span class="acc-t">Що буде на консультації?</span><span class="acc-plus"></span></button>
@@ -543,7 +586,7 @@
                     </div>
                     <div class="acc rv">
                         <button class="acc-head" type="button" id="fqh12" aria-expanded="false" aria-controls="fq12"><span class="acc-t">Скільки занять у пакеті?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq12" role="region" aria-labelledby="fqh12"><div><p>У пакеті 4, 8 або 12 занять. Можна почати з мінімального пакета на 4 заняття. На пакети по 8 і 12 занять діє знижка.</p></div></div>
+                        <div class="acc-body" id="fq12" role="region" aria-labelledby="fqh12"><div><p>У пакеті 4, 8 або 12 занять. Можна почати з пробного пакета на 4 уроки: він без знижки, ціна за урок така сама, як за окремий. На пакети по 8 і 12 уроків діє знижка.</p></div></div>
                     </div>
                     <div class="acc rv">
                         <button class="acc-head" type="button" id="fqh13" aria-expanded="false" aria-controls="fq13"><span class="acc-t">Як оплатити?</span><span class="acc-plus"></span></button>
@@ -575,7 +618,7 @@
                     </div>
                     <div class="acc rv" style="--d:4">
                         <button class="acc-head" type="button" id="fqh7" aria-expanded="false" aria-controls="fq7"><span class="acc-t">Чи можна перенести урок?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq7" role="region" aria-labelledby="fqh7"><div><p>Так: перенести урок можна не більше двох разів за один абонемент. Про перенесення чи скасування прошу попереджати завчасно. Детальні умови описано в договорі.</p></div></div>
+                        <div class="acc-body" id="fq7" role="region" aria-labelledby="fqh7"><div><p>Так. Попередьте мене не пізніше ніж за <span data-term="notice"></span>, і ми знайдемо інший час. Скільки перенесень і скасувань доступно, залежить від пакета: це описано в блоці <a href="#terms">«Умови співпраці»</a> та в договорі.</p></div></div>
                     </div>
                     <div class="acc rv" style="--d:4">
                         <button class="acc-head" type="button" id="fqh8" aria-expanded="false" aria-controls="fq8"><span class="acc-t">Для чого можна вчити англійську?</span><span class="acc-plus"></span></button>
@@ -586,8 +629,8 @@
                         <div class="acc-body" id="fq9" role="region" aria-labelledby="fqh9"><div><p>Для цього є навчання у зручний час: Ви отримуєте матеріали й завдання, працюєте, коли можете, а я надсилаю відгук письмово чи голосовими повідомленнями. За потреби — зустрічі для практики. Це окремий формат: кількість зустрічей і вартість обговорюємо на консультації.</p></div></div>
                     </div>
                     <div class="acc rv" style="--d:4">
-                        <button class="acc-head" type="button" id="fqh10" aria-expanded="false" aria-controls="fq10"><span class="acc-t">Який у Вас рівень англійської та яка підготовка?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq10" role="region" aria-labelledby="fqh10"><div><p>У мене 120-годинний акредитований сертифікат TESOL / TEFL (2024) і результат EF SET — C2 Proficient, 72/100 за тестом читання й аудіювання (жовтень 2026). Сертифікати можна переглянути в розділі «Про мене».</p></div></div>
+                        <button class="acc-head" type="button" id="fqh10" aria-expanded="false" aria-controls="fq10"><span class="acc-t">Яка у Вас підготовка?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq10" role="region" aria-labelledby="fqh10"><div><p>У мене 120-годинний акредитований сертифікат TESOL / TEFL (2024). Сертифікат можна переглянути в розділі «Про мене».</p></div></div>
                     </div>
                 </div>
             </div>
@@ -661,6 +704,6 @@
 
     <a href="#contact" id="fab" class="btn btn-primary fab">Безкоштовна консультація ↗</a>
 
-    <script src="site.js?v=1" defer></script>
+    <script src="site.js?v=2" defer></script>
 </body>
 </html>

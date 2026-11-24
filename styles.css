@@ -655,3 +655,26 @@ html { overflow-x:clip; }
 .mx-end { display:none; }
 .mx-end.show { display:block; animation:mxIn .5s var(--ease); }
 .mx-end p { color:var(--muted); }
+
+.pk-badge { display:inline-block; margin-left:.4rem; padding:.15rem .6rem; border-radius:999px; font:600 .72rem/1.4 var(--font-body); letter-spacing:.06em; text-transform:uppercase; vertical-align:middle; background:color-mix(in srgb,var(--accent) 16%,transparent); color:var(--accent); }
+.pack .pk-note { font-size:.9rem; margin:.7rem 0 0; color:var(--fg); }
+@media (prefers-reduced-motion:reduce) { .intro-card { animation:none; } }
+
+/* ---- Розділи, що розкриваються ---- */
+.about-sub { font-size:1.05rem; letter-spacing:.02em; margin:2.2rem 0 .8rem; opacity:.9; }
+.about-lead { margin:0 0 1rem; opacity:.85; }
+details.more { margin-top:1rem; }
+details.more > summary, .terms-acc > summary { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.9rem 1.2rem; border-radius:999px; border:1px solid var(--line); font-weight:600; transition:background .25s,border-color .25s; }
+details.more > summary::-webkit-details-marker, .terms-acc > summary::-webkit-details-marker { display:none; }
+details.more > summary::after, .terms-acc > summary::after { content:"+"; font-size:1.4rem; line-height:1; flex:none; transition:transform .3s var(--ease); }
+details[open].more > summary::after, .terms-acc[open] > summary::after { transform:rotate(45deg); }
+details.more > summary:hover, .terms-acc > summary:hover { border-color:var(--accent); }
+details.more > summary:focus-visible, .terms-acc > summary:focus-visible { outline:2px solid var(--accent2); outline-offset:3px; }
+details.more[open] > summary { margin-bottom:1rem; }
+details.more .about-cards { margin-top:0; }
+details.cert-more { margin-bottom:0; }
+.terms-acc > summary { border-radius:20px; font-family:var(--font-head); font-size:clamp(1.2rem,2.2vw,1.6rem); padding:1rem 1.3rem; border:0; background:none; padding-left:0; padding-right:0; }
+.terms-acc > summary small { margin-left:auto; font:400 .85rem var(--font-body); color:var(--muted); text-align:right; }
+.terms-acc > summary::after { color:var(--accent); }
+.terms-acc[open] > summary { margin-bottom:1rem; }
+@media (max-width:560px) { .terms-acc > summary small { display:none; } }

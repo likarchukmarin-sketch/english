@@ -19,7 +19,7 @@
                 noticeHours: 4,                               /* попередити не пізніше ніж за N годин */
                 noShowMinutes: 15,                            /* неявка без зв'язку протягом N хвилин */
                 packs: {
-                    4:  { validity: '2 тижні',  rhythm: 'по 2 заняття на тиждень', alt: 'Можливий і спокійніший темп: 4 тижні, по 1 занятті на тиждень.', reschedule: 2, cancel: 0 },
+                    4:  { validity: '4 тижні',  rhythm: 'по 1 заняттю на тиждень', alt: 'Для швидшого старту можливий інтенсив: 2 тижні, по 2 заняття на тиждень.', reschedule: 2, cancel: 0 },
                     8:  { validity: '4 тижні',  rhythm: 'по 2 заняття на тиждень', reschedule: 2, cancel: 2 },
                     12: { validity: '4 тижні',  rhythm: 'по 3 заняття на тиждень', reschedule: 2, cancel: 2 }
                 }
@@ -625,3 +625,14 @@
             cp.addEventListener('click', function () { copy(ta.value, function (ok) { say(ok ? 'Текст скопійовано.' : 'Не вдалося скопіювати — виділіть текст у полі й скопіюйте вручну.'); }); });
         })();
     })();
+
+
+/* Посилання на #terms відкриває акордеон умов */
+(function termsOpen() {
+    function open() { var d = document.querySelector('#terms details'); if (d && location.hash === '#terms') d.open = true; }
+    window.addEventListener('hashchange', open); open();
+    document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href="#terms"]');
+        if (a) { var d = document.querySelector('#terms details'); if (d) d.open = true; }
+    });
+})();

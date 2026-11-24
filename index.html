@@ -41,7 +41,7 @@
                 if (m) m.setAttribute('content', light ? '#F5F0E6' : '#12261F');
             } catch (e) {}
             try {
-                if (sessionStorage.getItem('introSeen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('skip-intro');
+                /* кицю показуємо при кожному завантаженні головної */
             } catch (e) {}
         })();
     </script>
@@ -52,7 +52,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=7">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Maryna Likarchuk","jobTitle":"Репетитор з англійської мови (TESOL/TEFL)","description":"TESOL/TEFL-сертифікований репетитор з англійської мови. Індивідуальні онлайн-заняття для дорослих.","url":"https://likarchukmarin-sketch.github.io/english/","image":"https://likarchukmarin-sketch.github.io/english/your-photo.jpg","knowsLanguage":["uk","en"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"120-hour Accredited TESOL/TEFL Certificate","dateCreated":"2024-08-30","recognizedBy":{"@type":"Organization","name":"World TESOL Academy"}}],"knowsAbout":["English language teaching","TESOL","TEFL"],"sameAs":["https://t.me/likarchuk","https://instagram.com/marina.likarchuk"]}
     </script>
@@ -95,12 +95,10 @@
             <a href="#top" class="logo">Maryna <span>Likarchuk</span></a>
             <nav class="nav" aria-label="Головне меню">
                 <a href="#about">Про мене</a>
-                <a href="#help">Допомога</a>
-                <a href="#formats">Формати</a>
-                <a href="#approach">Як я навчаю</a>
-                <a href="#how">Як це працює</a>
-                <a href="#cases">Історії</a>
                 <a href="#reviews">Відгуки</a>
+                <a href="#cases">Історії</a>
+                <a href="#how">Як це працює</a>
+                <a href="#faq">Питання</a>
             </nav>
             <div class="hdr-right">
                 <a href="#contact" data-track="cta-header" class="btn btn-primary btn-sm hdr-cta magnetic">Безкоштовна консультація ↗</a>
@@ -111,12 +109,10 @@
     <nav id="mobileMenu" class="mmenu" aria-label="Мобільне меню">
         <p class="m-hint">Розділи сайту</p>
         <a class="ml" style="--i:0" href="#about">Про мене</a>
-        <a class="ml" style="--i:1" href="#help">З чим допоможу</a>
-        <a class="ml" style="--i:2" href="#formats">Формати</a>
-        <a class="ml" style="--i:3" href="#approach">Як я навчаю</a>
-        <a class="ml" style="--i:4" href="#how">Як це працює</a>
-        <a class="ml" style="--i:5" href="#cases">Історії учнів</a>
-        <a class="ml" style="--i:6" href="#reviews">Відгуки</a>
+        <a class="ml" style="--i:1" href="#reviews">Відгуки</a>
+        <a class="ml" style="--i:2" href="#cases">Історії учнів</a>
+        <a class="ml" style="--i:3" href="#how">Як це працює</a>
+        <a class="ml" style="--i:4" href="#faq">Питання</a>
         <a class="btn btn-primary btn-lg" href="#contact">Безкоштовна консультація ↗</a>
     </nav>
 
@@ -206,10 +202,10 @@
                     <figcaption class="pcap"><b>Maryna Likarchuk</b><span>Репетитор з англійської мови</span></figcaption>
                 </figure>
                 <div>
-                    <div class="sec-head" style="margin-bottom:2rem">
+                    <div class="sec-head" style="margin-bottom:1.6rem">
                         <span class="kicker rv">Знайомство</span>
                         <h2 class="h2 split">Трохи про мене</h2>
-                        <p class="rv" style="--d:2">Коротко: яка в мене підготовка, як проходять заняття і чим я живу поза уроками.</p>
+                        <p class="rv" style="--d:2">Я допомагаю дорослим і молоді заговорити англійською без страху помилок: у Вашому темпі й під Ваші цілі.</p>
                     </div>
                     <div class="about-cred rv">
                             <span class="acc-ic" aria-hidden="true">🎓</span>
@@ -219,18 +215,29 @@
                                 <p><span lang="en">TESOL / TEFL</span> — міжнародна підготовка викладачів англійської мови для тих, для кого вона не рідна: у класі та онлайн.</p>
                             </div>
                         </div>
-                        <div class="certs rv">
+                    <details class="more cert-more"><summary>Переглянути сертифікат</summary>
+                        <div class="certs">
                             <a class="cert" href="tesol-certificate.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="tesol-certificate.jpg" width="1600" height="1130" alt="Сертифікат TESOL / TEFL, 120 годин, World TESOL Academy, 30 серпня 2024" loading="lazy" decoding="async" onerror="this.closest('.cert').hidden=true">
                                 <span>Сертифікат <span lang="en">TESOL / TEFL</span> ↗</span>
                             </a>
                         </div>
+                    </details>
+
+                    <h3 class="about-sub rv">З чим я допомагаю</h3>
+                    <div class="about-cards">
+                        <article class="mini rv" style="--d:0"><span class="acc-ic" aria-hidden="true">🗣️</span><div><h3>Заговорити англійською</h3><p>Від окремих слів і правил до живої розмови: самостійно висловлювати думки й упевнено почуватися в спілкуванні.</p></div></article><article class="mini rv" style="--d:1"><span class="acc-ic" aria-hidden="true">🌍</span><div><h3>Користуватися англійською в житті</h3><p>Під Ваші реальні ситуації: для роботи, подорожей, фільмів та серіалів, спілкування й саморозвитку.</p></div></article><article class="mini rv" style="--d:2"><span class="acc-ic" aria-hidden="true">🧩</span><div><h3>Розкласти знання по поличках</h3><p>Систематизувати граматику, заповнити прогалини, розширити словник і впевнено застосовувати знання на практиці.</p></div></article>
+                    </div>
+
+                    <h3 class="about-sub rv">Як я навчаю</h3>
+                    <p class="about-lead rv">Тут можна бути собою, навіть коли Ви ще не все знаєте: не треба боятися помилок чи прагнути ідеальності.</p>
+                    <div class="about-cards">
+                        <article class="mini rv" style="--d:0"><span class="acc-ic" aria-hidden="true">🎯</span><div><h3>Ваші цілі — орієнтир</h3><p>Адаптую заняття до Ваших потреб, інтересів і темпу.</p></div></article><article class="mini rv" style="--d:1"><span class="acc-ic" aria-hidden="true">💬</span><div><h3>Зрозуміти й застосувати</h3><p>Без зубріння складних правил: одразу вживаємо нове в діалогах.</p></div></article><article class="mini rv" style="--d:2"><span class="acc-ic" aria-hidden="true">🔁</span><div><h3>Закріпити й рухатися далі</h3><p>Системно повторюємо, щоб знання ставали автоматичними навичками.</p></div></article>
+                    </div>
+
+                    <details class="more about-more"><summary>Більше про мене</summary>
                         <div class="about-cards">
-                            <article class="mini rv"><span class="acc-ic" aria-hidden="true">🌱</span><div><h3>Як усе почалося</h3><p>Я починала з допомоги дітям та родичам у вивченні англійської. Згодом зрозуміла, що мені справді добре вдається пояснювати складні речі простими словами й щиро подобається допомагати людям долати страх перед мовою.</p></div></article>
-                            <article class="mini rv" style="--d:1"><span class="acc-ic" aria-hidden="true">💬</span><div><h3>На моїх уроках…</h3><p>Ви знайдете не лише правила й сухі вправи, а й доречні жарти, життєві історії, цікаві запитання та дійсно живі й щирі розмови про все на світі.</p></div></article>
-                            <article class="mini rv" style="--d:2"><span class="acc-ic" aria-hidden="true">💡</span><div><h3>Створюю власні матеріали</h3><p>Люблю вчитися сама, шукати нові ідеї й створювати для учнів власні інтерактивні матеріали.</p></div></article>
-                            <article class="mini rv" style="--d:3"><span class="acc-ic" aria-hidden="true">🫖</span><div><h3>Чай — це любов</h3><p>Ціную затишні моменти й чашку ароматного гарячого чаю, щоб відновити сили після насиченого дня.</p></div></article>
-                            <article class="mini rv" style="--d:4"><span class="acc-ic" aria-hidden="true">🐾</span><div><h3>Котики мають перевагу</h3><p>Особлива любов до котиків, повз яких просто неможливо пройти, щоб не зупинитися і не погладити!</p></div></article>
+                            <article class="mini"><span class="acc-ic" aria-hidden="true">🌱</span><div><h3>Як усе почалося</h3><p>Я починала з допомоги дітям та родичам у вивченні англійської. Згодом зрозуміла, що мені справді добре вдається пояснювати складні речі простими словами й щиро подобається допомагати людям долати страх перед мовою.</p></div></article><article class="mini"><span class="acc-ic" aria-hidden="true">💬</span><div><h3>На моїх уроках…</h3><p>Ви знайдете не лише правила й сухі вправи, а й доречні жарти, життєві історії, цікаві запитання та дійсно живі й щирі розмови про все на світі.</p></div></article><article class="mini"><span class="acc-ic" aria-hidden="true">💡</span><div><h3>Створюю власні матеріали</h3><p>Люблю вчитися сама, шукати нові ідеї й створювати для учнів власні інтерактивні матеріали.</p></div></article><article class="mini"><span class="acc-ic" aria-hidden="true">🫖</span><div><h3>Чай — це любов</h3><p>Ціную затишні моменти й чашку ароматного гарячого чаю, щоб відновити сили після насиченого дня.</p></div></article><article class="mini"><span class="acc-ic" aria-hidden="true">🐾</span><div><h3>Котики мають перевагу</h3><p>Особлива любов до котиків, повз яких просто неможливо пройти, щоб не зупинитися і не погладити!</p></div></article>
                         </div>
                         <div class="photos" id="photos" hidden>
                             <figure class="photo"><img src="photo-1.jpg" alt="Maryna Likarchuk" decoding="async" onload="var p=document.getElementById('photos');if(p)p.hidden=false" onerror="this.parentNode.remove()"></figure>
@@ -238,294 +245,13 @@
                             <figure class="photo"><img src="photo-3.jpg" alt="Maryna Likarchuk" decoding="async" onload="var p=document.getElementById('photos');if(p)p.hidden=false" onerror="this.parentNode.remove()"></figure>
                             <figure class="photo"><img src="photo-4.jpg" alt="Maryna Likarchuk" decoding="async" onload="var p=document.getElementById('photos');if(p)p.hidden=false" onerror="this.parentNode.remove()"></figure>
                         </div>
-                    </div>
-                </div>
-        </section>
-
-        <!-- З ЧИМ ДОПОМОЖУ (стопка карток) -->
-        <section id="help" class="sect">
-            <div class="container">
-                <div class="sec-head">
-                    <span class="kicker rv">Напрямки</span>
-                    <h2 class="h2 split">З чим я можу Вам допомогти?</h2>
-                    <p class="rv" style="--d:2">Працюємо з тим, що справді потрібно Вам у щоденному житті.</p>
-                </div>
-                <div class="stack">
-                    <article class="scard s1 spot" style="--n:0">
-                        <div class="big" aria-hidden="true" data-speed="0.05">01</div>
-                        <div>
-                            <h3>Заговорити англійською</h3>
-                            <p>Допоможу перейти від окремих слів і правил до живої розмови: Ви навчитеся самостійно висловлювати думки й упевнено почуватися в спілкуванні.</p>
-                        </div>
-                    </article>
-                    <article class="scard s2 spot" style="--n:1">
-                        <div class="big" aria-hidden="true" data-speed="0.05">02</div>
-                        <div>
-                            <h3>Користуватися англійською в житті</h3>
-                            <p>Застосовуємо мову під Ваші реальні життєві ситуації:</p>
-                            <div class="chips">
-                                <span>💼 для роботи</span><span>✈️ для подорожей</span><span>🎬 для фільмів та серіалів</span><span>🗣️ для спілкування</span><span>📚 для саморозвитку</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="scard s3 spot" style="--n:2">
-                        <div class="big" aria-hidden="true" data-speed="0.05" style="color:var(--accent)">03</div>
-                        <div>
-                            <h3>Розкласти знання по поличках</h3>
-                            <p>Систематизувати граматику, заповнити прогалини, розширити словниковий запас і навчитися впевнено застосовувати знання на практиці.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ФОРМАТИ РОБОТИ (плита, бенто) -->
-        <section id="formats" class="sect inv slab">
-            <div class="container">
-                <div class="sec-head">
-                    <span class="kicker rv">Як навчаємося</span>
-                    <h2 class="h2 split">Формати занять</h2>
-                    <p class="rv" style="--d:2">Оберіть формат, який підходить Вашому графіку й цілям.</p>
-                </div>
-                <div class="bento">
-                    <div class="cell f1 tilt3d rv l" data-tilt>
-                        <article class="card fill spot pwrap">
-                            <div>
-                                <span class="tag">Основний формат</span>
-                                <div class="emoji" aria-hidden="true" style="margin-top:1.4rem">👩‍💻</div>
-                                <h3>Індивідуальні заняття</h3>
-                                <p>Онлайн, один на один: заняття будуються навколо Ваших цілей, інтересів і темпу.</p>
-                            </div>
-                            <div class="facts">
-                                <div class="fact"><b>50 хв</b><span>тривалість уроку</span></div>
-                                <div class="fact"><b>1–4×</b><span>на тиждень — гнучка частота</span></div>
-                                <div class="fact"><b>Zoom</b><span>онлайн, один на один</span></div>
-                            </div>
-                            <ul class="ul">
-                                <li>Практика говоріння, граматика та словниковий запас</li>
-                                <li>Рівні від A1 до B2; українською та англійською або лише англійською — залежно від рівня</li>
-                            </ul>
-                        </article>
-                    </div>
-                    <div class="cell f2 rv r" style="--d:1">
-                        <article class="card spot">
-                            <span class="tag">Безкоштовно</span>
-                            <div class="emoji" aria-hidden="true">💡</div>
-                            <h3>Консультація</h3>
-                            <p>Зустріч у Zoom на 20–40 хвилин, без зобов'язань: знайомимося, з'ясовуємо Ваш рівень і цілі та обираємо зручний формат. Добрий старт, якщо ще не знаєте, з чого почати.</p>
-                            <p>Після неї Ви отримуєте персональний план наступних кроків і навчальні матеріали.</p>
-                        </article>
-                    </div>
-                    <div class="cell f3 rv r" style="--d:2">
-                        <article class="card spot">
-                            <div class="emoji" aria-hidden="true">⏳</div>
-                            <h3>Навчання у зручний час</h3>
-                            <p>Це асинхронний формат: Ви отримуєте матеріали й завдання, працюєте, коли Вам зручно, а я надсилаю відгук — письмово чи голосовими повідомленнями, з поясненнями.</p>
-                            <p>Підходить, якщо графік нестабільний або бувають відключення світла. За потреби — зустрічі для практики. Це окремий формат: кількість зустрічей і вартість обговорюємо на консультації.</p>
-                        </article>
-                    </div>
-                    <div class="cell f4 rv s">
-                        <article class="card spot">
-                            <div>
-                                <span class="tag">Скоро</span>
-                                <h3>Курси та вебінари</h3>
-                                <p>Короткі практичні курси й вебінари з окремих тем — щоб розібратися в темі та продовжувати навчання самостійно.</p>
-                            </div>
-                            <div class="ghost-num" style="color:var(--accent)" aria-hidden="true">✦</div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- МІЙ ПІДХІД (бенто) -->
-        <section id="approach" class="sect">
-            <div class="container">
-                <div class="approach-head">
-                    <div>
-                        <span class="kicker rv">Як я навчаю</span>
-                        <h2 class="h2 split">Тут можна бути собою. Навіть коли Ви ще не все знаєте.</h2>
-                    </div>
-                    <p class="rv" style="--d:2">Хочу, щоб на моїх заняттях не треба було боятися помилок, соромитися запитань чи прагнути ідеальності. Тут можна розбиратися у власному темпі, пробувати й поступово знаходити впевненість у своїх словах.</p>
-                </div>
-                <div class="bento">
-                    <div class="cell a1 rv l">
-                        <article class="card fill spot">
-                            <span class="deco sparkles" data-speed="-0.06" aria-hidden="true">✦</span>
-                            <div class="ghost-num" aria-hidden="true">01</div>
-                            <div>
-                                <h3>Ваші цілі — наш орієнтир</h3>
-                                <p>Адаптую заняття до Ваших потреб, інтересів і темпу. Ми працюємо над тим, що важливо саме для Вас.</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="cell a2 rv r" style="--d:1">
-                        <article class="card spot">
-                            <span class="deco rings" data-speed="0.08" aria-hidden="true"></span>
-                            <div class="ghost-num" aria-hidden="true" style="font-size:3.4rem;color:var(--accent)">02</div>
-                            <h3>Зрозуміти й застосувати</h3>
-                            <p>Розбираємося в мові без зубріння складних правил і одразу застосовуємо нове в діалогах.</p>
-                        </article>
-                    </div>
-                    <div class="cell a3 rv r" style="--d:2">
-                        <article class="card spot" style="background:var(--surface2)">
-                            <div class="ghost-num" aria-hidden="true" style="font-size:3.4rem;color:var(--accent)">03</div>
-                            <h3>Закріпити й рухатися далі</h3>
-                            <p>Повертаємося до вивченого й системно повторюємо матеріал, щоб знання поступово ставали автоматичними навичками.</p>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ЯК ЦЕ ВІДБУВАЄТЬСЯ -->
-        <section id="how" class="sect">
-            <div class="container">
-                <div class="sec-head">
-                    <span class="kicker rv">Крок за кроком</span>
-                    <h2 class="h2 split">Як це відбувається</h2>
-                    <p class="rv" style="--d:2">П'ять простих кроків від першого повідомлення до Вашої мети.</p>
-                </div>
-                <ol class="tl rv">
-                        <li class="tl-step"><span class="tl-n">1</span><div class="tl-text"><h3>Ви пишете мені</h3><p>У Telegram, Instagram або на пошту. Відповідаю протягом дня.</p></div><i class="tl-line" aria-hidden="true" style="--k:0"></i></li>
-                        <li class="tl-step"><span class="tl-n">2</span><div class="tl-text"><h3>Безкоштовна консультація</h3><p>Zoom, 20–40 хвилин, без зобов'язань: розповідаєте про свій досвід і мету, я пропоную, як навчатися.</p></div><i class="tl-line" aria-hidden="true" style="--k:1"></i></li>
-                        <li class="tl-step"><span class="tl-n">3</span><div class="tl-text"><h3>План навчання</h3><p>Складаю персональний план і добираю матеріали під Ваші цілі.</p></div><i class="tl-line" aria-hidden="true" style="--k:2"></i></li>
-                        <li class="tl-step"><span class="tl-n">4</span><div class="tl-text"><h3>Заняття</h3><p>Уроки по 50 хвилин у Zoom: говоримо, розбираємо, повторюємо.</p></div><i class="tl-line" aria-hidden="true" style="--k:3"></i></li>
-                        <li class="tl-step"><span class="tl-n"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div class="tl-text"><h3>Ваша ціль</h3><p>Крок за кроком рухаємося до результату, заради якого Ви почали.</p></div><i class="tl-line" aria-hidden="true" style="--k:4"></i></li>
-                    </ol>
-                <div class="how-facts rv">
-                    <span>Zoom · 50 хвилин</span>
-                    <span>Рівні A1–B2</span>
-                    <span>Українською та англійською</span>
-                    <span>Будні, 9:00–21:00 за Києвом</span>
-                </div>
-                <article class="card how-consult spot rv">
-                    <h3>Що буде на безкоштовній консультації</h3>
-                    <p>Це розмова на 20–40 хвилин у Zoom. Вам нічого не потрібно готувати.</p>
-                    <ul class="ul">
-                        <li>Розповісте, як було з англійською досі: що вчили, що подобалося, а що ні.</li>
-                        <li>Разом з'ясуємо Ваш рівень, мету й те, як Вам хотілося б навчатися.</li>
-                        <li>Я запропоную, як ми можемо працювати, і ми разом подивимося, чи підходимо один одному.</li>
-                    </ul>
-                    <p class="no-oblig"><b>Без зобов'язань:</b> Вас ніхто не змушує купувати. Якщо не підійде, я нічого від Вас не вимагатиму.</p>
-                </article>
-                <article class="card how-price spot rv">
-                    <div class="price-main">
-                        <h3>Скільки це коштує</h3>
-                        <!-- ЩОБ ЗМІНИТИ ЦІНУ: відредагуйте блок prices на початку файлу site.js — тут і в FAQ усе оновиться само -->
-                        <p>Індивідуальні уроки по 50 хвилин. Консультація безкоштовна.</p>
-                        <ul class="price-list">
-                            <li><span class="pl-name">Один урок</span><b class="pl-val" data-price="single"></b></li>
-                            <li><span class="pl-name">Пакет 4 уроки</span><b class="pl-val" data-price="pack-4"></b><span class="pl-note">пробний формат, без знижки · <span data-price="per-4"></span> за урок</span></li>
-                            <li><span class="pl-name">Пакет 8 уроків</span><b class="pl-val" data-price="pack-8"></b><span class="pl-note"><span data-price="per-8"></span> за урок<span data-price="save-8"></span></span></li>
-                            <li><span class="pl-name">Пакет 12 уроків</span><b class="pl-val" data-price="pack-12"></b><span class="pl-note"><span data-price="per-12"></span> за урок<span data-price="save-12"></span></span></li>
-                        </ul>
-                        <p class="pay-note">Ціни — для нових студентів. Оплата за реквізитами ФОП (IBAN) до початку занять пакета.</p>
-                    </div>
-                    <div class="how-actions">
-                        <a href="#contact" data-track="cta-how" class="btn btn-primary">Записатися на консультацію ↗</a>
-                        <a href="how-it-works.html" data-track="how-more" class="btn btn-ghost">Приклад плану й уроку →</a>
-                    </div>
-                </article>
-                <article class="card how-terms spot rv" id="terms">
-                    <h3>Умови співпраці</h3>
-                    <p>Коротко про головне, щоб заняття були зручними для нас обох. Умови для нових студентів; повний текст фіксуємо в договорі.</p>
-                    <div class="pack-grid">
-                        <div class="pack">
-                            <h4>Пакет 4 уроки</h4>
-                            <dl>
-                                <div><dt>Термін</dt><dd data-term="validity-4"></dd></div>
-                                <div><dt>Регулярність</dt><dd data-term="rhythm-4"></dd></div>
-                                <div><dt>Перенесення</dt><dd data-term="resched-4"></dd></div>
-                                <div><dt>Скасування</dt><dd data-term="cancel-4"></dd></div>
-                            </dl>
-                            <p class="pk-alt" data-term="alt-4"></p>
-                        </div>
-                        <div class="pack">
-                            <h4>Пакет 8 уроків</h4>
-                            <dl>
-                                <div><dt>Термін</dt><dd data-term="validity-8"></dd></div>
-                                <div><dt>Регулярність</dt><dd data-term="rhythm-8"></dd></div>
-                                <div><dt>Перенесення</dt><dd data-term="resched-8"></dd></div>
-                                <div><dt>Скасування</dt><dd data-term="cancel-8"></dd></div>
-                            </dl>
-                        </div>
-                        <div class="pack">
-                            <h4>Пакет 12 уроків</h4>
-                            <dl>
-                                <div><dt>Термін</dt><dd data-term="validity-12"></dd></div>
-                                <div><dt>Регулярність</dt><dd data-term="rhythm-12"></dd></div>
-                                <div><dt>Перенесення</dt><dd data-term="resched-12"></dd></div>
-                                <div><dt>Скасування</dt><dd data-term="cancel-12"></dd></div>
-                            </dl>
-                        </div>
-                    </div>
-                    <p class="terms-sum">Уроки, не використані за цей термін, згорають. Мета проста: щоб усі оплачені уроки відбулися за графіком, який ми домовилися тримати.</p>
-                    <ul class="terms-list">
-                        <li><b>Оплата наперед.</b> Пакет оплачується до початку занять.</li>
-                        <li><b>Скасування й перенесення.</b> Прошу попередити не пізніше ніж за <span data-term="notice"></span>, також у разі хвороби. Якщо попередити пізніше, урок оплачується, окрім форс-мажору.</li>
-                        <li><b>Перенесення.</b> Урок переходить на інший день у межах терміну пакета. Кількість перенесень обмежена (див. вище).</li>
-                        <li><b>Скасування.</b> Урок лишається в пакеті, і ми призначаємо його пізніше. Понад ліміт урок згорає.</li>
-                        <li><b>Якщо урок скасовую я,</b> перенесення безкоштовне.</li>
-                        <li><b>Запізнення.</b> Якщо Ви запізнилися, урок не подовжується. Якщо запізнилася я, цей час компенсую.</li>
-                        <li><b>Неявка.</b> Якщо Ви не з'явилися й не вийшли на зв'язок протягом <span data-term="wait"></span>, урок оплачується.</li>
-                        <li><b>Домашнє завдання.</b> Воно очікується: це частина навчання.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- КЕЙСИ СТУДЕНТІВ (вкладки) -->
-        <section id="cases" class="sect">
-            <div class="container">
-                <div class="sec-head">
-                    <span class="kicker rv">Досвід учнів</span>
-                    <h2 class="h2 split">Історії учнів</h2>
-                    <p class="rv" style="--d:2">Реальні історії учнів: з чого вони починали і чого досягли.</p>
-                </div>
-                <div class="tabs rv">
-                    <div class="tablist" role="tablist" aria-label="Історії учнів">
-                        <button class="tab" role="tab" id="tab-2" aria-selected="true" aria-controls="panel-2" type="button"><span class="av">В</span><span><b>Володимир (30 років)</b><small>Навчався понад 1 рік</small></span></button>
-                        <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1" type="button"><span class="av">Л</span><span><b>Людмила (40+ років)</b><small>Навчалася ~1,5 року</small></span></button>
-                        <button class="tab" role="tab" id="tab-1" aria-selected="false" aria-controls="panel-1" tabindex="-1" type="button"><span class="av">Н</span><span><b>Ніка (підліток)</b><small>Навчалася ~2,5–3 роки</small></span></button>
-                    </div>
-                    <div>
-                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-2" aria-labelledby="tab-2">
-                            <div class="panel-top"><span class="av">В</span><div><h3>Володимир (30 років)</h3><p class="muted">Навчався понад 1 рік</p></div><span class="lvl" aria-label="Рівень: з нуля до A2">0 → A2</span></div>
-                            <div class="steps">
-                                <div class="step"><b>На старті (майже з нуля):</b><p>Знав окремі слова й умів базово читати. Граматичної основи не було. Англійська була потрібна для подорожей і роботи.</p></div>
-                                <div class="step"><b>Над чим працювали:</b><p>Базова граматика, розширення словникового запасу, говоріння та лексика зі сфери будівництва.</p></div>
-                                <div class="step"><b>Результат (рівень A2 — елементарний):</b><p>Досяг рівня A2: впевнено почувається в подорожах і в простому спілкуванні з іноземцями. Почав вивчати професійну лексику.</p></div>
-                            </div>
-                            <details class="story"><summary>Що змінилося ➔</summary><p>«Тепер впевнено спілкується з іноземними учасниками на змаганнях з армреслінгу та опрацьовує професійну лексику зі сфери будівництва.»</p></details>
-                        </article>
-                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-3" aria-labelledby="tab-3" hidden>
-                            <div class="panel-top"><span class="av">Л</span><div><h3>Людмила (40+ років)</h3><p class="muted">Навчалася ~1,5 року</p></div><span class="lvl" aria-label="Рівень: від A1 до B1+, орієнтовно">A1 → B1+*</span></div>
-                            <div class="steps">
-                                <div class="step"><b>На старті (орієнтовно A1 — початковий рівень):</b><p>Мала базові знання, але складно будувала речення. Відчувала невпевненість під час говоріння.</p></div>
-                                <div class="step"><b>Над чим працювали:</b><p>Систематизація граматики, розширення словникового запасу, уміння користуватися словами в мові, подолання мовного бар'єра.</p></div>
-                                <div class="step"><b>Результат (орієнтовно B1 / B1+, середній рівень)*:</b><p>Навчилася чітко формулювати думки англійською, впевнено користується мовою й далі розвиває усне мовлення.</p></div>
-                            </div>
-                            <details class="story"><summary>Що змінилося ➔</summary><p>«Поступово пройшла шлях від скутості у реченнях до спокійного повсякденного висловлення власних думок.»</p></details>
-                        </article>
-                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-1" aria-labelledby="tab-1" hidden>
-                            <div class="panel-top"><span class="av">Н</span><div><h3>Ніка (підліток)</h3><p class="muted">Навчалася ~2,5–3 роки</p></div><span class="lvl" aria-label="Рівень: від A1 до B1+, орієнтовно">A1 → B1+*</span></div>
-                            <div class="steps">
-                                <div class="step"><b>На старті (орієнтовно A1 — початковий рівень):</b><p>Знала окремі слова та деякі конструкції, але не мала цілісного розуміння структури мови. Соромилася говорити.</p></div>
-                                <div class="step"><b>Над чим працювали:</b><p>Побудова граматичного фундаменту, розширення словникового запасу, практика говоріння та робота над вимовою.</p></div>
-                                <div class="step"><b>Результат (орієнтовно B1 / B1+, середній рівень)*:</b><p>Навчилася самостійно будувати речення та висловлювати думки. Стала впевнено користуватися англійською поза уроками.</p></div>
-                            </div>
-                            <details class="story"><summary>Що змінилося ➔</summary><p>«Реальний випадок: у Києві Ніка самостійно допомогла іноземному туристу розібратися зі складним маршрутом до Одеси й пояснила, як користуватися метро.»</p></details>
-                            <p class="footnote" style="margin-top:1.1rem">Ніка — мій єдиний учень-підліток. Зазвичай я працюю з дорослими та молоддю.</p>
-                        </article>
-                        <p class="footnote">* Рівні B1 / B1+ орієнтовні — їх визначено за навчальним прогресом. Для довідки (шкала CEFR): A1 — початковий, A2 — елементарний, B1 — середній.</p>
-                    </div>
+                    </details>
                 </div>
             </div>
         </section>
 
         <!-- ВІДГУКИ -->
-        <section id="reviews" class="sect" style="padding-top:clamp(1rem,3vw,2rem)">
+        <section id="reviews" class="sect" style="padding-top:clamp(2rem,5vw,3.5rem)">
             <div class="container">
                 <div class="rev">
                     <span class="kicker rv">Враження</span>
@@ -573,6 +299,156 @@
             </div>
         </section>
 
+        <!-- КЕЙСИ СТУДЕНТІВ (вкладки) -->
+        <section id="cases" class="sect" style="padding-top:clamp(1rem,3vw,2rem)">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">Досвід учнів</span>
+                    <h2 class="h2 split">Історії учнів</h2>
+                    <p class="rv" style="--d:2">Реальні історії учнів: з чого вони починали і чого досягли.</p>
+                </div>
+                <div class="tabs rv">
+                    <div class="tablist" role="tablist" aria-label="Історії учнів">
+                        <button class="tab" role="tab" id="tab-2" aria-selected="true" aria-controls="panel-2" type="button"><span class="av">В</span><span><b>Володимир (30 років)</b><small>Навчався понад 1 рік</small></span></button>
+                        <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1" type="button"><span class="av">Л</span><span><b>Людмила (40+ років)</b><small>Навчалася ~1,5 року</small></span></button>
+                        <button class="tab" role="tab" id="tab-1" aria-selected="false" aria-controls="panel-1" tabindex="-1" type="button"><span class="av">Н</span><span><b>Ніка (підліток)</b><small>Навчалася ~2,5–3 роки</small></span></button>
+                    </div>
+                    <div>
+                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-2" aria-labelledby="tab-2">
+                            <div class="panel-top"><span class="av">В</span><div><h3>Володимир (30 років)</h3><p class="muted">Навчався понад 1 рік</p></div><span class="lvl" aria-label="Рівень: з нуля до A2">0 → A2</span></div>
+                            <div class="steps">
+                                <div class="step"><b>На старті (майже з нуля):</b><p>Знав окремі слова й умів базово читати. Граматичної основи не було. Англійська була потрібна для подорожей і роботи.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Базова граматика, розширення словникового запасу, говоріння та лексика зі сфери будівництва.</p></div>
+                                <div class="step"><b>Результат (рівень A2 — елементарний):</b><p>Досяг рівня A2: впевнено почувається в подорожах і в простому спілкуванні з іноземцями. Почав вивчати професійну лексику.</p></div>
+                            </div>
+                            <details class="story"><summary>Що змінилося ➔</summary><p>«Тепер впевнено спілкується з іноземними учасниками на змаганнях з армреслінгу та опрацьовує професійну лексику зі сфери будівництва.»</p></details>
+                        </article>
+                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-3" aria-labelledby="tab-3" hidden>
+                            <div class="panel-top"><span class="av">Л</span><div><h3>Людмила (40+ років)</h3><p class="muted">Навчалася ~1,5 року</p></div><span class="lvl" aria-label="Рівень: від A1 до B1+, орієнтовно">A1 → B1+*</span></div>
+                            <div class="steps">
+                                <div class="step"><b>На старті (орієнтовно A1 — початковий рівень):</b><p>Мала базові знання, але складно будувала речення. Відчувала невпевненість під час говоріння.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Систематизація граматики, розширення словникового запасу, уміння користуватися словами в мові, подолання мовного бар'єра.</p></div>
+                                <div class="step"><b>Результат (орієнтовно B1 / B1+, середній рівень)*:</b><p>Навчилася чітко формулювати думки англійською, впевнено користується мовою й далі розвиває усне мовлення.</p></div>
+                            </div>
+                            <details class="story"><summary>Що змінилося ➔</summary><p>«Поступово пройшла шлях від скутості у реченнях до спокійного повсякденного висловлення власних думок.»</p></details>
+                        </article>
+                        <article class="card panel spot" role="tabpanel" tabindex="0" id="panel-1" aria-labelledby="tab-1" hidden>
+                            <div class="panel-top"><span class="av">Н</span><div><h3>Ніка (підліток)</h3><p class="muted">Навчалася ~2,5–3 роки</p></div><span class="lvl" aria-label="Рівень: від A1 до B1+, орієнтовно">A1 → B1+*</span></div>
+                            <div class="steps">
+                                <div class="step"><b>На старті (орієнтовно A1 — початковий рівень):</b><p>Знала окремі слова та деякі конструкції, але не мала цілісного розуміння структури мови. Соромилася говорити.</p></div>
+                                <div class="step"><b>Над чим працювали:</b><p>Побудова граматичного фундаменту, розширення словникового запасу, практика говоріння та робота над вимовою.</p></div>
+                                <div class="step"><b>Результат (орієнтовно B1 / B1+, середній рівень)*:</b><p>Навчилася самостійно будувати речення та висловлювати думки. Стала впевнено користуватися англійською поза уроками.</p></div>
+                            </div>
+                            <details class="story"><summary>Що змінилося ➔</summary><p>«Реальний випадок: у Києві Ніка самостійно допомогла іноземному туристу розібратися зі складним маршрутом до Одеси й пояснила, як користуватися метро.»</p></details>
+                            <p class="footnote" style="margin-top:1.1rem">Ніка — мій єдиний учень-підліток. Зазвичай я працюю з дорослими та молоддю.</p>
+                        </article>
+                        <p class="footnote">* Рівні B1 / B1+ орієнтовні — їх визначено за навчальним прогресом. Для довідки (шкала CEFR): A1 — початковий, A2 — елементарний, B1 — середній.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЯК ЦЕ ВІДБУВАЄТЬСЯ -->
+        <section id="how" class="sect" style="padding-top:clamp(1rem,3vw,2rem)">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="kicker rv">Крок за кроком</span>
+                    <h2 class="h2 split">Як це відбувається</h2>
+                    <p class="rv" style="--d:2">П'ять простих кроків від першого повідомлення до Вашої мети.</p>
+                </div>
+                <ol class="tl rv">
+                        <li class="tl-step"><span class="tl-n">1</span><div class="tl-text"><h3>Ви пишете мені</h3><p>У Telegram, Instagram або на пошту. Відповідаю протягом дня.</p></div><i class="tl-line" aria-hidden="true" style="--k:0"></i></li>
+                        <li class="tl-step"><span class="tl-n">2</span><div class="tl-text"><h3>Безкоштовна консультація</h3><p>Zoom, 20–40 хвилин, без зобов'язань: розповідаєте про свій досвід і мету, я пропоную, як навчатися.</p></div><i class="tl-line" aria-hidden="true" style="--k:1"></i></li>
+                        <li class="tl-step"><span class="tl-n">3</span><div class="tl-text"><h3>План навчання</h3><p>Складаю персональний план і добираю матеріали під Ваші цілі.</p></div><i class="tl-line" aria-hidden="true" style="--k:2"></i></li>
+                        <li class="tl-step"><span class="tl-n">4</span><div class="tl-text"><h3>Заняття</h3><p>Уроки по 50 хвилин у Zoom: говоримо, розбираємо, повторюємо.</p></div><i class="tl-line" aria-hidden="true" style="--k:3"></i></li>
+                        <li class="tl-step"><span class="tl-n"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div class="tl-text"><h3>Ваша ціль</h3><p>Крок за кроком рухаємося до результату, заради якого Ви почали.</p></div><i class="tl-line" aria-hidden="true" style="--k:4"></i></li>
+                    </ol>
+                <div class="how-facts rv">
+                    <span>Zoom · 50 хвилин</span>
+                    <span>Рівні A1–B2</span>
+                    <span>Українською та англійською</span>
+                    <span>Будні, 9:00–21:00 за Києвом</span>
+                    <span>Один на один</span>
+                    <span>Є формат у зручний час</span>
+                </div>
+                <article class="card how-consult spot rv">
+                    <h3>Що буде на безкоштовній консультації</h3>
+                    <p>Це розмова на 20–40 хвилин у Zoom. Вам нічого не потрібно готувати.</p>
+                    <ul class="ul">
+                        <li>Розповісте, як було з англійською досі: що вчили, що подобалося, а що ні.</li>
+                        <li>Разом з'ясуємо Ваш рівень, мету й те, як Вам хотілося б навчатися.</li>
+                        <li>Я запропоную, як ми можемо працювати, і ми разом подивимося, чи підходимо один одному.</li>
+                    </ul>
+                    <p class="no-oblig"><b>Без зобов'язань:</b> Вас ніхто не змушує купувати. Якщо не підійде, я нічого від Вас не вимагатиму.</p>
+                </article>
+                <article class="card how-price spot rv">
+                    <div class="price-main">
+                        <h3>Скільки це коштує</h3>
+                        <!-- ЩОБ ЗМІНИТИ ЦІНУ: відредагуйте блок prices на початку файлу site.js — тут і в FAQ усе оновиться само -->
+                        <p>Індивідуальні уроки по 50 хвилин. Консультація безкоштовна.</p>
+                        <ul class="price-list">
+                            <li><span class="pl-name">Один урок</span><b class="pl-val" data-price="single"></b></li>
+                            <li><span class="pl-name">Пакет 4 уроки</span><b class="pl-val" data-price="pack-4"></b><span class="pl-note">пробний формат, без знижки · <span data-price="per-4"></span> за урок</span></li>
+                            <li><span class="pl-name">Пакет 8 уроків</span><b class="pl-val" data-price="pack-8"></b><span class="pl-note"><span data-price="per-8"></span> за урок<span data-price="save-8"></span></span></li>
+                            <li><span class="pl-name">Пакет 12 уроків</span><b class="pl-val" data-price="pack-12"></b><span class="pl-note"><span data-price="per-12"></span> за урок<span data-price="save-12"></span></span></li>
+                        </ul>
+                        <p class="pay-note">Ціни — для нових студентів. Оплата за реквізитами ФОП (IBAN) до початку занять пакета.</p>
+                    </div>
+                    <div class="how-actions">
+                        <a href="#contact" data-track="cta-how" class="btn btn-primary">Записатися на консультацію ↗</a>
+                        <a href="how-it-works.html" data-track="how-more" class="btn btn-ghost">Приклад плану й уроку →</a>
+                    </div>
+                </article>
+                <article class="card how-terms spot rv" id="terms">
+                    <details class="terms-acc"><summary><span>Умови співпраці</span><small>пакети, перенесення, скасування</small></summary>
+                    <p>Коротко про головне, щоб заняття були зручними для нас обох. Умови для нових студентів; повний текст фіксуємо в договорі.</p>
+                    <div class="pack-grid">
+                        <div class="pack">
+                            <h4>Пакет 4 уроки <span class="pk-badge">пробний</span></h4>
+                            <dl>
+                                <div><dt>Термін</dt><dd data-term="validity-4"></dd></div>
+                                <div><dt>Регулярність</dt><dd data-term="rhythm-4"></dd></div>
+                                <div><dt>Перенесення</dt><dd data-term="resched-4"></dd></div>
+                                <div><dt>Скасування</dt><dd data-term="cancel-4"></dd></div>
+                            </dl>
+                            <p class="pk-alt" data-term="alt-4"></p>
+                            <p class="pk-note">Перша оплата: якщо хочете переконатися, що все підходить, оплатіть лише перші 4 уроки.</p>
+                        </div>
+                        <div class="pack">
+                            <h4>Пакет 8 уроків</h4>
+                            <dl>
+                                <div><dt>Термін</dt><dd data-term="validity-8"></dd></div>
+                                <div><dt>Регулярність</dt><dd data-term="rhythm-8"></dd></div>
+                                <div><dt>Перенесення</dt><dd data-term="resched-8"></dd></div>
+                                <div><dt>Скасування</dt><dd data-term="cancel-8"></dd></div>
+                            </dl>
+                        </div>
+                        <div class="pack">
+                            <h4>Пакет 12 уроків</h4>
+                            <dl>
+                                <div><dt>Термін</dt><dd data-term="validity-12"></dd></div>
+                                <div><dt>Регулярність</dt><dd data-term="rhythm-12"></dd></div>
+                                <div><dt>Перенесення</dt><dd data-term="resched-12"></dd></div>
+                                <div><dt>Скасування</dt><dd data-term="cancel-12"></dd></div>
+                            </dl>
+                        </div>
+                    </div>
+                    <p class="terms-sum">Уроки, не використані за цей термін, згорають. Мета проста: щоб усі оплачені уроки відбулися за графіком, який ми домовилися тримати.</p>
+                    <ul class="terms-list">
+                        <li><b>Оплата наперед.</b> Пакет оплачується до початку занять.</li>
+                        <li><b>Скасування й перенесення.</b> Прошу попередити не пізніше ніж за <span data-term="notice"></span>, також у разі хвороби. Якщо попередити пізніше, урок оплачується, окрім форс-мажору.</li>
+                        <li><b>Перенесення.</b> Урок переходить на інший день у межах терміну пакета. Кількість перенесень обмежена (див. вище).</li>
+                        <li><b>Скасування.</b> Урок лишається в пакеті, і ми призначаємо його пізніше. Понад ліміт урок згорає.</li>
+                        <li><b>Якщо урок скасовую я,</b> перенесення безкоштовне.</li>
+                        <li><b>Запізнення.</b> Якщо Ви запізнилися, урок не подовжується. Якщо запізнилася я, цей час компенсую.</li>
+                        <li><b>Неявка.</b> Якщо Ви не з'явилися й не вийшли на зв'язок протягом <span data-term="wait"></span>, урок оплачується.</li>
+                        <li><b>Домашнє завдання.</b> Воно очікується: це частина навчання.</li>
+                    </ul>
+                    </details>
+                </article>
+            </div>
+        </section>
+
         <!-- ЧАСТІ ЗАПИТАННЯ -->
         <section id="faq" class="sect" style="padding-top:clamp(1rem,3vw,2rem)">
             <div class="container">
@@ -582,32 +458,20 @@
                 </div>
                 <div class="faq about-list">
                     <div class="acc open rv">
-                        <button class="acc-head" type="button" id="fqh1" aria-expanded="true" aria-controls="fq1"><span class="acc-t">Скільки коштують заняття?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq1" role="region" aria-labelledby="fqh1"><div><p>Один урок (50 хвилин) — <span data-price="single"></span>. Пакети: 4 уроки — <span data-price="pack-4"></span>, 8 уроків — <span data-price="pack-8"></span>, 12 уроків — <span data-price="pack-12"></span>. У пакетах на 8 і 12 уроків вартість уроку нижча. Деталі — в блоці <a href="#terms">«Умови співпраці»</a>.</p></div></div>
+                        <button class="acc-head" type="button" id="fqh1" aria-expanded="true" aria-controls="fq1"><span class="acc-t">Як зрозуміти, що це підійде саме мені?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq1" role="region" aria-labelledby="fqh1"><div><p>Почніть із безкоштовної консультації: поговоримо про Вашу мету й рівень, і Ви побачите, який у мене підхід. Якщо підходить, можна оплатити лише перші 4 уроки — це мінімальна перша оплата, без довгих зобов'язань.</p></div></div>
                     </div>
                     <div class="acc rv">
-                        <button class="acc-head" type="button" id="fqh2" aria-expanded="false" aria-controls="fq2"><span class="acc-t">З чого почати і що буде на консультації?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq2" role="region" aria-labelledby="fqh2"><div><p>Напишіть мені в Telegram, Instagram або на пошту — або через форму внизу сторінки. Ми проведемо безкоштовну консультацію в Zoom на 20–40 хвилин: Ви розкажете, як було з англійською досі та яка у Вас мета, а я запропоную, як нам навчатися. Вона нічого не зобов'язує.</p></div></div>
+                        <button class="acc-head" type="button" id="fqh2" aria-expanded="false" aria-controls="fq2"><span class="acc-t">Для кого заняття і чи потрібно щось знати?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq2" role="region" aria-labelledby="fqh2"><div><p>Я працюю з дорослими та молоддю, рівні — від A1 до B2. Починати можна майже з нуля: помилки — природна частина навчання. Не знаєте свого рівня — визначимо на консультації. Якщо я не найкращий вибір для Вашого рівня, спрямую до колег, яким довіряю.</p></div></div>
                     </div>
                     <div class="acc rv">
-                        <button class="acc-head" type="button" id="fqh3" aria-expanded="false" aria-controls="fq3"><span class="acc-t">Скільки занять у пакеті?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq3" role="region" aria-labelledby="fqh3"><div><p>У пакеті 4, 8 або 12 занять. Можна почати з пробного пакета на 4 уроки: він без знижки, щоб зрозуміти, як проходять заняття.</p></div></div>
+                        <button class="acc-head" type="button" id="fqh3" aria-expanded="false" aria-controls="fq3"><span class="acc-t">Коли проходять заняття?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq3" role="region" aria-labelledby="fqh3"><div><p>У будні, орієнтовно з 9:00 до 21:00 за київським часом; зручний час обираємо разом. Залежно від рівня ведемо уроки українською й англійською або лише англійською.</p></div></div>
                     </div>
                     <div class="acc rv">
-                        <button class="acc-head" type="button" id="fqh4" aria-expanded="false" aria-controls="fq4"><span class="acc-t">Для кого заняття і чи потрібно щось знати?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq4" role="region" aria-labelledby="fqh4"><div><p>Я працюю з дорослими та молоддю, рівні — від A1 до B2. Починати можна майже з нуля: помилки — природна частина навчання. Якщо не знаєте свого рівня, визначимо його на консультації. Якщо я не найкращий вибір для Вашого рівня, спрямую до колег, яким довіряю.</p></div></div>
-                    </div>
-                    <div class="acc rv">
-                        <button class="acc-head" type="button" id="fqh5" aria-expanded="false" aria-controls="fq5"><span class="acc-t">Як проходять заняття і коли?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq5" role="region" aria-labelledby="fqh5"><div><p>Онлайн у Zoom, один на один, по 50 хвилин — від 1 до 4 разів на тиждень. Працюю в будні, орієнтовно з 9:00 до 21:00 за київським часом, зручний час обираємо разом. Залежно від рівня ведемо уроки українською й англійською або лише англійською.</p></div></div>
-                    </div>
-                    <div class="acc rv">
-                        <button class="acc-head" type="button" id="fqh6" aria-expanded="false" aria-controls="fq6"><span class="acc-t">Чи можна перенести урок, якщо графік нестабільний?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq6" role="region" aria-labelledby="fqh6"><div><p>Так: попередьте мене не пізніше ніж за <span data-term="notice"></span>, і ми знайдемо інший час. Кількість перенесень залежить від пакета, див. <a href="#terms">«Умови співпраці»</a>. Якщо графік зовсім нестабільний або немає світла, є окремий формат навчання у зручний час: матеріали й завдання, письмовий або голосовий відгук. Його вартість обговорюємо на консультації.</p></div></div>
-                    </div>
-                    <div class="acc rv">
-                        <button class="acc-head" type="button" id="fqh7" aria-expanded="false" aria-controls="fq7"><span class="acc-t">Яка у Вас підготовка?</span><span class="acc-plus"></span></button>
-                        <div class="acc-body" id="fq7" role="region" aria-labelledby="fqh7"><div><p>У мене 120-годинний акредитований сертифікат TESOL / TEFL (2024). Сертифікат можна переглянути в розділі «Про мене».</p></div></div>
+                        <button class="acc-head" type="button" id="fqh4" aria-expanded="false" aria-controls="fq4"><span class="acc-t">А якщо графік нестабільний або немає світла?</span><span class="acc-plus"></span></button>
+                        <div class="acc-body" id="fq4" role="region" aria-labelledby="fqh4"><div><p>Є окремий формат навчання у зручний час: Ви отримуєте матеріали й завдання, працюєте, коли можете, а я надсилаю відгук письмово чи голосовими повідомленнями. За потреби — зустрічі для практики. Кількість зустрічей і вартість обговорюємо на консультації.</p></div></div>
                     </div>
                 </div>
             </div>
@@ -681,6 +545,6 @@
 
     <a href="#contact" id="fab" class="btn btn-primary fab">Безкоштовна консультація ↗</a>
 
-    <script src="site.js?v=3" defer></script>
+    <script src="site.js?v=5" defer></script>
 </body>
 </html>
